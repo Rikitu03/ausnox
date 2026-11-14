@@ -29,7 +29,7 @@ This is an educational simulation, not certified human-exploration or emergency 
 | Deploy | Zero required paid runtime; use promotional offers only if genuinely needed |
 | Visual | Figma reference, Fable may redesign; preserve tasks, clarity and accessibility |
 | Release | Every core scientific/functional gate is mandatory even if 3D must be cut |
-| Documentation | Root Markdown for an implementation agent, with evidence and stop conditions |
+| Documentation | Markdown in `docs/` (README.md in the repository root) for an implementation agent, with evidence and stop conditions |
 
 ## 3. Challenge alignment and eligibility
 

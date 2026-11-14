@@ -37,7 +37,9 @@ flowchart TB
 
 ~~~text
 /
-  README.md, MASTERPLAN.md, PRD.md, ARCHITECTURE.md ...
+  README.md
+  docs/
+    MASTERPLAN.md, PRD.md, ARCHITECTURE.md ...
   public/
     data/jezero/
       manifest.json

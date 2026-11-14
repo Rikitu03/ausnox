@@ -72,7 +72,7 @@ Prohibited:
 ## 8. Fable agent handoff
 
 Fable should:
-1. Read README.md, MASTERPLAN.md, PRD.md, UI_UX_SPEC.md, AGENT_GUIDELINES.md.
+1. Read ../README.md, MASTERPLAN.md, PRD.md, UI_UX_SPEC.md, AGENT_GUIDELINES.md.
 2. Inspect linked Figma if access allows; if not, design from these flows and note inability to compare.
 3. Produce desktop and tablet screen designs, component variants and explicit loading/error/no-data states; create responsive map-first hierarchy.
 4. Keep map as the visual focal point; ensure toolbars do not cover map features or legends.
