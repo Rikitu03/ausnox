@@ -2,7 +2,7 @@
 
 **Navigating the Red Planet from Dawn to Dusk.**
 
-**Status (2026-11-14): planning/documentation only.** This repository has not yet implemented an application, verified an ingest pipeline, or deployed a demo. Do not represent specifications as completed work.
+**Status (2026-11-14): frontend implemented on demonstration data; scientific engine not started.** The React app in this repository runs every P0 screen and interaction against clearly labelled mock adapters. No NASA/USGS dataset has been ingested, no ingest pipeline is verified, A* routing and the Mars24 solar model are not implemented, and nothing is deployed. Do not represent specifications or demonstration output as completed scientific work. See [docs/FRONTEND_HANDOFF.md](docs/FRONTEND_HANDOFF.md).
 
 Ausnox is a proposed, science-grounded Marswalk mission-planning prototype for **NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map**. Its primary persona is a hypothetical mission-control planner. The app will combine real NASA/USGS Martian imagery and elevation with transparent, simulated EVA assumptions to compare round-trip science routes and daylight/mission time margins. **This is an educational research prototype, not flight-qualified navigation or astronaut safety guidance.**
 
@@ -35,12 +35,26 @@ All specifications live in [`docs/`](docs/), which is the authoritative specific
 | [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) | Agent-ready dependency-ordered work packages |
 | [docs/TESTING_AND_VALIDATION.md](docs/TESTING_AND_VALIDATION.md) | Scientific correctness, unit, integration and release gates |
 | [docs/AGENT_GUIDELINES.md](docs/AGENT_GUIDELINES.md) | Non-negotiable rules for AI coding agents |
+| [docs/FRONTEND_HANDOFF.md](docs/FRONTEND_HANDOFF.md) | What the frontend phase built, mock adapters, integration entry points, test evidence |
 
-## Quick start (planned, NOT yet runnable)
+## Quick start (frontend, demonstration data)
 
-Proposed implementation: React + TypeScript + Vite + Leaflet + Tailwind/shadcn; TypeScript browser A* and solar simulation; Python + Rasterio/NumPy data preprocessing. Static hosting can use Vercel. Details and environment contracts are in docs/ARCHITECTURE.md.
+Requires Node 20.19+ (verified on Node 24.13.0, npm 11.6.2, Windows 11).
 
-**Do not run destructive scaffolding commands against this README or the documents in `docs/`.** An agent must initialize Vite without overwriting this documentation, then establish actual commands, install dependencies, and update this section based on verified output. Until then, no npm, Python, or deployment success is claimed.
+~~~bash
+npm install
+npm run dev         # Vite dev server
+npm run typecheck   # tsc -b --noEmit
+npm run lint        # eslint
+npm run test -- --run
+npm run build       # static output in dist/
+~~~
+
+These commands were executed on 2026-11-14: typecheck, lint, 62 tests and the production build all passed. Results and what was not run are recorded in docs/FRONTEND_HANDOFF.md §14.
+
+The app defaults to `VITE_DATA_MODE=mock`: a synthetic terrain surface, demonstration route arcs and fixed example daylight times, all labelled *Illustrative* in the interface. `VITE_DATA_MODE=real` selects the real-adapter extension points in `src/services/adapters/real/`, which are not implemented and answer "unavailable". Stack: React + TypeScript + Vite + Leaflet + Tailwind + Radix/shadcn-style components + Zustand + Recharts. The Python + Rasterio/NumPy preprocessing described in docs/ARCHITECTURE.md does not exist yet. Not deployed.
+
+![Mission control view on demonstration data](docs/screenshots/mission-control.jpg)
 
 ## Primary development order
 
@@ -66,6 +80,6 @@ The initial habitat is fictional; no live astronauts or shelters are tracked. Wa
 
 ## Attribution and eligibility
 
-Before final submission, verify that **at least one NASA resource used by Ausnox is listed in the challenge's own Resources tab**, and cite **every** scientific dataset, image, dependency, third-party asset and AI tool in the project submission. Record versions, licenses and retrieval dates in docs/DATA_SOURCES.md. The connected Figma file could not be inspected using the available integration at documentation time; do not claim design-to-code parity until reviewed.
+Before final submission, verify that **at least one NASA resource used by Ausnox is listed in the challenge's own Resources tab**, and cite **every** scientific dataset, image, dependency, third-party asset and AI tool in the project submission. Record versions, licenses and retrieval dates in docs/DATA_SOURCES.md. The Figma file could not be inspected at documentation time. During the frontend phase it was viewed read-only in a browser and used as a reference for a redesign; there is no design-to-code parity and none is claimed (docs/FRONTEND_HANDOFF.md §13).
 
 Documentation drafted on 2026-11-14 from the project brief and user-approved decisions; implementation statuses must be updated with evidence, not assumptions.
