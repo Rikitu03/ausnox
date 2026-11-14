@@ -9,11 +9,11 @@ Use a running evidence log in commit notes/README status with observed commands 
 
 ## G0 — preflight and eligibility (critical; ~30 min)
 
-- [ ] Read all root docs and inspect repo before scaffolding. Confirm node/npm/python/gdal tooling.
+- [ ] Read the root README.md and all docs in `docs/`, and inspect repo before scaffolding. Confirm node/npm/python/gdal tooling.
 - [ ] Read official 2026 Martian Map challenge Details/Resources: https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/?tab=resources
 - [ ] Select at least one NASA resource that is **actually on the challenge's Resources list**, and record citation/why it meets requirements.
 - [ ] Inspect Figma if permission permits; coordinate with Fable. Otherwise log UI reference unverified and proceed from UI_UX_SPEC.md.
-- [ ] Protect docs during project initialization; do not overwrite existing README/MD files or run destructive root scaffolding.
+- [ ] Protect docs during project initialization; do not overwrite the root README or the `docs/` Markdown files, or run destructive root scaffolding.
 - [ ] Create running source register and list all API limits and asset permissions.
 
 **Exit:** clear eligibility-source plan and no docs overwritten.

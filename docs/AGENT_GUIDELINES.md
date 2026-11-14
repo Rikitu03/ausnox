@@ -1,9 +1,9 @@
 # AUSNOX — INSTRUCTIONS FOR AI CODING/DESIGN AGENTS
-Version: 1.0 | Root guidance for Claude, Codex, Fable or other agents
+Version: 1.0 | Guidance for Claude, Codex, Fable or other agents (specifications live in `docs/`; README.md stays in the repository root)
 
 ## 1. Read order and authority
 
-Read README.md → MASTERPLAN.md → PRD.md → DATA_SOURCES.md → SCIENTIFIC_MODELS.md → ARCHITECTURE.md → UI_UX_SPEC.md → IMPLEMENTATION_PLAN.md → TESTING_AND_VALIDATION.md before coding. Follow the user's approved constraints. If files conflict: correctness, provenance, safety/unknown handling, actual source evidence and P0 gates outweigh cosmetic convenience. Ask for a product-policy decision only when absolutely unavoidable; otherwise choose the documented defaults and record why.
+Read ../README.md (repository root) → MASTERPLAN.md → PRD.md → DATA_SOURCES.md → SCIENTIFIC_MODELS.md → ARCHITECTURE.md → UI_UX_SPEC.md → IMPLEMENTATION_PLAN.md → TESTING_AND_VALIDATION.md before coding. Follow the user's approved constraints. If files conflict: correctness, provenance, safety/unknown handling, actual source evidence and P0 gates outweigh cosmetic convenience. Ask for a product-policy decision only when absolutely unavoidable; otherwise choose the documented defaults and record why.
 
 This repo contains **documentation only at time of creation**. Do not claim code, data, tests, deployment or Figma inspection already exist.
 
@@ -26,7 +26,7 @@ This repo contains **documentation only at time of creation**. Do not claim code
 3. No auth, paid API, cloud account, production FastAPI, database or AI model required for P0.
 4. Keep deterministic logic pure and type-safe; separate visualization, science data and simulated assumptions.
 5. Test positive, negative, unknown, no-path, stale request and data-coverage cases.
-6. Never delete or overwrite the root Markdown plan during Vite scaffolding.
+6. Never delete or overwrite the root README.md or the Markdown plan in `docs/` during Vite scaffolding.
 7. No destructive data fetch or bulk binary commit; use reproducible pipeline, small output, versioned manifest and source hash.
 8. No secret keys in client JS; no inflated claims or hidden retries masking errors.
 9. Before any code push, inspect branch rules/user instruction; documentation push to main has explicit approval, not blanket authorization to bypass testing for future code.

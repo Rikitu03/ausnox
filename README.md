@@ -20,29 +20,31 @@ Official challenge: https://www.spaceappschallenge.org/2026/challenges/interplan
 
 **3D**: desirable stretch feature, not a release gate. The published challenge overview requests a layered, integrated Martian map; it does not expressly demand a 3D globe. If time permits, add a georeferenced 3D view without sacrificing the validated 2D workflow.
 
-## Documentation (repository root)
+## Documentation (`docs/`)
+
+All specifications live in [`docs/`](docs/), which is the authoritative specification directory. Only this README stays in the repository root.
 
 | Read first | Purpose |
 | --- | --- |
-| [MASTERPLAN.md](MASTERPLAN.md) | Scope, milestones, kill switches and priorities |
-| [PRD.md](PRD.md) | Requirements, personas, stories and acceptance criteria |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Static-first system design, schemas and boundaries |
-| [DATA_SOURCES.md](DATA_SOURCES.md) | Candidate datasets, provenance, access and licensing checks |
-| [SCIENTIFIC_MODELS.md](SCIENTIFIC_MODELS.md) | Mars coordinates, A*, slope, mission and solar models |
-| [UI_UX_SPEC.md](UI_UX_SPEC.md) | UX behavior, states, accessibility and Figma handoff |
-| [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | Agent-ready dependency-ordered work packages |
-| [TESTING_AND_VALIDATION.md](TESTING_AND_VALIDATION.md) | Scientific correctness, unit, integration and release gates |
-| [AGENT_GUIDELINES.md](AGENT_GUIDELINES.md) | Non-negotiable rules for AI coding agents |
+| [docs/MASTERPLAN.md](docs/MASTERPLAN.md) | Scope, milestones, kill switches and priorities |
+| [docs/PRD.md](docs/PRD.md) | Requirements, personas, stories and acceptance criteria |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Static-first system design, schemas and boundaries |
+| [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) | Candidate datasets, provenance, access and licensing checks |
+| [docs/SCIENTIFIC_MODELS.md](docs/SCIENTIFIC_MODELS.md) | Mars coordinates, A*, slope, mission and solar models |
+| [docs/UI_UX_SPEC.md](docs/UI_UX_SPEC.md) | UX behavior, states, accessibility and Figma handoff |
+| [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) | Agent-ready dependency-ordered work packages |
+| [docs/TESTING_AND_VALIDATION.md](docs/TESTING_AND_VALIDATION.md) | Scientific correctness, unit, integration and release gates |
+| [docs/AGENT_GUIDELINES.md](docs/AGENT_GUIDELINES.md) | Non-negotiable rules for AI coding agents |
 
 ## Quick start (planned, NOT yet runnable)
 
-Proposed implementation: React + TypeScript + Vite + Leaflet + Tailwind/shadcn; TypeScript browser A* and solar simulation; Python + Rasterio/NumPy data preprocessing. Static hosting can use Vercel. Details and environment contracts are in ARCHITECTURE.md.
+Proposed implementation: React + TypeScript + Vite + Leaflet + Tailwind/shadcn; TypeScript browser A* and solar simulation; Python + Rasterio/NumPy data preprocessing. Static hosting can use Vercel. Details and environment contracts are in docs/ARCHITECTURE.md.
 
-**Do not run destructive scaffolding commands against these root documents.** An agent must initialize Vite without overwriting this documentation, then establish actual commands, install dependencies, and update this section based on verified output. Until then, no npm, Python, or deployment success is claimed.
+**Do not run destructive scaffolding commands against this README or the documents in `docs/`.** An agent must initialize Vite without overwriting this documentation, then establish actual commands, install dependencies, and update this section based on verified output. Until then, no npm, Python, or deployment success is claimed.
 
 ## Primary development order
 
-1. Read AGENT_GUIDELINES.md and all ten root files.
+1. Read docs/AGENT_GUIDELINES.md, this README and all nine specification files in `docs/`.
 2. Inspect the linked Figma draft if access allows; Fable may redesign while retaining task flows.
 3. Confirm at least one NASA data source explicitly listed in the challenge's **Resources** tab; document evidence and credits.
 4. **P0 data gate**: acquire a real Jezero DEM; validate CRS, geographic extent, nodata, units, slopes and overlap with imagery. No fake DEM substitution.
@@ -64,6 +66,6 @@ The initial habitat is fictional; no live astronauts or shelters are tracked. Wa
 
 ## Attribution and eligibility
 
-Before final submission, verify that **at least one NASA resource used by Ausnox is listed in the challenge's own Resources tab**, and cite **every** scientific dataset, image, dependency, third-party asset and AI tool in the project submission. Record versions, licenses and retrieval dates in DATA_SOURCES.md. The connected Figma file could not be inspected using the available integration at documentation time; do not claim design-to-code parity until reviewed.
+Before final submission, verify that **at least one NASA resource used by Ausnox is listed in the challenge's own Resources tab**, and cite **every** scientific dataset, image, dependency, third-party asset and AI tool in the project submission. Record versions, licenses and retrieval dates in docs/DATA_SOURCES.md. The connected Figma file could not be inspected using the available integration at documentation time; do not claim design-to-code parity until reviewed.
 
 Documentation drafted on 2026-11-14 from the project brief and user-approved decisions; implementation statuses must be updated with evidence, not assumptions.
