@@ -1,0 +1,12 @@
+
+ RUN  v5.1.0 C:/Users/Profile/.codex/worktrees/68b8/ausnox
+
+
+ Test Files  7 passed (7)
+      Tests  99 passed (99)
+   Start at  21:26:27
+   Duration  70.32s (environment 36%, tests 33%, import 11%, setup 10%, transform 10%, worker 1%)
+
+Environment  jsdom was created 7 times · 24.14s total, 36% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments

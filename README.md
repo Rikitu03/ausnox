@@ -4,6 +4,8 @@
 
 **Live application: [ausnox.vercel.app](https://ausnox.vercel.app).** Ausnox runs on `@ausnox/scientific-engine` and the validated Jezero terrain asset: USGS HiRISE DTM (MRO) for elevation, slope and A* routing; NASA Mars Trek imagery (MRO HiRISE and CTX, MGS MOLA); cited Perseverance (Mars 2020) rover positions as science targets; Mars24 daylight; engine feasibility rules. The optional 3D viewer uses the same measured terrain. Current release checks, keyboard verification, deployment evidence and the demonstration are recorded in [docs/RELEASE_REPORT.md](docs/RELEASE_REPORT.md).
 
+**[Watch the 90-second captioned demonstration](https://ausnox.vercel.app/demo/ausnox-mvp.mp4)** — compare routes, review the round trip, then increase science time to make an afternoon mission infeasible. [Download captions](public/demo/ausnox-mvp.srt).
+
 Ausnox is a science-grounded Marswalk mission-planning prototype for **NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map**. Its primary persona is a hypothetical mission-control planner. The app combines real NASA/USGS Martian imagery and elevation with transparent, simulated EVA assumptions to compare round-trip science routes and daylight/mission time margins. **This is an educational research prototype, not flight-qualified navigation or astronaut safety guidance.** X2b remains failed and unresolved; imagery overlays may appear shifted by about 3 m. Formal screen-reader and full contrast audits remain separate from the recorded keyboard and tablet checks.
 
 Official challenge: https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/

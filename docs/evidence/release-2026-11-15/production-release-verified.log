@@ -1,0 +1,3 @@
+PASS desktop-keyboard {"sha256":"fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49","terrainBytes":5760000,"terrainContentEncoding":"br","tileResponses":52,"bothRouteLegs":true,"invalidCoordinatesRejected":true,"routePreferenceKeyboard":true,"scienceTimeChangesVerdict":true,"checksumUi":"Verified at load","creditsAnd3dStatus":true,"x2b":"FAIL remains disclosed"}
+PASS tablet-768 {"viewport":"768x1024","noHorizontalOverflow":true,"plannerSheet":true,"coordinateDialog":true,"escapeAndFocusRestoration":true}
+PASS imagery-outage {"nasaTileRequestsBlocked":3,"realDtmReliefFallback":true,"routingWorks":true,"noSyntheticReplacement":true}

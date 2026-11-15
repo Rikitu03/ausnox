@@ -1,0 +1,99 @@
+{
+  "url": "https://ausnox.vercel.app",
+  "checkedUtc": "2026-11-15T13:38:54.697Z",
+  "scenarios": [
+    {
+      "name": "desktop-keyboard",
+      "status": "PASS",
+      "evidence": {
+        "sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+        "terrainBytes": 5760000,
+        "terrainContentEncoding": "br",
+        "tileResponses": 52,
+        "bothRouteLegs": true,
+        "invalidCoordinatesRejected": true,
+        "routePreferenceKeyboard": true,
+        "scienceTimeChangesVerdict": true,
+        "checksumUi": "Verified at load",
+        "creditsAnd3dStatus": true,
+        "x2b": "FAIL remains disclosed"
+      }
+    },
+    {
+      "name": "tablet-768",
+      "status": "PASS",
+      "evidence": {
+        "viewport": "768x1024",
+        "noHorizontalOverflow": true,
+        "plannerSheet": true,
+        "coordinateDialog": true,
+        "escapeAndFocusRestoration": true
+      }
+    },
+    {
+      "name": "imagery-outage",
+      "status": "PASS",
+      "evidence": {
+        "nasaTileRequestsBlocked": 3,
+        "realDtmReliefFallback": true,
+        "routingWorks": true,
+        "noSyntheticReplacement": true
+      }
+    }
+  ],
+  "signals": [
+    {
+      "name": "desktop-keyboard",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "terrainRequests": 1,
+      "tileResponses": 52
+    },
+    {
+      "name": "tablet-768",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "terrainRequests": 1,
+      "tileResponses": 20
+    },
+    {
+      "name": "imagery-outage",
+      "pageErrors": [],
+      "consoleErrors": [
+        {
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/default/default028mm/15/13024/46859.png"
+        },
+        {
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/default/default028mm/13/3256/11714.png"
+        },
+        {
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/7/50/183.jpg"
+        }
+      ],
+      "failedRequests": [
+        {
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/default/default028mm/15/13024/46859.png",
+          "error": "net::ERR_FAILED"
+        },
+        {
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/default/default028mm/13/3256/11714.png",
+          "error": "net::ERR_FAILED"
+        },
+        {
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/7/50/183.jpg",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "httpErrors": [],
+      "terrainRequests": 1,
+      "tileResponses": 0
+    }
+  ]
+}

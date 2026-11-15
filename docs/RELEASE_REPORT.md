@@ -2,7 +2,15 @@
 
 Date: 2026-11-15. Public application: <https://ausnox.vercel.app>.
 
-This report separates observed production behavior from local changes. Release verification is in progress; pending rows are not passes.
+The requested local and deployed workflows passed. This report preserves the initial failure evidence, fixes and final results; it does not upgrade the unresolved scientific registration finding to a pass.
+
+## Demonstration
+
+[Watch the captioned MP4](https://ausnox.vercel.app/demo/ausnox-mvp.mp4) · [repository copy](../public/demo/ausnox-mvp.mp4) · [SRT captions](../public/demo/ausnox-mvp.srt).
+
+Actual browser recording of **https://ausnox.vercel.app**, application commit `d556d45e2573fd99f21b65c235941cf1e1e0f09e`. Encoded duration **90.36 seconds**, **1600 × 900**, H.264/yuv420p, **3,492,258 bytes**. It is captioned without an audio narration. No UI state was composited or fabricated: the captures show a confirmed real-terrain mission, shorter versus lower-slope routes, the same DEM in 3D, both summary legs, an afternoon start, then destination science time increased from 30 to 240 minutes and a negative return margin. It ends on the sources page with the unresolved registration caveat in the captions.
+
+The [recording metadata](evidence/release-2026-11-15/recording.json) stores action times and the source commit. [FFprobe output](evidence/release-2026-11-15/video-probe.json) verifies the encoded duration, format and dimensions. FFmpeg rendered the captions from the actual action timestamps; it did not alter the application results.
 
 ## Scope and review baseline
 
@@ -41,9 +49,15 @@ Controlled Radix dialogs and sheets now retain their external opener before Reac
 | Public real terrain bytes before release | PASS | 5,760,000 bytes, SHA-256 below |
 | NASA imagery before release | PASS | 28 successful tile responses in desktop scenario |
 | Imagery outage before release | PASS | Three blocked probe requests; real DTM relief and routing remain usable |
-| Tablet focus before release | FAIL, fix pending deployment verification | Regression described above |
-| Final public deployment verification | PENDING | Verify after main push |
-| Captioned 60–120 second recording | PENDING | Actual browser recording to be attached |
+| Tablet focus before release | FAIL, subsequently fixed and verified | Initial failure retained in verification-before.json |
+| Final public deployment verification | PASS | Application commit d556d45, Vercel READY; desktop, tablet and imagery-outage scenarios pass |
+| Captioned 60–120 second recording | PASS | Actual public-site recording; 90.36 s encoded MP4; no application exceptions |
+
+Final public evidence: [scenario results and browser/network signals](evidence/release-2026-11-15/verification-production.json), [deployment metadata](evidence/release-2026-11-15/deployment.json), [full browser-suite log](evidence/release-2026-11-15/browser-tests-verified.log), [frontend tests](evidence/release-2026-11-15/frontend-tests-final.log), [engine tests](evidence/release-2026-11-15/engine-tests-final.log), [build](evidence/release-2026-11-15/build-final.log), [initial focus failure](evidence/release-2026-11-15/verification-before.json).
+
+The final deployed desktop scenario received **52 successful NASA tile responses**. The **5,760,000-byte** decoded terrain matches the pinned SHA-256 and is served with **Brotli** encoding. Terrain is fetched once per page across view changes; both route legs and the load-time checksum appear in the UI. Changing science time produces infeasible and restoring it produces feasible. The 768px tablet case confirms no horizontal overflow and successful Escape/focus restoration. Blocking three NASA probe URLs produces the real local DTM relief fallback while routing remains available. Application page exceptions are empty; the outage scenario records its deliberately blocked network requests separately.
+
+Screenshots: [both route legs](evidence/release-2026-11-15/both-routes-summary.png), [infeasible timing](evidence/release-2026-11-15/science-time-infeasible.png), [terrain checksum and X2b](evidence/release-2026-11-15/terrain-checksum.png), [768px tablet](evidence/release-2026-11-15/tablet-768.png), [imagery fallback](evidence/release-2026-11-15/imagery-outage.png).
 
 The initial parallel frontend run hit a worker startup timeout. The constrained one-worker run completed all 99 tests. The first clean install encountered a Windows native-module lock; only the node process holding modules inside this workspace was stopped before retrying. These are recorded runner/environment failures, not silently counted as passes.
 
@@ -76,6 +90,7 @@ Stop this workspace's Vite process before `npm ci` on Windows. The release scrip
 - **Science locations:** NASA/JPL-Caltech Perseverance MMGIS localized rover waypoints and raw-image metadata. These are rover positions, not exact sample-tube or rock coordinates.
 - **Solar model:** NASA GISS Mars24, Allison & McEwen (2000); [published algorithm and worked examples](https://www.giss.nasa.gov/tools/mars24/help/algorithm.html).
 - **Software:** React, TypeScript, Vite, Three.js, Leaflet/React Leaflet, Recharts, Radix UI, Tailwind CSS, Zustand, Lucide, Playwright/Vitest and the documented Python geospatial dependencies. Instrument Sans and IBM Plex Mono fonts. Exact versions are pinned in package locks; installed packages carry their license texts. Vercel provides static hosting. Agentation is a local development tool and is removed from production code.
+- **Preprocessing and release tools:** Python; NumPy 2.5.4; Rasterio 1.5.2 with GDAL/PROJ; pyproj 3.8.0; certifi 2026.10.23; pytest 9.2.0, as pinned in `scientific-pipeline/requirements.txt`. Playwright/Chromium recorded the browser and FFmpeg 9.0 encoded the captioned demonstration.
 - **Design and AI assistance:** user-supplied Figma draft was a reference during earlier work, not a parity implementation. Interface, code, review and release automation were produced with AI assistance, including OpenAI Codex. No synthetic terrain or environmental measurements were substituted.
 
 Shipped terrain SHA-256: `fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49`. Source DTM SHA-256: `44c3819caa33922b06f7a8228534d1e32ab4087aca85144136d825c371c747d8`. No scientific grid, engine or pipeline change was made in this release.
@@ -87,3 +102,5 @@ Eligibility evidence is already recorded as S5 PASS in `scientific-pipeline/evid
 X2b remains **FAIL**, unresolved. The later scientific report records S2 PASS with X2b as a failed supplementary registration check; neither the tolerance nor image placement was changed. The original masterplan has a stricter alignment kill switch, so do not describe every alignment check as passing or the offset as resolved. Precision terrain demonstrations can use DTM relief.
 
 Coverage is a 2.43 km² AOI; 2 m cells do not establish footing or resolve small hazards; target coordinates are approximate rover positions; walking speed and EVA constraints are illustrative; daylight is geometric; no weather forecast, radiation, communications or life-support model is supplied. Formal screen-reader, full contrast and physical-touch-device audits are NOT RUN in this release. Keyboard and browser tablet evidence is scoped to the workflows actually exercised. This is an educational scientific prototype, not certified navigation or NASA-endorsed software.
+
+Initial review totals: **Standards 1 finding** (worst: missing verdict qualification), **Spec 2 findings** (worst: missing verdict qualification). All initial findings were fixed; follow-up focus edge cases were covered by passing browser regressions.

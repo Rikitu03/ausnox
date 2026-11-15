@@ -1,0 +1,27 @@
+
+> ausnox@0.1.0 postinstall
+> npm run build:engine
+
+
+> ausnox@0.1.0 build:engine
+> npm --prefix packages/scientific-engine run build
+
+
+> @ausnox/scientific-engine@0.1.0 build
+> tsc -p tsconfig.build.json
+
+
+added 383 packages, and audited 391 packages in 2m
+
+63 packages are looking for funding
+  run `npm fund` for details
+
+7 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.

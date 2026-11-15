@@ -1,0 +1,91 @@
+{
+  "url": "https://ausnox.vercel.app",
+  "checkedUtc": "2026-11-15T13:15:51.324Z",
+  "scenarios": [
+    {
+      "name": "desktop-keyboard",
+      "status": "PASS",
+      "evidence": {
+        "sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+        "terrainBytes": 5760000,
+        "tileResponses": 28,
+        "bothRouteLegs": true,
+        "invalidCoordinatesRejected": true,
+        "routePreferenceKeyboard": true,
+        "scienceTimeChangesVerdict": true,
+        "checksumUi": "Verified at load",
+        "x2b": "FAIL remains disclosed"
+      }
+    },
+    {
+      "name": "tablet-768",
+      "status": "FAIL",
+      "error": "Error: expect(locator).toBeFocused() failed\n\nLocator:  getByRole('button', { name: 'Mission planner', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  25000ms\n\nCall log:\n  - Expect \"toBeFocused\" getByRole('button', { name: 'Mission planner', exact: true }) with timeout 25000ms\n  - waiting for getByRole('button', { name: 'Mission planner', exact: true })\n    53 × locator resolved to <button type=\"button\" class=\"tap inline-flex shrink-0 items-center justify-center gap-2 rounded-ctl text-[13px] font-medium whitespace-nowrap transition-[background-color,border-color,color,transform] duration-150 ease-out active:scale-[0.98] disabled:opacity-45 disabled:active:scale-100 [&_svg]:size-4 [&_svg]:shrink-0 border border-line-strong text-fg hover:bg-hover h-9 px-3.5 bg-surface\">…</button>\n       - unexpected value \"inactive\"\n\n    at captureRawStack (C:\\Users\\Profile\\.codex\\worktrees\\68b8\\ausnox\\node_modules\\playwright-core\\lib\\coreBundle.js:9551:17)\n    at callMatcherAsStep (C:\\Users\\Profile\\.codex\\worktrees\\68b8\\ausnox\\node_modules\\playwright\\lib\\matchers\\expect.js:13342:57)\n    at Object.toBeFocused (C:\\Users\\Profile\\.codex\\worktrees\\68b8\\ausnox\\node_modules\\playwright\\lib\\matchers\\expect.js:13334:23)\n    at C:\\Users\\Profile\\.codex\\worktrees\\68b8\\ausnox\\scripts\\verify-release.mjs:159:86\n    at async scenario (C:\\Users\\Profile\\.codex\\worktrees\\68b8\\ausnox\\scripts\\verify-release.mjs:62:22)\n    at async file:///C:/Users/Profile/.codex/worktrees/68b8/ausnox/scripts/verify-release.mjs:147:3"
+    },
+    {
+      "name": "imagery-outage",
+      "status": "PASS",
+      "evidence": {
+        "nasaTileRequestsBlocked": 3,
+        "realDtmReliefFallback": true,
+        "routingWorks": true,
+        "noSyntheticReplacement": true
+      }
+    }
+  ],
+  "signals": [
+    {
+      "name": "desktop-keyboard",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "terrainRequests": 1,
+      "tileResponses": 28
+    },
+    {
+      "name": "tablet-768",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "terrainRequests": 1,
+      "tileResponses": 24
+    },
+    {
+      "name": "imagery-outage",
+      "pageErrors": [],
+      "consoleErrors": [
+        {
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/default/default028mm/15/13024/46859.png"
+        },
+        {
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/default/default028mm/13/3256/11714.png"
+        },
+        {
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/7/50/183.jpg"
+        }
+      ],
+      "failedRequests": [
+        {
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/default/default028mm/15/13024/46859.png",
+          "error": "net::ERR_FAILED"
+        },
+        {
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/default/default028mm/13/3256/11714.png",
+          "error": "net::ERR_FAILED"
+        },
+        {
+          "url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/7/50/183.jpg",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "httpErrors": [],
+      "terrainRequests": 1,
+      "tileResponses": 0
+    }
+  ]
+}

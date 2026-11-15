@@ -1,0 +1,42 @@
+{
+  "url": "https://ausnox.vercel.app",
+  "sourceCommit": "d556d45e2573fd99f21b65c235941cf1e1e0f09e",
+  "checkedUtc": "2026-11-15T13:40:29.923Z",
+  "durationSeconds": 90.012,
+  "viewport": "1600x900",
+  "errors": [],
+  "cues": [
+    {
+      "start": 0.001,
+      "text": "AUSNOX | Jezero crater, Mars\nReal NASA/USGS observations. A hypothetical Marswalk."
+    },
+    {
+      "start": 20.041,
+      "text": "Compare shortest traversable and lower-slope routes.\nOutbound and return legs are calculated independently."
+    },
+    {
+      "start": 30.641,
+      "text": "The 3D view uses the same verified elevation grid.\nDisplay height scale does not change route measurements."
+    },
+    {
+      "start": 41.283,
+      "text": "Review both route legs, walking time and science stops.\nThe return margin accounts for the selected reserve."
+    },
+    {
+      "start": 51.843,
+      "text": "Move the simulated start to 14:00 Mars local solar time.\nThe original science activities still fit the window."
+    },
+    {
+      "start": 61.166,
+      "text": "Increase the destination activity from 30 to 240 minutes.\nThe mission becomes infeasible: the return margin is insufficient."
+    },
+    {
+      "start": 74.189,
+      "text": "Every source distinguishes observations, calculations and assumptions.\nX2b image registration remains unresolved; small hazards are not resolved."
+    },
+    {
+      "start": 83.344,
+      "text": "NASA observations change a Marswalk decision.\nEducational simulation. Not operational navigation or NASA-endorsed safety advice."
+    }
+  ]
+}

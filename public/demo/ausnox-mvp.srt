@@ -1,0 +1,39 @@
+1
+00:00:00,001 --> 00:00:20,041
+AUSNOX | Jezero crater, Mars
+Real NASA/USGS observations. A hypothetical Marswalk.
+
+2
+00:00:20,041 --> 00:00:30,641
+Compare shortest traversable and lower-slope routes.
+Outbound and return legs are calculated independently.
+
+3
+00:00:30,641 --> 00:00:41,283
+The 3D view uses the same verified elevation grid.
+Display height scale does not change route measurements.
+
+4
+00:00:41,283 --> 00:00:51,843
+Review both route legs, walking time and science stops.
+The return margin accounts for the selected reserve.
+
+5
+00:00:51,843 --> 00:01:01,166
+Move the simulated start to 14:00 Mars local solar time.
+The original science activities still fit the window.
+
+6
+00:01:01,166 --> 00:01:14,189
+Increase the destination activity from 30 to 240 minutes.
+The mission becomes infeasible: the return margin is insufficient.
+
+7
+00:01:14,189 --> 00:01:23,344
+Every source distinguishes observations, calculations and assumptions.
+X2b image registration remains unresolved; small hazards are not resolved.
+
+8
+00:01:23,344 --> 00:01:30,012
+NASA observations change a Marswalk decision.
+Educational simulation. Not operational navigation or NASA-endorsed safety advice.

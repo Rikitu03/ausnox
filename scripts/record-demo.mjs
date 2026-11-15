@@ -90,7 +90,7 @@ try {
   }
   const subtitles = cues.map((cue, index) => `${index + 1}\n${timestamp(cue.start)} --> ${timestamp(cues[index + 1]?.start ?? durationSeconds)}\n${cue.text}\n`).join('\n')
   await writeFile(`${out}/ausnox-demo.srt`, subtitles)
-  await writeFile(`${out}/recording.json`, JSON.stringify({ url, checkedUtc: new Date().toISOString(), durationSeconds, viewport: '1600x900', errors, cues }, null, 2) + '\n')
+  await writeFile(`${out}/recording.json`, JSON.stringify({ url, sourceCommit: process.env.DEMO_COMMIT ?? null, checkedUtc: new Date().toISOString(), durationSeconds, viewport: '1600x900', errors, cues }, null, 2) + '\n')
   console.log(JSON.stringify({ url, durationSeconds, video: `${out}/ausnox-demo.webm`, subtitles: `${out}/ausnox-demo.srt`, errors }))
 } finally {
   await browser.close()

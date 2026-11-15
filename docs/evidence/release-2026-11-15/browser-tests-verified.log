@@ -1,0 +1,18 @@
+
+> ausnox@0.1.0 test:browser
+> playwright test
+
+[WebServer] (node:3808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:3120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests\browser\jezero-3d.spec.ts:21:1 › production DEM, both routes, camera, simulation, styles and shared mission controls (32.5s)
+  ✓  2 tests\browser\jezero-3d.spec.ts:142:1 › tablet 3D layout and WebGL context loss preserve the route and working 2D map (4.7s)
+  ✓  3 tests\browser\jezero-3d.spec.ts:167:1 › WebGL unavailable is contained and preserves the mission (2.8s)
+  ✓  4 tests\browser\keyboard.spec.ts:3:1 › desktop coordinate dialog restores its external keyboard opener (2.4s)
+  ✓  5 tests\browser\keyboard.spec.ts:17:1 › tablet coordinate entry and planner sheet return focus to the surviving launcher (2.7s)
+
+  5 passed (49.6s)

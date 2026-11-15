@@ -1,0 +1,10 @@
+{
+  "verifiedPublicUrl": "https://ausnox.vercel.app",
+  "deploymentId": "dpl_y9SVNAVBTrqww9KPNfCYhVXkqKFe",
+  "sourceCommit": "d556d45e2573fd99f21b65c235941cf1e1e0f09e",
+  "state": "READY",
+  "target": "production",
+  "readyUtc": "2026-11-15T13:37:54.956Z",
+  "entryScript": "/assets/index-BtydTkRY.js",
+  "terrainSha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49"
+}

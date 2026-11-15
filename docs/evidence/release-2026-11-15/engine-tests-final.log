@@ -1,0 +1,16 @@
+
+> ausnox@0.1.0 test:engine
+> npm --prefix packages/scientific-engine test
+
+
+> @ausnox/scientific-engine@0.1.0 test
+> vitest run
+
+
+ RUN  v5.1.0 C:/Users/Profile/.codex/worktrees/68b8/ausnox/packages/scientific-engine
+
+
+ Test Files  6 passed (6)
+      Tests  88 passed (88)
+   Start at  21:28:22
+   Duration  7.59s (transform 60%, tests 27%, import 12%, worker 1%)
