@@ -71,6 +71,28 @@ Shipped elevations equal the float32 2 × 2 source means exactly (2,004 independ
 - **Control experiment** (`photometric_control.py`): the best-fit sun is from azimuth 269°, elevation 15° (correlation 0.56). Synthetic images rendered from the DTM with that sun, with and without cast shadows (4.4 % of cells), are perfectly registered by construction; the same method finds ≤ 0.03 m on them, so the method has no geometric bias. Direct cross-correlation of the real image with the shadowed rendering gives +2.28 m east, −0.81 m south.
 - **Interpretation:** either a real displacement of about 2.4 m (1.2 cells) between the DTM and the orthoimages, within the USGS statement of < 3 m orthoimage co-registration, or albedo that correlates with slope aspect, which the control does not model. Routing uses only the DTM, so routes are consistent with the elevation grid. On a map, route and slope overlays may appear shifted by up to about 3 m relative to image features. This is **unresolved**; the manifest's `cross_validation` block exposes it at runtime.
 
+#### 3.4.1 Follow-up diagnostics (2026-11-15, after integration)
+
+X2b stays **FAIL**. Two diagnostic tests were written and their criteria committed before they were run (`git log -- scientific-pipeline/scripts/registration_*.py`).
+
+**Test 2, spatial consistency (`scripts/registration_windowed.py`, `evidence/registration_windowed.json`): outcome VARIABLE** for both primary configurations. The X2b regression was run in 64 windows of 96 × 96 cells.
+- The control (a synthetic rendering of the DTM, registered by construction) was valid: median offset +0.01 m E, −0.00 m S; 63/64 windows reliable, all within 1 m.
+- USGS orthomosaic: 49 reliable windows, median +1.86 m E [95 % CI +1.45, +2.41], −1.05 m S [−1.46, −0.15]; only 24 % of windows within 1 m of the median (criterion 70 %).
+- Mars Trek tiles: 49 windows, median +2.38 m E [+1.91, +2.98], −0.22 m S; 20 % within 1 m.
+
+Observations (descriptive, not part of the pre-registered rule):
+- 45 of 49 windows place the imagery east of the DTM, away from the fitted sun (azimuth 269°). The magnitude ranges from about 0.2 to 8 m (10th–90th percentile +0.35 to +6.1 m east).
+- The east offset grows with the brightness spread inside a window (Spearman ρ ≈ 0.5, p < 0.001, both images).
+- The homogeneous crater-floor windows give +0.4 to +2.7 m east.
+
+This pattern fits a photometric artifact (brightness that is not explained by DTM shading, such as albedo) better than a single rigid 2.4 m displacement. A smaller real offset with an artifact on top is not excluded.
+
+Limitations of test 2:
+- The covariate part of the pre-registered rule is scale-free and also flags the control, whose offsets vary by only ±0.1 m. Here the outcome is decided by the spread criterion alone; future rules should add a magnitude threshold.
+- The Mars Trek tiles are resampled from the same mosaic, so the agreement between the two images (per-window correlation 0.99) measures only resampling noise, not estimator noise on real albedo.
+
+**Test 1, sun-direction dependence (`scripts/registration_illumination.py`, `config/x2b_illumination.json`): NOT RUN.** It needs three HiRISE RDR images (about 1.35 GB) with sun azimuths 226.0°, 265.4° and 287.7°. The images have not been downloaded.
+
 ### 3.5 Known source limitations
 
 HiRISE DTM artefacts listed by USGS (boxes of 0.5–1 m, CCD seams, faceted low-contrast areas, interpolated patches) may be present. At 2 m cells and a ~4 m gradient baseline, rocks, steps and loose material are not represented. Slope says nothing about footing.
