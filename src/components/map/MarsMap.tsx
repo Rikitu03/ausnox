@@ -75,6 +75,7 @@ function Controller({ padding }: { padding: MapPadding }) {
   const focus = useUiStore((s) => s.focus)
   const placement = useUiStore((s) => s.placement)
   const mapMode = useUiStore((s) => s.mapMode)
+  const fitted = useRef<{ manifest: typeof manifest; seq: number } | null>(null)
 
   useEffect(() => {
     if (mapMode !== '2d') return
@@ -97,9 +98,16 @@ function Controller({ padding }: { padding: MapPadding }) {
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     map.invalidateSize()
+    // Panel visibility changes must not reset a camera the user has positioned.
+    if (fitted.current?.manifest === manifest && fitted.current.seq === focus.seq) return
+    fitted.current = { manifest, seq: focus.seq }
     if (focus.point) {
       const p = ll(focus.point)
-      if (p) map.setView(p, Math.max(map.getZoom(), 16), { animate: !reduce })
+      if (p) {
+        map.setView(p, Math.max(map.getZoom(), 16), { animate: false })
+        // Place the inspected target at the centre of the unobstructed map area.
+        map.panBy([(right - left) / 2, (bottom - top) / 2], { animate: !reduce })
+      }
       return
     }
     if (!manifest) return

@@ -70,7 +70,7 @@ export function Panel({ children, className, label }: { children: ReactNode; cla
   return (
     <section
       aria-label={label}
-      className={cn('flex min-h-0 flex-col overflow-hidden rounded-panel border border-line-strong bg-surface', className)}
+      className={cn('flex min-h-0 flex-col overflow-hidden rounded-panel border border-line bg-surface', className)}
     >
       {children}
     </section>
@@ -79,22 +79,32 @@ export function Panel({ children, className, label }: { children: ReactNode; cla
 
 export function PanelHeader({ title, meta, actions }: { title: string; meta?: ReactNode; actions?: ReactNode }) {
   return (
-    <header className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
+    <header className="flex items-center justify-between gap-3 border-b border-line bg-raised/50 px-5 py-5">
       <div className="min-w-0">
-        <h2 className="truncate text-sm font-medium">{title}</h2>
-        {meta && <div className="mt-0.5 text-xs text-fg-3">{meta}</div>}
+        <h2 className="text-lg leading-6 font-semibold tracking-tight">{title}</h2>
+        {meta && <div className="mt-1 text-xs leading-5 text-fg-2">{meta}</div>}
       </div>
       {actions && <div className="flex shrink-0 items-center gap-1">{actions}</div>}
     </header>
   )
 }
 
-export function Section({ title, aside, children, className }: { title?: string; aside?: ReactNode; children: ReactNode; className?: string }) {
+export function Section({
+  title,
+  aside,
+  children,
+  className,
+}: {
+  title?: string
+  aside?: ReactNode
+  children: ReactNode
+  className?: string
+}) {
   return (
-    <div className={cn('border-b border-line px-4 py-4 last:border-b-0', className)}>
+    <div className={cn('border-b border-line px-5 py-5 last:border-b-0', className)}>
       {(title || aside) && (
-        <div className="mb-3 flex items-center justify-between gap-3">
-          {title && <h3 className="text-[13px] font-medium text-fg-2">{title}</h3>}
+        <div className="mb-4 flex items-center justify-between gap-3">
+          {title && <h3 className="text-sm font-semibold text-fg">{title}</h3>}
           {aside}
         </div>
       )}
@@ -104,23 +114,62 @@ export function Section({ title, aside, children, className }: { title?: string;
 }
 
 /** Label over a figure. The figure is mono and tabular so columns of numbers line up. */
-export function Stat({ label, value, sub, emphasis }: { label: string; value: ReactNode; sub?: ReactNode; emphasis?: boolean }) {
+export function Stat({
+  label,
+  value,
+  sub,
+  emphasis,
+}: {
+  label: string
+  value: ReactNode
+  sub?: ReactNode
+  emphasis?: boolean
+}) {
   return (
     <div className="min-w-0">
-      <dt className="text-xs text-fg-3">{label}</dt>
-      <dd className={cn('num mt-1 truncate', emphasis ? 'text-2xl leading-8 text-accent' : 'text-[15px] leading-5 text-fg')}>{value}</dd>
-      {sub && <dd className="mt-0.5 text-xs text-fg-3">{sub}</dd>}
+      <dt className="text-xs leading-5 text-fg-2">{label}</dt>
+      <dd
+        className={cn(
+          'num mt-1 break-words',
+          emphasis ? 'text-[30px] leading-10 tracking-tight text-fg' : 'text-lg leading-7 text-fg',
+        )}
+      >
+        {value}
+      </dd>
+      {sub && <dd className="mt-1 text-xs leading-5 text-fg-2">{sub}</dd>}
     </div>
   )
 }
 
-export function EmptyState({ icon: Icon, title, children, action }: { icon: LucideIcon; title: string; children?: ReactNode; action?: ReactNode }) {
+export function EmptyState({
+  icon: Icon,
+  title,
+  children,
+  action,
+}: {
+  icon: LucideIcon
+  title: string
+  children?: ReactNode
+  action?: ReactNode
+}) {
   return (
-    <div className="flex flex-col items-start gap-2 rounded-card border border-dashed border-line-strong p-4">
+    <div className="flex flex-col items-start gap-2 rounded-card bg-bg p-4">
       <Icon className="size-4 text-fg-3" aria-hidden />
       <p className="text-[13px] font-medium">{title}</p>
       {children && <p className="text-[13px] text-fg-2">{children}</p>}
       {action && <div className="mt-1 flex flex-wrap gap-2">{action}</div>}
     </div>
+  )
+}
+
+/** Native disclosure keeps supporting science one keyboard action away. */
+export function Details({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <details className="science-details group/details">
+      <summary className="cursor-pointer rounded-ctl py-2 text-[13px] font-medium text-fg-2 marker:text-accent hover:text-fg">
+        {title}
+      </summary>
+      <div className="space-y-3 pt-2 pb-1 text-[13px] leading-5 text-fg-2">{children}</div>
+    </details>
   )
 }

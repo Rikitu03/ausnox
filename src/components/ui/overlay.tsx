@@ -1,6 +1,6 @@
 import { X } from 'lucide-react'
 import { Dialog as RadixDialog, Tooltip as RadixTooltip } from 'radix-ui'
-import type { ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 import { Button } from './button'
 
@@ -11,9 +11,28 @@ interface OverlayProps {
   description?: string
   children: ReactNode
   className?: string
+  fallbackFocus?: () => HTMLElement | null
 }
 
 const scrim = 'fixed inset-0 z-[1100] bg-black/55 anim-fade'
+
+/** Controlled overlays have external openers rather than Radix Trigger elements. */
+function useFocusReturn(fallbackFocus?: () => HTMLElement | null) {
+  const opener = useRef<HTMLElement | null>(null)
+  return {
+    onOpenAutoFocus() {
+      opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    },
+    onCloseAutoFocus(event: Event) {
+      event.preventDefault()
+      // A sheet can close while opening coordinate entry. Keep the new modal's focus.
+      if (document.querySelector('[role="dialog"][data-state="open"]')) return
+      const target = opener.current
+      if (target?.isConnected && target !== document.body) target.focus()
+      else fallbackFocus?.()?.focus()
+    },
+  }
+}
 
 function Header({ title, description }: { title: string; description?: string }) {
   return (
@@ -36,12 +55,14 @@ function Header({ title, description }: { title: string; description?: string })
 }
 
 /** Centred modal. Escape closes it and focus returns to the trigger. */
-export function Dialog({ open, onOpenChange, title, description, children, className }: OverlayProps) {
+export function Dialog({ open, onOpenChange, title, description, children, className, fallbackFocus }: OverlayProps) {
+  const focusReturn = useFocusReturn(fallbackFocus)
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className={scrim} />
         <RadixDialog.Content
+          {...focusReturn}
           className={cn(
             'anim-rise fixed top-1/2 left-1/2 z-[1101] flex max-h-[calc(100dvh-32px)] w-[calc(100vw-32px)] max-w-lg -translate-x-1/2 -translate-y-1/2 flex-col rounded-panel border border-line-strong bg-surface',
             className,
@@ -57,11 +78,13 @@ export function Dialog({ open, onOpenChange, title, description, children, class
 
 /** Side sheet. Used for provenance and for the side panels on narrow screens. */
 export function Sheet({ side = 'right', bare, ...props }: OverlayProps & { side?: 'left' | 'right'; bare?: boolean }) {
+  const focusReturn = useFocusReturn(props.fallbackFocus)
   return (
     <RadixDialog.Root open={props.open} onOpenChange={props.onOpenChange}>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className={scrim} />
         <RadixDialog.Content
+          {...focusReturn}
           className={cn(
             'fixed top-0 bottom-0 z-[1101] flex w-[min(400px,calc(100vw-40px))] flex-col border-line-strong bg-surface',
             side === 'right' ? 'right-0 border-l [animation:slide-right_220ms_var(--ease-out)_both]' : 'left-0 border-r [animation:slide-left_220ms_var(--ease-out)_both]',

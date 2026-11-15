@@ -82,7 +82,7 @@ export function SimDock({ className }: { className?: string }) {
   const setView = useUiStore((s) => s.setView)
   const view = useUiStore((s) => s.view)
   return (
-    <section aria-label="Simulated mission clock" className={cn('flex items-center gap-4 rounded-panel border border-line-strong bg-surface px-4 py-3', className)}>
+    <section aria-label="Simulated mission clock" className={cn('sim-dock flex flex-wrap items-center gap-3 rounded-panel border border-line-strong bg-surface px-4 py-3', className)}>
       <PlayButton />
       <div className="shrink-0">
         <div className="flex items-center gap-2">
@@ -95,7 +95,7 @@ export function SimDock({ className }: { className?: string }) {
           {endS <= 0 ? 'Local solar time · no plan' : `Local solar time · T+${formatDuration(snapshot.simS)}`}
         </p>
       </div>
-      <DaylightTimeline compact className="flex-1" />
+      <DaylightTimeline compact className="min-w-24 flex-1 max-sm:basis-full" />
       {view !== 'simulation' && (
         <Button size="sm" variant="ghost" className="hidden shrink-0 sm:inline-flex" onClick={() => setView('simulation')}>
           Open simulation

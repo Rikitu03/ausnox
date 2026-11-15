@@ -31,7 +31,7 @@ export function Segmented<T extends string | number>({
             className={cn(
               'tap relative flex cursor-pointer items-center justify-center rounded-[6px] px-2 text-center text-[13px] transition-colors duration-150 has-focus-visible:outline-2 has-focus-visible:outline-offset-1 has-focus-visible:outline-accent',
               size === 'sm' ? 'h-7' : 'h-8',
-              checked ? 'bg-hover text-fg shadow-[inset_0_0_0_1px_var(--color-line-strong)]' : 'text-fg-2 hover:text-fg',
+              checked ? 'bg-raised text-fg after:absolute after:inset-x-2 after:bottom-0 after:h-px after:bg-accent' : 'text-fg-2 hover:text-fg',
             )}
           >
             <input type="radio" name={name} className="sr-only" checked={checked} onChange={() => onChange(o.value)} />

@@ -139,7 +139,7 @@ export function SourcesView() {
     <div className="h-full overflow-y-auto">
       <div className="mx-auto max-w-[1120px] space-y-8 px-4 py-6 sm:px-6 sm:py-8">
         <header>
-          <h1 className="text-2xl leading-8 font-medium">Data sources and methods</h1>
+          <h1 className="text-[28px] leading-9 font-semibold tracking-tight">Data sources and methods</h1>
           <p className="mt-2 max-w-[68ch] text-[13px] text-fg-2">
             What Ausnox is built to use, what it shows today, and how far each number can be trusted. Ausnox is a NASA Space Apps
             2026 project. It is not endorsed by NASA
@@ -206,7 +206,7 @@ export function SourcesView() {
                     {r.integration === 'demo-stand-in' && <KindBadge kind="illustrative" />}
                     <span className="ml-auto text-xs text-fg-3">{STATUS[r.integration]}</span>
                   </div>
-                  <h3 className="mt-3 text-sm font-medium">{r.title}</h3>
+                  <h3 className="mt-3 text-base font-semibold">{r.title}</h3>
                   {(r.mission || r.instrument) && <p className="mt-0.5 text-[13px] text-fg-2">{[r.mission, r.instrument].filter(Boolean).join(' · ')}</p>}
                   <dl className="mt-3 space-y-2 text-[13px]">
                     <div className="grid grid-cols-[88px_1fr] gap-3">
@@ -255,7 +255,7 @@ export function SourcesView() {
             {METHODS.map((m) => (
               <li key={m.title} className="rounded-panel border border-line bg-surface p-5">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="text-sm font-medium">{m.title}</h3>
+                  <h3 className="text-base font-semibold">{m.title}</h3>
                   <KindBadge kind={m.kind} />
                 </div>
                 <p className="mt-2 text-[13px] text-fg-2">{m.body}</p>
@@ -292,7 +292,7 @@ export function SourcesView() {
             <ul className="grid gap-4 md:grid-cols-3">
               {SERVICES.map((s) => (
                 <li key={s.name} className="rounded-panel border border-line bg-surface p-5">
-                  <h3 className="text-sm font-medium">{s.name}</h3>
+                  <h3 className="text-base font-semibold">{s.name}</h3>
                   <p className="mt-2 text-[13px] text-fg-2">{s.detail}</p>
                 </li>
               ))}
@@ -300,10 +300,11 @@ export function SourcesView() {
           </Block>
         )}
 
-        <Block title="3D terrain view" intro="Planned as an enhancement; not part of this release">
+        <Block title="3D terrain view" intro="An optional view of the same verified elevation model">
           <p className="max-w-[78ch] text-[13px] text-fg-2">
-            Not available in this build. A 3D view will only draw the validated elevation model, with any vertical exaggeration
-            labelled. The map stays 2D and nothing depends on 3D
+            The cube control opens the validated elevation model in 3D, with relief, elevation and slope styles. Vertical
+            exaggeration is labelled and changes only the display. Routes and measurements use the original terrain grid.
+            A 2D fallback is available if WebGL cannot run. Imagery draping is not implemented
           </p>
         </Block>
 
@@ -340,9 +341,10 @@ export function SourcesView() {
 
         <Block title="Credits">
           <p className="max-w-[78ch] text-[13px] text-fg-2">
-            Built with React, Leaflet, Recharts, Radix UI, Tailwind CSS and Lucide icons. Typefaces: Instrument Sans and IBM Plex
-            Mono. Interface and code were produced with AI assistance. Dataset credits are listed with each source above and will
-            be completed with product IDs, checksums and retrieval dates when the data is ingested
+            Built with React, Three.js, Leaflet, Recharts, Radix UI, Tailwind CSS and Lucide icons. Typefaces: Instrument Sans and
+            IBM Plex Mono. Interface and code were produced with AI assistance, including OpenAI Codex. Dataset credits are
+            listed with each source above. Product IDs, checksums and retrieval dates are recorded in the shipped terrain
+            manifest and in docs/DATA_SOURCES.md
           </p>
         </Block>
       </div>

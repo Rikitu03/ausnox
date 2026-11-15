@@ -14,14 +14,14 @@ export function TopBar() {
   const setHelpOpen = useUiStore((s) => s.setHelpOpen)
   const title = useDataStore((s) => s.manifest?.title)
   return (
-    <header className="flex h-12 shrink-0 items-center gap-3 border-b border-line bg-bg px-3 sm:gap-4 sm:px-4">
+    <header className="app-header grid shrink-0 grid-cols-[1fr_auto] items-center gap-x-4 border-b border-line bg-bg px-4 sm:px-5 lg:flex lg:h-16">
       <a href="#/control" onClick={() => setView('control')} className="flex shrink-0 items-center gap-2 rounded-ctl" aria-label="Ausnox, mission control">
-        <Logo />
-        <span className="text-[15px] font-semibold tracking-[0.08em]">AUSNOX</span>
+        <Logo className="size-6 text-accent" />
+        <span className="text-base font-semibold tracking-[0.1em]">AUSNOX</span>
       </a>
       <span className="hidden shrink-0 text-xs text-fg-3 xl:inline">{title ?? 'Jezero Crater'}</span>
 
-      <nav aria-label="Views" className="-my-px flex min-w-0 flex-1 items-stretch gap-1 self-stretch overflow-x-auto sm:justify-center">
+      <nav aria-label="Views" className="app-navigation order-3 col-span-2 flex min-w-0 flex-1 items-stretch gap-1 self-stretch overflow-x-auto lg:order-none lg:justify-center">
         {VIEWS.map((v) => (
           <button
             key={v.id}
@@ -30,11 +30,11 @@ export function TopBar() {
             onClick={() => setView(v.id)}
             className={cn(
               'tap relative shrink-0 px-2.5 text-[13px] whitespace-nowrap transition-colors duration-150 sm:px-3',
-              view === v.id ? 'text-fg' : 'text-fg-2 hover:text-fg',
+              view === v.id ? 'font-semibold text-fg' : 'text-fg-2 hover:text-fg',
             )}
           >
             {v.label}
-            {view === v.id && <span className="absolute inset-x-2.5 bottom-0 h-0.5 rounded-full bg-accent sm:inset-x-3" aria-hidden />}
+            {view === v.id && <span className="absolute inset-x-2.5 bottom-0 h-px rounded-full bg-accent sm:inset-x-3" aria-hidden />}
           </button>
         ))}
       </nav>

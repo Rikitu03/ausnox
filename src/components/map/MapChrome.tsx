@@ -237,7 +237,7 @@ export function PlacementBanner({ className }: { className?: string }) {
   if (!placement && !issue) return null
   const target = issue?.target ?? placement!
   return (
-    <div className={cn(float, 'anim-rise w-[min(440px,calc(100vw-24px))] p-3', className)} role="status" aria-live="polite">
+    <div className={cn(float, 'anim-rise w-[min(440px,calc(100vw-24px))] max-w-full p-3', className)} role="status" aria-live="polite">
       {issue ? (
         <StatusAlert
           tone="warn"
@@ -246,7 +246,7 @@ export function PlacementBanner({ className }: { className?: string }) {
           action={
             <>
               {issue.snap && (
-                <Button size="sm" variant="primary" onClick={confirmSnap}>
+                <Button size="sm" variant="primary" className="h-auto min-h-8 whitespace-normal py-2 text-left" onClick={confirmSnap}>
                   Use nearest usable cell, {formatMetres(issue.snapDistanceM, 0)} away
                   {issue.snapSlopeDeg !== null ? ` (${formatDegrees(issue.snapSlopeDeg)})` : ''}
                 </Button>
@@ -344,6 +344,7 @@ export function CoordinateEntryDialog() {
       }}
       title={target ? `Enter ${TARGET_LABEL[target]} coordinates` : 'Enter coordinates'}
       description="Use this instead of selecting a spot on the map"
+      fallbackFocus={() => document.getElementById('workspace-planner-toggle')}
     >
       <form onSubmit={submit} className="space-y-4" noValidate>
         <Segmented
@@ -394,7 +395,7 @@ export function CoordinateEntryDialog() {
             title="That location cannot be used"
             action={
               issue.snap && (
-                <Button size="sm" variant="primary" onClick={confirmSnap}>
+                <Button size="sm" variant="primary" className="h-auto min-h-8 whitespace-normal py-2 text-left" onClick={confirmSnap}>
                   Use nearest usable cell, {formatMetres(issue.snapDistanceM, 0)} away
                 </Button>
               )
@@ -443,7 +444,7 @@ export function ImageryNotice({ className }: { className?: string }) {
         live
         tone="bad"
         title="Terrain data unavailable"
-        className={cn('w-[min(420px,calc(100vw-24px))] bg-surface', className)}
+        className={cn('w-[min(420px,calc(100vw-24px))] max-w-full bg-surface', className)}
         action={
           <Button size="sm" onClick={() => void init()}>
             <RefreshCw />
@@ -462,7 +463,7 @@ export function ImageryNotice({ className }: { className?: string }) {
       live
       tone="warn"
       title="Map imagery unavailable"
-      className={cn('w-[min(420px,calc(100vw-24px))] bg-surface', className)}
+      className={cn('w-[min(420px,calc(100vw-24px))] max-w-full bg-surface', className)}
       action={
         <>
           <Button size="sm" onClick={() => void load(basemapId, true)}>

@@ -27,7 +27,7 @@ function Card({ title, aside, children, className }: { title: string; aside?: Re
   return (
     <section className={cn('rounded-panel border border-line bg-surface p-5', className)}>
       <div className="mb-4 flex items-center justify-between gap-3">
-        <h2 className="text-sm font-medium">{title}</h2>
+        <h2 className="text-base font-semibold">{title}</h2>
         {aside}
       </div>
       {children}
@@ -100,11 +100,11 @@ export function SummaryView() {
 
   return (
     <div className="h-full overflow-y-auto">
-      <div className="mx-auto max-w-[1120px] space-y-4 px-4 py-6 sm:px-6 sm:py-8">
+      <div className="mx-auto max-w-[1120px] space-y-6 px-4 py-6 sm:px-6 sm:py-8">
         <header className="flex flex-wrap items-end justify-between gap-4">
           <div className="min-w-0">
             <p className="num text-xs text-fg-3">{config.id}</p>
-            <h1 className="mt-1 truncate text-2xl leading-8 font-medium">{config.name || 'Untitled Marswalk'}</h1>
+            <h1 className="mt-1 truncate text-[28px] leading-9 font-semibold tracking-tight">{config.name || 'Untitled Marswalk'}</h1>
             <p className="mt-1 text-[13px] text-fg-2">
               Mission summary · {MODE_LABEL[config.routeMode]} route · hypothetical EVA, simulated
             </p>

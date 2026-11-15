@@ -34,6 +34,8 @@ describe('App', () => {
     expect(screen.getByText('Loading terrain and map layers')).toBeInTheDocument()
     await ready()
     expect(screen.getAllByText('SIMULATED').length).toBeGreaterThan(0)
+    expect(screen.getByText(/Demonstration result/)).toBeInTheDocument()
+    await userEvent.click(screen.getByText('Scientific explanation', { exact: true }))
     expect(screen.getByText(/Demonstration response/)).toBeInTheDocument()
     expect(screen.getByText(/Not for operational navigation/)).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Mission planner' })).toBeInTheDocument()
@@ -54,6 +56,7 @@ describe('App', () => {
 
     await user.click(within(nav).getByRole('button', { name: 'Terrain' }))
     expect(screen.getByRole('region', { name: 'Layers and science' })).toBeInTheDocument()
+    await user.click(screen.getByText('Imagery sources & availability', { exact: true }))
     expect(screen.getAllByText(/Unavailable\. Needs the real map adapter/).length).toBe(3)
 
     await user.click(within(nav).getByRole('button', { name: 'Simulation' }))
@@ -64,10 +67,10 @@ describe('App', () => {
     const user = userEvent.setup()
     render(<App />)
     await ready()
-    const field = screen.getByRole('spinbutton', { name: 'Science time at Sampling stop A' })
+    const field = screen.getByRole('spinbutton', { name: 'Activity duration' })
     await user.clear(field)
     await user.type(field, '240')
-    expect(await screen.findByText('Infeasible under selected assumptions')).toBeInTheDocument()
+    expect(await within(screen.getByRole('status', { name: 'Mission verdict' })).findByText('Infeasible under selected assumptions')).toBeInTheDocument()
     expect(screen.getByText('Not enough time to return')).toBeInTheDocument()
   })
 
@@ -75,7 +78,7 @@ describe('App', () => {
     const user = userEvent.setup()
     render(<App />)
     await ready()
-    const field = screen.getByRole('spinbutton', { name: 'Science time at Sampling stop A' })
+    const field = screen.getByRole('spinbutton', { name: 'Activity duration' })
     await user.clear(field)
     await user.type(field, '-5')
     expect(screen.getByRole('alert')).toHaveTextContent('Must be 0 to 240 min')
@@ -131,9 +134,39 @@ describe('App', () => {
     const user = userEvent.setup()
     render(<App />)
     await ready()
+    await user.click(screen.getByText('Planning details', { exact: true }))
     await user.click(screen.getAllByRole('button', { name: /Show source: Route geometry/ })[0]!)
     const drawer = await screen.findByRole('dialog', { name: 'Route geometry and terrain metrics' })
     expect(within(drawer).getByText(/not pathfinding results/)).toBeInTheDocument()
+  })
+
+  it('reveals scientific context on demand while keeping the verdict in the summary', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await ready()
+    const status = screen.getByRole('region', { name: 'Mission status' })
+    const disclosure = within(status).getByText('Scientific explanation', { exact: true }).closest('details')!
+    expect(disclosure.open).toBe(false)
+    await user.click(within(status).getByText('Scientific explanation', { exact: true }))
+    expect(disclosure.open).toBe(true)
+    expect(within(disclosure).getByText(/without terrain shadows/)).toBeVisible()
+    expect(within(status).getByText('Feasible under selected assumptions')).toBeVisible()
+    expect(within(status).getByRole('button', { name: 'Simulate' })).toBeEnabled()
+  })
+
+  it('selects a science target and keeps full citations behind its details', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await ready()
+    await user.click(within(screen.getByRole('navigation', { name: 'Views' })).getByRole('button', { name: 'Terrain' }))
+    const layers = screen.getByRole('region', { name: 'Layers and science' })
+    await user.click(within(layers).getAllByRole('button', { name: /View target/ })[0]!)
+    expect(within(layers).getByRole('button', { name: 'Set destination' })).toBeVisible()
+    const disclosure = within(layers).getByText('Scientific details', { exact: true }).closest('details')!
+    expect(disclosure.open).toBe(false)
+    await user.click(within(layers).getByText('Scientific details', { exact: true }))
+    expect(disclosure.open).toBe(true)
+    expect(within(disclosure).getByRole('button', { name: /Show source/ })).toBeVisible()
   })
 
   it('reports indeterminate when the solar model is unavailable', async () => {

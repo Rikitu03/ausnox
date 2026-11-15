@@ -1,6 +1,6 @@
 import { Flag, House, Keyboard, MapPin, Plus, RotateCcw, Trash2 } from 'lucide-react'
 import { useId } from 'react'
-import { EmptyState, PanelHeader, Section, StatusAlert } from '@/components/layout/primitives'
+import { Details, EmptyState, PanelHeader, Section, StatusAlert } from '@/components/layout/primitives'
 import { KindBadge, SourceBadge } from '@/components/provenance/Provenance'
 import { Button } from '@/components/ui/button'
 import { Collapsible, NumberField, Segmented, Select, Switch } from '@/components/ui/controls'
@@ -19,23 +19,32 @@ function Position({ position }: { position: GridCoord }) {
   const issue = validityIssue(sample.validity)
   const nominal = useDataStore((s) => s.manifest?.georeference.kind !== 'verified')
   return (
-    <div className="num mt-1.5 space-y-0.5 text-xs text-fg-2">
-      <p>
-        x {formatGrid(position.x)} · y {formatGrid(position.y)}
-      </p>
-      {sample.geo && (
-        <p className="text-fg-3">
-          {formatGeo(sample.geo.lonEast, 'lon')} · {formatGeo(sample.geo.latNorth, 'lat')}
-          {nominal && <span className="font-sans"> nominal</span>}
-        </p>
-      )}
+    <div className="mt-3">
       {issue ? (
-        <p className="font-sans text-bad">Unknown: {issue}</p>
+        <p className="text-xs text-bad">Unknown terrain: {issue}</p>
       ) : (
-        <p>
-          {formatMetres(sample.elevationM, 1)} elevation · {formatDegrees(sample.slopeDeg)} slope
-        </p>
+        <dl className="location-metrics">
+          <div>
+            <dt>Elevation</dt>
+            <dd>{formatMetres(sample.elevationM, 1)}</dd>
+          </div>
+          <div>
+            <dt>Slope</dt>
+            <dd>{formatDegrees(sample.slopeDeg)}</dd>
+          </div>
+        </dl>
       )}
+      <Details title="Coordinates & reference">
+        <p className="num text-xs break-words">
+          x {formatGrid(position.x)} · y {formatGrid(position.y)}
+        </p>
+        {sample.geo && (
+          <p className="num text-xs break-words">
+            {formatGeo(sample.geo.lonEast, 'lon')} · {formatGeo(sample.geo.latNorth, 'lat')}
+          </p>
+        )}
+        <p>{nominal ? 'Nominal coordinates; not a verified transform.' : 'Planetocentric coordinates, Mars 2000.'}</p>
+      </Details>
     </div>
   )
 }
@@ -48,7 +57,12 @@ function PlaceActions({ target, placed }: { target: PlacementTarget; placed: boo
   const terrainReady = useDataStore((s) => s.manifest !== null)
   return (
     <div className="mt-3 flex flex-wrap gap-2">
-      <Button size="sm" disabled={!terrainReady} aria-pressed={active} onClick={() => (active ? cancel() : start(target))}>
+      <Button
+        size="sm"
+        disabled={!terrainReady}
+        aria-pressed={active}
+        onClick={() => (active ? cancel() : start(target))}
+      >
         <MapPin />
         {active ? 'Cancel placing' : placed ? 'Move on map' : 'Place on map'}
       </Button>
@@ -96,7 +110,9 @@ export function PlannerPanel() {
   const pickWaypoint = (id: string, as: 'destination' | 'stop') => {
     const wp = waypoints.find((w) => w.id === id)
     if (!wp) return
-    useUiStore.getState().attemptPlace(as, wp.position, { label: wp.title, waypointId: wp.id, durationMin: wp.suggestedDurationMin })
+    useUiStore
+      .getState()
+      .attemptPlace(as, wp.position, { label: wp.title, waypointId: wp.id, durationMin: wp.suggestedDurationMin })
   }
 
   return (
@@ -121,8 +137,8 @@ export function PlannerPanel() {
         }
       />
       <div className="min-h-0 flex-1 overflow-y-auto">
-        <Section>
-          <label htmlFor={nameId} className="mb-1 block text-xs text-fg-3">
+        <Section title="Mission setup">
+          <label htmlFor={nameId} className="mb-2 block text-sm font-medium text-fg-2">
             Mission name
           </label>
           <input
@@ -132,7 +148,26 @@ export function PlannerPanel() {
             onChange={(e) => m.setName(e.target.value)}
             className="tap h-9 w-full rounded-ctl border border-line-strong bg-bg px-2.5 text-[13px] outline-none focus:border-fg-2"
           />
-          <p className="num mt-1.5 text-xs text-fg-3">{config.id}</p>
+          <div className="mt-3">
+            <p className="mb-2 text-xs font-medium text-fg-2">Route preference</p>
+            <Segmented<RouteMode>
+              label="Route preference"
+              value={config.routeMode}
+              onChange={m.setRouteMode}
+              options={[
+                { value: 'shortest', label: 'Shortest traversable' },
+                { value: 'lower-slope', label: 'Lower slope' },
+              ]}
+            />
+            <Details title="Planning details">
+              <p className="num text-xs break-all">{config.id}</p>
+              <p>
+                Shortest traversable minimizes distance on known terrain under the slope limit. Lower slope accepts
+                extra distance to prefer gentler ground. This preference does not minimize total ascent or energy.
+              </p>
+              <SourceBadge id="route-geometry" />
+            </Details>
+          </div>
         </Section>
 
         {terrainError && (
@@ -144,84 +179,103 @@ export function PlannerPanel() {
         )}
 
         <Section title="Habitat" aside={<KindBadge kind="simulated" />}>
-          {config.habitat ? (
-            <div className="flex gap-3">
-              <span className="grid size-7 shrink-0 place-items-center rounded-[8px] bg-fg text-bg" aria-hidden>
-                <House className="size-4" />
-              </span>
-              <div className="min-w-0">
-                <p className="text-[13px]">Hypothetical habitat</p>
-                <Position position={config.habitat.position} />
+          <div className="location-card">
+            {config.habitat ? (
+              <div className="flex gap-3">
+                <span className="grid size-7 shrink-0 place-items-center rounded-[8px] bg-fg text-bg" aria-hidden>
+                  <House className="size-4" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[13px]">Hypothetical habitat</p>
+                  <Position position={config.habitat.position} />
+                </div>
               </div>
-            </div>
-          ) : (
-            <EmptyState icon={House} title="No habitat yet">
-              Pick any cell with terrain data. The habitat is fictional
-            </EmptyState>
-          )}
-          <PlaceActions target="habitat" placed={!!config.habitat} />
+            ) : (
+              <EmptyState icon={House} title="No habitat yet">
+                Pick any cell with terrain data. The habitat is fictional
+              </EmptyState>
+            )}
+            <PlaceActions target="habitat" placed={!!config.habitat} />
+          </div>
         </Section>
 
         <Section title="Science destination">
-          {config.destination ? (
-            <div className="flex gap-3">
-              <span className="grid size-7 shrink-0 place-items-center rounded-full bg-accent text-accent-ink" aria-hidden>
-                <Flag className="size-4" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-[13px]">{config.destination.label}</p>
-                <Position position={config.destination.position} />
+          <div className="location-card destination-card">
+            {config.destination ? (
+              <div className="flex gap-3">
+                <span
+                  className="grid size-7 shrink-0 place-items-center rounded-full bg-accent text-accent-ink"
+                  aria-hidden
+                >
+                  <Flag className="size-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[13px]">{config.destination.label}</p>
+                  <Position position={config.destination.position} />
+                </div>
               </div>
+            ) : (
+              <EmptyState icon={Flag} title="No destination yet">
+                Place it on the map or choose a listed waypoint
+              </EmptyState>
+            )}
+            {config.destination && (
               <NumberField
-                label={`Science time at ${config.destination.label}`}
-                hideLabel
-                className="w-24 shrink-0"
+                label="Activity duration"
+                className="mt-3 w-full"
                 value={config.destination.durationMin}
                 onCommit={(v) => m.setStopDuration('destination', v)}
                 {...LIMITS.stopDurationMin}
                 unit="min"
               />
-            </div>
-          ) : (
-            <EmptyState icon={Flag} title="No destination yet">
-              Place it on the map or choose a listed waypoint
-            </EmptyState>
-          )}
-          <PlaceActions target="destination" placed={!!config.destination} />
-          <div className="mt-3">
-            <Select
-              aria-label="Use a science waypoint as the destination"
-              value={config.destination?.waypointId ?? ''}
-              disabled={waypoints.length === 0}
-              onChange={(e) => pickWaypoint(e.target.value, 'destination')}
-            >
-              <option value="" disabled>
-                {waypointsError ? 'Waypoints unavailable' : waypoints.length === 0 ? 'No science waypoints listed' : 'Choose from science waypoints'}
-              </option>
-              {waypoints.map((w) => (
-                <option key={w.id} value={w.id}>
-                  {w.title} ({w.labelQuality === 'cited' ? 'cited rover position' : 'illustrative'})
+            )}
+            <PlaceActions target="destination" placed={!!config.destination} />
+            <div className="mt-3">
+              <Select
+                aria-label="Use a science waypoint as the destination"
+                value={config.destination?.waypointId ?? ''}
+                disabled={waypoints.length === 0}
+                onChange={(e) => pickWaypoint(e.target.value, 'destination')}
+              >
+                <option value="" disabled>
+                  {waypointsError
+                    ? 'Waypoints unavailable'
+                    : waypoints.length === 0
+                      ? 'No science waypoints listed'
+                      : 'Choose from science waypoints'}
                 </option>
-              ))}
-            </Select>
+                {waypoints.map((w) => (
+                  <option key={w.id} value={w.id}>
+                    {w.title} ({w.labelQuality === 'cited' ? 'cited rover position' : 'illustrative'})
+                  </option>
+                ))}
+              </Select>
+            </div>
           </div>
         </Section>
 
-        <Section title="Science stops on the way out" aside={<span className="num text-xs text-fg-3">{config.stops.length}</span>}>
+        <Section title="Science stops" aside={<span className="num text-xs text-fg-3">{config.stops.length}</span>}>
           {config.stops.length === 0 ? (
-            <p className="text-[13px] text-fg-3">Optional. Stops are visited in the order listed, then the destination</p>
+            <p className="text-[13px] text-fg-3">
+              Optional. Stops are visited in the order listed, then the destination
+            </p>
           ) : (
             <ol className="space-y-3">
               {config.stops.map((s, i) => (
                 <li key={s.id} className="flex items-start gap-3">
-                  <span className="num grid size-6 shrink-0 place-items-center rounded-full border-[1.5px] border-fg text-xs" aria-hidden>
+                  <span
+                    className="num grid size-6 shrink-0 place-items-center rounded-full border-[1.5px] border-fg text-xs"
+                    aria-hidden
+                  >
                     {i + 1}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-[13px]">{s.label}</p>
-                    <p className="num text-xs text-fg-3">
-                      x {formatGrid(s.position.x)} · y {formatGrid(s.position.y)}
-                    </p>
+                    <p className="text-[13px] font-medium leading-5">{s.label}</p>
+                    <Details title="Stop location">
+                      <p className="num text-xs">
+                        x {formatGrid(s.position.x)} · y {formatGrid(s.position.y)}
+                      </p>
+                    </Details>
                   </div>
                   <NumberField
                     label={`Science time at ${s.label}`}
@@ -232,7 +286,12 @@ export function PlannerPanel() {
                     {...LIMITS.stopDurationMin}
                     unit="min"
                   />
-                  <Button size="icon" variant="ghost" aria-label={`Remove ${s.label}`} onClick={() => m.removeStop(s.id)}>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    aria-label={`Remove ${s.label}`}
+                    onClick={() => m.removeStop(s.id)}
+                  >
                     <Trash2 />
                   </Button>
                 </li>
@@ -245,7 +304,12 @@ export function PlannerPanel() {
               Add stop on map
             </Button>
             {waypoints.length > 0 && (
-              <Select aria-label="Add a science waypoint as a stop" value="" className="h-8 w-44" onChange={(e) => pickWaypoint(e.target.value, 'stop')}>
+              <Select
+                aria-label="Add a science waypoint as a stop"
+                value=""
+                className="h-8 w-full"
+                onChange={(e) => pickWaypoint(e.target.value, 'stop')}
+              >
                 <option value="" disabled>
                   Add a waypoint
                 </option>
@@ -259,40 +323,58 @@ export function PlannerPanel() {
           </div>
         </Section>
 
-        <Section title="Route preference" aside={<SourceBadge id="route-geometry" />}>
-          <Segmented<RouteMode>
-            label="Route preference"
-            value={config.routeMode}
-            onChange={m.setRouteMode}
-            options={[
-              { value: 'shortest', label: 'Shortest traversable' },
-              { value: 'lower-slope', label: 'Lower slope' },
-            ]}
-          />
-          <p className="mt-2 text-xs text-fg-3">
-            {config.routeMode === 'shortest'
-              ? 'Least distance among paths that stay on known terrain under the slope limit'
-              : 'Accepts extra distance to avoid steep ground and climbing'}
-          </p>
-        </Section>
-
         <Section>
           <Collapsible title="Advanced assumptions" hint="Illustrative values. Not NASA operational limits">
             <div className="space-y-3">
               <AssumptionRow label="Walking speed" hint="Constant on all terrain">
-                <NumberField label="Walking speed" hideLabel value={a.walkingSpeedMps} onCommit={(v) => m.setAssumption('walkingSpeedMps', v)} {...LIMITS.walkingSpeedMps} unit="m/s" />
+                <NumberField
+                  label="Walking speed"
+                  hideLabel
+                  value={a.walkingSpeedMps}
+                  onCommit={(v) => m.setAssumption('walkingSpeedMps', v)}
+                  {...LIMITS.walkingSpeedMps}
+                  unit="m/s"
+                />
               </AssumptionRow>
               <AssumptionRow label="Slope limit" hint="Steeper cells are blocked">
-                <NumberField label="Slope limit" hideLabel value={a.maxSlopeDeg} onCommit={(v) => m.setAssumption('maxSlopeDeg', v)} {...LIMITS.maxSlopeDeg} unit="°" />
+                <NumberField
+                  label="Slope limit"
+                  hideLabel
+                  value={a.maxSlopeDeg}
+                  onCommit={(v) => m.setAssumption('maxSlopeDeg', v)}
+                  {...LIMITS.maxSlopeDeg}
+                  unit="°"
+                />
               </AssumptionRow>
               <AssumptionRow label="Reserve" hint="Kept free before the deadline">
-                <NumberField label="Reserve" hideLabel value={a.reserveMin} onCommit={(v) => m.setAssumption('reserveMin', v)} {...LIMITS.reserveMin} unit="min" />
+                <NumberField
+                  label="Reserve"
+                  hideLabel
+                  value={a.reserveMin}
+                  onCommit={(v) => m.setAssumption('reserveMin', v)}
+                  {...LIMITS.reserveMin}
+                  unit="min"
+                />
               </AssumptionRow>
               <AssumptionRow label="Mission start" hint={`${formatLtst(a.startLtstHours)} local true solar time`}>
-                <NumberField label="Mission start, Mars clock hours" hideLabel value={a.startLtstHours} onCommit={(v) => m.setAssumption('startLtstHours', v)} {...LIMITS.startLtstHours} unit="h" />
+                <NumberField
+                  label="Mission start, Mars clock hours"
+                  hideLabel
+                  value={a.startLtstHours}
+                  onCommit={(v) => m.setAssumption('startLtstHours', v)}
+                  {...LIMITS.startLtstHours}
+                  unit="h"
+                />
               </AssumptionRow>
               <AssumptionRow label="Warning threshold" hint="Margin that triggers a warning">
-                <NumberField label="Warning threshold" hideLabel value={a.warningMarginMin} onCommit={(v) => m.setAssumption('warningMarginMin', v)} {...LIMITS.warningMarginMin} unit="min" />
+                <NumberField
+                  label="Warning threshold"
+                  hideLabel
+                  value={a.warningMarginMin}
+                  onCommit={(v) => m.setAssumption('warningMarginMin', v)}
+                  {...LIMITS.warningMarginMin}
+                  unit="min"
+                />
               </AssumptionRow>
               <div>
                 <div className="mb-1 flex items-center justify-between">
@@ -301,7 +383,12 @@ export function PlannerPanel() {
                   </label>
                   <SourceBadge id="mars24-solar" />
                 </div>
-                <Select id={`${nameId}-solar`} value={a.solarScenarioId} disabled={scenarios.length === 0} onChange={(e) => m.setAssumption('solarScenarioId', e.target.value)}>
+                <Select
+                  id={`${nameId}-solar`}
+                  value={a.solarScenarioId}
+                  disabled={scenarios.length === 0}
+                  onChange={(e) => m.setAssumption('solarScenarioId', e.target.value)}
+                >
                   {scenarios.length === 0 && <option value="">No daylight model available</option>}
                   {scenarios.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -315,11 +402,23 @@ export function PlannerPanel() {
                   Limit EVA duration
                   <span className="block text-xs text-fg-3">Earth hours from mission start</span>
                 </label>
-                <Switch id={`${nameId}-eva`} label="Limit EVA duration" checked={a.maxEvaEnabled} onChange={(on) => m.setAssumption('maxEvaEnabled', on)} />
+                <Switch
+                  id={`${nameId}-eva`}
+                  label="Limit EVA duration"
+                  checked={a.maxEvaEnabled}
+                  onChange={(on) => m.setAssumption('maxEvaEnabled', on)}
+                />
               </div>
               {a.maxEvaEnabled && (
                 <AssumptionRow label="Maximum EVA duration">
-                  <NumberField label="Maximum EVA duration" hideLabel value={a.maxEvaHours} onCommit={(v) => m.setAssumption('maxEvaHours', v)} {...LIMITS.maxEvaHours} unit="h" />
+                  <NumberField
+                    label="Maximum EVA duration"
+                    hideLabel
+                    value={a.maxEvaHours}
+                    onCommit={(v) => m.setAssumption('maxEvaHours', v)}
+                    {...LIMITS.maxEvaHours}
+                    unit="h"
+                  />
                 </AssumptionRow>
               )}
               <Button size="sm" variant="ghost" className="-ml-2.5" onClick={m.restoreDefaultAssumptions}>
@@ -330,7 +429,7 @@ export function PlannerPanel() {
         </Section>
       </div>
 
-      <footer className="border-t border-line p-4">
+      <footer className="border-t border-line bg-bg/50 p-5">
         {issues.length > 0 && (
           <StatusAlert live tone="bad" title="Mission cannot be calculated yet" className="mb-3">
             <ul className="space-y-1">
