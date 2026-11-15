@@ -106,9 +106,14 @@ test('production DEM, both routes, camera, simulation, styles and shared mission
   await enter3D(page)
   await page.getByLabel('Vertical scale', { exact: true }).selectOption('3')
   await expect(page.getByText('3× visual only', { exact: true })).toBeVisible()
+  // The scene and its visualization options survive 2D and back; nothing is rebuilt or reset.
+  const sceneId = await canvas.getAttribute('data-scene-id')
   await page.getByRole('button', { name: '3D terrain view', exact: true }).click()
   await enter3D(page)
-  await expect(page.getByLabel('Vertical scale', { exact: true })).toHaveValue('1')
+  await expect(page.getByLabel('Vertical scale', { exact: true })).toHaveValue('3')
+  await expect(canvas).toHaveAttribute('data-vertical-scale', '3')
+  expect(await canvas.getAttribute('data-scene-id')).toBe(sceneId)
+  await page.getByLabel('Vertical scale', { exact: true }).selectOption('1')
   for (let i = 0; i < 3; i++) {
     await page.getByRole('button', { name: '3D terrain view', exact: true }).click()
     await enter3D(page)
@@ -161,6 +166,9 @@ test('tablet 3D layout and WebGL context loss preserve the route and working 2D 
   await expect(page.getByRole('button', { name: '3D terrain view', exact: true })).toHaveAttribute('aria-pressed', 'false')
   await expect(page.locator('.leaflet-container')).toBeVisible()
   await expect(page.getByRole('button', { name: 'Start simulation' })).toBeEnabled()
+  // Reopening 3D retries with a fresh WebGL context.
+  await enter3D(page)
+  await expect(page.getByRole('heading', { name: '3D terrain unavailable' })).toHaveCount(0)
 })
 
 test('WebGL unavailable is contained and preserves the mission', async ({ page }) => {
