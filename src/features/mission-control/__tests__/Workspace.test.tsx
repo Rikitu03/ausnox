@@ -121,7 +121,7 @@ describe('desktop workspace', () => {
     await ready()
     await user.click(screen.getByRole('button', { name: 'Focus map' }))
     useUiStore.getState().setHelpOpen(true)
-    await screen.findByRole('dialog', { name: 'About Ausnox' })
+    await screen.findByRole('dialog', { name: 'Help' })
     await user.keyboard('{Escape}')
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull())
     expect(useUiStore.getState().focusMode).toBe(true)

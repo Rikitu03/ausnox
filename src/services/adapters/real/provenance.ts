@@ -43,7 +43,8 @@ function fromEngine(r: EngineRecord, extraLimitations: string[] = []): Provenanc
 export type TrekStatus = 'ok' | 'failed' | 'untested'
 
 function trekRecords(status: (id: string) => TrekStatus): ProvenanceRecord[] {
-  const integration = (id: string): ProvenanceRecord['integration'] => (status(id) === 'ok' ? 'integrated' : 'planned')
+  const integration = (id: string): ProvenanceRecord['integration'] => 
+    status(id) === 'ok' ? 'integrated' : status(id) === 'failed' ? 'unavailable' : 'planned'
   const reach = (id: string) =>
     status(id) === 'ok' ? [] : [status(id) === 'failed' ? 'Mars Trek did not serve a test tile in this session, so the layer is not shown' : 'Not requested yet in this session']
   return [

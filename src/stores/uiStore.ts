@@ -91,6 +91,8 @@ interface UiState {
   features: { coverage: boolean; grid: boolean; waypoints: boolean }
   provenanceId: string | null
   helpOpen: boolean
+  /** Section of the Data sources page to scroll to once it renders (deep links from Help and the header). */
+  sourcesSection: string | null
   /** Draw the route of the other mode on the map as well. */
   compare: boolean
   /** Which side sheet is open on narrow screens. One at a time. */
@@ -123,6 +125,9 @@ interface UiState {
   toggleFeature(key: keyof UiState['features']): void
   openProvenance(id: string | null): void
   setHelpOpen(open: boolean): void
+  /** Opens the Data sources page, optionally at one section (an element id on that page). */
+  openSources(section?: string | null): void
+  clearSourcesSection(): void
   setCompare(compare: boolean): void
   setSheet(sheet: UiState['sheet']): void
   setPanel(view: MapView, side: PanelSide, open: boolean): void
@@ -160,6 +165,7 @@ export const useUiStore = create<UiState>((set, get) => ({
   features: { coverage: true, grid: true, waypoints: true },
   provenanceId: null,
   helpOpen: false,
+  sourcesSection: null,
   compare: false,
   sheet: null,
   panels: loadPanels(),
@@ -232,6 +238,11 @@ export const useUiStore = create<UiState>((set, get) => ({
   toggleFeature: (key) => set((s) => ({ features: { ...s.features, [key]: !s.features[key] } })),
   openProvenance: (provenanceId) => set({ provenanceId }),
   setHelpOpen: (helpOpen) => set({ helpOpen }),
+  openSources(section = null) {
+    get().setView('sources')
+    set({ helpOpen: false, provenanceId: null, sourcesSection: section })
+  },
+  clearSourcesSection: () => set({ sourcesSection: null }),
   setCompare: (compare) => set({ compare }),
   setSheet: (sheet) => set({ sheet }),
   setPanel(view, side, open) {

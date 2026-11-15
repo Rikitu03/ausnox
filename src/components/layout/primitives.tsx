@@ -70,9 +70,9 @@ export function PanelHeader({ title, meta, actions }: { title: string; meta?: Re
     <header className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
       <div className="min-w-0">
         <h2 className="truncate text-sm font-medium">{title}</h2>
-        {meta && <div className="mt-0.5 text-xs text-fg-3">{meta}</div>}
+        {meta && <div className="mt-1 text-xs text-fg-3">{meta}</div>}
       </div>
-      {actions && <div className="flex shrink-0 items-center gap-1">{actions}</div>}
+      {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
     </header>
   )
 }
@@ -96,8 +96,8 @@ export function Stat({ label, value, sub, emphasis }: { label: string; value: Re
   return (
     <div className="min-w-0">
       <dt className="text-xs text-fg-3">{label}</dt>
-      <dd className={cn('num mt-1 truncate', emphasis ? 'text-2xl leading-8 text-accent' : 'text-[15px] leading-5 text-fg')}>{value}</dd>
-      {sub && <dd className="mt-0.5 text-xs text-fg-3">{sub}</dd>}
+      <dd className={cn('num mt-1.5 truncate', emphasis ? 'text-2xl leading-8 text-accent' : 'text-[15px] leading-5 text-fg')}>{value}</dd>
+      {sub && <dd className="mt-1 text-xs text-fg-3">{sub}</dd>}
     </div>
   )
 }

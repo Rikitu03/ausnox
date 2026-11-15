@@ -164,7 +164,7 @@ export function Collapsible({ title, hint, children, defaultOpen = false }: { ti
       <RadixCollapsible.Trigger className="tap group flex w-full items-center justify-between gap-3 rounded-ctl py-1 text-left">
         <span>
           <span className="block text-[13px] font-medium">{title}</span>
-          {hint && <span className="block text-xs text-fg-3">{hint}</span>}
+          {hint && <span className="mt-1 block text-xs text-fg-3">{hint}</span>}
         </span>
         <ChevronDown className="size-4 shrink-0 text-fg-3 transition-transform duration-150 group-data-[state=open]:rotate-180" aria-hidden />
       </RadixCollapsible.Trigger>

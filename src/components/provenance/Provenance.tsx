@@ -32,6 +32,30 @@ export function KindBadge({ kind, className }: { kind: BadgeKind; className?: st
   )
 }
 
+type Integration = ProvenanceRecord['integration']
+
+/**
+ * Integration status: whether a source is wired into this build. Deliberately styled unlike the
+ * scientific classification badge (dot and plain words, no border) so the two are never confused.
+ */
+export const STATUS_META: Record<Integration, { label: string; dot: string; meaning: string }> = {
+  integrated: { label: 'In use', dot: 'bg-ok', meaning: 'Downloaded, checked and wired into this build' },
+  'demo-stand-in': { label: 'Stand-in', dot: 'bg-warn', meaning: 'Synthetic demo data is shown until the real source is integrated' },
+  unavailable: { label: 'Unavailable', dot: 'bg-bad', meaning: 'Integrated, but could not be reached in this session' },
+  planned: { label: 'Planned', dot: 'border border-fg-3 bg-transparent', meaning: 'Named for a later phase. Not ingested and not shown' },
+}
+
+export function StatusPill({ status, className }: { status: Integration; className?: string }) {
+  const { label, dot } = STATUS_META[status]
+  return (
+    <span className={cn('inline-flex items-center gap-1.5 text-xs whitespace-nowrap text-fg-2', className)}>
+      <span className={cn('size-2 shrink-0 rounded-full', dot)} aria-hidden />
+      <span className="sr-only">Status: </span>
+      {label}
+    </span>
+  )
+}
+
 /** Badge that opens the source details for one dataset or model. */
 export function SourceBadge({ id, kind, className }: { id: string; kind?: BadgeKind; className?: string }) {
   const record = findRecord(id)
@@ -58,6 +82,7 @@ const INTEGRATION: Record<ProvenanceRecord['integration'], string> = {
   planned: 'Planned. Not ingested yet',
   'demo-stand-in': 'Demo stand-in shown. Real data or model not integrated yet',
   integrated: 'In use',
+  unavailable: 'Unavailable. Integrated, but could not be reached in this session',
 }
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {

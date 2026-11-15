@@ -1,7 +1,7 @@
 import {
-  AmbientLight, BoxGeometry, BufferGeometry, Color, ConeGeometry, DirectionalLight, Group,
+  AmbientLight, BoxGeometry, BufferGeometry, Color, ConeGeometry, DirectionalLight, ExtrudeGeometry, Group,
   Line, LineBasicMaterial, LineDashedMaterial, Mesh, MeshBasicMaterial, PerspectiveCamera,
-  Plane, Raycaster, Scene, SphereGeometry, Vector2, Vector3, WebGLRenderer,
+  Plane, Raycaster, Scene, Shape, SphereGeometry, Vector2, Vector3, WebGLRenderer,
 } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js'
@@ -90,11 +90,21 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
     const routes = new Group(), markers = new Group(), guides = new Group()
     scene.add(routes, markers, guides)
     cleanup.push(() => { disposeObjects(routes); disposeObjects(markers); disposeObjects(guides) })
-    const walker = new Mesh(new SphereGeometry(7, 12, 8), new MeshBasicMaterial({ color: '#ffffff', depthTest: false }))
-    walker.renderOrder = 6
+    // Simulated astronaut: a blue navigation arrow with a white rim, lying on the surface and
+    // pointing along the direction of travel.
+    const walker = new Group()
+    const arrow = (scale: number, color: string, order: number) => {
+      const shape = new Shape().moveTo(0, 16 * scale).lineTo(12 * scale, -12 * scale).lineTo(0, -5 * scale).lineTo(-12 * scale, -12 * scale).closePath()
+      const geometry = new ExtrudeGeometry(shape, { depth: 4, bevelEnabled: false }).rotateX(-Math.PI / 2)
+      const m = new Mesh(geometry, new MeshBasicMaterial({ color, depthTest: false }))
+      m.renderOrder = order
+      return m
+    }
+    walker.add(arrow(1.3, '#ffffff', 6), arrow(1, '#2f7cf6', 7))
     walker.visible = false
     scene.add(walker)
-    cleanup.push(() => { walker.geometry.dispose(); walker.material.dispose() })
+    cleanup.push(() => disposeObjects(walker))
+    let lastHeading = 0
 
     let raf = 0, disposed = false, failed = false
     let frames = 0, renderTotal = 0
@@ -111,6 +121,11 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
       if (!host.clientWidth || !host.clientHeight) return
       try {
         const changed = controls.update()
+        if (walker.visible) {
+          // Keep the arrow about 34 px long on screen at any zoom, never smaller than its ground size.
+          const metresPerPx = 2 * camera.position.distanceTo(walker.position) * Math.tan(camera.fov * Math.PI / 360) / host.clientHeight
+          walker.scale.setScalar(Math.max(1, 34 * metresPerPx / 36))
+        }
         const before = performance.now()
         gpu.render(scene, camera)
         labels.render(scene, camera)
@@ -217,10 +232,20 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
         const mission = useMissionStore.getState(), sim = useSimStore.getState()
         const r = mission.routes[mission.config.routeMode], a = mission.assessments[mission.config.routeMode]
         const current = !mission.stale && mission.status === 'done'
-        const snap = snapshotAt(current && a?.status === 'ok' ? a.assessment : null, current && r?.status === 'ok' ? r.route : null, sim.simS, mission.config.assumptions.startLtstHours)
+        const assessment = current && a?.status === 'ok' ? a.assessment : null, route = current && r?.status === 'ok' ? r.route : null
+        const start = mission.config.assumptions.startLtstHours
+        const snap = snapshotAt(assessment, route, sim.simS, start)
         walker.visible = current && snap.position !== null
         if (walker.visible && snap.position) {
-          walker.position.copy(vector(frame.surface(snap.position, 12)))
+          const here = frame.surface(snap.position, 12)
+          walker.position.copy(vector(here))
+          // Heading from where the plan puts the walker a moment later; kept while standing still.
+          const ahead = snapshotAt(assessment, route, sim.simS + 10, start).position
+          if (ahead) {
+            const next = frame.surface(ahead, 12), dx = next.x - here.x, dz = next.z - here.z
+            if (Math.hypot(dx, dz) > 0.01) lastHeading = Math.atan2(-dx, -dz)
+          }
+          walker.rotation.y = lastHeading
           canvas.dataset.walkerGrid = JSON.stringify(snap.position)
         } else delete canvas.dataset.walkerGrid
         invalidate()

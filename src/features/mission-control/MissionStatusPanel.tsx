@@ -32,13 +32,13 @@ export function MissionStatusPanel() {
       <div className="min-h-0 flex-1 overflow-y-auto" aria-busy={status === 'calculating'}>
         <Section>
           <FeasibilityHeadline />
-          {assessment && <ResultOrigin source={assessment.source} className="mt-2" />}
+          {assessment && <ResultOrigin source={assessment.source} className="mt-3" />}
         </Section>
 
         {status === 'idle' ? (
           <Section>
             <EmptyState icon={Route} title="No mission calculated">
-              Set a habitat and a science destination in the planner, then calculate. Route, timing and return margin appear here
+              Set a habitat and destination in the planner, then calculate to see route, timing and return margin
             </EmptyState>
           </Section>
         ) : firstRun ? (
@@ -60,16 +60,16 @@ export function MissionStatusPanel() {
                     value={formatMargin(okAssessment.returnMarginS)}
                     sub={
                       okAssessment.returnMarginS === null
-                        ? 'Unknown. A required input is missing'
+                        ? 'Unknown: a required input is missing'
                         : okAssessment.windowLimitedBy === 'max-eva'
-                          ? 'Measured against the EVA duration limit'
-                          : 'Measured against geometric sunset, no terrain shadows'
+                          ? 'Against the EVA duration limit'
+                          : 'Against geometric sunset, terrain shadows ignored'
                     }
                   />
                 </dl>
-                <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-4">
+                <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5">
                   <Stat label="Round trip" value={formatDistance(okRoute?.totalDistanceM)} />
-                  <Stat label="Walking time" value={formatDuration(travelS)} sub={`at ${okAssessment.assumptionsUsed.walkingSpeedMps} m/s, simulated`} />
+                  <Stat label="Walking time" value={formatDuration(travelS)} sub={`${okAssessment.assumptionsUsed.walkingSpeedMps} m/s, simulated`} />
                   <Stat label="Science time" value={formatDuration(okAssessment.scienceS)} />
                   <Stat label="Steepest slope" value={formatDegrees(okRoute?.maxSlopeDeg)} sub={`limit ${maxSlope}°`} />
                 </dl>
@@ -99,29 +99,29 @@ export function MissionStatusPanel() {
                   <thead>
                     <tr className="text-xs text-fg-3">
                       <td />
-                      <th scope="col" className="pb-1 text-right font-normal">Distance</th>
-                      <th scope="col" className="pb-1 text-right font-normal">Climb</th>
-                      <th scope="col" className="pb-1 text-right font-normal">Descent</th>
+                      <th scope="col" className="pb-2 text-right font-normal">Distance</th>
+                      <th scope="col" className="pb-2 text-right font-normal">Climb</th>
+                      <th scope="col" className="pb-2 text-right font-normal">Descent</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[okRoute.outbound, okRoute.inbound].map((leg) => (
                       <tr key={leg.id} className="border-t border-line">
-                        <th scope="row" className="py-1.5 text-left font-normal">
+                        <th scope="row" className="py-2.5 text-left font-normal">
                           <span className="flex items-center gap-2">
                             <span className={cn('w-4 border-t-[3px]', leg.id === 'outbound' ? 'border-out' : 'border-dashed border-ret')} aria-hidden />
                             {leg.id === 'outbound' ? 'Outbound' : 'Return'}
                           </span>
                         </th>
-                        <td className="num py-1.5 text-right">{formatDistance(leg.distanceM)}</td>
-                        <td className="num py-1.5 text-right">{Math.round(leg.ascentM)} m</td>
-                        <td className="num py-1.5 text-right">{Math.round(leg.descentM)} m</td>
+                        <td className="num py-2.5 text-right">{formatDistance(leg.distanceM)}</td>
+                        <td className="num py-2.5 text-right">{Math.round(leg.ascentM)} m</td>
+                        <td className="num py-2.5 text-right">{Math.round(leg.descentM)} m</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                <p className="mt-2 text-xs text-fg-3">
-                  {okRoute.identicalLegs ? 'The return follows the same line as the outbound leg' : 'The return leg was chosen on its own and differs from the outbound leg'}
+                <p className="mt-3 text-xs text-fg-3">
+                  {okRoute.identicalLegs ? 'Return retraces the outbound path' : 'Return takes a different, separately routed path'}
                 </p>
               </Section>
             )}
@@ -140,7 +140,7 @@ export function MissionStatusPanel() {
           </div>
         )}
       </div>
-      <footer className="flex gap-2 border-t border-line p-4">
+      <footer className="flex gap-3 border-t border-line p-4">
         <Button className="flex-1" onClick={() => setView('summary')}>
           Full summary
           <ArrowRight />

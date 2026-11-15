@@ -22,12 +22,12 @@ export function Swatch({ stop }: { stop: LegendStop }) {
 export function LayerLegend({ layer }: { layer: MapLayer }) {
   if (!layer.legend) return null
   return (
-    <div className="mt-2">
+    <div className="mt-3">
       <p className="text-xs text-fg-3">
         {layer.legend.title}
         {layer.legend.unit ? `, ${layer.legend.unit}` : ''}
       </p>
-      <ul className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
         {layer.legend.stops.map((s) => (
           <li key={s.label} className="flex items-center gap-1.5 text-xs text-fg-2">
             <Swatch stop={s} />
@@ -43,14 +43,14 @@ export function LayerLegend({ layer }: { layer: MapLayer }) {
 function ImageryError({ layerId }: { layerId: string }) {
   const entry = useDataStore((s) => s.imagery[layerId])
   const load = useDataStore((s) => s.loadImagery)
-  if (entry?.state === 'loading') return <p className="mt-1 text-xs text-fg-3">Loading imagery</p>
+  if (entry?.state === 'loading') return <p className="mt-2 text-xs text-fg-3">Loading imagery</p>
   if (entry?.state !== 'error') return null
   return (
     <div className="mt-2">
       <p className="text-xs text-bad" role="alert">
-        Could not load: {entry.error.detail}
+        Couldn't load: {entry.error.detail}
       </p>
-      <Button size="sm" variant="ghost" className="mt-1 -ml-2.5" onClick={() => void load(layerId, true)}>
+      <Button size="sm" variant="ghost" className="mt-2 -ml-2.5" onClick={() => void load(layerId, true)}>
         <RefreshCw />
         Try again
       </Button>
@@ -79,16 +79,16 @@ export function LayerControls() {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <fieldset>
-        <legend className="mb-2 text-[13px] font-medium text-fg-2">Basemap</legend>
-        <ul className="space-y-1">
+        <legend className="mb-3 text-[13px] font-medium text-fg-2">Basemap</legend>
+        <ul className="space-y-2">
           {layers
             .filter((l) => l.role === 'basemap')
             .map((l) => {
               const unavailable = l.availability === 'unavailable'
               return (
-                <li key={l.id} className={cn('rounded-ctl border border-transparent px-2.5 py-2', basemapId === l.id && 'border-line-strong bg-raised')}>
+                <li key={l.id} className={cn('rounded-ctl border border-transparent px-3 py-3', basemapId === l.id && 'border-line-strong bg-raised')}>
                   <div className="flex items-start gap-2.5">
                     <input
                       type="radio"
@@ -100,14 +100,14 @@ export function LayerControls() {
                       onChange={() => setBasemap(l.id)}
                     />
                     <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+                      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
                         <label htmlFor={`${group}-${l.id}`} className={cn('text-[13px]', unavailable ? 'text-fg-3' : 'cursor-pointer text-fg')}>
                           {l.title}
                         </label>
                         <SourceBadge id={l.provenanceId} kind={l.illustrative ? 'illustrative' : undefined} />
                       </div>
-                      {l.mission && <p className="text-xs text-fg-3">{l.mission}</p>}
-                      {unavailable && <p className="mt-0.5 text-xs text-fg-3">Unavailable. {l.availabilityNote}</p>}
+                      {l.mission && <p className="mt-1 text-xs text-fg-3">{l.mission}</p>}
+                      {unavailable && <p className="mt-2 text-xs text-fg-3">Unavailable. {l.availabilityNote}</p>}
                       {basemapId === l.id && <ImageryError layerId={l.id} />}
                     </div>
                   </div>
@@ -118,18 +118,18 @@ export function LayerControls() {
       </fieldset>
 
       <fieldset>
-        <legend className="mb-2 text-[13px] font-medium text-fg-2">Terrain overlays</legend>
-        <ul className="space-y-1">
+        <legend className="mb-3 text-[13px] font-medium text-fg-2">Terrain overlays</legend>
+        <ul className="space-y-2">
           {layers
             .filter((l) => l.role === 'overlay')
             .map((l) => (
-              <li key={l.id} className="px-2.5 py-2">
-                <div className="flex items-center justify-between gap-3">
+              <li key={l.id} className="px-3 py-2">
+                <div className="flex items-center justify-between gap-4">
                   <label htmlFor={`${group}-${l.id}`} className="cursor-pointer text-[13px]">
                     {l.title}
-                    <span className="block text-xs text-fg-3">{l.mission}</span>
+                    <span className="mt-1 block text-xs text-fg-3">{l.mission}</span>
                   </label>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-3">
                     <SourceBadge id={l.provenanceId} kind={l.illustrative ? 'illustrative' : undefined} />
                     <Switch id={`${group}-${l.id}`} label={l.title} checked={!!overlays[l.id]} onChange={(on) => toggleOverlay(l.id, on)} />
                   </div>
@@ -146,8 +146,8 @@ export function LayerControls() {
       </fieldset>
 
       <fieldset>
-        <legend className="mb-2 text-[13px] font-medium text-fg-2">Map features</legend>
-        <ul className="space-y-1">
+        <legend className="mb-3 text-[13px] font-medium text-fg-2">Map features</legend>
+        <ul className="space-y-2">
           {(
             [
               ['coverage', 'Terrain coverage boundary'],
@@ -155,7 +155,7 @@ export function LayerControls() {
               ['grid', '500 m grid'],
             ] as const
           ).map(([key, label]) => (
-            <li key={key} className="flex items-center justify-between gap-3 px-2.5 py-2">
+            <li key={key} className="flex items-center justify-between gap-4 px-3 py-2">
               <label htmlFor={`${group}-${key}`} className="cursor-pointer text-[13px]">
                 {label}
               </label>

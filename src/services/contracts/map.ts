@@ -78,8 +78,9 @@ export interface ProvenanceRecord {
    * `planned`: named in docs/DATA_SOURCES.md, not ingested.
    * `demo-stand-in`: the app currently shows synthetic data in its place.
    * `integrated`: real data verified and served.
+   * `unavailable`: integrated, but could not be reached in this session (for example a Mars Trek outage).
    */
-  integration: 'planned' | 'demo-stand-in' | 'integrated'
+  integration: 'planned' | 'demo-stand-in' | 'integrated' | 'unavailable'
 }
 
 export interface MapDataService {

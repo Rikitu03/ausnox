@@ -69,7 +69,7 @@ export function FeasibilityHeadline({ size = 'md' }: { size?: 'md' | 'lg' }) {
 export function ViolationList({ assessment }: { assessment: MissionAssessment }) {
   if (assessment.violations.length === 0) return null
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       {assessment.violations.map((v) => (
         <StatusAlert key={v.code} tone={v.severity === 'violation' ? 'bad' : v.severity === 'warning' ? 'warn' : 'unknown'} title={v.title}>
           {v.detail}
@@ -83,7 +83,7 @@ export function ServiceErrorAlert({ error, title }: { error: ServiceError; title
   return (
     <StatusAlert tone={error.code === 'NO_ROUTE' || error.code === 'UNSUPPORTED_SLOPE' ? 'bad' : 'unknown'} title={title}>
       {error.detail}
-      <span className="num mt-1 block text-xs text-fg-3">{error.code}</span>
+      <span className="num mt-2 block text-xs text-fg-3">{error.code}</span>
     </StatusAlert>
   )
 }
@@ -109,23 +109,23 @@ export function MarginBreakdown({ assessment }: { assessment: MissionAssessment 
         <tbody>
           {rows.map(([label, value, note]) => (
             <tr key={label} className="border-b border-line">
-              <th scope="row" className="py-1.5 text-left font-normal text-fg-2">
+              <th scope="row" className="py-2.5 text-left font-normal text-fg-2">
                 {label}
                 {note && <span className="text-fg-3"> · {note}</span>}
               </th>
-              <td className="num py-1.5 text-right">{value}</td>
+              <td className="num py-2.5 text-right">{value}</td>
             </tr>
           ))}
           <tr>
-            <th scope="row" className="py-2 text-left font-medium">
+            <th scope="row" className="py-3 text-left font-medium">
               Return margin
             </th>
-            <td className="num py-2 text-right font-medium">{formatMargin(assessment.returnMarginS)}</td>
+            <td className="num py-3 text-right font-medium">{formatMargin(assessment.returnMarginS)}</td>
           </tr>
         </tbody>
       </table>
-      <p className="mt-1 text-xs text-fg-3">
-        All durations are Earth time. Mars clock hours are converted before the sum. A missing value makes the result
+      <p className="mt-3 text-xs text-fg-3">
+        All durations are Earth time; Mars clock hours are converted first. Any missing value makes the result
         indeterminate, never feasible
       </p>
     </div>
@@ -177,7 +177,7 @@ export function RouteComparison() {
           <tr>
             <td />
             {modes.map((m) => (
-              <th key={m} scope="col" className="w-[34%] pb-2 text-right align-bottom font-normal">
+              <th key={m} scope="col" className="w-[34%] pb-2.5 text-right align-bottom font-normal">
                 <label
                   className={cn(
                     'tap inline-flex cursor-pointer items-center justify-end gap-1.5 rounded-ctl px-1.5 py-1 text-right has-focus-visible:outline-2 has-focus-visible:outline-accent',
@@ -194,11 +194,11 @@ export function RouteComparison() {
         <tbody>
           {rows.map(([label, value]) => (
             <tr key={label} className="border-t border-line">
-              <th scope="row" className="py-1.5 text-left font-normal text-fg-2">
+              <th scope="row" className="py-2.5 text-left font-normal text-fg-2">
                 {label}
               </th>
               {modes.map((m) => (
-                <td key={m} className={cn('num py-1.5 text-right', mode === m ? 'text-fg' : 'text-fg-2')}>
+                <td key={m} className={cn('num py-2.5 text-right', mode === m ? 'text-fg' : 'text-fg-2')}>
                   {value(m)}
                 </td>
               ))}
@@ -209,27 +209,27 @@ export function RouteComparison() {
       {modes.map((m) => {
         const r = routes[m]
         return r?.status === 'error' ? (
-          <p key={m} className="mt-2 text-xs text-fg-2">
+          <p key={m} className="mt-3 text-xs text-fg-2">
             {MODE_LABEL[m]}: {r.detail}
           </p>
         ) : null
       })}
-      {identical && <p className="mt-2 text-xs text-fg-2">Both modes give the same route for these inputs</p>}
-      <div className="mt-3 flex items-center justify-between gap-3">
+      {identical && <p className="mt-3 text-xs text-fg-2">Both modes give the same route</p>}
+      <div className="mt-5 flex items-center justify-between gap-4">
         <label htmlFor="compare-on-map" className="cursor-pointer text-[13px] text-fg-2">
           Show the other mode on the map
-          <span className="block text-xs text-fg-3">Drawn as a thin dotted line</span>
+          <span className="mt-1 block text-xs text-fg-3">Thin dotted line</span>
         </label>
         <Switch id="compare-on-map" label="Show the other mode on the map" checked={compare} onChange={setCompare} />
       </div>
-      <div className="mt-3 flex items-center gap-2 text-xs text-fg-3">
+      <div className="mt-4 flex items-center gap-2 text-xs text-fg-3">
         <SourceBadge id="route-geometry" />
         {modes.some((m) => {
           const r = routes[m]
           return r?.status === 'ok' && r.route.terrainAwarePathfinding
         })
-          ? 'A* on the HiRISE DTM grid. Distances are ground metres on Mars'
-          : 'Demonstration arcs, not pathfinding results'}
+          ? 'A* on the HiRISE DTM grid · ground metres on Mars'
+          : 'Demo arcs, not pathfinding results'}
       </div>
     </div>
   )

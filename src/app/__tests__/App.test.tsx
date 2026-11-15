@@ -110,7 +110,7 @@ describe('App', () => {
     expect(screen.getByText('No mission calculated')).toBeInTheDocument()
     expect(screen.getByText('No habitat yet')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Calculate mission' }))
-    expect(await screen.findByText('Mission cannot be calculated yet')).toBeInTheDocument()
+    expect(await screen.findByText("Can't calculate yet")).toBeInTheDocument()
     expect(screen.getByText('Set a habitat location')).toBeInTheDocument()
   })
 

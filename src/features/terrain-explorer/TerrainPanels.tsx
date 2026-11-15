@@ -19,7 +19,7 @@ export function LayersPanel() {
   const attemptPlace = useUiStore((s) => s.attemptPlace)
   return (
     <>
-      <PanelHeader title="Layers and science" meta="What the map can show, and where it comes from" />
+      <PanelHeader title="Layers and science" meta="Map layers and their sources" />
       <div className="min-h-0 flex-1 overflow-y-auto">
         <Section>
           <LayerControls />
@@ -31,38 +31,38 @@ export function LayersPanel() {
             </StatusAlert>
           ) : waypoints.length === 0 ? (
             <EmptyState icon={MapPinOff} title="No science waypoints listed">
-              You can still place a destination anywhere with measured terrain
+              You can still place a destination anywhere on measured terrain
             </EmptyState>
           ) : (
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               {waypoints.map((w) => (
                 <li key={w.id}>
-                  <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center justify-between gap-3">
                     <p className="text-[13px] font-medium">{w.title}</p>
                     <KindBadge kind={w.labelQuality === 'illustrative' ? 'illustrative' : 'observed'} />
                   </div>
-                  <p className="mt-1 text-[13px] text-fg-2">{w.description}</p>
-                  <p className="num mt-1 text-xs text-fg-3">
+                  <p className="mt-2 text-[13px] text-fg-2">{w.description}</p>
+                  <p className="num mt-2 text-xs text-fg-3">
                     {w.geo
                       ? `${formatGeo(w.geo.lonEast, 'lon')} · ${formatGeo(w.geo.latNorth, 'lat')}`
                       : `x ${formatGrid(w.position.x)} · y ${formatGrid(w.position.y)}`}
-                    {' · '}suggested {w.suggestedDurationMin} min (simulated)
+                    {' · '}{w.suggestedDurationMin} min suggested, simulated
                   </p>
                   {w.observation && (w.observation.sol !== null || w.observation.utcDate) && (
-                    <p className="mt-0.5 text-xs text-fg-3">
+                    <p className="mt-1 text-xs text-fg-3">
                       Perseverance{w.observation.sol !== null ? ` sol ${w.observation.sol}` : ''}
                       {w.observation.utcDate ? `, ${w.observation.utcDate}` : ''}
                     </p>
                   )}
                   {w.caveats && w.caveats.length > 0 && (
-                    <ul className="mt-1.5 list-disc space-y-0.5 pl-4 text-xs text-fg-3">
+                    <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-fg-3">
                       {w.caveats.map((c) => (
                         <li key={c}>{c}</li>
                       ))}
                     </ul>
                   )}
                   {w.sources && w.sources.length > 0 && (
-                    <ul className="mt-1.5 space-y-0.5 text-xs">
+                    <ul className="mt-2 space-y-1 text-xs">
                       {w.sources.map((s) => (
                         <li key={s.url + s.label}>
                           <a href={s.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-fg-2 underline-offset-2 hover:underline">
@@ -73,7 +73,7 @@ export function LayersPanel() {
                       ))}
                     </ul>
                   )}
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     <Button
                       size="sm"
                       onClick={() => {
@@ -138,7 +138,7 @@ export function TerrainInspectorPanel() {
         >
           {!inspected ? (
             <EmptyState icon={Crosshair} title="No cell selected">
-              Select any spot on the map to read its elevation, slope and source
+              Select a spot on the map to read its elevation, slope and source
             </EmptyState>
           ) : (
             <div aria-live="polite">
@@ -147,7 +147,7 @@ export function TerrainInspectorPanel() {
                 {inspected.cell && ` · cell ${inspected.cell.col}, ${inspected.cell.row}`}
               </p>
               {inspected.geo && (
-                <p className="num mt-0.5 text-xs text-fg-3">
+                <p className="num mt-1 text-xs text-fg-3">
                   {formatGeo(inspected.geo.lonEast, 'lon')} · {formatGeo(inspected.geo.latNorth, 'lat')}{' '}
                   <span className="font-sans">
                     {manifest?.georeference.kind === 'verified' ? 'planetocentric, Mars 2000' : 'nominal, not a verified transform'}
@@ -165,7 +165,7 @@ export function TerrainInspectorPanel() {
                   )}
                 </div>
               ) : (
-                <dl className="mt-4 grid grid-cols-2 gap-4">
+                <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5">
                   <div>
                     <Stat label="Elevation" value={formatMetres(inspected.elevationM, 1)} sub={real ? 'above the Mars areoid' : 'above an arbitrary zero'} />
                     <SourceBadge id={manifest?.elevationProvenanceId ?? 'usgs-hirise-dtm'} className="mt-2" />
@@ -174,7 +174,7 @@ export function TerrainInspectorPanel() {
                     <Stat
                       label="Slope"
                       value={formatDegrees(inspected.slopeDeg)}
-                      sub={inspected.slopeDeg! > maxSlope ? `over the ${maxSlope}° limit, blocked` : `within the ${maxSlope}° limit`}
+                      sub={inspected.slopeDeg! > maxSlope ? `over ${maxSlope}° limit, blocked` : `within ${maxSlope}° limit`}
                     />
                     <SourceBadge id={manifest?.slopeProvenanceId ?? 'dem-slope'} className="mt-2" />
                   </div>
@@ -194,12 +194,12 @@ export function TerrainInspectorPanel() {
           <>
             <Section title="Dataset" aside={manifest.status === 'illustrative-demo' ? <KindBadge kind="illustrative" /> : <KindBadge kind="observed" />}>
               {manifest.status === 'illustrative-demo' && (
-                <p className="mb-3 text-[13px] text-fg-2">
-                  This surface is synthetic. It stands in for the Jezero HiRISE terrain model until that product is downloaded and
-                  validated. No value here is a Mars measurement
+                <p className="mb-5 text-[13px] text-fg-2">
+                  Synthetic stand-in until the Jezero HiRISE terrain model is downloaded and validated. No value here is a Mars
+                  measurement
                 </p>
               )}
-              <dl className="grid grid-cols-2 gap-x-4 gap-y-4">
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-5">
                 <Stat
                   label="Area on the ground"
                   value={
@@ -223,14 +223,16 @@ export function TerrainInspectorPanel() {
                   value={`${((manifest.validCellCount / manifest.totalCellCount) * 100).toFixed(1)}%`}
                   sub={real ? 'the rest is never routed through' : 'the rest is unknown'}
                 />
-                <Stat label="Elevation range" value={`${Math.round(manifest.elevationRangeM[0]).toLocaleString('en-US')} to ${Math.round(manifest.elevationRangeM[1]).toLocaleString('en-US')} m`} />
+                <div className="col-span-2">
+                  <Stat label="Elevation range" value={`${Math.round(manifest.elevationRangeM[0]).toLocaleString('en-US')} to ${Math.round(manifest.elevationRangeM[1]).toLocaleString('en-US')} m`} />
+                </div>
               </dl>
-              {terrainSource && <p className="mt-3 text-xs text-fg-3">{terrainSource.note}</p>}
-              <p className="mt-1 text-xs text-fg-3">Georeference: {manifest.georeference.note}</p>
+              {terrainSource && <p className="mt-5 text-xs text-fg-3">{terrainSource.note}</p>}
+              <p className="mt-2 text-xs text-fg-3">Georeference: {manifest.georeference.note}</p>
             </Section>
             {v && (
               <Section title="Verification">
-                <ul className="space-y-1.5 text-[13px]">
+                <ul className="space-y-2.5 text-[13px]">
                   <li className="flex justify-between gap-3">
                     <span className="text-fg-2">Grid checksum (SHA-256)</span>
                     <span className={v.checksum === 'verified' ? 'text-ok' : 'text-warn'}>{v.checksum === 'verified' ? 'Verified at load' : 'Not checked'}</span>
@@ -250,8 +252,8 @@ export function TerrainInspectorPanel() {
                   .filter((c) => c.status !== 'PASS')
                   .map((c) => (
                     <StatusAlert key={c.id} tone="warn" title={`Unresolved: ${c.id}`} className="mt-3">
-                      {c.summary}. Routing uses only the DTM, so routes are consistent with the elevation grid; the offset affects
-                      how overlays line up with imagery. No correction is applied
+                      {c.summary}. Routes use only the DTM, so they match the elevation grid; the offset only shifts overlays against
+                      imagery. No correction is applied
                     </StatusAlert>
                   ))}
               </Section>
