@@ -1,4 +1,4 @@
-import { ChevronDown, Crosshair, Layers, LocateFixed, Maximize, Minus, Plus, RefreshCw, X } from 'lucide-react'
+import { Box, ChevronDown, Crosshair, Layers, LocateFixed, Maximize, Minus, Plus, RefreshCw, X } from 'lucide-react'
 import { Popover } from 'radix-ui'
 import { useState, type FormEvent } from 'react'
 import { StatusAlert } from '@/components/layout/primitives'
@@ -23,19 +23,21 @@ const TARGET_LABEL: Record<PlacementTarget, string> = {
 
 const float = 'rounded-card border border-line-strong bg-surface'
 
-function ToolButton({ label, onClick, children }: { label: string; onClick?: () => void; children: React.ReactNode }) {
+function ToolButton({ label, onClick, pressed, children }: { label: string; onClick?: () => void; pressed?: boolean; children: React.ReactNode }) {
   return (
     <Tooltip label={label} side="right">
-      <Button variant="ghost" size="icon" aria-label={label} onClick={onClick} className="text-fg">
+      <Button
+        variant="ghost"
+        size="icon"
+        aria-label={label}
+        aria-pressed={pressed}
+        onClick={onClick}
+        className={cn(pressed ? 'bg-accent text-accent-ink hover:bg-accent/90 hover:text-accent-ink' : 'text-fg')}
+      >
         {children}
       </Button>
     </Tooltip>
   )
-}
-
-export function MapViewSelector() {
-  const mode = useUiStore((s) => s.mapMode)
-  return <Segmented label="Map visualization" value={mode} onChange={(m) => useUiStore.getState().setMapMode(m)} options={[{ value: '2d', label: '2D Map' }, { value: '3d', label: '3D Terrain' }]} className="bg-surface" />
 }
 
 /** Shared zoom, fit and layer controls for both renderers. */
@@ -80,6 +82,9 @@ export function MapTools({ className, showLayers }: { className?: string; showLa
             </Popover.Portal>
           </Popover.Root>
         )}
+        <ToolButton label="3D terrain view" pressed={mode === '3d'} onClick={() => useUiStore.getState().setMapMode(mode === '3d' ? '2d' : '3d')}>
+          <Box aria-hidden />
+        </ToolButton>
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ Branch: `feat/3d-jezero-explorer`, based on freshly fetched `origin/main` at `a9
 
 ## Feature and dependencies
 
-The existing Mission Control, Terrain and Simulation workspaces now offer **2D Map / 3D Terrain**. They share one loaded DEM, mission configuration, pair of route-mode results, assessments and simulated clock. The feature does not introduce another route planner or clock.
+The existing Mission Control, Terrain and Simulation workspaces use the original **cube icon** beneath the layer control to toggle 3D. It lights up in copper while 3D is active; clicking it again returns to 2D. The button exposes its state through `aria-pressed` and supports Enter/Space. There is no separate 2D/3D selector. The views share one loaded DEM, mission configuration, pair of route-mode results, assessments and simulated clock. The feature does not introduce another route planner or clock.
 
 Added exact versions: `three` **0.187.0**, `@types/three` **0.187.0**, `@playwright/test` **1.65.1** (development only). Existing React **19.3.1**, TypeScript **6.0.3**, Vite **8.3.8**, Zustand **5.1.0** and `@ausnox/scientific-engine` **0.1.0** remain in use. Three.js is MIT licensed; Playwright is Apache-2.0. AI-assisted implementation: OpenAI Codex.
 
@@ -104,7 +104,7 @@ Rendering is demand-driven, with frames only for camera damping, resizing or cha
 
 ## Verification and performance evidence
 
-Executed on **2026-11-15**, Windows / Node **24.13.0**, implementation commit `7cd877f`. Final results:
+Executed on **2026-11-15**, Windows / Node **24.13.0**. Initial implementation: `7cd877f`; the cube-toggle revision was rechecked with typecheck, lint, all 97 frontend/integration tests, production build and all three browser scenarios. The scientific engine and dependencies did not change in that UI revision. Results:
 
 | Check | Result |
 | --- | --- |
@@ -113,8 +113,8 @@ Executed on **2026-11-15**, Windows / Node **24.13.0**, implementation commit `7
 | `npm run lint` | **PASS**, no errors or warnings |
 | `npx vitest run` | **PASS**, 7 files / **97 tests** (original 86 plus 8 geometry/integration and 3 React/store tests) |
 | `npm run test:engine` | **PASS**, 6 files / **88 tests** |
-| `npm run build` | **PASS**, Vite production build 3.16 s; lazy 3D chunk 586.23 kB / 147.75 kB gzip, advisory chunk-size warning |
-| Production Playwright | **PASS**, **3 tests**, 29.3 s; 1568×1040 desktop, 820×1180 tablet and live resize to 1024×820 |
+| `npm run build` | **PASS**, Vite production build 1.96 s; lazy 3D chunk 586.23 kB / 147.75 kB gzip, advisory chunk-size warning |
+| Production Playwright | **PASS**, **3 tests**, 48.8 s; 1568×1040 desktop, 820×1180 tablet and live resize to 1024×820 |
 | Original dataset checksum | **PASS**, SHA-256 unchanged |
 | Scientific-engine / pipeline / public terrain diff | **PASS**, no changes |
 | New Python pipeline run | **NOT RUN**, no processing code or data changed |
@@ -127,13 +127,15 @@ Measured in the production build with **headless Chromium 158**, **Intel Iris Pl
 
 | Measurement | Observed |
 | --- | --- |
-| First scene assembly, including geometry, texture and overlays | **226.70 ms** |
-| Mean renderer + label CPU time across 68 rendered frames | **3.86 ms** |
-| Orbit sample, 73 animation-frame intervals | Mean **16.67 ms** (~60 fps), p95 **16.80 ms** |
+| First scene assembly, including geometry, texture and overlays | **223.30 ms** |
+| Mean renderer + label CPU time across 68 rendered frames | **3.28 ms** |
+| Orbit sample, 64 animation-frame intervals | Mean **19.01 ms** (~53 fps), p95 **16.80 ms**; one long interval affects the mean |
 | Idle frame scheduling | **No extra frames** during the 200 ms idle assertion |
 | Display complexity | **40,401 vertices / 80,000 triangles** |
 
-These are short measurements on one integrated GPU, not a broad device certification. The renderer CPU timing includes early shader work; a newly remounted scene's two-frame mean (24.10 ms in the record) is cold-start dominated and is not steady-state frame rate. The repeat scene assembly measured 161.20 ms. Exact test outcomes, hardware, timings, route counts and blocked requests are committed in [`screenshots/3d/verification.json`](screenshots/3d/verification.json).
+These are short measurements on one integrated GPU, not a broad device certification. The renderer CPU timing includes early shader work; a newly remounted scene's two-frame mean (18.05 ms in the record) is cold-start dominated and is not steady-state frame rate. The repeat scene assembly measured 81.50 ms. Exact test outcomes, hardware, timings, route counts and blocked requests are committed in [`screenshots/3d/verification.json`](screenshots/3d/verification.json).
+
+The toolbar revision restores the original cube icon under Layers, removes the separate view selector and uses a flat copper active fill. Mouse click, Enter and Space toggle the same shared view state; `aria-pressed` follows both directions and renderer fallback. The existing state-preservation test now exercises the actual toolbar toggle, and Playwright confirms that the old selector is absent. Production screenshots were refreshed. Additional review at 1440, 768 and 390 px confirmed the active/inactive control and 44 px touch targets; the existing dense phone map/marker layout is outside this component change. Design-taste source lint returned **0 FAIL / 0 WARN** for the changed UI files. Its standalone browser inspector timed out at `Page.enable` on both installed Chromium variants, so visual review used the working Playwright browser and screenshots instead; no inspector pass is claimed.
 
 Screenshots are real production-browser captures in `screenshots/3d/`:
 

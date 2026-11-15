@@ -1,7 +1,7 @@
 import { PanelLeft, PanelRight } from 'lucide-react'
 import { useEffect, type ReactNode } from 'react'
 import { Panel } from '@/components/layout/primitives'
-import { CoordinateBar, DemoMapTag, ImageryNotice, MapLegend, MapTools, MapViewSelector, PlacementBanner, RegistrationTag } from '@/components/map/MapChrome'
+import { CoordinateBar, DemoMapTag, ImageryNotice, MapLegend, MapTools, PlacementBanner, RegistrationTag } from '@/components/map/MapChrome'
 import { MarsMap } from '@/components/map/MarsMap'
 import { TerrainView } from '@/components/map/TerrainView'
 import { SimDock } from '@/components/simulation/SimControls'
@@ -61,7 +61,7 @@ export function Workspace({ view }: { view: MapView }) {
           padding={{ left: inset + (desktop ? 56 : 0), right: inset, top: desktop ? 24 : 72, bottom: 160 }}
         />
       </div>
-      {mapMode === '3d' && <div className="absolute" style={{ left: inset + 56, right: inset, top: desktop ? 56 : 108, bottom: 168 }}><TerrainView /></div>}
+      {mapMode === '3d' && <div className="absolute" style={{ left: inset + 56, right: inset, top: desktop ? 12 : 64, bottom: 168 }}><TerrainView /></div>}
 
       {desktop ? (
         <>
@@ -100,7 +100,6 @@ export function Workspace({ view }: { view: MapView }) {
       <div className="absolute z-10" style={{ left: inset, top: desktop ? 12 : 64 }}>
         <MapTools showLayers={view !== 'terrain' || !desktop} />
       </div>
-      <div className="absolute z-10" style={{ left: inset + 60, top: desktop ? 12 : 64 }}><MapViewSelector /></div>
       <div className="absolute top-3 z-10" style={{ right: inset }}>
         {mapMode === '2d' && <MapLegend defaultOpen={false} />}
       </div>

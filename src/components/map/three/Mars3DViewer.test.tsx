@@ -2,7 +2,7 @@ import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { TooltipProvider } from '@/components/ui/overlay'
-import { CoordinateEntryDialog, MapViewSelector } from '@/components/map/MapChrome'
+import { CoordinateEntryDialog, MapTools } from '@/components/map/MapChrome'
 import { services } from '@/services'
 import { useDataStore } from '@/stores/dataStore'
 import { useMissionStore } from '@/stores/missionStore'
@@ -36,10 +36,15 @@ describe('shared 2D/3D controls', () => {
     const user = userEvent.setup()
     useSimStore.setState({ simS: 300, playing: false })
     const m = useMissionStore.getState(), sim = useSimStore.getState()
-    render(<MapViewSelector />)
-    await user.click(screen.getByText('3D Terrain'))
+    render(<TooltipProvider><MapTools showLayers /></TooltipProvider>)
+    const toggle = screen.getByRole('button', { name: '3D terrain view' })
+    expect(toggle).toHaveAttribute('aria-pressed', 'false')
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute('aria-pressed', 'true')
     expect(useUiStore.getState().mapMode).toBe('3d')
-    await user.click(screen.getByText('2D Map'))
+    await user.keyboard('[Space]')
+    expect(toggle).toHaveAttribute('aria-pressed', 'false')
+    expect(useUiStore.getState().mapMode).toBe('2d')
     const after = useMissionStore.getState()
     expect(after.config).toBe(m.config); expect(after.routes).toBe(m.routes); expect(after.assessments).toBe(m.assessments)
     expect(after.requestId).toBe(m.requestId); expect(useSimStore.getState()).toBe(sim)
