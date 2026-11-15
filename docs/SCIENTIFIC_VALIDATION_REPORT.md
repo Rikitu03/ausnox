@@ -91,7 +91,31 @@ Limitations of test 2:
 - The covariate part of the pre-registered rule is scale-free and also flags the control, whose offsets vary by only ±0.1 m. Here the outcome is decided by the spread criterion alone; future rules should add a magnitude threshold.
 - The Mars Trek tiles are resampled from the same mosaic, so the agreement between the two images (per-window correlation 0.99) measures only resampling noise, not estimator noise on real albedo.
 
-**Test 1, sun-direction dependence (`scripts/registration_illumination.py`, `config/x2b_illumination.json`): NOT RUN.** It needs three HiRISE RDR images (about 1.35 GB) with sun azimuths 226.0°, 265.4° and 287.7°. The images have not been downloaded.
+**Test 1, sun-direction dependence (`scripts/registration_illumination.py`, `config/x2b_illumination.json`, `evidence/registration_illumination.json`): outcome INCONCLUSIVE.**
+
+Method. Three HiRISE RDR images containing the whole AOI were downloaded from the HiRISE PDS archive (1.35 GB, git-ignored), with sun azimuths 226.0°, 265.4° and 287.7° (Mars24). For each image, its photometric offset against the DTM minus its cross-correlation offset against the USGS orthomosaic (corrected for illumination bias with synthetic renderings) estimates the DTM-to-orthomosaic displacement D. The image's own placement errors cancel in this difference; they were 80–235 m south before pre-alignment.
+
+| Image | Sun azimuth | Windows | D east (95 % CI) | D south (95 % CI) | Pure anti-sun artifact would give |
+| --- | ---: | ---: | --- | --- | --- |
+| ESP_084883_1985 | 226.0° | 22 | +1.24 m [−0.35, +2.35] | −1.17 m [−2.63, +0.19] | +1.86 m E, −1.79 m S |
+| ESP_037396_1985 | 265.4° | 27 | +1.42 m [+0.76, +2.06] | −1.23 m [−2.10, +0.32] | +2.57 m E, −0.21 m S |
+| ESP_088351_1985 | 287.7° | 50 | +1.75 m [+1.47, +2.21] | −0.52 m [−1.39, +0.52] | +2.45 m E, +0.80 m S |
+
+Decision statistic on the extreme pair (20 shared windows): s = −0.30, 95 % CI [−0.89, +0.49]. Here s = 0 means the offset is the same under both suns, and s = 1 means it rotates fully with the sun. The pre-registered REAL-OFFSET rule needs the CI inside [−0.5, 0.5] with width ≤ 1.0, and it is not. The ARTIFACT rule needs the CI inside [0.5, 1.5], and it is not. The outcome is therefore INCONCLUSIVE.
+
+Reading (not part of the rule):
+- The CI excludes s = 1, so an artifact that rotates fully with the sun at the X2b magnitude is disfavoured.
+- All three images give a similar displacement of about +1.2 to +1.8 m east and −0.5 to −1.2 m south. This is smaller than the 2.3–3.2 m of the single-image X2b estimates.
+- Taken with test 2, the evidence leans towards a real DTM-to-orthomosaic displacement of roughly 1.5–2 m east-south-east, plus terrain-dependent noise. It is not conclusive.
+
+Limitations:
+- Image A has few reliable windows (emission 19°), and its fitted shading azimuth is 14° from Mars24, just inside the 15° validity limit.
+- In every image, including the orthomosaic, the best-fitting Lambertian sun elevation (10–15°) is far below the true elevation (35–44°). The Lambertian shading model is a weak photometric model for this surface, and that also affects X2b itself.
+- Two defects were fixed after the first run, without changing the criteria: the archive's file sizes are decimal kilobytes, and the GeoJP2 header of ESP_037396 has latitude of true scale and latitude of origin swapped. Projections are now taken from the PDS labels.
+
+**Status.** X2b remains **FAIL** and the ±3 m overlay label is unchanged. No correction is applied: neither test passed its own criteria. Options for a decisive test:
+- Add more images near azimuth 226°. ESP_058574 and ESP_058640 (224–227°) cover part of the AOI.
+- Run a brightness-independent check, such as matching DTM break lines to image edges.
 
 ### 3.5 Known source limitations
 
