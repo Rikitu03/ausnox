@@ -342,9 +342,20 @@ export function SourcesView() {
         <Block title="Credits">
           <p className="max-w-[78ch] text-[13px] text-fg-2">
             Built with React, Three.js, Leaflet, Recharts, Radix UI, Tailwind CSS and Lucide icons. Typefaces: Instrument Sans and
-            IBM Plex Mono. Interface and code were produced with AI assistance, including OpenAI Codex. Dataset credits are
+            IBM Plex Mono. OpenAI GPT models, OpenAI Codex and Anthropic Claude Code assisted planning, interface/code,
+            documentation and verification. This describes development assistance; the NASA/USGS observations are authentic.
+            Terrain derivatives, calculated routes/daylight and simulated mission assumptions are distinct. Dataset credits are
             listed with each source above. Product IDs, checksums and retrieval dates are recorded in the shipped terrain
             manifest and in docs/DATA_SOURCES.md
+          </p>
+          <p className="mt-3 max-w-[78ch] text-[13px] text-fg-2">
+            <a className="underline underline-offset-4" href="https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/AI_USAGE.md" target="_blank" rel="noreferrer">AI usage and validation limits</a>
+            {' · '}
+            <a className="underline underline-offset-4" href="https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/SI_DISCLOSURE.json" target="_blank" rel="noreferrer">SI metadata</a>
+            {' · '}
+            <a className="underline underline-offset-4" href="https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/THIRD_PARTY_NOTICES.md" target="_blank" rel="noreferrer">Resource and license register</a>
+            {' · '}
+            <a className="underline underline-offset-4" href="/THIRD_PARTY_NOTICES.txt" target="_blank" rel="noreferrer">Software and font license texts</a>
           </p>
         </Block>
       </div>

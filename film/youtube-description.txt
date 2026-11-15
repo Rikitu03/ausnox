@@ -1,0 +1,41 @@
+SUGGESTED UPLOAD TITLE (retain provider title credit for the recorded free-plan narration):
+Ausnox — Navigating the Red Planet from Dawn to Dusk | AI voice: elevenlabs.io
+
+UPLOAD STATUS: PENDING. This is prepared copy, not an uploaded video or verified public URL. Resolve the generation-time ElevenLabs account/voice permissions, competition reuse terms and external design/logo rights before publishing. Confirm the text matches the final export.
+
+Ausnox is an educational Marswalk planning prototype for NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map. Explore real Jezero terrain in 2D and 3D, compare terrain-aware A* outbound and return routes, and examine how science time, illustrative EVA settings and geometric daylight affect a simulated mission.
+
+Try the app: https://ausnox.vercel.app/
+Source: https://github.com/Rikitu03/ausnox
+Project page: https://www.spaceappschallenge.org/2026/find-a-team/ausnox/?tab=project
+
+SI / AI DISCLOSURE
+This video combines real application recordings with SI-assisted programmed motion graphics, transitions, route animation and compositing. Anthropic Claude Code assisted the production scripts. A visible SI-GENERATED VIDEO COMPOSITE watermark identifies this treatment. No text-to-image or text-to-video Mars observation asset is recorded by the producer.
+
+Voiceover generated using ElevenLabs AI. The narration is synthetic. The producer records ElevenLabs text-to-speech and Scribe transcript comparison. The score and sound effects use programmed synthesis with AI-assisted code; no stock music, external samples or generative music service is recorded. Preserve SI acknowledgment in the uploaded media metadata and use the hosting platform's synthetic-content disclosure where offered.
+
+OpenAI GPT models, OpenAI Codex and Anthropic Claude Code assisted Ausnox software planning, programming, interface refinement, documentation, integration and testing. AI-assisted code did not replace authentic NASA/USGS terrain observations with generated terrain. Detailed disclosures:
+https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/AI_USAGE.md
+https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/SI_DISCLOSURE.json
+
+SCIENTIFIC SOURCES
+Elevation source: Fergason, R. L., Galuszka, D. M., Hare, T. M., Mayer, D. P., Redding, B. L., Smith, E. D. (2020). High-Resolution Imaging Science Experiment Digital Terrain Model Mosaic for Mars 2020 Terrain Relative Navigation. U.S. Geological Survey. https://doi.org/10.5066/P9REJ9JN
+MRO HiRISE source credit: NASA/JPL-Caltech/University of Arizona/USGS. The app uses a cropped, block-mean 2 m derivative; slope is derived using Horn (1981).
+HiRISE imagery: NASA/JPL Mars Trek; NASA/JPL-Caltech/University of Arizona/USGS.
+CTX imagery, where shown: NASA/JPL-Caltech/MSSS/USGS. MOLA context, where shown: NASA/GSFC/MOLA Science Team/USGS.
+https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=mars
+Science target positions: NASA/JPL-Caltech Perseverance MMGIS localized rover waypoints. These are rover positions, not exact rock or sample-tube locations.
+https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json
+Martian time and geometric daylight: NASA GISS Mars24; Allison & McEwen (2000).
+https://www.giss.nasa.gov/tools/mars24/help/algorithm.html
+Fonts: Instrument Sans (Instrument Sans Project Authors) and IBM Plex Mono (IBM), SIL Open Font License 1.1.
+Software/source credits and rights register:
+https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/THIRD_PARTY_NOTICES.md
+
+ENGLISH SUBTITLES
+The inspected local candidate includes burned-in English captions. Upload the matching original production captions.srt as an English caption track too, then verify timing and spoken wording after platform processing. This preparation file does not certify an uploaded track.
+
+LIMITATIONS
+Observed-source NASA/USGS data support the terrain; slopes, routes and daylight are derived; habitat, EVA assumptions and mission playback are simulated. The candidate's values belong to one illustrative scenario. X2b imagery-to-DTM registration remains unresolved, with approximately 3 m potential overlay discrepancy. The small 2 m grid cannot resolve all footing hazards. Daylight is geometric, not a terrain-shadow or weather forecast. No radiation or life-support assessment is provided.
+
+Educational Marswalk simulation. Not for operational navigation or astronaut safety guidance. Not endorsed by NASA; no scientific certification is claimed. NASA and mission names are factual source/event credits.

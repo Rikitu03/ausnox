@@ -1,0 +1,34 @@
+{
+  "required_files_present": true,
+  "missing_files": [],
+  "broken_relative_links": [],
+  "summary": {
+    "characters": 927,
+    "words": 127,
+    "within_1500_characters": true,
+    "within_50_to_200_words": true
+  },
+  "si_json_valid": true,
+  "protected_assets": [
+    {
+      "file": "public/data/jezero/terrain.bin",
+      "sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+      "bytes": 5760000,
+      "unchanged": true
+    },
+    {
+      "file": "public/data/jezero/manifest.json",
+      "sha256": "302b212766298d7477682bd70039f14be537c39cbc260963befb12972999ac03",
+      "bytes": 9918,
+      "unchanged": true
+    },
+    {
+      "file": "public/demo/ausnox-mvp.mp4",
+      "sha256": "6a8bff5643c651525e8c185a691dc5266225a9a3e3bf43f875e0e58abeba93c4",
+      "bytes": 3492258,
+      "unchanged": true
+    }
+  ],
+  "protected_source_diff": null,
+  "scope": "Local file links and JSON/hash/static scope checks; not web availability or legal certification"
+}

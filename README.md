@@ -4,7 +4,7 @@
 
 **Live application: [ausnox.vercel.app](https://ausnox.vercel.app).** Ausnox runs on `@ausnox/scientific-engine` and the validated Jezero terrain asset: USGS HiRISE DTM (MRO) for elevation, slope and A* routing; NASA Mars Trek imagery (MRO HiRISE and CTX, MGS MOLA); cited Perseverance (Mars 2020) rover positions as science targets; Mars24 daylight; engine feasibility rules. The optional 3D viewer uses the same measured terrain. Current release checks, keyboard verification, deployment evidence and the demonstration are recorded in [docs/RELEASE_REPORT.md](docs/RELEASE_REPORT.md).
 
-**[Watch the 90-second captioned demonstration](https://ausnox.vercel.app/demo/ausnox-mvp.mp4)** — compare routes, review the round trip, then increase science time to make an afternoon mission infeasible. [Download captions](public/demo/ausnox-mvp.srt).
+**[Watch the extended captioned walkthrough (90.360 seconds)](https://ausnox.vercel.app/demo/ausnox-mvp.mp4)** — compare routes, review the round trip, then increase science time to make an afternoon mission infeasible. [Download captions](public/demo/ausnox-mvp.srt). This walkthrough exceeds the 2026 submission's 30-second limit. **Submission demonstration: PENDING — eligible public demonstration URL required.** A separate local 25-second film candidate passes duration checks but is not uploaded; see [production disclosure](film/production-disclosure.md).
 
 Ausnox is a science-grounded Marswalk mission-planning prototype for **NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map**. Its primary persona is a hypothetical mission-control planner. The app combines real NASA/USGS Martian imagery and elevation with transparent, simulated EVA assumptions to compare round-trip science routes and daylight/mission time margins. **This is an educational research prototype, not flight-qualified navigation or astronaut safety guidance.** X2b remains failed and unresolved; imagery overlays may appear shifted by about 3 m. Formal screen-reader and full contrast audits remain separate from the recorded keyboard and tablet checks.
 
@@ -20,11 +20,19 @@ Official challenge: https://www.spaceappschallenge.org/2026/challenges/interplan
 - Astronomically modeled daylight with a simulated, pausable mission clock; visible remaining return margin and the assumptions behind it.
 - Responsive desktop-first dashboard, tablet usable, no login or required database; static-first deployment with offline-ready local processed route data.
 
-**3D terrain explorer** (`feat/3d-jezero-explorer`): Three.js now renders the existing verified Jezero DEM inside Mission Control, with relief, elevation and slope styles, shared routes and simulation, terrain inspection, camera controls and a 2D fallback. Default height scale is 1×; imagery draping remains unimplemented and X2b remains unresolved. See [the 3D handoff and verification evidence](docs/3D_TERRAIN_HANDOFF.md).
+**Integrated 3D terrain explorer:** Three.js renders the existing Jezero DEM inside Mission Control, with relief, elevation and slope styles, shared routes and simulation, terrain inspection, camera controls and a 2D fallback. Default height scale is 1×; imagery draping remains unimplemented and X2b remains unresolved. See [the 3D handoff and verification evidence](docs/3D_TERRAIN_HANDOFF.md).
+
+## AI-Assisted Development & Transparency
+
+OpenAI GPT models, OpenAI Codex and Anthropic Claude Code assisted planning, programming, interface design/refinement, scientific-engine and terrain-pipeline implementation/testing, 3D visualization, integration, documentation and verification automation. Repository handoffs and commit records support these categories; exact per-file/tool attribution is incomplete. [AI_USAGE.md](docs/AI_USAGE.md) distinguishes recorded contributions from owner-declared assistance and unknown details; [SI_DISCLOSURE.json](docs/SI_DISCLOSURE.json) provides code/workflow metadata.
+
+Authentic NASA/USGS observations were not replaced with generated terrain. The shipped terrain grid, slopes, A* paths and daylight are **derived**; habitat/EVA assumptions and mission playback are **simulated**. Historical [scientific validation](docs/SCIENTIFIC_VALIDATION_REPORT.md) and [release evidence](docs/RELEASE_REPORT.md) record tests and reference comparisons, not NASA certification. X2b remains **FAIL**, with approximately 3 m potential imagery-registration discrepancy; geometric daylight, limited coverage and illustrative EVA assumptions prevent operational safety use.
+
+The extended walkthrough is a real app recording with captions and no audio. A separately inspected short-film candidate uses real app captures, SI-assisted programmed compositing/score and ElevenLabs synthetic narration; sampled frames show an SI watermark and English captions, and metadata disclose the voice. Its public upload and rights checks remain pending. See [production disclosure](film/production-disclosure.md), [third-party notices](docs/THIRD_PARTY_NOTICES.md), [submission copy](docs/NASA_SUBMISSION_COPY.md) and [compliance status/blockers](docs/NASA_COMPLIANCE_REPORT.md).
 
 ## Documentation (`docs/`)
 
-All specifications live in [`docs/`](docs/), which is the authoritative specification directory. Only this README stays in the repository root.
+Specifications and compliance records live in [`docs/`](docs/); the root [LICENSE](LICENSE) applies to original project code, and `film/` holds media disclosure copy.
 
 | Read first | Purpose |
 | --- | --- |
@@ -101,7 +109,7 @@ The initial habitat is fictional; no live astronauts or shelters are tracked. Wa
 ## Links
 
 - NASA Mars Trek WMTS: https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=mars
-- USGS Jezero HiRISE DTM release: https://www.usgs.gov/data/mars-sample-return-hirise-mosaics-terrain-relative-navigation
+- USGS Mars 2020 TRN HiRISE DTM actually used (Fergason et al., 2020): https://doi.org/10.5066/P9REJ9JN
 - NASA Mars24 calculation reference: https://www.giss.nasa.gov/tools/mars24/help/algorithm.html
 - NASA Space Apps 2026 Global Offers (optional, not data requirements): https://www.spaceappschallenge.org/2026/global-offers/
 - Figma MARS draft (reference only; may require access): https://www.figma.com/design/EejtJslZYEA3RTeYntsURR/MARS?node-id=0-1
@@ -109,6 +117,8 @@ The initial habitat is fictional; no live astronauts or shelters are tracked. Wa
 ## Attribution and eligibility
 
 Before final submission, verify that **at least one NASA resource used by Ausnox is listed in the challenge's own Resources tab**, and cite **every** scientific dataset, image, dependency, third-party asset and AI tool in the project submission. Record versions, licenses and retrieval dates in docs/DATA_SOURCES.md. The Figma file could not be inspected at documentation time. During the frontend phase it was viewed read-only in a browser and used as a reference for a redesign; there is no design-to-code parity and none is claimed (docs/FRONTEND_HANDOFF.md §13).
+
+Original project code is available under the [MIT License](LICENSE), explicitly authorized by the owner. External datasets, fonts, libraries, design material and narration retain their own terms. [Third-party notices](docs/THIRD_PARTY_NOTICES.md) record exact dependency licenses (including restricted terms), credits and unresolved rights questions. MIT does not establish complete competition or third-party licensing compliance.
 
 Data credits: USGS HiRISE DTM mosaic for Mars 2020 TRN (Fergason et al. 2020, doi:10.5066/P9REJ9JN; NASA/JPL-Caltech/University of Arizona); NASA/JPL Mars Trek WMTS (MRO HiRISE and CTX mosaics, MGS MOLA colour hillshade); NASA/JPL-Caltech Perseverance rover localizations (MMGIS) and raw-image metadata; NASA GISS Mars24 algorithm (Allison & McEwen 2000). Mars Trek and the Perseverance raw-image gallery, both used here, are listed on the challenge Resources tab (gate S5, `scientific-pipeline/evidence/challenge_resources.json`).
 

@@ -1,0 +1,27 @@
+Ausnox — educational Marswalk planning prototype
+
+Original project software is licensed under MIT by owner authorization.
+External code, data, imagery, fonts, design references and generated narration
+retain their own terms. This notice does not grant rights over external content.
+
+AI-assisted development: OpenAI GPT models, OpenAI Codex and Anthropic Claude Code.
+See docs/AI_USAGE.md and docs/SI_DISCLOSURE.json for evidence and attribution limits.
+
+Terrain source: Fergason et al. (2020), USGS HiRISE DTM mosaic for Mars 2020
+Terrain Relative Navigation, https://doi.org/10.5066/P9REJ9JN.
+HiRISE: NASA/JPL-Caltech/University of Arizona/USGS.
+CTX: NASA/JPL-Caltech/MSSS/USGS.
+MOLA: NASA/GSFC/MOLA Science Team/USGS.
+Perseverance localized rover positions: NASA/JPL-Caltech MMGIS.
+Martian time and geometric daylight: NASA GISS Mars24; Allison & McEwen (2000).
+
+The shipped grid, slope, routes and daylight are derived; EVA assumptions and
+mission playback are simulated. X2b registration remains unresolved, with
+approximately 3 m potential imagery-to-DTM discrepancy. Educational prototype;
+not flight-qualified or for operational navigation. No NASA endorsement.
+
+Full versions, rights qualifications and external attribution:
+docs/THIRD_PARTY_NOTICES.md
+Collected npm license texts: docs/evidence/compliance/NPM_LICENSE_TEXTS.txt
+Static deployment notices: public/THIRD_PARTY_NOTICES.txt
+Separate short-film candidate: film/production-disclosure.md

@@ -1,6 +1,7 @@
 {
   "name": "@ausnox/scientific-engine",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "description": "Ausnox scientific engine: Mars coordinates, HiRISE terrain grid, A* Marswalk routing, Mars24 solar time and EVA feasibility. Framework independent.",
   "type": "module",

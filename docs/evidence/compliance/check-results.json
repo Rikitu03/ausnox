@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "command": "npm.cmd run typecheck",
+      "started_utc": "2026-11-15T15:10:28.236Z",
+      "exit_code": 0,
+      "signal": null,
+      "status": "PASS",
+      "log": "docs/evidence/compliance/typecheck.log"
+    },
+    {
+      "command": "npm.cmd run lint",
+      "started_utc": "2026-11-15T15:10:52.214Z",
+      "exit_code": 0,
+      "signal": null,
+      "status": "PASS",
+      "log": "docs/evidence/compliance/lint.log"
+    },
+    {
+      "command": "npx.cmd vitest run --maxWorkers=1",
+      "started_utc": "2026-11-15T15:11:19.652Z",
+      "exit_code": 0,
+      "signal": null,
+      "status": "PASS",
+      "log": "docs/evidence/compliance/frontend-tests.log"
+    },
+    {
+      "command": "npm.cmd run test:engine",
+      "started_utc": "2026-11-15T15:12:30.622Z",
+      "exit_code": 0,
+      "signal": null,
+      "status": "PASS",
+      "log": "docs/evidence/compliance/engine-tests.log"
+    },
+    {
+      "command": "npm.cmd run build",
+      "started_utc": "2026-11-15T15:20:47.283Z",
+      "exit_code": 0,
+      "signal": null,
+      "status": "PASS",
+      "log": "docs/evidence/compliance/build.log"
+    }
+  ]
+}

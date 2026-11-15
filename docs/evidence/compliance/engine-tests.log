@@ -1,0 +1,17 @@
+npm.cmd run test:engine
+
+> ausnox@0.1.0 test:engine
+> npm --prefix packages/scientific-engine test
+
+
+> @ausnox/scientific-engine@0.1.0 test
+> vitest run
+
+
+ RUN  v5.1.0 C:/xampp/htdocs/projects/ausnox/.compliance-worktree/packages/scientific-engine
+
+
+ Test Files  6 passed (6)
+      Tests  88 passed (88)
+   Start at  23:12:32
+   Duration  1.55s (tests 39%, import 33%, transform 26%, worker 3%)

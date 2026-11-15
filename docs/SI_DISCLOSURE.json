@@ -1,0 +1,39 @@
+{
+  "project_name": "Ausnox",
+  "disclosure_version": "1.0.0",
+  "baseline_commit": "7c1d559a8039e50a96b652eab58ecc2c637c71e4",
+  "readable_disclosure": "docs/AI_USAGE.md",
+  "scope": "Project-level attribution; no file-by-file generation percentage is established",
+  "tools": [
+    {"provider": "OpenAI", "name": "GPT models", "categories": ["planning", "technical design", "documentation", "development assistance"], "evidence_level": "owner-declared", "evidence": ["Owner development history supplied for this audit"], "exact_model": null},
+    {"provider": "OpenAI", "name": "Codex", "categories": ["programming", "interface refinement", "testing", "release automation", "compliance documentation"], "evidence_level": "repository-documented", "evidence": ["docs/3D_TERRAIN_HANDOFF.md", "docs/RELEASE_REPORT.md", "docs/NASA_COMPLIANCE_REPORT.md"]},
+    {"provider": "Anthropic", "name": "Claude Code", "categories": ["programming", "design implementation", "integration", "terrain diagnostics", "documentation", "testing", "film automation"], "evidence_level": "owner-declared and recorded commit attribution", "evidence": ["git:c26464a", "git:a1f7315", "git:1472100", "git:f2bd3c8", "git:188e2c3", "git:cd35b3e", "git:4c5336e", "film/production-disclosure.md"]},
+    {"provider": "ElevenLabs", "name": "Text-to-speech", "categories": ["synthetic narration"], "evidence_level": "separate local media metadata and producer record", "evidence": ["docs/evidence/compliance/local-film.json", "film/production-disclosure.md"], "scope": "Separate local short-film candidate; not part of audited main"},
+    {"provider": "ElevenLabs", "name": "Scribe", "categories": ["transcript comparison"], "evidence_level": "producer-recorded; not independently rerun", "evidence": ["film/production-disclosure.md"], "scope": "Separate local short-film production"}
+  ],
+  "components": [
+    {"name": "architecture", "assistance": "documented project-level planning; exact attribution unknown"},
+    {"name": "React frontend and UI/UX", "assistance": "recorded AI-assisted implementation/refinement"},
+    {"name": "scientific engine", "assistance": "project-level implementation/testing assistance; per-file tool attribution unknown"},
+    {"name": "terrain pipeline", "assistance": "implementation/validation assistance; Claude-recorded registration diagnostics"},
+    {"name": "Three.js viewer", "assistance": "Codex-recorded implementation"},
+    {"name": "integration, documentation, testing", "assistance": "recorded AI-assisted code, writing, debugging and automation"},
+    {"name": "separate short-film candidate", "assistance": "producer-recorded Claude-assisted compositor/score code and ElevenLabs synthetic voice"}
+  ],
+  "scientific_data_provenance": {
+    "observed_sources": ["USGS Mars 2020 TRN HiRISE DTM, DOI 10.5066/P9REJ9JN", "NASA Mars Trek HiRISE/CTX/MOLA imagery", "NASA/JPL-Caltech Perseverance localized waypoints"],
+    "derived": ["cropped/block-mean 2 m terrain grid", "Horn slope", "A* routes", "Mars24 geometric daylight", "calculated mission margins"],
+    "simulated": ["hypothetical habitat", "illustrative EVA assumptions", "mission timelines/playback"],
+    "si_assisted_implementation_is_not_synthetic_observation": true,
+    "generative_terrain_substitution_evidence": "none found",
+    "mock_and_test_data": "explicit illustrative mock mode and synthetic test fixtures; not production observations",
+    "manifest": "public/data/jezero/manifest.json",
+    "unresolved_findings": ["X2b FAIL: approximately 3 m potential imagery/DTM registration discrepancy", "Five strict Mars24 published-value discrepancies retained in scientific report", "Rover-clock absolute reference longitude unverified"]
+  },
+  "media": {
+    "extended_walkthrough": {"file": "public/demo/ausnox-mvp.mp4", "container_duration_seconds": 90.36, "audio_streams": 0, "submission_duration_eligible": false, "generation": "real application recording and captions; AI-assisted automation", "watermark_verification": "not certified"},
+    "short_film_candidate": {"availability": "separate original working tree; video not committed in this compliance branch", "filename": "film/ausnox-showcase-25s.mp4", "container_duration_seconds": 25.0, "video_duration_seconds": 25.0, "audio_duration_seconds": 25.0, "public_url": null, "upload_status": "Owner confirms not uploaded to YouTube", "visuals": "real app recordings and SI-assisted programmed composite; no text-to-image/video asset recorded", "audio": "ElevenLabs synthetic voice plus producer-recorded programmed score", "watermark": "visible on inspected representative frames; full-frame continuity not independently certified", "captions": "English captions visible on sampled frames; external SRT in separate production work", "rights": "ElevenLabs account/voice permissions and competition reuse rights unresolved"}
+  },
+  "unknown_or_unverified": ["Exact GPT model versions, prompts and sessions", "Per-file generated portions and usage percentages", "Independent human review of all code, calculations and frames", "Complete external Figma/logo rights", "Full third-party license compatibility", "Final upload access, captions and description", "Final NASA form state and submission receipt"],
+  "certification": "No NASA endorsement, scientific certification or operational navigation qualification claimed"
+}

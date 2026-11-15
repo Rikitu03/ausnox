@@ -1,0 +1,4 @@
+npm.cmd run typecheck
+
+> ausnox@0.1.0 typecheck
+> tsc -b --noEmit

@@ -1,0 +1,5950 @@
+{
+  "baseline": "7c1d559a8039e50a96b652eab58ecc2c637c71e4",
+  "scope": "Every external package entry in root package-lock.json, including platform-specific optional packages; declarations are not legal clearance.",
+  "packages": [
+    {
+      "name": "@adobe/css-tools",
+      "version": "4.5.0",
+      "lock_path": "node_modules/@adobe/css-tools",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/adobe/css-tools.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@asamuzakjp/css-color",
+      "version": "5.1.11",
+      "lock_path": "node_modules/@asamuzakjp/css-color",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/asamuzaK/cssColor#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@asamuzakjp/dom-selector",
+      "version": "7.1.1",
+      "lock_path": "node_modules/@asamuzakjp/dom-selector",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/asamuzaK/domSelector#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@asamuzakjp/generational-cache",
+      "version": "1.0.1",
+      "lock_path": "node_modules/@asamuzakjp/generational-cache",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/asamuzaK/generationalCache",
+      "status": "license text available"
+    },
+    {
+      "name": "@asamuzakjp/nwsapi",
+      "version": "2.3.9",
+      "lock_path": "node_modules/@asamuzakjp/nwsapi",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "http://javascript.nwbox.com/nwsapi/",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/code-frame",
+      "version": "7.29.7",
+      "lock_path": "node_modules/@babel/code-frame",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-code-frame",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/compat-data",
+      "version": "7.29.7",
+      "lock_path": "node_modules/@babel/compat-data",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/babel/babel.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/core",
+      "version": "7.29.13",
+      "lock_path": "node_modules/@babel/core",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-core",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/generator",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/generator",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-generator",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helper-compilation-targets",
+      "version": "7.29.13",
+      "lock_path": "node_modules/@babel/helper-compilation-targets",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/babel/babel.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helper-globals",
+      "version": "7.29.7",
+      "lock_path": "node_modules/@babel/helper-globals",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/babel/babel.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helper-module-imports",
+      "version": "7.29.7",
+      "lock_path": "node_modules/@babel/helper-module-imports",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-helper-module-imports",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helper-module-transforms",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/helper-module-transforms",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-helper-module-transforms",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helper-string-parser",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/helper-string-parser",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-helper-string-parser",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helper-validator-identifier",
+      "version": "7.29.7",
+      "lock_path": "node_modules/@babel/helper-validator-identifier",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/babel/babel.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helper-validator-option",
+      "version": "7.29.7",
+      "lock_path": "node_modules/@babel/helper-validator-option",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/babel/babel.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/helpers",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/helpers",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-helpers",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/parser",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/parser",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-parser",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/runtime",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/runtime",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-runtime",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/template",
+      "version": "7.29.7",
+      "lock_path": "node_modules/@babel/template",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-template",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/traverse",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/traverse",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-traverse",
+      "status": "license text available"
+    },
+    {
+      "name": "@babel/types",
+      "version": "7.29.14",
+      "lock_path": "node_modules/@babel/types",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://babel.dev/docs/en/next/babel-types",
+      "status": "license text available"
+    },
+    {
+      "name": "@bramus/specificity",
+      "version": "2.4.3",
+      "lock_path": "node_modules/@bramus/specificity",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/bramus/specificity#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@cacheable/memory",
+      "version": "2.2.0",
+      "lock_path": "node_modules/@cacheable/memory",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/jaredwray/cacheable.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@cacheable/utils",
+      "version": "2.5.0",
+      "lock_path": "node_modules/@cacheable/utils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/jaredwray/cacheable.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@csstools/color-helpers",
+      "version": "6.1.2",
+      "lock_path": "node_modules/@csstools/color-helpers",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT-0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/csstools/postcss-plugins/tree/main/packages/color-helpers#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@csstools/css-calc",
+      "version": "3.4.3",
+      "lock_path": "node_modules/@csstools/css-calc",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/csstools/postcss-plugins/tree/main/packages/css-calc#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@csstools/css-color-parser",
+      "version": "4.2.7",
+      "lock_path": "node_modules/@csstools/css-color-parser",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/csstools/postcss-plugins/tree/main/packages/css-color-parser#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@csstools/css-parser-algorithms",
+      "version": "4.0.2",
+      "lock_path": "node_modules/@csstools/css-parser-algorithms",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/csstools/postcss-plugins/tree/main/packages/css-parser-algorithms#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@csstools/css-syntax-patches-for-csstree",
+      "version": "1.1.16",
+      "lock_path": "node_modules/@csstools/css-syntax-patches-for-csstree",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT-0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/csstools/postcss-plugins/tree/main/packages/css-syntax-patches-for-csstree#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@csstools/css-tokenizer",
+      "version": "4.0.2",
+      "lock_path": "node_modules/@csstools/css-tokenizer",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/csstools/postcss-plugins/tree/main/packages/css-tokenizer#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@dimforge/rapier3d-compat",
+      "version": "0.12.0",
+      "lock_path": "node_modules/@dimforge/rapier3d-compat",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://rapier.rs",
+      "status": "license text available"
+    },
+    {
+      "name": "@emnapi/core",
+      "version": "1.11.3",
+      "lock_path": "node_modules/@emnapi/core",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@emnapi/core/v/1.11.3",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@emnapi/wasi-threads",
+      "version": "1.2.3",
+      "lock_path": "node_modules/@emnapi/core/node_modules/@emnapi/wasi-threads",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@emnapi/wasi-threads/v/1.2.3",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@emnapi/runtime",
+      "version": "1.11.3",
+      "lock_path": "node_modules/@emnapi/runtime",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@emnapi/runtime/v/1.11.3",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@emnapi/wasi-threads",
+      "version": "2.2.0",
+      "lock_path": "node_modules/@emnapi/wasi-threads",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@emnapi/wasi-threads/v/2.2.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@eslint-community/eslint-utils",
+      "version": "4.10.1",
+      "lock_path": "node_modules/@eslint-community/eslint-utils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint-community/eslint-utils#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "eslint-visitor-keys",
+      "version": "3.4.3",
+      "lock_path": "node_modules/@eslint-community/eslint-utils/node_modules/eslint-visitor-keys",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/eslint-visitor-keys#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@eslint-community/regexpp",
+      "version": "4.12.3",
+      "lock_path": "node_modules/@eslint-community/regexpp",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint-community/regexpp#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@eslint/config-array",
+      "version": "0.23.6",
+      "lock_path": "node_modules/@eslint/config-array",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/rewrite/tree/main/packages/config-array#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@eslint/config-helpers",
+      "version": "0.7.0",
+      "lock_path": "node_modules/@eslint/config-helpers",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/rewrite/tree/main/packages/config-helpers#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@eslint/core",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@eslint/core",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/rewrite/tree/main/packages/core#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@eslint/js",
+      "version": "10.0.1",
+      "lock_path": "node_modules/@eslint/js",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://eslint.org",
+      "status": "license text available"
+    },
+    {
+      "name": "@eslint/object-schema",
+      "version": "3.0.5",
+      "lock_path": "node_modules/@eslint/object-schema",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/rewrite/tree/main/packages/object-schema#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@eslint/plugin-kit",
+      "version": "0.7.3",
+      "lock_path": "node_modules/@eslint/plugin-kit",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/rewrite/tree/main/packages/plugin-kit#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@exodus/bytes",
+      "version": "1.16.0",
+      "lock_path": "node_modules/@exodus/bytes",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/ExodusOSS/bytes",
+      "status": "license text available"
+    },
+    {
+      "name": "@floating-ui/core",
+      "version": "1.8.0",
+      "lock_path": "node_modules/@floating-ui/core",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://floating-ui.com",
+      "status": "license text available"
+    },
+    {
+      "name": "@floating-ui/dom",
+      "version": "1.8.0",
+      "lock_path": "node_modules/@floating-ui/dom",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://floating-ui.com",
+      "status": "license text available"
+    },
+    {
+      "name": "@floating-ui/react-dom",
+      "version": "2.1.9",
+      "lock_path": "node_modules/@floating-ui/react-dom",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://floating-ui.com/docs/react-dom",
+      "status": "license text available"
+    },
+    {
+      "name": "@floating-ui/utils",
+      "version": "0.2.12",
+      "lock_path": "node_modules/@floating-ui/utils",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://floating-ui.com",
+      "status": "license text available"
+    },
+    {
+      "name": "@fontsource-variable/instrument-sans",
+      "version": "5.3.0",
+      "lock_path": "node_modules/@fontsource-variable/instrument-sans",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "OFL-1.1",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://fontsource.org/fonts/instrument-sans",
+      "status": "license text available"
+    },
+    {
+      "name": "@fontsource/ibm-plex-mono",
+      "version": "5.3.0",
+      "lock_path": "node_modules/@fontsource/ibm-plex-mono",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "OFL-1.1",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://fontsource.org/fonts/ibm-plex-mono",
+      "status": "license text available"
+    },
+    {
+      "name": "@humanfs/core",
+      "version": "0.19.2",
+      "lock_path": "node_modules/@humanfs/core",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/humanwhocodes/humanfs#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@humanfs/node",
+      "version": "0.16.8",
+      "lock_path": "node_modules/@humanfs/node",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/humanwhocodes/humanfs#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@humanfs/types",
+      "version": "0.15.0",
+      "lock_path": "node_modules/@humanfs/types",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://github.com/humanwhocodes/humanfs#readme",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@humanwhocodes/module-importer",
+      "version": "1.0.1",
+      "lock_path": "node_modules/@humanwhocodes/module-importer",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/humanwhocodes/module-importer.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@humanwhocodes/retry",
+      "version": "0.4.3",
+      "lock_path": "node_modules/@humanwhocodes/retry",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/humanwhocodes/retry.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@isaacs/nonrecursive-glob-match",
+      "version": "1.1.0",
+      "lock_path": "node_modules/@isaacs/nonrecursive-glob-match",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BlueOak-1.0.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://www.npmjs.com/package/@isaacs/nonrecursive-glob-match/v/1.1.0",
+      "status": "license text available"
+    },
+    {
+      "name": "@jridgewell/gen-mapping",
+      "version": "0.3.13",
+      "lock_path": "node_modules/@jridgewell/gen-mapping",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jridgewell/sourcemaps/tree/main/packages/gen-mapping",
+      "status": "license text available"
+    },
+    {
+      "name": "@jridgewell/remapping",
+      "version": "2.3.5",
+      "lock_path": "node_modules/@jridgewell/remapping",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jridgewell/sourcemaps/tree/main/packages/remapping",
+      "status": "license text available"
+    },
+    {
+      "name": "@jridgewell/resolve-uri",
+      "version": "3.1.3",
+      "lock_path": "node_modules/@jridgewell/resolve-uri",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jridgewell/resolve-uri",
+      "status": "license text available"
+    },
+    {
+      "name": "@jridgewell/sourcemap-codec",
+      "version": "1.6.0",
+      "lock_path": "node_modules/@jridgewell/sourcemap-codec",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jridgewell/sourcemaps/tree/main/packages/sourcemap-codec",
+      "status": "license text available"
+    },
+    {
+      "name": "@jridgewell/trace-mapping",
+      "version": "0.3.31",
+      "lock_path": "node_modules/@jridgewell/trace-mapping",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jridgewell/sourcemaps/tree/main/packages/trace-mapping",
+      "status": "license text available"
+    },
+    {
+      "name": "@keyv/bigmap",
+      "version": "1.3.1",
+      "lock_path": "node_modules/@keyv/bigmap",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jaredwray/keyv",
+      "status": "license text available"
+    },
+    {
+      "name": "@keyv/serialize",
+      "version": "1.1.1",
+      "lock_path": "node_modules/@keyv/serialize",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jaredwray/keyv",
+      "status": "license text available"
+    },
+    {
+      "name": "@napi-rs/wasm-runtime",
+      "version": "1.2.6",
+      "lock_path": "node_modules/@napi-rs/wasm-runtime",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@napi-rs/wasm-runtime/v/1.2.6",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@oxc-project/types",
+      "version": "0.156.0",
+      "lock_path": "node_modules/@oxc-project/types",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://oxc.rs",
+      "status": "license text available"
+    },
+    {
+      "name": "@playwright/test",
+      "version": "1.65.1",
+      "lock_path": "node_modules/@playwright/test",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "source": "https://playwright.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/number",
+      "version": "1.1.3",
+      "lock_path": "node_modules/@radix-ui/number",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/primitive",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/primitive",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-accessible-icon",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/react-accessible-icon",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-accordion",
+      "version": "1.3.1",
+      "lock_path": "node_modules/@radix-ui/react-accordion",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-alert-dialog",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-alert-dialog",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-arrow",
+      "version": "1.1.17",
+      "lock_path": "node_modules/@radix-ui/react-arrow",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-aspect-ratio",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/react-aspect-ratio",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-avatar",
+      "version": "1.3.1",
+      "lock_path": "node_modules/@radix-ui/react-avatar",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-checkbox",
+      "version": "1.4.1",
+      "lock_path": "node_modules/@radix-ui/react-checkbox",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-collapsible",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-collapsible",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-collection",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/react-collection",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-compose-refs",
+      "version": "1.1.5",
+      "lock_path": "node_modules/@radix-ui/react-compose-refs",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-context",
+      "version": "1.3.0",
+      "lock_path": "node_modules/@radix-ui/react-context",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-context-menu",
+      "version": "2.4.1",
+      "lock_path": "node_modules/@radix-ui/react-context-menu",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-dialog",
+      "version": "1.3.1",
+      "lock_path": "node_modules/@radix-ui/react-dialog",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-direction",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/react-direction",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-dismissable-layer",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-dismissable-layer",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-dropdown-menu",
+      "version": "2.2.1",
+      "lock_path": "node_modules/@radix-ui/react-dropdown-menu",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-focus-guards",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/react-focus-guards",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-focus-scope",
+      "version": "1.3.1",
+      "lock_path": "node_modules/@radix-ui/react-focus-scope",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-form",
+      "version": "0.3.0",
+      "lock_path": "node_modules/@radix-ui/react-form",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-hover-card",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-hover-card",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-id",
+      "version": "1.1.4",
+      "lock_path": "node_modules/@radix-ui/react-id",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-label",
+      "version": "2.1.17",
+      "lock_path": "node_modules/@radix-ui/react-label",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-menu",
+      "version": "2.2.1",
+      "lock_path": "node_modules/@radix-ui/react-menu",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-menubar",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-menubar",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-navigation-menu",
+      "version": "1.4.1",
+      "lock_path": "node_modules/@radix-ui/react-navigation-menu",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-one-time-password-field",
+      "version": "0.2.1",
+      "lock_path": "node_modules/@radix-ui/react-one-time-password-field",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-password-toggle-field",
+      "version": "0.2.1",
+      "lock_path": "node_modules/@radix-ui/react-password-toggle-field",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-popover",
+      "version": "1.3.1",
+      "lock_path": "node_modules/@radix-ui/react-popover",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-popper",
+      "version": "1.4.0",
+      "lock_path": "node_modules/@radix-ui/react-popper",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-portal",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/react-portal",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-presence",
+      "version": "1.1.11",
+      "lock_path": "node_modules/@radix-ui/react-presence",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-primitive",
+      "version": "2.2.0",
+      "lock_path": "node_modules/@radix-ui/react-primitive",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-progress",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-progress",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-radio-group",
+      "version": "1.5.1",
+      "lock_path": "node_modules/@radix-ui/react-radio-group",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-roving-focus",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-roving-focus",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-scroll-area",
+      "version": "1.4.0",
+      "lock_path": "node_modules/@radix-ui/react-scroll-area",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-select",
+      "version": "2.4.1",
+      "lock_path": "node_modules/@radix-ui/react-select",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-separator",
+      "version": "1.2.0",
+      "lock_path": "node_modules/@radix-ui/react-separator",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-slider",
+      "version": "1.6.1",
+      "lock_path": "node_modules/@radix-ui/react-slider",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-slot",
+      "version": "1.5.0",
+      "lock_path": "node_modules/@radix-ui/react-slot",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-switch",
+      "version": "1.4.1",
+      "lock_path": "node_modules/@radix-ui/react-switch",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-tabs",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-tabs",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-toast",
+      "version": "1.3.1",
+      "lock_path": "node_modules/@radix-ui/react-toast",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-toggle",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-toggle",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-toggle-group",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-toggle-group",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-toolbar",
+      "version": "1.2.1",
+      "lock_path": "node_modules/@radix-ui/react-toolbar",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-tooltip",
+      "version": "1.4.1",
+      "lock_path": "node_modules/@radix-ui/react-tooltip",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-callback-ref",
+      "version": "1.1.5",
+      "lock_path": "node_modules/@radix-ui/react-use-callback-ref",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-controllable-state",
+      "version": "1.3.0",
+      "lock_path": "node_modules/@radix-ui/react-use-controllable-state",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-effect-event",
+      "version": "0.0.5",
+      "lock_path": "node_modules/@radix-ui/react-use-effect-event",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-escape-keydown",
+      "version": "1.1.6",
+      "lock_path": "node_modules/@radix-ui/react-use-escape-keydown",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-is-hydrated",
+      "version": "0.1.3",
+      "lock_path": "node_modules/@radix-ui/react-use-is-hydrated",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-layout-effect",
+      "version": "1.1.4",
+      "lock_path": "node_modules/@radix-ui/react-use-layout-effect",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-previous",
+      "version": "1.1.4",
+      "lock_path": "node_modules/@radix-ui/react-use-previous",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-rect",
+      "version": "1.1.4",
+      "lock_path": "node_modules/@radix-ui/react-use-rect",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-use-size",
+      "version": "1.1.5",
+      "lock_path": "node_modules/@radix-ui/react-use-size",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/react-visually-hidden",
+      "version": "1.2.13",
+      "lock_path": "node_modules/@radix-ui/react-visually-hidden",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@radix-ui/rect",
+      "version": "1.1.3",
+      "lock_path": "node_modules/@radix-ui/rect",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "@react-leaflet/core",
+      "version": "3.0.0",
+      "lock_path": "node_modules/@react-leaflet/core",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "Hippocratic-2.1",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://react-leaflet.js.org/docs/core-introduction",
+      "status": "license text available"
+    },
+    {
+      "name": "@reduxjs/toolkit",
+      "version": "2.14.0",
+      "lock_path": "node_modules/@reduxjs/toolkit",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://redux-toolkit.js.org",
+      "status": "license text available"
+    },
+    {
+      "name": "@rolldown/binding-android-arm-eabi",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-android-arm-eabi",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-android-arm-eabi/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-android-arm64",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-android-arm64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-android-arm64/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-darwin-arm64",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-darwin-arm64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-darwin-arm64/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-darwin-x64",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-darwin-x64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-darwin-x64/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-freebsd-x64",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-freebsd-x64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-freebsd-x64/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-linux-arm-gnueabihf",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-linux-arm-gnueabihf/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-linux-arm64-gnu",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-linux-arm64-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-linux-arm64-gnu/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-linux-arm64-musl",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-linux-arm64-musl",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-linux-arm64-musl/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-linux-ppc64-gnu",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-linux-ppc64-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-linux-ppc64-gnu/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-linux-s390x-gnu",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-linux-s390x-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-linux-s390x-gnu/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-linux-x64-gnu",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-linux-x64-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-linux-x64-gnu/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-linux-x64-musl",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-linux-x64-musl",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-linux-x64-musl/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-openharmony-arm64",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-openharmony-arm64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-openharmony-arm64/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-wasm32-wasi",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-wasm32-wasi",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-wasm32-wasi/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@emnapi/core",
+      "version": "2.0.0-beta.2",
+      "lock_path": "node_modules/@rolldown/binding-wasm32-wasi/node_modules/@emnapi/core",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@emnapi/core/v/2.0.0-beta.2",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@emnapi/runtime",
+      "version": "2.0.0-beta.2",
+      "lock_path": "node_modules/@rolldown/binding-wasm32-wasi/node_modules/@emnapi/runtime",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@emnapi/runtime/v/2.0.0-beta.2",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-win32-arm64-msvc",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-win32-arm64-msvc",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@rolldown/binding-win32-arm64-msvc/v/1.2.19",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/binding-win32-x64-msvc",
+      "version": "1.2.19",
+      "lock_path": "node_modules/@rolldown/binding-win32-x64-msvc",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://rolldown.rs/",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@rolldown/pluginutils",
+      "version": "1.1.1",
+      "lock_path": "node_modules/@rolldown/pluginutils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/rolldown/plugins/tree/main/packages/pluginutils#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@standard-schema/spec",
+      "version": "1.1.0",
+      "lock_path": "node_modules/@standard-schema/spec",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://standardschema.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "@standard-schema/utils",
+      "version": "0.3.0",
+      "lock_path": "node_modules/@standard-schema/utils",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/standard-schema/standard-schema",
+      "status": "license text available"
+    },
+    {
+      "name": "@tailwindcss/node",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/node",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://tailwindcss.com",
+      "status": "license text available"
+    },
+    {
+      "name": "@tailwindcss/oxide",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/tailwindlabs/tailwindcss.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@tailwindcss/oxide-android-arm64",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-android-arm64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-android-arm64/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-darwin-arm64",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-darwin-arm64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-darwin-arm64/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-darwin-x64",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-darwin-x64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-darwin-x64/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-freebsd-x64",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-freebsd-x64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-freebsd-x64/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-linux-arm-gnueabihf",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-linux-arm-gnueabihf",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-linux-arm-gnueabihf/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-linux-arm64-gnu",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-linux-arm64-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-linux-arm64-gnu/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-linux-arm64-musl",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-linux-arm64-musl",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-linux-arm64-musl/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-linux-x64-gnu",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-linux-x64-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-linux-x64-gnu/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-linux-x64-musl",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-linux-x64-musl",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-linux-x64-musl/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-wasm32-wasi",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-wasm32-wasi",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "git+https://github.com/tailwindlabs/tailwindcss.git",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@emnapi/core",
+      "version": "1.11.3",
+      "lock_path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/core",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/toyobayashi/emnapi#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@emnapi/runtime",
+      "version": "1.11.3",
+      "lock_path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/runtime",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/toyobayashi/emnapi#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@emnapi/wasi-threads",
+      "version": "1.2.3",
+      "lock_path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/wasi-threads",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/toyobayashi/emnapi#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@napi-rs/wasm-runtime",
+      "version": "1.2.2",
+      "lock_path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@napi-rs/wasm-runtime",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://napi.rs/",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tybys/wasm-util",
+      "version": "0.10.3",
+      "lock_path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@tybys/wasm-util",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://github.com/toyobayashi/wasm-util.git",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "tslib",
+      "version": "2.8.1",
+      "lock_path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/tslib",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "0BSD",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "https://www.typescriptlang.org/",
+      "status": "license text available"
+    },
+    {
+      "name": "@tailwindcss/oxide-win32-arm64-msvc",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-win32-arm64-msvc",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tailwindcss/oxide-win32-arm64-msvc/v/4.3.5",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@tailwindcss/oxide-win32-x64-msvc",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/oxide-win32-x64-msvc",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/tailwindlabs/tailwindcss.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@tailwindcss/vite",
+      "version": "4.3.5",
+      "lock_path": "node_modules/@tailwindcss/vite",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://tailwindcss.com",
+      "status": "license text available"
+    },
+    {
+      "name": "@testing-library/dom",
+      "version": "10.4.2",
+      "lock_path": "node_modules/@testing-library/dom",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/testing-library/dom-testing-library#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@testing-library/jest-dom",
+      "version": "7.0.1",
+      "lock_path": "node_modules/@testing-library/jest-dom",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/testing-library/jest-dom#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "dom-accessibility-api",
+      "version": "0.6.3",
+      "lock_path": "node_modules/@testing-library/jest-dom/node_modules/dom-accessibility-api",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/eps1lon/dom-accessibility-api.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@testing-library/react",
+      "version": "16.3.3",
+      "lock_path": "node_modules/@testing-library/react",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/testing-library/react-testing-library#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@testing-library/user-event",
+      "version": "14.6.10",
+      "lock_path": "node_modules/@testing-library/user-event",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/testing-library/user-event#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@tweenjs/tween.js",
+      "version": "23.1.3",
+      "lock_path": "node_modules/@tweenjs/tween.js",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/tweenjs/tween.js",
+      "status": "license text available"
+    },
+    {
+      "name": "@tybys/wasm-util",
+      "version": "0.10.4",
+      "lock_path": "node_modules/@tybys/wasm-util",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/@tybys/wasm-util/v/0.10.4",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "@types/aria-query",
+      "version": "5.0.4",
+      "lock_path": "node_modules/@types/aria-query",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/aria-query",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/chai",
+      "version": "5.2.3",
+      "lock_path": "node_modules/@types/chai",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/chai",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-array",
+      "version": "3.2.2",
+      "lock_path": "node_modules/@types/d3-array",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-array",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-color",
+      "version": "3.1.3",
+      "lock_path": "node_modules/@types/d3-color",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-color",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-ease",
+      "version": "3.0.2",
+      "lock_path": "node_modules/@types/d3-ease",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-ease",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-interpolate",
+      "version": "3.0.4",
+      "lock_path": "node_modules/@types/d3-interpolate",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-interpolate",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-path",
+      "version": "3.1.1",
+      "lock_path": "node_modules/@types/d3-path",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-path",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-scale",
+      "version": "4.0.9",
+      "lock_path": "node_modules/@types/d3-scale",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-scale",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-shape",
+      "version": "3.2.0",
+      "lock_path": "node_modules/@types/d3-shape",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-shape",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-time",
+      "version": "3.0.4",
+      "lock_path": "node_modules/@types/d3-time",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-time",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/d3-timer",
+      "version": "3.0.2",
+      "lock_path": "node_modules/@types/d3-timer",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/d3-timer",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/deep-eql",
+      "version": "4.0.2",
+      "lock_path": "node_modules/@types/deep-eql",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/deep-eql",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/esrecurse",
+      "version": "4.3.1",
+      "lock_path": "node_modules/@types/esrecurse",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/esrecurse",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/estree",
+      "version": "1.0.10",
+      "lock_path": "node_modules/@types/estree",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/geojson",
+      "version": "7946.0.16",
+      "lock_path": "node_modules/@types/geojson",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/geojson",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/json-schema",
+      "version": "7.0.15",
+      "lock_path": "node_modules/@types/json-schema",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/json-schema",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/leaflet",
+      "version": "1.9.22",
+      "lock_path": "node_modules/@types/leaflet",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/leaflet",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/node",
+      "version": "26.6.6",
+      "lock_path": "node_modules/@types/node",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/react",
+      "version": "19.3.0",
+      "lock_path": "node_modules/@types/react",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/react-dom",
+      "version": "19.3.0",
+      "lock_path": "node_modules/@types/react-dom",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/stats.js",
+      "version": "0.17.4",
+      "lock_path": "node_modules/@types/stats.js",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/stats.js",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/three",
+      "version": "0.187.0",
+      "lock_path": "node_modules/@types/three",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/three",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/use-sync-external-store",
+      "version": "0.0.6",
+      "lock_path": "node_modules/@types/use-sync-external-store",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/use-sync-external-store",
+      "status": "license text available"
+    },
+    {
+      "name": "@types/webxr",
+      "version": "0.5.24",
+      "lock_path": "node_modules/@types/webxr",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/webxr",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/eslint-plugin",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io/packages/eslint-plugin",
+      "status": "license text available"
+    },
+    {
+      "name": "ignore",
+      "version": "7.0.14",
+      "lock_path": "node_modules/@typescript-eslint/eslint-plugin/node_modules/ignore",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE-MIT"
+      ],
+      "source": "https://github.com/kaelzhang/node-ignore.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/parser",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io/packages/parser",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/project-service",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/project-service",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/scope-manager",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/scope-manager",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io/packages/scope-manager",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/tsconfig-utils",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/tsconfig-utils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/type-utils",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/type-utils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/types",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/types",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/typescript-estree",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/typescript-estree",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io/packages/typescript-estree",
+      "status": "license text available"
+    },
+    {
+      "name": "minimatch",
+      "version": "10.2.6",
+      "lock_path": "node_modules/@typescript-eslint/typescript-estree/node_modules/minimatch",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BlueOak-1.0.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "git@github.com:isaacs/minimatch",
+      "status": "license text available"
+    },
+    {
+      "name": "semver",
+      "version": "7.8.6",
+      "lock_path": "node_modules/@typescript-eslint/typescript-estree/node_modules/semver",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/npm/node-semver.git",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/utils",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/utils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io/packages/utils",
+      "status": "license text available"
+    },
+    {
+      "name": "@typescript-eslint/visitor-keys",
+      "version": "8.72.2",
+      "lock_path": "node_modules/@typescript-eslint/visitor-keys",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io",
+      "status": "license text available"
+    },
+    {
+      "name": "@vitejs/plugin-react",
+      "version": "6.3.0",
+      "lock_path": "node_modules/@vitejs/plugin-react",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "@vitest/mocker",
+      "version": "5.1.0",
+      "lock_path": "node_modules/@vitest/mocker",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/vitest-dev/vitest/tree/main/packages/mocker",
+      "status": "license text available"
+    },
+    {
+      "name": "@vitest/spy",
+      "version": "5.1.0",
+      "lock_path": "node_modules/@vitest/spy",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://vitest.dev/api/mock",
+      "status": "license text available"
+    },
+    {
+      "name": "acorn",
+      "version": "8.19.0",
+      "lock_path": "node_modules/acorn",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/acornjs/acorn",
+      "status": "license text available"
+    },
+    {
+      "name": "acorn-jsx",
+      "version": "5.3.2",
+      "lock_path": "node_modules/acorn-jsx",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/acornjs/acorn-jsx",
+      "status": "license text available"
+    },
+    {
+      "name": "agentation",
+      "version": "3.1.2",
+      "lock_path": "node_modules/agentation",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "PolyForm-Shield-1.0.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://www.npmjs.com/package/agentation/v/3.1.2",
+      "status": "license text available"
+    },
+    {
+      "name": "ajv",
+      "version": "6.15.0",
+      "lock_path": "node_modules/ajv",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/ajv-validator/ajv",
+      "status": "license text available"
+    },
+    {
+      "name": "ansi-regex",
+      "version": "5.0.1",
+      "lock_path": "node_modules/ansi-regex",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "chalk/ansi-regex",
+      "status": "license text available"
+    },
+    {
+      "name": "ansi-styles",
+      "version": "5.2.0",
+      "lock_path": "node_modules/ansi-styles",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "chalk/ansi-styles",
+      "status": "license text available"
+    },
+    {
+      "name": "aria-hidden",
+      "version": "1.2.6",
+      "lock_path": "node_modules/aria-hidden",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/theKashey/aria-hidden#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "aria-query",
+      "version": "5.3.0",
+      "lock_path": "node_modules/aria-query",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/A11yance/aria-query#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "assertion-error",
+      "version": "2.0.1",
+      "lock_path": "node_modules/assertion-error",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git@github.com:chaijs/assertion-error.git",
+      "status": "license text available"
+    },
+    {
+      "name": "balanced-match",
+      "version": "4.0.4",
+      "lock_path": "node_modules/balanced-match",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "git://github.com/juliangruber/balanced-match.git",
+      "status": "license text available"
+    },
+    {
+      "name": "baseline-browser-mapping",
+      "version": "2.11.37",
+      "lock_path": "node_modules/baseline-browser-mapping",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "git+https://github.com/web-platform-dx/baseline-browser-mapping.git",
+      "status": "license text available"
+    },
+    {
+      "name": "bidi-js",
+      "version": "1.1.0",
+      "lock_path": "node_modules/bidi-js",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "https://github.com/lojjic/bidi-js.git",
+      "status": "license text available"
+    },
+    {
+      "name": "brace-expansion",
+      "version": "5.0.13",
+      "lock_path": "node_modules/brace-expansion",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/juliangruber/brace-expansion.git",
+      "status": "license text available"
+    },
+    {
+      "name": "browserslist",
+      "version": "4.29.5",
+      "lock_path": "node_modules/browserslist",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "browserslist/browserslist",
+      "status": "license text available"
+    },
+    {
+      "name": "cacheable",
+      "version": "2.5.0",
+      "lock_path": "node_modules/cacheable",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/jaredwray/cacheable.git",
+      "status": "license text available"
+    },
+    {
+      "name": "caniuse-lite",
+      "version": "1.0.30001826",
+      "lock_path": "node_modules/caniuse-lite",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "CC-BY-4.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "browserslist/caniuse-lite",
+      "status": "license text available"
+    },
+    {
+      "name": "chai",
+      "version": "6.3.0",
+      "lock_path": "node_modules/chai",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "http://chaijs.com",
+      "status": "license text available"
+    },
+    {
+      "name": "class-variance-authority",
+      "version": "0.7.1",
+      "lock_path": "node_modules/class-variance-authority",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/joe-bell/cva#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "clsx",
+      "version": "2.1.1",
+      "lock_path": "node_modules/clsx",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "lukeed/clsx",
+      "status": "license text available"
+    },
+    {
+      "name": "convert-source-map",
+      "version": "2.0.0",
+      "lock_path": "node_modules/convert-source-map",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/thlorenz/convert-source-map",
+      "status": "license text available"
+    },
+    {
+      "name": "cross-spawn",
+      "version": "7.0.6",
+      "lock_path": "node_modules/cross-spawn",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/moxystudio/node-cross-spawn",
+      "status": "license text available"
+    },
+    {
+      "name": "css-tree",
+      "version": "3.2.1",
+      "lock_path": "node_modules/css-tree",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "csstree/csstree",
+      "status": "license text available"
+    },
+    {
+      "name": "css.escape",
+      "version": "1.5.1",
+      "lock_path": "node_modules/css.escape",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE-MIT.txt"
+      ],
+      "source": "https://mths.be/cssescape",
+      "status": "license text available"
+    },
+    {
+      "name": "csstype",
+      "version": "3.2.3",
+      "lock_path": "node_modules/csstype",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/frenic/csstype",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-array",
+      "version": "3.2.5",
+      "lock_path": "node_modules/d3-array",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-array/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-color",
+      "version": "3.1.1",
+      "lock_path": "node_modules/d3-color",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-color/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-ease",
+      "version": "3.0.2",
+      "lock_path": "node_modules/d3-ease",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "BSD-3-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-ease/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-format",
+      "version": "3.1.3",
+      "lock_path": "node_modules/d3-format",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-format/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-interpolate",
+      "version": "3.0.2",
+      "lock_path": "node_modules/d3-interpolate",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-interpolate/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-path",
+      "version": "3.1.1",
+      "lock_path": "node_modules/d3-path",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-path/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-scale",
+      "version": "4.0.3",
+      "lock_path": "node_modules/d3-scale",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-scale/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-shape",
+      "version": "3.2.1",
+      "lock_path": "node_modules/d3-shape",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-shape/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-time",
+      "version": "3.1.1",
+      "lock_path": "node_modules/d3-time",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-time/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-time-format",
+      "version": "4.1.1",
+      "lock_path": "node_modules/d3-time-format",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-time-format/",
+      "status": "license text available"
+    },
+    {
+      "name": "d3-timer",
+      "version": "3.0.2",
+      "lock_path": "node_modules/d3-timer",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://d3js.org/d3-timer/",
+      "status": "license text available"
+    },
+    {
+      "name": "data-urls",
+      "version": "7.0.0",
+      "lock_path": "node_modules/data-urls",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "git+https://github.com/jsdom/data-urls.git",
+      "status": "license text available"
+    },
+    {
+      "name": "debug",
+      "version": "4.4.3",
+      "lock_path": "node_modules/debug",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git://github.com/debug-js/debug.git",
+      "status": "license text available"
+    },
+    {
+      "name": "decimal.js",
+      "version": "10.6.0",
+      "lock_path": "node_modules/decimal.js",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENCE.md"
+      ],
+      "source": "https://github.com/MikeMcl/decimal.js.git",
+      "status": "license text available"
+    },
+    {
+      "name": "decimal.js-light",
+      "version": "2.5.1",
+      "lock_path": "node_modules/decimal.js-light",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENCE.md"
+      ],
+      "source": "https://github.com/MikeMcl/decimal.js-light.git",
+      "status": "license text available"
+    },
+    {
+      "name": "deep-is",
+      "version": "0.1.4",
+      "lock_path": "node_modules/deep-is",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "http://github.com/thlorenz/deep-is.git",
+      "status": "license text available"
+    },
+    {
+      "name": "dequal",
+      "version": "2.0.3",
+      "lock_path": "node_modules/dequal",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "lukeed/dequal",
+      "status": "license text available"
+    },
+    {
+      "name": "detect-libc",
+      "version": "2.1.2",
+      "lock_path": "node_modules/detect-libc",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git://github.com/lovell/detect-libc.git",
+      "status": "license text available"
+    },
+    {
+      "name": "detect-node-es",
+      "version": "1.1.0",
+      "lock_path": "node_modules/detect-node-es",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/thekashey/detect-node",
+      "status": "license text available"
+    },
+    {
+      "name": "dom-accessibility-api",
+      "version": "0.5.16",
+      "lock_path": "node_modules/dom-accessibility-api",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/eps1lon/dom-accessibility-api.git",
+      "status": "license text available"
+    },
+    {
+      "name": "electron-to-chromium",
+      "version": "1.5.485",
+      "lock_path": "node_modules/electron-to-chromium",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/Kilian/electron-to-chromium.git",
+      "status": "license text available"
+    },
+    {
+      "name": "enhanced-resolve",
+      "version": "5.27.0",
+      "lock_path": "node_modules/enhanced-resolve",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/webpack/enhanced-resolve#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "entities",
+      "version": "9.0.0",
+      "lock_path": "node_modules/entities",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/fb55/entities.git",
+      "status": "license text available"
+    },
+    {
+      "name": "es-module-lexer",
+      "version": "2.3.2",
+      "lock_path": "node_modules/es-module-lexer",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/guybedford/es-module-lexer#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "es-toolkit",
+      "version": "1.53.2",
+      "lock_path": "node_modules/es-toolkit",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "source": "https://es-toolkit.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "escalade",
+      "version": "3.2.0",
+      "lock_path": "node_modules/escalade",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "lukeed/escalade",
+      "status": "license text available"
+    },
+    {
+      "name": "escape-string-regexp",
+      "version": "4.0.0",
+      "lock_path": "node_modules/escape-string-regexp",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/escape-string-regexp",
+      "status": "license text available"
+    },
+    {
+      "name": "eslint",
+      "version": "10.15.0",
+      "lock_path": "node_modules/eslint",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://eslint.org",
+      "status": "license text available"
+    },
+    {
+      "name": "eslint-plugin-react-hooks",
+      "version": "7.1.1",
+      "lock_path": "node_modules/eslint-plugin-react-hooks",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://react.dev/",
+      "status": "license text available"
+    },
+    {
+      "name": "eslint-plugin-react-refresh",
+      "version": "0.5.7",
+      "lock_path": "node_modules/eslint-plugin-react-refresh",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "github:ArnaudBarre/eslint-plugin-react-refresh",
+      "status": "license text available"
+    },
+    {
+      "name": "eslint-scope",
+      "version": "9.1.2",
+      "lock_path": "node_modules/eslint-scope",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/js/blob/main/packages/eslint-scope/README.md",
+      "status": "license text available"
+    },
+    {
+      "name": "eslint-visitor-keys",
+      "version": "5.0.1",
+      "lock_path": "node_modules/eslint-visitor-keys",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/js/blob/main/packages/eslint-visitor-keys/README.md",
+      "status": "license text available"
+    },
+    {
+      "name": "espree",
+      "version": "11.2.0",
+      "lock_path": "node_modules/espree",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/eslint/js/blob/main/packages/espree/README.md",
+      "status": "license text available"
+    },
+    {
+      "name": "esquery",
+      "version": "1.7.0",
+      "lock_path": "node_modules/esquery",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-3-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "license.txt"
+      ],
+      "source": "https://github.com/estools/esquery/",
+      "status": "license text available"
+    },
+    {
+      "name": "esrecurse",
+      "version": "4.3.0",
+      "lock_path": "node_modules/esrecurse",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://github.com/estools/esrecurse",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "estraverse",
+      "version": "5.3.0",
+      "lock_path": "node_modules/estraverse",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.BSD"
+      ],
+      "source": "https://github.com/estools/estraverse",
+      "status": "license text available"
+    },
+    {
+      "name": "estree-walker",
+      "version": "3.0.3",
+      "lock_path": "node_modules/estree-walker",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/Rich-Harris/estree-walker",
+      "status": "license text available"
+    },
+    {
+      "name": "esutils",
+      "version": "2.0.3",
+      "lock_path": "node_modules/esutils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.BSD"
+      ],
+      "source": "https://github.com/estools/esutils",
+      "status": "license text available"
+    },
+    {
+      "name": "eventemitter3",
+      "version": "5.0.4",
+      "lock_path": "node_modules/eventemitter3",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git://github.com/primus/eventemitter3.git",
+      "status": "license text available"
+    },
+    {
+      "name": "expect-type",
+      "version": "1.4.0",
+      "lock_path": "node_modules/expect-type",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/mmkal/expect-type#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "fast-deep-equal",
+      "version": "3.1.3",
+      "lock_path": "node_modules/fast-deep-equal",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/epoberezkin/fast-deep-equal#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "fast-json-stable-stringify",
+      "version": "2.1.0",
+      "lock_path": "node_modules/fast-json-stable-stringify",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/epoberezkin/fast-json-stable-stringify",
+      "status": "license text available"
+    },
+    {
+      "name": "fast-levenshtein",
+      "version": "2.0.6",
+      "lock_path": "node_modules/fast-levenshtein",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/hiddentao/fast-levenshtein.git",
+      "status": "license text available"
+    },
+    {
+      "name": "fdir",
+      "version": "6.5.0",
+      "lock_path": "node_modules/fdir",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/thecodrr/fdir#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "fflate",
+      "version": "0.8.3",
+      "lock_path": "node_modules/fflate",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://101arrowz.github.io/fflate",
+      "status": "license text available"
+    },
+    {
+      "name": "file-entry-cache",
+      "version": "11.1.5",
+      "lock_path": "node_modules/file-entry-cache",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/jaredwray/cacheable.git",
+      "status": "license text available"
+    },
+    {
+      "name": "find-up",
+      "version": "5.0.0",
+      "lock_path": "node_modules/find-up",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/find-up",
+      "status": "license text available"
+    },
+    {
+      "name": "flat-cache",
+      "version": "6.1.23",
+      "lock_path": "node_modules/flat-cache",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/jaredwray/cacheable.git",
+      "status": "license text available"
+    },
+    {
+      "name": "flatted",
+      "version": "3.4.4",
+      "lock_path": "node_modules/flatted",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/WebReflection/flatted#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "fsevents",
+      "version": "2.3.3",
+      "lock_path": "node_modules/fsevents",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MIT",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/fsevents/v/2.3.3",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "gensync",
+      "version": "1.0.0-beta.2",
+      "lock_path": "node_modules/gensync",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/loganfsmyth/gensync",
+      "status": "license text available"
+    },
+    {
+      "name": "get-nonce",
+      "version": "1.0.1",
+      "lock_path": "node_modules/get-nonce",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/theKashey/get-nonce",
+      "status": "license text available"
+    },
+    {
+      "name": "glob-parent",
+      "version": "6.0.2",
+      "lock_path": "node_modules/glob-parent",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "gulpjs/glob-parent",
+      "status": "license text available"
+    },
+    {
+      "name": "globals",
+      "version": "17.14.0",
+      "lock_path": "node_modules/globals",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/globals",
+      "status": "license text available"
+    },
+    {
+      "name": "graceful-fs",
+      "version": "4.2.12",
+      "lock_path": "node_modules/graceful-fs",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BlueOak-1.0.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/isaacs/node-graceful-fs",
+      "status": "license text available"
+    },
+    {
+      "name": "hashery",
+      "version": "1.5.1",
+      "lock_path": "node_modules/hashery",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jaredwray/hashery.git",
+      "status": "license text available"
+    },
+    {
+      "name": "hermes-estree",
+      "version": "0.25.1",
+      "lock_path": "node_modules/hermes-estree",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git@github.com:facebook/hermes.git",
+      "status": "license text available"
+    },
+    {
+      "name": "hermes-parser",
+      "version": "0.25.1",
+      "lock_path": "node_modules/hermes-parser",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git@github.com:facebook/hermes.git",
+      "status": "license text available"
+    },
+    {
+      "name": "hookified",
+      "version": "1.15.1",
+      "lock_path": "node_modules/hookified",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jaredwray/hookified#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "html-encoding-sniffer",
+      "version": "6.0.0",
+      "lock_path": "node_modules/html-encoding-sniffer",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "git+https://github.com/jsdom/html-encoding-sniffer.git",
+      "status": "license text available"
+    },
+    {
+      "name": "ignore",
+      "version": "5.3.2",
+      "lock_path": "node_modules/ignore",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE-MIT"
+      ],
+      "source": "git@github.com:kaelzhang/node-ignore.git",
+      "status": "license text available"
+    },
+    {
+      "name": "immer",
+      "version": "11.2.10",
+      "lock_path": "node_modules/immer",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/immerjs/immer#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "imurmurhash",
+      "version": "0.1.4",
+      "lock_path": "node_modules/imurmurhash",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://github.com/jensyt/imurmurhash-js",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "indent-string",
+      "version": "4.0.0",
+      "lock_path": "node_modules/indent-string",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/indent-string",
+      "status": "license text available"
+    },
+    {
+      "name": "internmap",
+      "version": "2.0.3",
+      "lock_path": "node_modules/internmap",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/mbostock/internmap/",
+      "status": "license text available"
+    },
+    {
+      "name": "is-extglob",
+      "version": "2.1.1",
+      "lock_path": "node_modules/is-extglob",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jonschlinkert/is-extglob",
+      "status": "license text available"
+    },
+    {
+      "name": "is-glob",
+      "version": "4.0.3",
+      "lock_path": "node_modules/is-glob",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/micromatch/is-glob",
+      "status": "license text available"
+    },
+    {
+      "name": "is-potential-custom-element-name",
+      "version": "1.0.1",
+      "lock_path": "node_modules/is-potential-custom-element-name",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE-MIT.txt"
+      ],
+      "source": "https://github.com/mathiasbynens/is-potential-custom-element-name",
+      "status": "license text available"
+    },
+    {
+      "name": "isexe",
+      "version": "2.0.0",
+      "lock_path": "node_modules/isexe",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/isaacs/isexe#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "jiti",
+      "version": "2.7.0",
+      "lock_path": "node_modules/jiti",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "unjs/jiti",
+      "status": "license text available"
+    },
+    {
+      "name": "js-tokens",
+      "version": "4.0.0",
+      "lock_path": "node_modules/js-tokens",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "lydell/js-tokens",
+      "status": "license text available"
+    },
+    {
+      "name": "jsdom",
+      "version": "29.1.1",
+      "lock_path": "node_modules/jsdom",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "git+https://github.com/jsdom/jsdom.git",
+      "status": "license text available"
+    },
+    {
+      "name": "lru-cache",
+      "version": "11.5.3",
+      "lock_path": "node_modules/jsdom/node_modules/lru-cache",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BlueOak-1.0.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "git+ssh://git@github.com/isaacs/node-lru-cache.git",
+      "status": "license text available"
+    },
+    {
+      "name": "jsesc",
+      "version": "3.1.0",
+      "lock_path": "node_modules/jsesc",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE-MIT.txt"
+      ],
+      "source": "https://mths.be/jsesc",
+      "status": "license text available"
+    },
+    {
+      "name": "json-schema-traverse",
+      "version": "0.4.1",
+      "lock_path": "node_modules/json-schema-traverse",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/epoberezkin/json-schema-traverse#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "json-stable-stringify-without-jsonify",
+      "version": "1.0.1",
+      "lock_path": "node_modules/json-stable-stringify-without-jsonify",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/samn/json-stable-stringify",
+      "status": "license text available"
+    },
+    {
+      "name": "json5",
+      "version": "2.2.3",
+      "lock_path": "node_modules/json5",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "http://json5.org/",
+      "status": "license text available"
+    },
+    {
+      "name": "keyv",
+      "version": "5.6.0",
+      "lock_path": "node_modules/keyv",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jaredwray/keyv",
+      "status": "license text available"
+    },
+    {
+      "name": "leaflet",
+      "version": "1.9.4",
+      "lock_path": "node_modules/leaflet",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://leafletjs.com/",
+      "status": "license text available"
+    },
+    {
+      "name": "levn",
+      "version": "0.4.1",
+      "lock_path": "node_modules/levn",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/gkz/levn",
+      "status": "license text available"
+    },
+    {
+      "name": "lightningcss",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MPL-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/parcel-bundler/lightningcss.git",
+      "status": "license text available"
+    },
+    {
+      "name": "lightningcss-android-arm64",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-android-arm64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-android-arm64/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-darwin-arm64",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-darwin-arm64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-darwin-arm64/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-darwin-x64",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-darwin-x64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-darwin-x64/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-freebsd-x64",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-freebsd-x64",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-freebsd-x64/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-linux-arm-gnueabihf",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-linux-arm-gnueabihf",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-linux-arm-gnueabihf/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-linux-arm64-gnu",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-linux-arm64-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-linux-arm64-gnu/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-linux-arm64-musl",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-linux-arm64-musl",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-linux-arm64-musl/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-linux-x64-gnu",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-linux-x64-gnu",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-linux-x64-gnu/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-linux-x64-musl",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-linux-x64-musl",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-linux-x64-musl/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-win32-arm64-msvc",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-win32-arm64-msvc",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": false,
+      "license_files": [],
+      "source": "https://www.npmjs.com/package/lightningcss-win32-arm64-msvc/v/1.33.0",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "lightningcss-win32-x64-msvc",
+      "version": "1.33.0",
+      "lock_path": "node_modules/lightningcss-win32-x64-msvc",
+      "development_only": true,
+      "optional": true,
+      "declared_license": "MPL-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/parcel-bundler/lightningcss.git",
+      "status": "license text available"
+    },
+    {
+      "name": "locate-path",
+      "version": "6.0.0",
+      "lock_path": "node_modules/locate-path",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/locate-path",
+      "status": "license text available"
+    },
+    {
+      "name": "lru-cache",
+      "version": "5.1.1",
+      "lock_path": "node_modules/lru-cache",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git://github.com/isaacs/node-lru-cache.git",
+      "status": "license text available"
+    },
+    {
+      "name": "lucide-react",
+      "version": "1.73.0",
+      "lock_path": "node_modules/lucide-react",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://lucide.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "lz-string",
+      "version": "1.5.0",
+      "lock_path": "node_modules/lz-string",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "http://pieroxy.net/blog/pages/lz-string/index.html",
+      "status": "license text available"
+    },
+    {
+      "name": "magic-string",
+      "version": "1.4.5",
+      "lock_path": "node_modules/magic-string",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/Rich-Harris/magic-string.git",
+      "status": "license text available"
+    },
+    {
+      "name": "mdn-data",
+      "version": "2.27.1",
+      "lock_path": "node_modules/mdn-data",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "CC0-1.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://developer.mozilla.org",
+      "status": "license text available"
+    },
+    {
+      "name": "meshoptimizer",
+      "version": "1.1.1",
+      "lock_path": "node_modules/meshoptimizer",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/zeux/meshoptimizer",
+      "status": "license text available"
+    },
+    {
+      "name": "min-indent",
+      "version": "1.0.1",
+      "lock_path": "node_modules/min-indent",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "https://github.com/thejameskyle/min-indent",
+      "status": "license text available"
+    },
+    {
+      "name": "minimatch",
+      "version": "11.0.8",
+      "lock_path": "node_modules/minimatch",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BlueOak-1.0.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "git+ssh://git@github.com/isaacs/minimatch.git",
+      "status": "license text available"
+    },
+    {
+      "name": "ms",
+      "version": "2.1.3",
+      "lock_path": "node_modules/ms",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license.md"
+      ],
+      "source": "vercel/ms",
+      "status": "license text available"
+    },
+    {
+      "name": "nanoid",
+      "version": "3.3.20",
+      "lock_path": "node_modules/nanoid",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "ai/nanoid",
+      "status": "license text available"
+    },
+    {
+      "name": "natural-compare",
+      "version": "1.4.0",
+      "lock_path": "node_modules/natural-compare",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "git://github.com/litejs/natural-compare-lite.git",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "node-releases",
+      "version": "2.0.64",
+      "lock_path": "node_modules/node-releases",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/chicoxyzzy/node-releases.git",
+      "status": "license text available"
+    },
+    {
+      "name": "obug",
+      "version": "3.0.0",
+      "lock_path": "node_modules/obug",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/sxzz/obug#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "optionator",
+      "version": "0.9.4",
+      "lock_path": "node_modules/optionator",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/gkz/optionator",
+      "status": "license text available"
+    },
+    {
+      "name": "p-limit",
+      "version": "3.1.0",
+      "lock_path": "node_modules/p-limit",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/p-limit",
+      "status": "license text available"
+    },
+    {
+      "name": "p-locate",
+      "version": "5.0.0",
+      "lock_path": "node_modules/p-locate",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/p-locate",
+      "status": "license text available"
+    },
+    {
+      "name": "parse5",
+      "version": "8.1.1",
+      "lock_path": "node_modules/parse5",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://parse5.js.org",
+      "status": "license text available"
+    },
+    {
+      "name": "path-exists",
+      "version": "4.0.0",
+      "lock_path": "node_modules/path-exists",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/path-exists",
+      "status": "license text available"
+    },
+    {
+      "name": "path-key",
+      "version": "3.1.1",
+      "lock_path": "node_modules/path-key",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/path-key",
+      "status": "license text available"
+    },
+    {
+      "name": "picocolors",
+      "version": "1.1.1",
+      "lock_path": "node_modules/picocolors",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "alexeyraspopov/picocolors",
+      "status": "license text available"
+    },
+    {
+      "name": "picomatch",
+      "version": "4.0.7",
+      "lock_path": "node_modules/picomatch",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/micromatch/picomatch",
+      "status": "license text available"
+    },
+    {
+      "name": "playwright",
+      "version": "1.65.1",
+      "lock_path": "node_modules/playwright",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "source": "https://playwright.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.65.1",
+      "lock_path": "node_modules/playwright-core",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "source": "https://playwright.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "postcss",
+      "version": "8.5.33",
+      "lock_path": "node_modules/postcss",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://postcss.org/",
+      "status": "license text available"
+    },
+    {
+      "name": "prelude-ls",
+      "version": "1.2.1",
+      "lock_path": "node_modules/prelude-ls",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "http://preludels.com",
+      "status": "license text available"
+    },
+    {
+      "name": "pretty-format",
+      "version": "27.5.1",
+      "lock_path": "node_modules/pretty-format",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/facebook/jest.git",
+      "status": "license text available"
+    },
+    {
+      "name": "react-is",
+      "version": "17.0.2",
+      "lock_path": "node_modules/pretty-format/node_modules/react-is",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://reactjs.org/",
+      "status": "license text available"
+    },
+    {
+      "name": "punycode",
+      "version": "2.3.1",
+      "lock_path": "node_modules/punycode",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE-MIT.txt"
+      ],
+      "source": "https://mths.be/punycode",
+      "status": "license text available"
+    },
+    {
+      "name": "qified",
+      "version": "0.10.1",
+      "lock_path": "node_modules/qified",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jaredwray/qified#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "hookified",
+      "version": "2.2.0",
+      "lock_path": "node_modules/qified/node_modules/hookified",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jaredwray/hookified#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "radix-ui",
+      "version": "1.8.1",
+      "lock_path": "node_modules/radix-ui",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://radix-ui.com/primitives",
+      "status": "license text available"
+    },
+    {
+      "name": "react",
+      "version": "19.3.1",
+      "lock_path": "node_modules/react",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://react.dev/",
+      "status": "license text available"
+    },
+    {
+      "name": "react-dom",
+      "version": "19.3.1",
+      "lock_path": "node_modules/react-dom",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://react.dev/",
+      "status": "license text available"
+    },
+    {
+      "name": "react-is",
+      "version": "19.3.1",
+      "lock_path": "node_modules/react-is",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://react.dev/",
+      "status": "license text available"
+    },
+    {
+      "name": "react-leaflet",
+      "version": "5.0.0",
+      "lock_path": "node_modules/react-leaflet",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "Hippocratic-2.1",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://react-leaflet.js.org",
+      "status": "license text available"
+    },
+    {
+      "name": "react-redux",
+      "version": "9.3.1",
+      "lock_path": "node_modules/react-redux",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/reduxjs/react-redux",
+      "status": "license text available"
+    },
+    {
+      "name": "react-remove-scroll",
+      "version": "2.7.2",
+      "lock_path": "node_modules/react-remove-scroll",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/theKashey/react-remove-scroll",
+      "status": "license text available"
+    },
+    {
+      "name": "react-remove-scroll-bar",
+      "version": "2.3.8",
+      "lock_path": "node_modules/react-remove-scroll-bar",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://github.com/theKashey/react-remove-scroll-bar",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "react-style-singleton",
+      "version": "2.2.3",
+      "lock_path": "node_modules/react-style-singleton",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/theKashey/react-style-singleton#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "recharts",
+      "version": "3.10.1",
+      "lock_path": "node_modules/recharts",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/recharts/recharts",
+      "status": "license text available"
+    },
+    {
+      "name": "redent",
+      "version": "3.0.0",
+      "lock_path": "node_modules/redent",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/redent",
+      "status": "license text available"
+    },
+    {
+      "name": "redux",
+      "version": "5.0.1",
+      "lock_path": "node_modules/redux",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "http://redux.js.org",
+      "status": "license text available"
+    },
+    {
+      "name": "redux-thunk",
+      "version": "3.1.0",
+      "lock_path": "node_modules/redux-thunk",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/reduxjs/redux-thunk",
+      "status": "license text available"
+    },
+    {
+      "name": "require-from-string",
+      "version": "2.0.2",
+      "lock_path": "node_modules/require-from-string",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "floatdrop/require-from-string",
+      "status": "license text available"
+    },
+    {
+      "name": "reselect",
+      "version": "5.2.0",
+      "lock_path": "node_modules/reselect",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/reduxjs/reselect.git",
+      "status": "license text available"
+    },
+    {
+      "name": "rolldown",
+      "version": "1.2.19",
+      "lock_path": "node_modules/rolldown",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://rolldown.rs/",
+      "status": "license text available"
+    },
+    {
+      "name": "saxes",
+      "version": "6.0.0",
+      "lock_path": "node_modules/saxes",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [],
+      "source": "https://github.com/lddubeau/saxes.git",
+      "status": "declaration only; text unresolved on this platform"
+    },
+    {
+      "name": "scheduler",
+      "version": "0.28.0",
+      "lock_path": "node_modules/scheduler",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://react.dev/",
+      "status": "license text available"
+    },
+    {
+      "name": "semver",
+      "version": "6.3.2",
+      "lock_path": "node_modules/semver",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/npm/node-semver.git",
+      "status": "license text available"
+    },
+    {
+      "name": "shebang-command",
+      "version": "2.0.0",
+      "lock_path": "node_modules/shebang-command",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "kevva/shebang-command",
+      "status": "license text available"
+    },
+    {
+      "name": "shebang-regex",
+      "version": "3.0.0",
+      "lock_path": "node_modules/shebang-regex",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/shebang-regex",
+      "status": "license text available"
+    },
+    {
+      "name": "source-map-js",
+      "version": "1.2.2",
+      "lock_path": "node_modules/source-map-js",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-3-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/7rulnik/source-map-js",
+      "status": "license text available"
+    },
+    {
+      "name": "std-env",
+      "version": "4.3.0",
+      "lock_path": "node_modules/std-env",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENCE"
+      ],
+      "source": "unjs/std-env",
+      "status": "license text available"
+    },
+    {
+      "name": "strip-indent",
+      "version": "3.0.0",
+      "lock_path": "node_modules/strip-indent",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/strip-indent",
+      "status": "license text available"
+    },
+    {
+      "name": "symbol-tree",
+      "version": "3.2.4",
+      "lock_path": "node_modules/symbol-tree",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jsdom/js-symbol-tree#symbol-tree",
+      "status": "license text available"
+    },
+    {
+      "name": "tailwind-merge",
+      "version": "3.7.0",
+      "lock_path": "node_modules/tailwind-merge",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/dcastil/tailwind-merge",
+      "status": "license text available"
+    },
+    {
+      "name": "tailwindcss",
+      "version": "4.3.5",
+      "lock_path": "node_modules/tailwindcss",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://tailwindcss.com",
+      "status": "license text available"
+    },
+    {
+      "name": "tapable",
+      "version": "2.3.4",
+      "lock_path": "node_modules/tapable",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/webpack/tapable",
+      "status": "license text available"
+    },
+    {
+      "name": "three",
+      "version": "0.187.0",
+      "lock_path": "node_modules/three",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://threejs.org/",
+      "status": "license text available"
+    },
+    {
+      "name": "tiny-invariant",
+      "version": "1.3.3",
+      "lock_path": "node_modules/tiny-invariant",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/alexreardon/tiny-invariant.git",
+      "status": "license text available"
+    },
+    {
+      "name": "tinybench",
+      "version": "6.2.3",
+      "lock_path": "node_modules/tinybench",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/tinylibs/tinybench#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "tinyexec",
+      "version": "1.3.1",
+      "lock_path": "node_modules/tinyexec",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/tinylibs/tinyexec#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "tinyglobby",
+      "version": "0.2.17",
+      "lock_path": "node_modules/tinyglobby",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://superchupu.dev/tinyglobby",
+      "status": "license text available"
+    },
+    {
+      "name": "tldts",
+      "version": "7.5.2",
+      "lock_path": "node_modules/tldts",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/remusao/tldts#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "tldts-core",
+      "version": "7.5.2",
+      "lock_path": "node_modules/tldts-core",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/remusao/tldts#readme",
+      "status": "license text available"
+    },
+    {
+      "name": "tough-cookie",
+      "version": "6.1.0",
+      "lock_path": "node_modules/tough-cookie",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-3-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/salesforce/tough-cookie",
+      "status": "license text available"
+    },
+    {
+      "name": "tr46",
+      "version": "6.0.0",
+      "lock_path": "node_modules/tr46",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "git+https://github.com/jsdom/tr46.git",
+      "status": "license text available"
+    },
+    {
+      "name": "ts-api-utils",
+      "version": "2.5.0",
+      "lock_path": "node_modules/ts-api-utils",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://github.com/JoshuaKGoldberg/ts-api-utils",
+      "status": "license text available"
+    },
+    {
+      "name": "tslib",
+      "version": "2.9.1",
+      "lock_path": "node_modules/tslib",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "0BSD",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "https://www.typescriptlang.org/",
+      "status": "license text available"
+    },
+    {
+      "name": "type-check",
+      "version": "0.4.0",
+      "lock_path": "node_modules/type-check",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/gkz/type-check",
+      "status": "license text available"
+    },
+    {
+      "name": "typescript",
+      "version": "6.0.3",
+      "lock_path": "node_modules/typescript",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "https://www.typescriptlang.org/",
+      "status": "license text available"
+    },
+    {
+      "name": "typescript-eslint",
+      "version": "8.72.2",
+      "lock_path": "node_modules/typescript-eslint",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://typescript-eslint.io/packages/typescript-eslint",
+      "status": "license text available"
+    },
+    {
+      "name": "undici",
+      "version": "7.30.2",
+      "lock_path": "node_modules/undici",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://undici.nodejs.org",
+      "status": "license text available"
+    },
+    {
+      "name": "undici-types",
+      "version": "8.9.0",
+      "lock_path": "node_modules/undici-types",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://undici.nodejs.org",
+      "status": "license text available"
+    },
+    {
+      "name": "update-browserslist-db",
+      "version": "1.3.4",
+      "lock_path": "node_modules/update-browserslist-db",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "browserslist/update-db",
+      "status": "license text available"
+    },
+    {
+      "name": "uri-js",
+      "version": "4.4.1",
+      "lock_path": "node_modules/uri-js",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/garycourt/uri-js",
+      "status": "license text available"
+    },
+    {
+      "name": "use-callback-ref",
+      "version": "1.3.3",
+      "lock_path": "node_modules/use-callback-ref",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/theKashey/use-callback-ref/",
+      "status": "license text available"
+    },
+    {
+      "name": "use-sidecar",
+      "version": "1.1.3",
+      "lock_path": "node_modules/use-sidecar",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/theKashey/use-sidecar",
+      "status": "license text available"
+    },
+    {
+      "name": "use-sync-external-store",
+      "version": "1.7.0",
+      "lock_path": "node_modules/use-sync-external-store",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/react/react.git",
+      "status": "license text available"
+    },
+    {
+      "name": "victory-vendor",
+      "version": "37.4.1",
+      "lock_path": "node_modules/victory-vendor",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT AND ISC AND BSD-3-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "https://commerce.nearform.com/open-source/victory",
+      "status": "license text available"
+    },
+    {
+      "name": "vite",
+      "version": "8.3.8",
+      "lock_path": "node_modules/vite",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://vite.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "vitest",
+      "version": "5.1.0",
+      "lock_path": "node_modules/vitest",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "https://vitest.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "w3c-xmlserializer",
+      "version": "5.0.0",
+      "lock_path": "node_modules/w3c-xmlserializer",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "jsdom/w3c-xmlserializer",
+      "status": "license text available"
+    },
+    {
+      "name": "webidl-conversions",
+      "version": "8.0.1",
+      "lock_path": "node_modules/webidl-conversions",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "BSD-2-Clause",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source": "git+https://github.com/jsdom/webidl-conversions.git",
+      "status": "license text available"
+    },
+    {
+      "name": "whatwg-mimetype",
+      "version": "5.0.0",
+      "lock_path": "node_modules/whatwg-mimetype",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "jsdom/whatwg-mimetype",
+      "status": "license text available"
+    },
+    {
+      "name": "whatwg-url",
+      "version": "16.0.1",
+      "lock_path": "node_modules/whatwg-url",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "git+https://github.com/jsdom/whatwg-url.git",
+      "status": "license text available"
+    },
+    {
+      "name": "which",
+      "version": "2.0.2",
+      "lock_path": "node_modules/which",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git://github.com/isaacs/node-which.git",
+      "status": "license text available"
+    },
+    {
+      "name": "why-is-node-running",
+      "version": "3.2.1",
+      "lock_path": "node_modules/why-is-node-running",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/mafintosh/why-is-node-running",
+      "status": "license text available"
+    },
+    {
+      "name": "word-wrap",
+      "version": "1.2.5",
+      "lock_path": "node_modules/word-wrap",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/jonschlinkert/word-wrap",
+      "status": "license text available"
+    },
+    {
+      "name": "xml-name-validator",
+      "version": "5.0.0",
+      "lock_path": "node_modules/xml-name-validator",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "Apache-2.0",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source": "jsdom/xml-name-validator",
+      "status": "license text available"
+    },
+    {
+      "name": "xmlchars",
+      "version": "2.2.0",
+      "lock_path": "node_modules/xmlchars",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/lddubeau/xmlchars.git",
+      "status": "license text available"
+    },
+    {
+      "name": "yallist",
+      "version": "3.1.1",
+      "lock_path": "node_modules/yallist",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "ISC",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git+https://github.com/isaacs/yallist.git",
+      "status": "license text available"
+    },
+    {
+      "name": "yocto-queue",
+      "version": "0.1.0",
+      "lock_path": "node_modules/yocto-queue",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "license"
+      ],
+      "source": "sindresorhus/yocto-queue",
+      "status": "license text available"
+    },
+    {
+      "name": "zod",
+      "version": "4.6.7",
+      "lock_path": "node_modules/zod",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://zod.dev",
+      "status": "license text available"
+    },
+    {
+      "name": "zod-validation-error",
+      "version": "4.0.2",
+      "lock_path": "node_modules/zod-validation-error",
+      "development_only": true,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "git://github.com/causaly/zod-validation-error.git",
+      "status": "license text available"
+    },
+    {
+      "name": "zustand",
+      "version": "5.1.0",
+      "lock_path": "node_modules/zustand",
+      "development_only": false,
+      "optional": false,
+      "declared_license": "MIT",
+      "installed_matching": true,
+      "license_files": [
+        "LICENSE"
+      ],
+      "source": "https://github.com/pmndrs/zustand",
+      "status": "license text available"
+    }
+  ]
+}

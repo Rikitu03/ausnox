@@ -1,0 +1,102 @@
+{
+  "checked_at_utc": "2026-11-15T15:15:17.242Z",
+  "method": "Unauthenticated curl GET with redirects; success here does not establish interactive app/media compliance",
+  "links": [
+    {
+      "url": "https://ausnox.vercel.app/",
+      "http_status": 200,
+      "effective_url": "https://ausnox.vercel.app/",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://ausnox.vercel.app/demo/ausnox-mvp.mp4",
+      "http_status": 200,
+      "effective_url": "https://ausnox.vercel.app/demo/ausnox-mvp.mp4",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://doi.org/10.5066/P9REJ9JN",
+      "http_status": 200,
+      "effective_url": "https://astrogeology.usgs.gov/search/map/Mars/Mars2020/JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=mars",
+      "http_status": 200,
+      "effective_url": "https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=mars",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/WMTSCapabilities.xml",
+      "http_status": 200,
+      "effective_url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/WMTSCapabilities.xml",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/WMTSCapabilities.xml",
+      "http_status": 200,
+      "effective_url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/WMTSCapabilities.xml",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/WMTSCapabilities.xml",
+      "http_status": 200,
+      "effective_url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/WMTSCapabilities.xml",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://www.giss.nasa.gov/tools/mars24/help/algorithm.html",
+      "http_status": 200,
+      "effective_url": "https://www.giss.nasa.gov/tools/mars24/help/algorithm.html",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+      "http_status": 200,
+      "effective_url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+      "exit_code": 0,
+      "error": null,
+      "authenticated": false
+    },
+    {
+      "url": "https://www.spaceappschallenge.org/legal/",
+      "http_status": 0,
+      "effective_url": "https://www.spaceappschallenge.org/legal/",
+      "exit_code": 60,
+      "error": "curl: (60) schannel: SEC_E_UNTRUSTED_ROOT (0x80090325) - The certificate chain was issued by an authority that is not trusted.\r\nMore details here: https://curl.se/docs/sslcerts.html\r\n\r\ncurl failed to verify the legitimacy of the server and therefore could not\r\nestablish a secure connection to it. To learn more about this situation and\r\nhow to fix it, please visit the webpage mentioned above.",
+      "authenticated": false
+    },
+    {
+      "url": "https://www.spaceappschallenge.org/resources/project-submission-guide/",
+      "http_status": 0,
+      "effective_url": "https://www.spaceappschallenge.org/resources/project-submission-guide/",
+      "exit_code": 60,
+      "error": "curl: (60) schannel: SEC_E_UNTRUSTED_ROOT (0x80090325) - The certificate chain was issued by an authority that is not trusted.\r\nMore details here: https://curl.se/docs/sslcerts.html\r\n\r\ncurl failed to verify the legitimacy of the server and therefore could not\r\nestablish a secure connection to it. To learn more about this situation and\r\nhow to fix it, please visit the webpage mentioned above.",
+      "authenticated": false
+    },
+    {
+      "url": "https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/",
+      "http_status": 0,
+      "effective_url": "https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/",
+      "exit_code": 60,
+      "error": "curl: (60) schannel: SEC_E_UNTRUSTED_ROOT (0x80090325) - The certificate chain was issued by an authority that is not trusted.\r\nMore details here: https://curl.se/docs/sslcerts.html\r\n\r\ncurl failed to verify the legitimacy of the server and therefore could not\r\nestablish a secure connection to it. To learn more about this situation and\r\nhow to fix it, please visit the webpage mentioned above.",
+      "authenticated": false
+    }
+  ]
+}
