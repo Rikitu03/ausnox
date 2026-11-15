@@ -18,7 +18,7 @@ Official challenge: https://www.spaceappschallenge.org/2026/challenges/interplan
 - Astronomically modeled daylight with a simulated, pausable mission clock; visible remaining return margin and the assumptions behind it.
 - Responsive desktop-first dashboard, tablet usable, no login or required database; static-first deployment with offline-ready local processed route data.
 
-**3D**: desirable stretch feature, not a release gate. The published challenge overview requests a layered, integrated Martian map; it does not expressly demand a 3D globe. If time permits, add a georeferenced 3D view without sacrificing the validated 2D workflow.
+**3D terrain explorer** (`feat/3d-jezero-explorer`): Three.js now renders the existing verified Jezero DEM inside Mission Control, with relief, elevation and slope styles, shared routes and simulation, terrain inspection, camera controls and a 2D fallback. Default height scale is 1×; imagery draping remains unimplemented and X2b remains unresolved. See [the 3D handoff and verification evidence](docs/3D_TERRAIN_HANDOFF.md).
 
 ## Documentation (`docs/`)
 
@@ -52,9 +52,10 @@ npm run dev         # real NASA/USGS data and the scientific engine
 npm run dev:mock    # deterministic demonstration adapters (synthetic, labelled Illustrative)
 npm run typecheck   # tsc -b --noEmit
 npm run lint        # eslint (app and engine sources)
-npx vitest run      # 86 tests, 22 of them on the real Jezero assets
+npx vitest run      # frontend, stores and actual Jezero geometry/adapter tests
 npm run test:engine # engine package suite, 88 tests
 npm run build       # static output in dist/ (real mode)
+npm run test:browser # production 2D/3D workflow; install Playwright Chromium first
 ~~~
 
 The install, check, test and build commands were run on 2026-11-15 and passed, and both dev servers were started and checked in Chrome; see docs/INTEGRATION_REPORT.md §10–12. Deployment steps: docs/DEPLOYMENT_GUIDE.md.
