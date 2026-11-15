@@ -3,8 +3,9 @@ import type { TerrainManifest, TerrainRaster } from '@/services/contracts'
 import { ELEVATION_RAMP, SLOPE_CLASSES } from '@/services/adapters/real/render'
 import { hasElevation } from './TerrainCoordinates'
 
-export type SurfaceStyle = 'relief' | 'elevation' | 'slope'
-export const SURFACE_LABELS: Record<SurfaceStyle, string> = { relief: 'Terrain Relief', elevation: 'Elevation View', slope: 'Slope Hazard View' }
+import type { SurfaceStyle } from './surface'
+
+export { SURFACE_LABELS, type SurfaceStyle } from './surface'
 
 /** Overlay extension boundary: full-resolution scientific raster -> RGBA, independently of geometry.
  * Future layers must supply their own verified data, provenance and legend; none are simulated here.

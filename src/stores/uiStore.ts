@@ -14,6 +14,46 @@ export const VIEWS: { id: View; label: string }[] = [
 
 export type PlacementTarget = 'habitat' | 'destination' | 'stop'
 
+/** Views that show the map with a side panel on each edge. */
+export type MapView = Extract<View, 'control' | 'terrain' | 'simulation'>
+export type PanelSide = 'left' | 'right'
+export type PanelLayout = Record<MapView, Record<PanelSide, boolean>>
+export const VERTICAL_SCALES = [1, 2, 3] as const
+export type VerticalScale = (typeof VERTICAL_SCALES)[number]
+
+const PANELS_KEY = 'ausnox.panels.v1'
+const DEFAULT_PANELS: PanelLayout = {
+  control: { left: true, right: true },
+  terrain: { left: true, right: true },
+  simulation: { left: true, right: true },
+}
+
+/** Desktop panel layout survives reloads when storage is available. It is a convenience, never required. */
+function loadPanels(): PanelLayout {
+  try {
+    const raw = window.localStorage.getItem(PANELS_KEY)
+    if (!raw) return DEFAULT_PANELS
+    const saved = JSON.parse(raw) as Partial<PanelLayout>
+    const out = structuredClone(DEFAULT_PANELS)
+    for (const view of Object.keys(out) as MapView[]) {
+      for (const side of ['left', 'right'] as const) {
+        const v = saved[view]?.[side]
+        if (typeof v === 'boolean') out[view][side] = v
+      }
+    }
+    return out
+  } catch {
+    return DEFAULT_PANELS
+  }
+}
+function savePanels(panels: PanelLayout) {
+  try {
+    window.localStorage.setItem(PANELS_KEY, JSON.stringify(panels))
+  } catch {
+    /* Private mode or blocked storage: the layout simply is not remembered. */
+  }
+}
+
 /** What a placement carries when it comes from a listed science waypoint (or the sample mission). */
 export interface PlacementMeta {
   label: string
@@ -53,8 +93,17 @@ interface UiState {
   helpOpen: boolean
   /** Draw the route of the other mode on the map as well. */
   compare: boolean
-  /** Which side sheet is open on narrow screens. */
-  sheet: 'left' | 'right' | null
+  /** Which side sheet is open on narrow screens. One at a time. */
+  sheet: PanelSide | null
+  /** Desktop side panels, open or collapsed, remembered per map view. */
+  panels: PanelLayout
+  /**
+   * Focus map: every panel is hidden and the map takes the whole workspace. `panels` is left untouched
+   * while it is on, so turning it off restores exactly the layout that was there before.
+   */
+  focusMode: boolean
+  /** 3D vertical exaggeration. Visual only; every measurement stays tied to the source DEM. */
+  verticalScale: VerticalScale
   /** Incremented to ask the map to fit the terrain footprint, or centre on a point. */
   focus: { seq: number; point: GridCoord | null }
 
@@ -76,6 +125,9 @@ interface UiState {
   setHelpOpen(open: boolean): void
   setCompare(compare: boolean): void
   setSheet(sheet: UiState['sheet']): void
+  setPanel(view: MapView, side: PanelSide, open: boolean): void
+  setFocusMode(on: boolean): void
+  setVerticalScale(scale: VerticalScale): void
   focusMap(point?: GridCoord | null): void
 }
 
@@ -110,11 +162,14 @@ export const useUiStore = create<UiState>((set, get) => ({
   helpOpen: false,
   compare: false,
   sheet: null,
+  panels: loadPanels(),
+  focusMode: false,
+  verticalScale: 1,
   focus: { seq: 0, point: null },
 
   setView(view) {
     if (window.location.hash !== `#/${view}`) window.history.replaceState(null, '', `#/${view}`)
-    set({ view, sheet: null, placement: null, placementIssue: null })
+    set({ view, sheet: null, placement: null, placementIssue: null, focusMode: false })
   },
   setMapMode: (mapMode) => set({ mapMode }),
   startPlacement: (target) => set({ placement: target, placementIssue: null, sheet: null }),
@@ -179,5 +234,13 @@ export const useUiStore = create<UiState>((set, get) => ({
   setHelpOpen: (helpOpen) => set({ helpOpen }),
   setCompare: (compare) => set({ compare }),
   setSheet: (sheet) => set({ sheet }),
+  setPanel(view, side, open) {
+    const panels = { ...get().panels, [view]: { ...get().panels[view], [side]: open } }
+    savePanels(panels)
+    // Opening a panel while focused leaves focus mode, so the panel actually appears.
+    set({ panels, ...(open ? { focusMode: false } : {}) })
+  },
+  setFocusMode: (focusMode) => set({ focusMode, sheet: null }),
+  setVerticalScale: (verticalScale) => set({ verticalScale }),
   focusMap: (point = null) => set((s) => ({ focus: { seq: s.focus.seq + 1, point } })),
 }))

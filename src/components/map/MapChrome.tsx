@@ -1,4 +1,4 @@
-import { Box, ChevronDown, Crosshair, Layers, LocateFixed, Maximize, Minus, Plus, RefreshCw, X } from 'lucide-react'
+import { Box, ChevronUp, Crosshair, Layers, LocateFixed, Maximize2, Minimize2, Minus, Plus, RefreshCw, Scan, X } from 'lucide-react'
 import { Popover } from 'radix-ui'
 import { useState, type FormEvent } from 'react'
 import { StatusAlert } from '@/components/layout/primitives'
@@ -14,6 +14,7 @@ import { cn } from '@/utils/cn'
 import { formatDegrees, formatGeo, formatGrid, formatMetres } from '@/utils/format'
 import { placementIssue, validityIssue } from '@/utils/validation'
 import { LayerControls, LayerLegend } from './LayerControls'
+import { ThreeLegendNotes } from './three/ThreeChrome'
 
 const TARGET_LABEL: Record<PlacementTarget, string> = {
   habitat: 'habitat',
@@ -56,7 +57,7 @@ export function MapTools({ className, showLayers }: { className?: string; showLa
           <Minus />
         </ToolButton>
         <ToolButton label="Fit terrain coverage" onClick={() => focusMap()}>
-          <Maximize />
+          <Scan />
         </ToolButton>
       </div>
       <div className={cn(float, 'flex flex-col p-1')}>
@@ -96,39 +97,50 @@ const LINE_KEY = [
   { label: 'Terrain coverage boundary', line: 'border-t-2 border-dashed border-fg-2' },
 ]
 
-/** Always-available key to lines, markers and active overlays. */
-export function MapLegend({ className, defaultOpen }: { className?: string; defaultOpen: boolean }) {
-  const [open, setOpen] = useState(defaultOpen)
+/** Always-available key to lines, markers, active overlays and their sources. Opens upward from the lower-left corner. */
+export function MapLegend({ className }: { className?: string }) {
   const layers = useDataStore((s) => s.layers)
   const overlays = useUiStore((s) => s.overlays)
   const basemapId = useUiStore((s) => s.basemapId)
+  const mode = useUiStore((s) => s.mapMode)
   const basemap = layers.find((l) => l.id === basemapId)
   const active = layers.filter((l) => l.role === 'overlay' && overlays[l.id])
   return (
-    <div className={cn(float, 'w-60 text-[13px]', className)}>
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        className="tap flex w-full items-center justify-between gap-2 rounded-card px-3 py-2 text-left"
-      >
-        <span className="font-medium">Legend</span>
-        <ChevronDown className={cn('size-4 text-fg-3 transition-transform duration-150', open && 'rotate-180')} aria-hidden />
-      </button>
-      {open && (
-        <div className="space-y-3 border-t border-line px-3 py-3">
-          {basemap && (
-            <div>
-              <div className="flex items-center justify-between gap-2">
-                <span>{basemap.title}</span>
-                <SourceBadge id={basemap.provenanceId} kind={basemap.illustrative ? 'illustrative' : undefined} />
+    <Popover.Root>
+      <Popover.Trigger asChild>
+        <button
+          type="button"
+          className={cn(float, 'tap group flex h-9 shrink-0 items-center gap-2 px-3 text-[13px] text-fg transition-colors duration-150 hover:bg-raised', className)}
+        >
+          Legend
+          <ChevronUp className="size-4 text-fg-3 transition-transform duration-150 group-data-[state=open]:rotate-180" aria-hidden />
+        </button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          side="top"
+          align="start"
+          sideOffset={8}
+          collisionPadding={12}
+          aria-label="Map legend"
+          className="anim-fade z-[1000] max-h-[min(520px,calc(100dvh-160px))] w-[min(300px,calc(100vw-24px))] space-y-3 overflow-y-auto rounded-panel border border-line-strong bg-surface p-3 text-[13px]"
+        >
+          {mode === '3d' ? (
+            <ThreeLegendNotes />
+          ) : (
+            basemap && (
+              <div>
+                <div className="flex items-center justify-between gap-2">
+                  <span>{basemap.title}</span>
+                  <SourceBadge id={basemap.provenanceId} kind={basemap.illustrative ? 'illustrative' : undefined} />
+                </div>
+                {basemap.illustrative && <p className="mt-1 text-xs text-fg-3">A drawing of synthetic terrain. Not NASA imagery</p>}
+                {basemap.caveat && <p className="mt-1 text-xs text-warn">{basemap.caveat}</p>}
+                <BasemapAttribution className="mt-1" />
               </div>
-              {basemap.illustrative && <p className="mt-1 text-xs text-fg-3">A drawing of synthetic terrain. Not NASA imagery</p>}
-              {basemap.caveat && <p className="mt-1 text-xs text-warn">{basemap.caveat}</p>}
-              <BasemapAttribution className="mt-1" />
-            </div>
+            )
           )}
-          <ul className="space-y-1.5">
+          <ul className="space-y-1.5 border-t border-line pt-3">
             {LINE_KEY.map((k) => (
               <li key={k.label} className="flex items-center gap-2.5 text-fg-2">
                 <span className={cn('w-6 shrink-0', k.line)} aria-hidden />
@@ -158,17 +170,77 @@ export function MapLegend({ className, defaultOpen }: { className?: string; defa
               Waypoint
             </li>
           </ul>
-          {active.map((l) => (
-            <div key={l.id} className="border-t border-line pt-3">
-              <div className="flex items-center justify-between gap-2">
-                <span>{l.title}</span>
-                <SourceBadge id={l.provenanceId} kind={l.illustrative ? 'illustrative' : undefined} />
+          {mode === '2d' &&
+            active.map((l) => (
+              <div key={l.id} className="border-t border-line pt-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span>{l.title}</span>
+                  <SourceBadge id={l.provenanceId} kind={l.illustrative ? 'illustrative' : undefined} />
+                </div>
+                <LayerLegend layer={l} />
               </div>
-              <LayerLegend layer={l} />
-            </div>
-          ))}
+            ))}
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
+  )
+}
+
+/**
+ * Focus map: hides every panel so the map takes the whole workspace, and brings the saved layout back
+ * on exit. Escape also exits; the workspace handles it so it never fights an open dialog.
+ */
+export function FocusMapButton({ compact }: { compact: boolean }) {
+  const on = useUiStore((s) => s.focusMode)
+  const set = useUiStore((s) => s.setFocusMode)
+  const label = on ? 'Exit focus map' : 'Focus map'
+  return (
+    <Tooltip label={on ? 'Bring the panels back' : 'Hide the panels and give the map the whole workspace'} side="bottom">
+      <Button
+        aria-pressed={on}
+        aria-label={label}
+        aria-keyshortcuts={on ? 'Escape' : undefined}
+        size={compact ? 'icon' : 'md'}
+        onClick={() => set(!on)}
+        className={cn('bg-surface', on && 'border-accent/50')}
+      >
+        {on ? <Minimize2 className="text-accent" aria-hidden /> : <Maximize2 aria-hidden />}
+        {!compact && <span aria-hidden>{on ? 'Exit focus' : 'Focus map'}</span>}
+        {!compact && on && (
+          <kbd className="key" aria-hidden>
+            Esc
+          </kbd>
+        )}
+      </Button>
+    </Tooltip>
+  )
+}
+
+/** The selected terrain cell, lower-right on the map, with its source. Cleared with its close button. */
+export function InspectedCell({ className }: { className?: string }) {
+  const inspected = useUiStore((s) => s.inspected)
+  const issue = useUiStore((s) => s.placementIssue)
+  const inspect = useUiStore((s) => s.inspect)
+  const manifest = useDataStore((s) => s.manifest)
+  if (!inspected || issue) return null
+  const measured = manifest?.status !== 'illustrative-demo'
+  return (
+    <div className={cn(float, 'anim-fade w-[min(320px,100%)] py-1.5 pr-1.5 pl-3 text-xs', className)} role="status">
+      <div className="flex items-center justify-between gap-2">
+        <span className="font-medium text-fg">
+          {measured ? 'Measured terrain' : 'Demo terrain'} · {inspected.validity}
+        </span>
+        <div className="flex items-center gap-1">
+          <SourceBadge id={manifest?.elevationProvenanceId ?? 'usgs-hirise-dtm'} />
+          <Button variant="ghost" size="icon-sm" aria-label="Clear selected cell" className="size-7" onClick={() => inspect(null)}>
+            <X />
+          </Button>
         </div>
-      )}
+      </div>
+      <p className="num pr-1.5 pb-0.5 text-fg-2">
+        {inspected.geo && `${formatGeo(inspected.geo.lonEast, 'lon')} · ${formatGeo(inspected.geo.latNorth, 'lat')} · `}
+        {formatMetres(inspected.elevationM, 1)} · slope {inspected.slopeDeg === null ? 'unknown' : formatDegrees(inspected.slopeDeg)}
+      </p>
     </div>
   )
 }
@@ -179,15 +251,22 @@ const NICE = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000
  * Pointer readout and scale. The scale is measured on the Mars sphere (R = 3,396,190 m) east-west at
  * the map centre, never an Earth scale. North-south the equirectangular map is 1/cos(lat) longer.
  */
-export function CoordinateBar({ className }: { className?: string }) {
+export function CoordinateBar({ className, quiet }: { className?: string; quiet?: boolean }) {
   const hover = useMapStore((s) => s.hover)
   const metresPerPx = useMapStore((s) => s.metresPerPx)
   const inspected = useUiStore((s) => s.inspected)
   const georef = useDataStore((s) => s.manifest?.georeference.kind)
-  const sample = hover ?? inspected
-  const pxPerM = metresPerPx ? 1 / metresPerPx : null
+  const mode = useUiStore((s) => s.mapMode)
+  const issueOpen = useUiStore((s) => s.placementIssue !== null)
+  // While the selected-cell card is up it carries the selection; this bar then reads the pointer only.
+  const cardShown = inspected !== null && !issueOpen
+  const sample = hover ?? (cardShown ? null : inspected)
+  // A perspective view has no single scale; the bar belongs to the flat map only.
+  const pxPerM = metresPerPx && mode === '2d' ? 1 / metresPerPx : null
   const length = pxPerM ? ([...NICE].reverse().find((n) => n * pxPerM <= 110) ?? NICE[0]!) : null
   const issue = sample ? validityIssue(sample.validity) : null
+  // Focus map drops the hint text; with no scale and no cell there is then nothing to show.
+  if ((quiet || cardShown) && !sample && length === null) return null
   return (
     <div className={cn(float, 'flex h-9 items-center gap-4 overflow-hidden px-3 text-xs text-fg-2', className)}>
       {length !== null && pxPerM !== null && (
@@ -196,7 +275,7 @@ export function CoordinateBar({ className }: { className?: string }) {
           <span className="num">{length >= 1000 ? `${length / 1000} km` : `${length} m`}</span>
         </div>
       )}
-      <div className="h-4 w-px shrink-0 bg-line-strong" aria-hidden />
+      {pxPerM !== null && <div className="h-4 w-px shrink-0 bg-line-strong" aria-hidden />}
       {sample ? (
         <div className="num flex min-w-0 items-center gap-4 whitespace-nowrap">
           <span className="hidden lg:inline" title="Grid metres from the south-west corner of the terrain grid">
@@ -220,7 +299,7 @@ export function CoordinateBar({ className }: { className?: string }) {
             </span>
           )}
         </div>
-      ) : (
+      ) : quiet || cardShown ? null : (
         <span className="truncate">Move over the map or select a cell to read terrain values</span>
       )}
     </div>

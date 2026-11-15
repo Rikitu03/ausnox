@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { TooltipProvider } from '@/components/ui/overlay'
@@ -76,8 +76,14 @@ describe('shared 2D/3D controls', () => {
     await user.click(screen.getByRole('button', { name: 'Return to 2D Map' }))
     expect(useUiStore.getState().mapMode).toBe('2d')
     expect(useMissionStore.getState()).toBe(mission)
-    rendered.unmount()
+    // The viewer stays mounted through 2D; reopening 3D retries the scene instead of keeping the failure.
     mocks.fail = false
+    act(() => useUiStore.getState().setMapMode('3d'))
+    await waitFor(() => expect(screen.queryByRole('alert')).toBeNull())
+    expect(mocks.dispose).not.toHaveBeenCalled()
+    rendered.unmount()
+    expect(mocks.dispose).toHaveBeenCalledOnce()
+    mocks.dispose.mockClear()
     const working = render(<TooltipProvider><Mars3DViewer /></TooltipProvider>)
     working.unmount()
     expect(mocks.dispose).toHaveBeenCalledOnce()

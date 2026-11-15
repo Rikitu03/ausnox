@@ -92,11 +92,38 @@ function Controller({ padding }: { padding: MapPadding }) {
     map.getContainer().classList.toggle('placing', placement !== null)
   }, [map, placement])
 
-  // Fit the footprint on load, on request, and when the panels around the map change.
-  const { left, right, top, bottom } = padding
+  // The container follows the workspace: panels opening or closing, focus mode, window resizes.
+  // Keep the geographic centre and zoom (Leaflet pans by half the size change), never refit.
+  useEffect(() => {
+    const container = map.getContainer()
+    let raf = 0
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        // Hidden behind the 3D view: wait until shown, the mode effect above re-measures then.
+        if (!container.clientWidth || !container.clientHeight) return
+        map.invalidateSize({ animate: false, pan: true })
+        measureScale(map)
+      })
+    })
+    observer.observe(container)
+    return () => {
+      cancelAnimationFrame(raf)
+      observer.disconnect()
+    }
+  }, [map])
+
+  // Fit the footprint on load and on request only. Padding is read at that moment, so the chrome
+  // around the map shapes the framing without a layout change ever resetting the view.
+  const paddingRef = useRef(padding)
+  useEffect(() => {
+    paddingRef.current = padding
+  })
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    map.invalidateSize()
+    const container = map.getContainer()
+    if (!container.clientWidth || !container.clientHeight) return
+    map.invalidateSize({ animate: false })
     if (focus.point) {
       const p = ll(focus.point)
       if (p) map.setView(p, Math.max(map.getZoom(), 16), { animate: !reduce })
@@ -106,9 +133,10 @@ function Controller({ padding }: { padding: MapPadding }) {
     const sw = ll({ x: 0, y: 0 })
     const ne = ll({ x: manifest.grid.widthM, y: manifest.grid.heightM })
     if (!sw || !ne) return
+    const { left, right, top, bottom } = paddingRef.current
     map.fitBounds([sw, ne], { paddingTopLeft: [left, top], paddingBottomRight: [right, bottom], animate: false })
     measureScale(map)
-  }, [map, manifest, focus, left, right, top, bottom])
+  }, [map, manifest, focus])
 
   const toGrid = (e: L.LeafletMouseEvent) => services.terrain.fromGeo({ lonEast: e.latlng.lng, latNorth: e.latlng.lat })
 

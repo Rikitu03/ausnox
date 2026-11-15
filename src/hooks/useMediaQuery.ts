@@ -12,5 +12,7 @@ export function useMediaQuery(query: string): boolean {
   )
 }
 
-/** Side panels sit beside the map from this width up. Below it they open as sheets. */
-export const useIsDesktop = () => useMediaQuery('(min-width: 1180px)')
+/** Side panels sit beside the map from this width up. Below it they open as drawers over the map. */
+export const useIsDesktop = () => useMediaQuery('(min-width: 1280px)')
+/** Below this width panels open as bottom sheets instead of side drawers. */
+export const useIsTabletUp = () => useMediaQuery('(min-width: 768px)')

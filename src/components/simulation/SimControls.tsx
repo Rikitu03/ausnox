@@ -76,7 +76,7 @@ export function SpeedControl({ className }: { className?: string }) {
 }
 
 /** Slim transport strip under the map: clock, play, the sol timeline. */
-export function SimDock({ className }: { className?: string }) {
+export function SimDock({ className, minimal }: { className?: string; minimal?: boolean }) {
   const snapshot = useSimulationSnapshot()
   const endS = useSimStore((s) => s.endS)
   const setView = useUiStore((s) => s.setView)
@@ -96,7 +96,7 @@ export function SimDock({ className }: { className?: string }) {
         </p>
       </div>
       <DaylightTimeline compact className="flex-1" />
-      {view !== 'simulation' && (
+      {view !== 'simulation' && !minimal && (
         <Button size="sm" variant="ghost" className="hidden shrink-0 sm:inline-flex" onClick={() => setView('simulation')}>
           Open simulation
         </Button>

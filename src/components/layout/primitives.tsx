@@ -65,18 +65,6 @@ export const FEASIBILITY: Record<Feasibility, { icon: LucideIcon; color: string;
   indeterminate: { icon: CircleHelp, color: 'text-fg-2', label: 'Indeterminate', short: 'Indeterminate' },
 }
 
-/** Panel that floats over the map on desktop. The same content is reused inside sheets. */
-export function Panel({ children, className, label }: { children: ReactNode; className?: string; label: string }) {
-  return (
-    <section
-      aria-label={label}
-      className={cn('flex min-h-0 flex-col overflow-hidden rounded-panel border border-line-strong bg-surface', className)}
-    >
-      {children}
-    </section>
-  )
-}
-
 export function PanelHeader({ title, meta, actions }: { title: string; meta?: ReactNode; actions?: ReactNode }) {
   return (
     <header className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
