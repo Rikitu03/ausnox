@@ -1,4 +1,4 @@
-import { Box, ChevronDown, Crosshair, Layers, LocateFixed, Maximize, Minus, Plus, RefreshCw, X } from 'lucide-react'
+import { ChevronDown, Crosshair, Layers, LocateFixed, Maximize, Minus, Plus, RefreshCw, X } from 'lucide-react'
 import { Popover } from 'radix-ui'
 import { useState, type FormEvent } from 'react'
 import { StatusAlert } from '@/components/layout/primitives'
@@ -6,7 +6,7 @@ import { KindBadge, SourceBadge } from '@/components/provenance/Provenance'
 import { Button } from '@/components/ui/button'
 import { Segmented } from '@/components/ui/controls'
 import { Dialog, Tooltip } from '@/components/ui/overlay'
-import { dataMode, services, type GridCoord } from '@/services'
+import { services, type GridCoord } from '@/services'
 import { useDataStore } from '@/stores/dataStore'
 import { useMapStore } from '@/stores/mapStore'
 import { useUiStore, type PlacementTarget } from '@/stores/uiStore'
@@ -33,18 +33,24 @@ function ToolButton({ label, onClick, children }: { label: string; onClick?: () 
   )
 }
 
-/** Zoom, fit, layers, coordinate entry and the 3D notice. */
+export function MapViewSelector() {
+  const mode = useUiStore((s) => s.mapMode)
+  return <Segmented label="Map visualization" value={mode} onChange={(m) => useUiStore.getState().setMapMode(m)} options={[{ value: '2d', label: '2D Map' }, { value: '3d', label: '3D Terrain' }]} className="bg-surface" />
+}
+
+/** Shared zoom, fit and layer controls for both renderers. */
 export function MapTools({ className, showLayers }: { className?: string; showLayers: boolean }) {
   const map = useMapStore((s) => s.map)
+  const three = useMapStore((s) => s.threeControls)
+  const mode = useUiStore((s) => s.mapMode)
   const focusMap = useUiStore((s) => s.focusMap)
-  const [threeD, setThreeD] = useState(false)
   return (
     <div className={cn('flex flex-col gap-2', className)} role="toolbar" aria-label="Map tools" aria-orientation="vertical">
       <div className={cn(float, 'flex flex-col p-1')}>
-        <ToolButton label="Zoom in" onClick={() => map?.zoomIn()}>
+        <ToolButton label="Zoom in" onClick={() => mode === '3d' ? three?.zoom(0.8) : map?.zoomIn()}>
           <Plus />
         </ToolButton>
-        <ToolButton label="Zoom out" onClick={() => map?.zoomOut()}>
+        <ToolButton label="Zoom out" onClick={() => mode === '3d' ? three?.zoom(1.25) : map?.zoomOut()}>
           <Minus />
         </ToolButton>
         <ToolButton label="Fit terrain coverage" onClick={() => focusMap()}>
@@ -74,23 +80,7 @@ export function MapTools({ className, showLayers }: { className?: string; showLa
             </Popover.Portal>
           </Popover.Root>
         )}
-        <ToolButton label="3D terrain view" onClick={() => setThreeD(true)}>
-          <Box />
-        </ToolButton>
       </div>
-      <Dialog open={threeD} onOpenChange={setThreeD} title="3D terrain view is not available" description="The 2D map has everything needed to plan and review a mission">
-        <div className="space-y-3 text-[13px] text-fg-2">
-          <p>
-            {dataMode === 'mock'
-              ? 'A 3D view needs a validated elevation model with a checked height datum. Until that exists, Ausnox will not draw a 3D surface, because a made-up mesh could be mistaken for real Martian relief.'
-              : 'The 3D explorer is not built in this release. Elevation, slope and the route profile from the validated HiRISE DTM are shown in 2D: the elevation and slope overlays, the shaded relief basemap and the elevation profile in the summary.'}
-          </p>
-          <p>Your mission, map position and layers stay exactly as they are.</p>
-          <Button variant="primary" onClick={() => setThreeD(false)}>
-            Back to the 2D map
-          </Button>
-        </div>
-      </Dialog>
     </div>
   )
 }

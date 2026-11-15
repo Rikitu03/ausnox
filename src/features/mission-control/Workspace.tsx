@@ -1,8 +1,9 @@
 import { PanelLeft, PanelRight } from 'lucide-react'
 import { useEffect, type ReactNode } from 'react'
 import { Panel } from '@/components/layout/primitives'
-import { CoordinateBar, DemoMapTag, ImageryNotice, MapLegend, MapTools, PlacementBanner, RegistrationTag } from '@/components/map/MapChrome'
+import { CoordinateBar, DemoMapTag, ImageryNotice, MapLegend, MapTools, MapViewSelector, PlacementBanner, RegistrationTag } from '@/components/map/MapChrome'
 import { MarsMap } from '@/components/map/MarsMap'
+import { TerrainView } from '@/components/map/TerrainView'
 import { SimDock } from '@/components/simulation/SimControls'
 import { Button } from '@/components/ui/button'
 import { Sheet } from '@/components/ui/overlay'
@@ -37,6 +38,7 @@ const GUTTER = 12
 export function Workspace({ view }: { view: MapView }) {
   const desktop = useIsDesktop()
   const sheet = useUiStore((s) => s.sheet)
+  const mapMode = useUiStore((s) => s.mapMode)
   const setSheet = useUiStore((s) => s.setSheet)
   const { left, right } = PANELS[view]
   const inset = desktop ? PANEL_W + GUTTER * 2 : GUTTER
@@ -53,10 +55,13 @@ export function Workspace({ view }: { view: MapView }) {
   return (
     <div className="relative h-full overflow-hidden">
       <h1 className="sr-only">{left.label}</h1>
-      <MarsMap
-        showWalker
-        padding={{ left: inset + (desktop ? 56 : 0), right: inset, top: desktop ? 24 : 72, bottom: 160 }}
-      />
+      <div className={mapMode === '3d' ? 'hidden' : 'absolute inset-0'} aria-hidden={mapMode === '3d'}>
+        <MarsMap
+          showWalker
+          padding={{ left: inset + (desktop ? 56 : 0), right: inset, top: desktop ? 24 : 72, bottom: 160 }}
+        />
+      </div>
+      {mapMode === '3d' && <div className="absolute" style={{ left: inset + 56, right: inset, top: desktop ? 56 : 108, bottom: 168 }}><TerrainView /></div>}
 
       {desktop ? (
         <>
@@ -95,8 +100,9 @@ export function Workspace({ view }: { view: MapView }) {
       <div className="absolute z-10" style={{ left: inset, top: desktop ? 12 : 64 }}>
         <MapTools showLayers={view !== 'terrain' || !desktop} />
       </div>
+      <div className="absolute z-10" style={{ left: inset + 60, top: desktop ? 12 : 64 }}><MapViewSelector /></div>
       <div className="absolute top-3 z-10" style={{ right: inset }}>
-        <MapLegend defaultOpen={false} />
+        {mapMode === '2d' && <MapLegend defaultOpen={false} />}
       </div>
 
       <div className="pointer-events-none absolute z-20 flex flex-col items-center gap-2" style={{ left: inset + 56, right: inset, top: desktop ? 12 : 64 }}>
@@ -104,7 +110,7 @@ export function Workspace({ view }: { view: MapView }) {
           <PlacementBanner />
         </div>
         <div className="pointer-events-auto">
-          <ImageryNotice />
+          {mapMode === '2d' && <ImageryNotice />}
         </div>
       </div>
 
@@ -112,7 +118,7 @@ export function Workspace({ view }: { view: MapView }) {
         <div className="flex items-center gap-2">
           <CoordinateBar className="min-w-0 flex-1" />
           <DemoMapTag className="shrink-0" />
-          <RegistrationTag className="shrink-0" />
+          {mapMode === '2d' && <RegistrationTag className="shrink-0" />}
         </div>
         <SimDock />
       </div>
