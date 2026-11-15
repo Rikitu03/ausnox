@@ -32,6 +32,8 @@ export interface ServiceError {
   code: ServiceErrorCode
   detail: string
   source: ResultSource
+  /** The scientific engine's own error, kept unchanged for debugging and explanations. Real adapters only. */
+  origin?: { code: string; details?: Readonly<Record<string, unknown>>; failedLeg?: string }
 }
 
 export type Ok<T> = { status: 'ok'; source: ResultSource } & T

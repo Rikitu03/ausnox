@@ -315,15 +315,28 @@ describe('layers, waypoints and provenance', () => {
   })
 })
 
-describe('real adapters', () => {
-  it('answer NOT_IMPLEMENTED everywhere and never return favourable data', async () => {
-    const real = createRealServices()
+describe('real adapters without their data', () => {
+  it('fail closed: no synthetic terrain, no route, never a favourable verdict', async () => {
+    // Every asset request fails like an unreachable server. Tests with the real assets are in adapters/real/__tests__.
+    const offline = async () =>
+      ({ ok: false, status: 404, headers: { get: () => null }, json: async () => ({}), arrayBuffer: async () => new ArrayBuffer(0) }) as unknown as Response
+    const real = createRealServices({ fetch: offline, useWorker: false, probeImagery: false })
     expect(real.mode).toBe('real')
     expect(real.demo).toBeUndefined()
-    expect(await real.terrain.load()).toMatchObject({ status: 'error', code: 'NOT_IMPLEMENTED', source: { kind: 'engine' } })
-    expect(real.terrain.sample({ x: 1, y: 1 })).toMatchObject({ validity: 'unavailable', elevationM: null })
-    expect(await real.routing.computeRoundTrip(request())).toMatchObject({ status: 'error', code: 'NOT_IMPLEMENTED' })
-    expect(await real.solar.getSolarDay('x', null)).toMatchObject({ status: 'error', code: 'NOT_IMPLEMENTED' })
-    expect(real.mission.assess({ config: mission(), route: null, solar: null })).toMatchObject({ status: 'error', code: 'NOT_IMPLEMENTED' })
+    expect(real.sampleMission()).toBeNull()
+    expect(await real.terrain.load()).toMatchObject({ status: 'error', code: 'DATA_UNAVAILABLE', source: { kind: 'engine' }, origin: { code: 'DATASET_UNAVAILABLE' } })
+    expect(real.terrain.sample({ x: 1, y: 1 })).toMatchObject({ validity: 'unavailable', elevationM: null, slopeDeg: null })
+    expect(real.terrain.toGeo({ x: 1, y: 1 })).toBeNull()
+    const route = await real.routing.computeRoundTrip(request())
+    expect(route).toMatchObject({ status: 'error', code: 'DATA_UNAVAILABLE' })
+    expect(await real.mapData.listWaypoints()).toMatchObject({ status: 'error', code: 'DATA_UNAVAILABLE' })
+    const solar = await real.solar.getSolarDay('sol-690-three-forks', null)
+    expect(solar).toMatchObject({ status: 'error', code: 'INVALID_INPUT' })
+    const assessed = real.mission.assess({ config: mission(), route, solar })
+    expect(assessed.status).toBe('ok')
+    if (assessed.status !== 'ok') return
+    expect(assessed.assessment.feasibility).toBe('indeterminate')
+    expect(assessed.assessment.returnMarginS).toBeNull()
+    expect(assessed.assessment.violations.map((v) => v.code)).toEqual(expect.arrayContaining(['MISSING_TERRAIN', 'MISSING_ROUTE', 'MISSING_SOLAR']))
   })
 })

@@ -16,11 +16,12 @@ import { DaylightTimeline, TimelineKey } from '@/components/simulation/DaylightT
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/controls'
 import { useActiveResults } from '@/hooks/useActiveResults'
-import { MARS_HOUR_SECONDS, services, type RouteLeg } from '@/services'
+import { MARS_HOUR_SECONDS, services, type GridCoord, type RouteLeg } from '@/services'
+import { useDataStore } from '@/stores/dataStore'
 import { useMissionStore } from '@/stores/missionStore'
 import { useUiStore } from '@/stores/uiStore'
 import { cn } from '@/utils/cn'
-import { formatDegrees, formatDistance, formatDuration, formatGrid, formatLtst, formatMargin } from '@/utils/format'
+import { formatDegrees, formatDistance, formatDuration, formatGeo, formatGrid, formatLtst, formatMargin } from '@/utils/format'
 
 function Card({ title, aside, children, className }: { title: string; aside?: ReactNode; children: ReactNode; className?: string }) {
   return (
@@ -58,6 +59,21 @@ function LegCard({ leg, travelS }: { leg: RouteLeg; travelS: number | null }) {
   )
 }
 
+/** Position as verified lon/lat when the terrain is georeferenced, otherwise as demo grid metres. */
+function Where({ p }: { p: GridCoord }) {
+  const verified = useDataStore((s) => s.manifest?.georeference.kind === 'verified')
+  const geo = verified ? services.terrain.toGeo(p) : null
+  return geo ? (
+    <>
+      {formatGeo(geo.lonEast, 'lon')} · {formatGeo(geo.latNorth, 'lat')}
+    </>
+  ) : (
+    <>
+      x {formatGrid(p.x)} · y {formatGrid(p.y)}
+    </>
+  )
+}
+
 export function SummaryView() {
   const config = useMissionStore((s) => s.config)
   const solar = useMissionStore((s) => s.solar)
@@ -68,6 +84,7 @@ export function SummaryView() {
   const scenario = services.solar.listScenarios().find((s) => s.id === a.solarScenarioId)
   const stops = [...config.stops, ...(config.destination ? [config.destination] : [])]
   const busy = status === 'calculating' || stale
+  const verifiedGeo = useDataStore((s) => s.manifest?.georeference.kind === 'verified')
 
   // The same facts as the cards, as one paragraph for screen readers and copy-paste.
   const plain =
@@ -75,7 +92,10 @@ export function SummaryView() {
       ? `${config.name}: ${MODE_LABEL[config.routeMode]} route, ${formatDistance(okRoute.totalDistanceM)} round trip, ` +
         `${formatDuration(okAssessment.totalMissionS)} including ${formatDuration(okAssessment.scienceS)} of science, steepest slope ${formatDegrees(okRoute.maxSlopeDeg)} ` +
         `against a ${a.maxSlopeDeg}° limit. Return margin ${formatMargin(okAssessment.returnMarginS)} after a ${formatDuration(okAssessment.reserveS)} reserve. ` +
-        `Assessment: ${okAssessment.feasibility} under selected assumptions. Demonstration result, not for navigation.`
+        `Assessment: ${okAssessment.feasibility} under selected assumptions. ` +
+        (okRoute.terrainAwarePathfinding
+          ? 'Scientific engine result on real NASA/USGS terrain; constraints are illustrative, not for navigation.'
+          : 'Demonstration result, not for navigation.')
       : null
 
   return (
@@ -175,9 +195,7 @@ export function SummaryView() {
                     <span>
                       Habitat <span className="text-fg-3">· hypothetical</span>
                     </span>
-                    <span className="num text-right text-xs text-fg-2">
-                      {config.habitat ? `x ${formatGrid(config.habitat.position.x)} · y ${formatGrid(config.habitat.position.y)}` : 'Not set'}
-                    </span>
+                    <span className="num text-right text-xs text-fg-2">{config.habitat ? <Where p={config.habitat.position} /> : 'Not set'}</span>
                   </li>
                   {stops.map((s, i) => (
                     <li key={s.id} className="flex items-start justify-between gap-3 border-t border-line pt-3">
@@ -186,13 +204,17 @@ export function SummaryView() {
                         <span className="text-fg-3"> · {i === stops.length - 1 ? 'destination' : `stop ${i + 1}`} · {s.durationMin} min science</span>
                       </span>
                       <span className="num shrink-0 text-right text-xs text-fg-2">
-                        x {formatGrid(s.position.x)} · y {formatGrid(s.position.y)}
+                        <Where p={s.position} />
                       </span>
                     </li>
                   ))}
                   {!config.destination && <li className="border-t border-line pt-3 text-fg-3">Destination not set</li>}
                 </ol>
-                <p className="mt-4 text-xs text-fg-3">Grid metres on the demo terrain. Not verified Mars coordinates</p>
+                <p className="mt-4 text-xs text-fg-3">
+                  {verifiedGeo
+                    ? 'Planetocentric longitude and latitude, Mars 2000 (same transform as the scientific engine)'
+                    : 'Grid metres on the demo terrain. Not verified Mars coordinates'}
+                </p>
               </Card>
             </div>
 
@@ -250,7 +272,11 @@ export function SummaryView() {
               </dl>
               <ul className="mt-5 space-y-1.5 border-t border-line pt-4 text-[13px] text-fg-2">
                 <li>These are illustrative planning values chosen in this app. They are not NASA operational limits</li>
-                <li>Walking time is distance divided by a constant speed. Slope does not slow the walker in this model</li>
+                <li>
+                  {okRoute?.outbound.surfaceDistanceM !== undefined
+                    ? 'Walking time is the 3-D surface length of the route divided by a constant speed. Slope does not slow the walker in this model'
+                    : 'Walking time is distance divided by a constant speed. Slope does not slow the walker in this model'}
+                </li>
                 <li>The reserve is kept apart from the mission duration and subtracted from the time available</li>
                 {okRoute && <li>Route: {okRoute.method}</li>}
                 {day?.approximations.map((x) => <li key={x}>Daylight: {x}</li>)}

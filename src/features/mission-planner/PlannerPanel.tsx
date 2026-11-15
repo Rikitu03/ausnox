@@ -17,6 +17,7 @@ function Position({ position }: { position: GridCoord }) {
   useDataStore((s) => s.revision)
   const sample = services.terrain.sample(position)
   const issue = validityIssue(sample.validity)
+  const nominal = useDataStore((s) => s.manifest?.georeference.kind !== 'verified')
   return (
     <div className="num mt-1.5 space-y-0.5 text-xs text-fg-2">
       <p>
@@ -24,7 +25,8 @@ function Position({ position }: { position: GridCoord }) {
       </p>
       {sample.geo && (
         <p className="text-fg-3">
-          {formatGeo(sample.geo.lonEast, 'lon')} · {formatGeo(sample.geo.latNorth, 'lat')} <span className="font-sans">nominal</span>
+          {formatGeo(sample.geo.lonEast, 'lon')} · {formatGeo(sample.geo.latNorth, 'lat')}
+          {nominal && <span className="font-sans"> nominal</span>}
         </p>
       )}
       {issue ? (
@@ -89,11 +91,12 @@ export function PlannerPanel() {
   const calculating = status === 'calculating'
   const hasResults = status !== 'idle'
 
+  // Waypoints go through the same placement check as a click: one on terrain steeper than the
+  // slope limit opens the confirm-to-snap prompt instead of being used silently.
   const pickWaypoint = (id: string, as: 'destination' | 'stop') => {
     const wp = waypoints.find((w) => w.id === id)
     if (!wp) return
-    if (as === 'destination') m.setDestination(wp.position, wp.title, wp.id, wp.suggestedDurationMin)
-    else m.addStop(wp.position, wp.title, wp.id, wp.suggestedDurationMin)
+    useUiStore.getState().attemptPlace(as, wp.position, { label: wp.title, waypointId: wp.id, durationMin: wp.suggestedDurationMin })
   }
 
   return (
@@ -104,7 +107,7 @@ export function PlannerPanel() {
         actions={
           <>
             <Tooltip label="Load the sample mission">
-              <Button size="sm" variant="ghost" onClick={m.loadDemo}>
+              <Button size="sm" variant="ghost" onClick={() => useUiStore.getState().loadSample()}>
                 Sample
               </Button>
             </Tooltip>
@@ -197,7 +200,7 @@ export function PlannerPanel() {
               </option>
               {waypoints.map((w) => (
                 <option key={w.id} value={w.id}>
-                  {w.title} (illustrative)
+                  {w.title} ({w.labelQuality === 'cited' ? 'cited rover position' : 'illustrative'})
                 </option>
               ))}
             </Select>

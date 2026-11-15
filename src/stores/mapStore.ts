@@ -6,7 +6,9 @@ import type { TerrainSample } from '@/services'
 interface MapState {
   map: LeafletMap | null
   zoom: number
+  /** Ground metres per screen pixel east-west at the map centre, measured on the Mars sphere. */
+  metresPerPx: number | null
   hover: TerrainSample | null
 }
 
-export const useMapStore = create<MapState>(() => ({ map: null, zoom: 0, hover: null }))
+export const useMapStore = create<MapState>(() => ({ map: null, zoom: 0, metresPerPx: null, hover: null }))

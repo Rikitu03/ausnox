@@ -95,7 +95,7 @@ describe('App', () => {
     expect(await within(dialog).findByText('That location cannot be used')).toBeInTheDocument()
     expect(useMissionStore.getState().config.habitat?.position).toEqual({ x: 700, y: 1500 })
 
-    await user.click(within(dialog).getByRole('button', { name: /Use nearest valid cell/ }))
+    await user.click(within(dialog).getByRole('button', { name: /Use nearest usable cell/ }))
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
     const placed = useMissionStore.getState().config.habitat!.position
     expect(placed).not.toEqual({ x: 700, y: 1500 })

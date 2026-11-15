@@ -8,7 +8,7 @@ export interface RouteRequest {
   datasetId: string
   habitat: GridCoord
   /** Intermediate stops in visiting order, then the destination last. */
-  waypoints: { label: string; position: GridCoord }[]
+  waypoints: { label: string; position: GridCoord; id?: string; durationMin?: number }[]
   mode: RouteMode
   maxSlopeDeg: number
 }
@@ -30,6 +30,8 @@ export interface RouteLeg {
   descentM: number
   maxSlopeDeg: number
   meanSlopeDeg: number
+  /** 3-D length including height change, metres. Travel times use this when the engine provides it. */
+  surfaceDistanceM?: number
   /** Cumulative distance at which each waypoint of the leg is reached, metres. */
   waypointDistancesM: { label: string; distanceM: number }[]
 }

@@ -4,7 +4,12 @@ export interface GeoCoord {
   latNorth: number
 }
 
-/** Projected terrain-grid coordinate in metres. x grows east, y grows north, origin at the south-west corner of the AOI. */
+/**
+ * Terrain-grid coordinate in metres. x grows east, y grows north, origin at the south-west corner of the AOI.
+ * For real data these are projected metres of the dataset CRS (Mars 2000 sphere, equirectangular), offset by
+ * the AOI's south-west corner. Projected metres are not ground metres east-west; use
+ * `TerrainService.groundDistanceM` for any physical distance.
+ */
 export interface GridCoord {
   x: number
   y: number
@@ -19,10 +24,14 @@ export interface CellIndex {
 export interface GridSpec {
   widthCells: number
   heightCells: number
-  /** Metres per cell edge. */
+  /** Grid metres per cell edge (projected metres for real data). */
   cellSizeM: number
   widthM: number
   heightM: number
+  /** Physical size of one cell on the ground, when it differs from `cellSizeM` (real equirectangular data). */
+  groundCellSizeM?: { eastWest: number; northSouth: number }
+  /** Physical extent of the grid on the ground, metres. */
+  groundExtentM?: { eastWest: number; northSouth: number }
 }
 
 /** How grid metres map to Mars longitude/latitude. */

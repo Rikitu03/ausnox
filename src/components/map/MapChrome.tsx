@@ -1,4 +1,4 @@
-import { Box, ChevronDown, Layers, LocateFixed, Maximize, Minus, Plus, RefreshCw, X } from 'lucide-react'
+import { Box, ChevronDown, Crosshair, Layers, LocateFixed, Maximize, Minus, Plus, RefreshCw, X } from 'lucide-react'
 import { Popover } from 'radix-ui'
 import { useState, type FormEvent } from 'react'
 import { StatusAlert } from '@/components/layout/primitives'
@@ -6,13 +6,13 @@ import { KindBadge, SourceBadge } from '@/components/provenance/Provenance'
 import { Button } from '@/components/ui/button'
 import { Segmented } from '@/components/ui/controls'
 import { Dialog, Tooltip } from '@/components/ui/overlay'
-import { services, type GridCoord } from '@/services'
+import { dataMode, services, type GridCoord } from '@/services'
 import { useDataStore } from '@/stores/dataStore'
 import { useMapStore } from '@/stores/mapStore'
 import { useUiStore, type PlacementTarget } from '@/stores/uiStore'
 import { cn } from '@/utils/cn'
 import { formatDegrees, formatGeo, formatGrid, formatMetres } from '@/utils/format'
-import { validityIssue } from '@/utils/validation'
+import { placementIssue, validityIssue } from '@/utils/validation'
 import { LayerControls, LayerLegend } from './LayerControls'
 
 const TARGET_LABEL: Record<PlacementTarget, string> = {
@@ -81,8 +81,9 @@ export function MapTools({ className, showLayers }: { className?: string; showLa
       <Dialog open={threeD} onOpenChange={setThreeD} title="3D terrain view is not available" description="The 2D map has everything needed to plan and review a mission">
         <div className="space-y-3 text-[13px] text-fg-2">
           <p>
-            A 3D view needs a validated elevation model with a checked height datum. Until that exists, Ausnox will not draw
-            a 3D surface, because a made-up mesh could be mistaken for real Martian relief.
+            {dataMode === 'mock'
+              ? 'A 3D view needs a validated elevation model with a checked height datum. Until that exists, Ausnox will not draw a 3D surface, because a made-up mesh could be mistaken for real Martian relief.'
+              : 'The 3D explorer is not built in this release. Elevation, slope and the route profile from the validated HiRISE DTM are shown in 2D: the elevation and slope overlays, the shaded relief basemap and the elevation profile in the summary.'}
           </p>
           <p>Your mission, map position and layers stay exactly as they are.</p>
           <Button variant="primary" onClick={() => setThreeD(false)}>
@@ -128,6 +129,8 @@ export function MapLegend({ className, defaultOpen }: { className?: string; defa
                 <SourceBadge id={basemap.provenanceId} kind={basemap.illustrative ? 'illustrative' : undefined} />
               </div>
               {basemap.illustrative && <p className="mt-1 text-xs text-fg-3">A drawing of synthetic terrain. Not NASA imagery</p>}
+              {basemap.caveat && <p className="mt-1 text-xs text-warn">{basemap.caveat}</p>}
+              <BasemapAttribution className="mt-1" />
             </div>
           )}
           <ul className="space-y-1.5">
@@ -139,7 +142,7 @@ export function MapLegend({ className, defaultOpen }: { className?: string; defa
             ))}
             <li className="flex items-center gap-2.5 text-fg-2">
               <span className="hatch size-3 shrink-0 rounded-[3px] border border-line-strong bg-raised" aria-hidden />
-              No terrain data
+              No terrain data or unknown slope
             </li>
           </ul>
           <ul className="grid grid-cols-2 gap-x-2 gap-y-1.5 text-fg-2">
@@ -175,28 +178,33 @@ export function MapLegend({ className, defaultOpen }: { className?: string; defa
   )
 }
 
-const NICE = [20, 50, 100, 200, 500, 1000, 2000]
+const NICE = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
 
-/** Pointer readout and scale. Mars metres from the flat grid, never an Earth scale. */
+/**
+ * Pointer readout and scale. The scale is measured on the Mars sphere (R = 3,396,190 m) east-west at
+ * the map centre, never an Earth scale. North-south the equirectangular map is 1/cos(lat) longer.
+ */
 export function CoordinateBar({ className }: { className?: string }) {
   const hover = useMapStore((s) => s.hover)
-  const zoom = useMapStore((s) => s.zoom)
+  const metresPerPx = useMapStore((s) => s.metresPerPx)
   const inspected = useUiStore((s) => s.inspected)
   const georef = useDataStore((s) => s.manifest?.georeference.kind)
   const sample = hover ?? inspected
-  const pxPerM = 2 ** zoom
-  const length = [...NICE].reverse().find((n) => n * pxPerM <= 110) ?? NICE[0]!
+  const pxPerM = metresPerPx ? 1 / metresPerPx : null
+  const length = pxPerM ? ([...NICE].reverse().find((n) => n * pxPerM <= 110) ?? NICE[0]!) : null
   const issue = sample ? validityIssue(sample.validity) : null
   return (
     <div className={cn(float, 'flex h-9 items-center gap-4 overflow-hidden px-3 text-xs text-fg-2', className)}>
-      <div className="flex shrink-0 items-center gap-2" aria-label={`Map scale: bar is ${length} metres`}>
-        <span className="block h-1.5 border-x border-b border-fg-2" style={{ width: length * pxPerM }} aria-hidden />
-        <span className="num">{length >= 1000 ? `${length / 1000} km` : `${length} m`}</span>
-      </div>
+      {length !== null && pxPerM !== null && (
+        <div className="flex shrink-0 items-center gap-2" aria-label={`Map scale: bar is ${length} metres on Mars, east-west`}>
+          <span className="block h-1.5 border-x border-b border-fg-2" style={{ width: length * pxPerM }} aria-hidden />
+          <span className="num">{length >= 1000 ? `${length / 1000} km` : `${length} m`}</span>
+        </div>
+      )}
       <div className="h-4 w-px shrink-0 bg-line-strong" aria-hidden />
       {sample ? (
         <div className="num flex min-w-0 items-center gap-4 whitespace-nowrap">
-          <span>
+          <span className="hidden lg:inline" title="Grid metres from the south-west corner of the terrain grid">
             x {formatGrid(sample.grid.x)} · y {formatGrid(sample.grid.y)}
           </span>
           {sample.geo && (
@@ -206,7 +214,11 @@ export function CoordinateBar({ className }: { className?: string }) {
             </span>
           )}
           {issue ? (
-            <span className="truncate font-sans text-fg">Unknown: {issue.split('.')[0]!.toLowerCase()}</span>
+            <span className="truncate font-sans text-fg">
+              {sample.validity === 'slope-unknown'
+                ? `${formatMetres(sample.elevationM, 1)} · slope unknown`
+                : `Unknown: ${issue.split('.')[0]!.toLowerCase()}`}
+            </span>
           ) : (
             <span className="text-fg">
               {formatMetres(sample.elevationM, 1)} · {formatDegrees(sample.slopeDeg)}
@@ -234,13 +246,14 @@ export function PlacementBanner({ className }: { className?: string }) {
       {issue ? (
         <StatusAlert
           tone="warn"
-          title={`That spot cannot be the ${TARGET_LABEL[target]}`}
+          title={issue.meta ? `${issue.meta.label} cannot be the ${TARGET_LABEL[target]} as placed` : `That spot cannot be the ${TARGET_LABEL[target]}`}
           className="border-0 bg-transparent p-0"
           action={
             <>
               {issue.snap && (
                 <Button size="sm" variant="primary" onClick={confirmSnap}>
-                  Use nearest valid cell, {Math.round(issue.snapDistanceM!)} m away
+                  Use nearest usable cell, {formatMetres(issue.snapDistanceM, 0)} away
+                  {issue.snapSlopeDeg !== null ? ` (${formatDegrees(issue.snapSlopeDeg)})` : ''}
                 </Button>
               )}
               <Button size="sm" onClick={() => useUiStore.setState({ placementIssue: null, placement: target })}>
@@ -252,17 +265,17 @@ export function PlacementBanner({ className }: { className?: string }) {
             </>
           }
         >
-          {validityIssue(issue.validity)}.{' '}
+          {placementIssue(issue.validity, issue.slopeDeg, issue.maxSlopeDeg)}.{' '}
           {issue.snap
-            ? 'The dashed marker shows the nearest valid cell. Nothing moves unless you choose it'
-            : 'No valid cell within 400 m'}
+            ? `The dashed marker shows the nearest cell with known slope at or below ${issue.maxSlopeDeg}°. Nothing moves unless you choose it`
+            : 'No usable cell within 400 m'}
         </StatusAlert>
       ) : (
         <div className="flex items-center gap-3">
           <LocateFixed className="size-4 shrink-0 text-accent" aria-hidden />
           <p className="min-w-0 flex-1 text-[13px]">
             Select a spot on the map for the {TARGET_LABEL[target]}
-            <span className="block text-xs text-fg-3">Any cell with terrain data works. Press Escape to cancel</span>
+            <span className="block text-xs text-fg-3">Any cell with measured terrain at or below the slope limit works. Press Escape to cancel</span>
           </p>
           <Button size="sm" onClick={() => openEntry(target)}>
             Enter coordinates
@@ -307,10 +320,21 @@ export function CoordinateEntryDialog() {
   }
 
   const labels = mode === 'grid' ? (['x, metres east', 'y, metres north'] as const) : (['Longitude, degrees east', 'Latitude, degrees north'] as const)
+  const verified = manifest?.georeference.kind === 'verified'
+  const geoRange = (() => {
+    if (!manifest) return null
+    const sw = services.terrain.toGeo({ x: 0, y: 0 })
+    const ne = services.terrain.toGeo({ x: manifest.grid.widthM, y: manifest.grid.heightM })
+    return sw && ne ? `${sw.lonEast.toFixed(5)}–${ne.lonEast.toFixed(5)}° E, ${sw.latNorth.toFixed(5)}–${ne.latNorth.toFixed(5)}° N` : null
+  })()
   const range = manifest
     ? mode === 'grid'
-      ? `Terrain spans x 0 to ${manifest.grid.widthM} m and y 0 to ${manifest.grid.heightM} m`
-      : 'Longitude and latitude use the nominal demo placement and are not a verified transform'
+      ? verified
+        ? `Grid metres from the south-west corner: x 0 to ${manifest.grid.widthM} m, y 0 to ${manifest.grid.heightM} m. These are projected metres; east-west they are about 5% longer than ground metres`
+        : `Terrain spans x 0 to ${manifest.grid.widthM} m and y 0 to ${manifest.grid.heightM} m`
+      : verified
+        ? `Planetocentric latitude, east-positive longitude (Mars 2000). Terrain covers ${geoRange}`
+        : 'Longitude and latitude use the nominal demo placement and are not a verified transform'
     : 'Terrain is not loaded'
 
   return (
@@ -376,15 +400,16 @@ export function CoordinateEntryDialog() {
             action={
               issue.snap && (
                 <Button size="sm" variant="primary" onClick={confirmSnap}>
-                  Use nearest valid cell, {Math.round(issue.snapDistanceM!)} m away
+                  Use nearest usable cell, {formatMetres(issue.snapDistanceM, 0)} away
                 </Button>
               )
             }
           >
-            {validityIssue(issue.validity)}
+            {placementIssue(issue.validity, issue.slopeDeg, issue.maxSlopeDeg)}
             {issue.snap && (
               <span className="num block">
-                Nearest valid cell: x {formatGrid(issue.snap.x)}, y {formatGrid(issue.snap.y)}
+                Nearest usable cell: x {formatGrid(issue.snap.x)}, y {formatGrid(issue.snap.y)}
+                {issue.snapSlopeDeg !== null ? `, slope ${formatDegrees(issue.snapSlopeDeg)}` : ''}
               </span>
             )}
           </StatusAlert>
@@ -415,6 +440,8 @@ export function ImageryNotice({ className }: { className?: string }) {
   const terrainError = useDataStore((s) => s.terrainError)
   const load = useDataStore((s) => s.loadImagery)
   const init = useDataStore((s) => s.init)
+  const setBasemap = useUiStore((s) => s.setBasemap)
+  const hasRelief = useDataStore((s) => s.layers.some((l) => l.id === 'dtm-hillshade' && l.availability === 'available'))
   if (terrainError) {
     return (
       <StatusAlert
@@ -442,14 +469,46 @@ export function ImageryNotice({ className }: { className?: string }) {
       title="Map imagery unavailable"
       className={cn('w-[min(420px,calc(100vw-24px))] bg-surface', className)}
       action={
-        <Button size="sm" onClick={() => void load(basemapId, true)}>
-          <RefreshCw />
-          Try again
-        </Button>
+        <>
+          <Button size="sm" onClick={() => void load(basemapId, true)}>
+            <RefreshCw />
+            Try again
+          </Button>
+          {hasRelief && basemapId !== 'dtm-hillshade' && (
+            <Button size="sm" variant="ghost" onClick={() => setBasemap('dtm-hillshade')}>
+              Use DTM relief
+            </Button>
+          )}
+        </>
       }
     >
-      {entry.error.detail}. Terrain data is loaded, so placement, routing and timing still work on a blank background
+      {entry.error.detail}. Terrain data is loaded, so placement, routing and timing still work. No imagery is substituted
     </StatusAlert>
+  )
+}
+
+/** Credit line for the active basemap (Mars Trek layers carry their NASA attribution). */
+export function BasemapAttribution({ className }: { className?: string }) {
+  const basemapId = useUiStore((s) => s.basemapId)
+  const entry = useDataStore((s) => s.imagery[basemapId])
+  if (entry?.state !== 'ready' || entry.imagery.type !== 'tiles') return null
+  return <p className={cn('text-[11px] leading-snug text-fg-3', className)}>Imagery: {entry.imagery.attribution}</p>
+}
+
+/** Compact on-map reminder of the unresolved overlay registration (X2b) while imagery is shown. */
+export function RegistrationTag({ className }: { className?: string }) {
+  const basemapId = useUiStore((s) => s.basemapId)
+  const layer = useDataStore((s) => s.layers.find((l) => l.id === basemapId))
+  const entry = useDataStore((s) => s.imagery[basemapId])
+  if (!layer?.caveat || entry?.state !== 'ready' || entry.imagery.type !== 'tiles') return null
+  return (
+    <Tooltip label={layer.caveat} side="top">
+      <div tabIndex={0} className={cn(float, 'flex h-9 items-center gap-2 px-2.5 text-xs text-fg-2 outline-none focus-visible:border-fg-2', className)}>
+        <Crosshair className="size-3.5 shrink-0 text-warn" aria-hidden />
+        <span className="hidden sm:inline">{basemapId === 'hirise-ortho' ? 'Overlay registration ±3 m' : 'Context imagery'}</span>
+        <span className="sr-only">{layer.caveat}</span>
+      </div>
+    </Tooltip>
   )
 }
 

@@ -1,7 +1,7 @@
 import { PanelLeft, PanelRight } from 'lucide-react'
 import { useEffect, type ReactNode } from 'react'
 import { Panel } from '@/components/layout/primitives'
-import { CoordinateBar, DemoMapTag, ImageryNotice, MapLegend, MapTools, PlacementBanner } from '@/components/map/MapChrome'
+import { CoordinateBar, DemoMapTag, ImageryNotice, MapLegend, MapTools, PlacementBanner, RegistrationTag } from '@/components/map/MapChrome'
 import { MarsMap } from '@/components/map/MarsMap'
 import { SimDock } from '@/components/simulation/SimControls'
 import { Button } from '@/components/ui/button'
@@ -112,6 +112,7 @@ export function Workspace({ view }: { view: MapView }) {
         <div className="flex items-center gap-2">
           <CoordinateBar className="min-w-0 flex-1" />
           <DemoMapTag className="shrink-0" />
+          <RegistrationTag className="shrink-0" />
         </div>
         <SimDock />
       </div>

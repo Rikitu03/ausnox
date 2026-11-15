@@ -30,6 +30,8 @@ interface DataState {
   revision: number
   init(): Promise<void>
   loadImagery(layerId: string, force?: boolean): Promise<void>
+  /** Marks a layer's imagery as failed after it was served (for example tiles that stop loading). */
+  reportImageryError(layerId: string, detail: string): void
 }
 
 export const useDataStore = create<DataState>((set, get) => ({
@@ -76,6 +78,13 @@ export const useDataStore = create<DataState>((set, get) => ({
         ...s.imagery,
         [layerId]: result.status === 'ok' ? { state: 'ready', imagery: result.imagery } : { state: 'error', error: result },
       },
+    }))
+  },
+
+  reportImageryError(layerId, detail) {
+    const source = get().terrainSource ?? { kind: services.mode === 'mock' ? 'mock' : 'engine', adapter: 'map', version: '-', note: 'Map imagery' }
+    set((s) => ({
+      imagery: { ...s.imagery, [layerId]: { state: 'error', error: { status: 'error', code: 'DATA_UNAVAILABLE', detail, source } } },
     }))
   },
 }))

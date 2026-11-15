@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { services, type CellValidity, type GridCoord, type TerrainSample } from '@/services'
+import { services, type GridCoord, type TerrainSample } from '@/services'
+import { checkPlacement, type PlacementProblem } from '@/utils/validation'
 import { useMissionStore } from './missionStore'
 
 export type View = 'control' | 'terrain' | 'simulation' | 'summary' | 'sources'
@@ -13,14 +14,29 @@ export const VIEWS: { id: View; label: string }[] = [
 
 export type PlacementTarget = 'habitat' | 'destination' | 'stop'
 
+/** What a placement carries when it comes from a listed science waypoint (or the sample mission). */
+export interface PlacementMeta {
+  label: string
+  waypointId: string | null
+  durationMin: number
+}
+
 /** A refused placement, kept on screen until the planner confirms a snap or cancels. */
 export interface PlacementIssue {
   target: PlacementTarget
   point: GridCoord
-  validity: CellValidity
-  /** Nearest valid cell, offered as an explicit choice. Never applied silently. */
+  /** Why the point was refused: missing data, or a measured slope above the mission limit. */
+  validity: PlacementProblem
+  /** Measured slope of the refused cell, when known. */
+  slopeDeg: number | null
+  /** Slope limit the point was checked against. */
+  maxSlopeDeg: number
+  /** Nearest usable cell (known slope at or below the limit), offered as an explicit choice. Never applied silently. */
   snap: GridCoord | null
+  /** Ground distance to the snap cell, metres (Mars sphere, not grid metres). */
   snapDistanceM: number | null
+  snapSlopeDeg: number | null
+  meta: PlacementMeta | null
 }
 
 interface UiState {
@@ -45,8 +61,10 @@ interface UiState {
   startPlacement(target: PlacementTarget): void
   cancelPlacement(): void
   /** Tries to place the active target. Returns true when the point was accepted. */
-  attemptPlace(target: PlacementTarget, point: GridCoord): boolean
+  attemptPlace(target: PlacementTarget, point: GridCoord, meta?: PlacementMeta | null): boolean
   confirmSnap(): void
+  /** Loads the sample mission; a destination that fails the placement check opens the confirm-to-snap prompt. */
+  loadSample(): void
   openCoordinateEntry(target: PlacementTarget | null): void
   inspect(point: GridCoord | null): void
   setBasemap(id: string): void
@@ -61,10 +79,13 @@ interface UiState {
 
 const SNAP_SEARCH_M = 400
 
-function apply(target: PlacementTarget, point: GridCoord) {
+function apply(target: PlacementTarget, point: GridCoord, meta: PlacementMeta | null) {
   const mission = useMissionStore.getState()
   if (target === 'habitat') mission.setHabitat(point)
-  else if (target === 'destination') mission.setDestination(point)
+  else if (target === 'destination') {
+    if (meta) mission.setDestination(point, meta.label, meta.waypointId, meta.durationMin)
+    else mission.setDestination(point)
+  } else if (meta) mission.addStop(point, meta.label, meta.waypointId, meta.durationMin)
   else mission.addStop(point)
 }
 
@@ -79,7 +100,7 @@ export const useUiStore = create<UiState>((set, get) => ({
   placementIssue: null,
   coordinateEntry: null,
   inspected: null,
-  basemapId: 'schematic-base',
+  basemapId: services.mode === 'mock' ? 'schematic-base' : 'hirise-ortho',
   overlays: {},
   features: { coverage: true, grid: true, waypoints: true },
   provenanceId: null,
@@ -95,21 +116,26 @@ export const useUiStore = create<UiState>((set, get) => ({
   startPlacement: (target) => set({ placement: target, placementIssue: null, sheet: null }),
   cancelPlacement: () => set({ placement: null, placementIssue: null }),
 
-  attemptPlace(target, point) {
-    const sample = services.terrain.sample(point)
-    if (sample.validity === 'valid') {
-      apply(target, point)
+  attemptPlace(target, point, meta = null) {
+    const maxSlopeDeg = useMissionStore.getState().config.assumptions.maxSlopeDeg
+    const check = checkPlacement(services.terrain, point, maxSlopeDeg)
+    if (check.ok) {
+      apply(target, point, meta)
       set({ placement: null, placementIssue: null, coordinateEntry: null })
       return true
     }
-    const snap = sample.validity === 'unavailable' ? null : services.terrain.nearestValid(point, SNAP_SEARCH_M)
+    const snap = check.problem === 'unavailable' ? null : services.terrain.nearestValid(point, SNAP_SEARCH_M, maxSlopeDeg)
     set({
       placementIssue: {
         target,
         point,
-        validity: sample.validity,
+        validity: check.problem,
+        slopeDeg: check.sample.slopeDeg,
+        maxSlopeDeg,
         snap,
-        snapDistanceM: snap ? Math.hypot(snap.x - point.x, snap.y - point.y) : null,
+        snapDistanceM: snap ? services.terrain.groundDistanceM(point, snap) : null,
+        snapSlopeDeg: snap ? services.terrain.sample(snap).slopeDeg : null,
+        meta,
       },
     })
     return false
@@ -117,8 +143,28 @@ export const useUiStore = create<UiState>((set, get) => ({
   confirmSnap() {
     const issue = get().placementIssue
     if (!issue?.snap) return
-    apply(issue.target, issue.snap)
+    const mission = useMissionStore.getState()
+    const finishSample = issue.target === 'destination' && mission.sampleDestinationPending
+    const meta = issue.meta ? { ...issue.meta, label: `${issue.meta.label} (nearest usable cell)` } : null
+    apply(issue.target, issue.snap, meta)
     set({ placement: null, placementIssue: null, coordinateEntry: null })
+    if (finishSample) {
+      // The user confirmed the sample's adjusted destination: the sample is complete, calculate it.
+      useMissionStore.setState({ isDemo: true })
+      void useMissionStore.getState().calculate()
+    }
+  },
+  loadSample() {
+    set({ placement: null, placementIssue: null })
+    const outcome = useMissionStore.getState().loadDemo()
+    if (outcome.status === 'needs-destination') {
+      const { destination } = outcome
+      get().attemptPlace('destination', destination.position, {
+        label: destination.label,
+        waypointId: destination.waypointId,
+        durationMin: destination.durationMin,
+      })
+    }
   },
   openCoordinateEntry: (target) => set({ coordinateEntry: target, placementIssue: null, sheet: target ? null : get().sheet }),
   inspect: (point) => set({ inspected: point ? services.terrain.sample(point) : null }),

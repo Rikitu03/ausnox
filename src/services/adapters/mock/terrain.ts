@@ -118,7 +118,7 @@ export function createMockTerrain(): TerrainService {
       }
     },
     sample,
-    nearestValid(point, maxDistanceM) {
+    nearestValid(point, maxDistanceM, maxSlopeDeg) {
       if (!raster) return null
       const c = GRID.cellSizeM
       const col0 = Math.floor(point.x / c)
@@ -128,7 +128,9 @@ export function createMockTerrain(): TerrainService {
       let bestD = Infinity
       for (let row = Math.max(0, row0 - reach); row <= Math.min(GRID.heightCells - 1, row0 + reach); row++) {
         for (let col = Math.max(0, col0 - reach); col <= Math.min(GRID.widthCells - 1, col0 + reach); col++) {
-          if (raster.validity[row * GRID.widthCells + col] !== 1) continue
+          const i = row * GRID.widthCells + col
+          if (raster.validity[i] !== 1) continue
+          if (maxSlopeDeg !== undefined && !(raster.slopeDeg[i]! <= maxSlopeDeg)) continue
           const centre = { x: (col + 0.5) * c, y: (row + 0.5) * c }
           const d = Math.hypot(centre.x - point.x, centre.y - point.y)
           if (d < bestD && d <= maxDistanceM) {
@@ -139,6 +141,8 @@ export function createMockTerrain(): TerrainService {
       }
       return best
     },
+    // Demo grid metres are nominal ground metres, so plane distance is the ground distance.
+    groundDistanceM: (a, b) => (raster ? Math.hypot(b.x - a.x, b.y - a.y) : null),
     toGeo,
     fromGeo,
   }

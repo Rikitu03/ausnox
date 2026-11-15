@@ -224,7 +224,12 @@ export function RouteComparison() {
       </div>
       <div className="mt-3 flex items-center gap-2 text-xs text-fg-3">
         <SourceBadge id="route-geometry" />
-        Demonstration arcs, not pathfinding results
+        {modes.some((m) => {
+          const r = routes[m]
+          return r?.status === 'ok' && r.route.terrainAwarePathfinding
+        })
+          ? 'A* on the HiRISE DTM grid. Distances are ground metres on Mars'
+          : 'Demonstration arcs, not pathfinding results'}
       </div>
     </div>
   )

@@ -26,45 +26,91 @@ function Block({ title, intro, children }: { title: string; intro?: string; chil
   )
 }
 
-const METHODS: { title: string; kind: BadgeKind; body: string; now: string }[] = [
+const METHODS: { title: string; kind: BadgeKind; body: string; now: Record<'mock' | 'real', string> }[] = [
   {
     title: 'Slope',
     kind: 'derived',
-    body: 'Slope per cell is atan of the gradient magnitude, with gradients taken by finite differences over valid neighbouring cells in projected metres. Cells without a valid neighbour pair are unknown and blocked.',
-    now: 'Runs today, but on the synthetic demo surface.',
+    body: 'Slope per cell is atan of the gradient magnitude, with Horn (1981) gradients over the 3 × 3 neighbourhood in physical metres (east-west cell width shrinks with cos latitude). A cell is unknown, and never routed through, when it or any neighbour lacks elevation.',
+    now: {
+      mock: 'Runs today, but on the synthetic demo surface.',
+      real: 'Computed by the Python pipeline from the USGS HiRISE DTM and shipped in terrain.bin; matched by an independent recomputation to 1.6e-6° (gate S3).',
+    },
   },
   {
     title: 'Routing',
     kind: 'derived',
-    body: 'Planned: A* over the terrain grid with eight neighbours, no corner cutting, cells without data or above the slope limit forbidden. Shortest mode minimises distance. Lower-slope mode adds a slope penalty. The return leg is computed on its own.',
-    now: 'Not implemented. The app draws the best of seven fixed arcs per segment and labels them as demonstration geometry.',
+    body: 'A* over the terrain grid with eight neighbours, no corner cutting, cells without data or above the slope limit forbidden. Shortest mode minimises distance. Lower-slope mode multiplies distance by 1 + 4 × (slope / limit)², a preference score rather than energy. The return leg is searched on its own.',
+    now: {
+      mock: 'Not implemented. The app draws the best of seven fixed arcs per segment and labels them as demonstration geometry.',
+      real: 'Runs in a Web Worker on the 2 m Jezero grid (scientific engine, gates R1–R4 passed). Distances are ground metres on the Mars sphere.',
+    },
   },
   {
     title: 'Walking time',
     kind: 'simulated',
-    body: 'Leg time is path distance divided by a constant walking speed. Mission duration is both legs plus science stops. The reserve is tracked separately.',
-    now: 'Runs today as plain arithmetic over the demonstration route.',
+    body: 'Leg time is the 3-D surface length of the path divided by a constant walking speed. Mission duration is all legs plus science stops. The reserve is tracked separately.',
+    now: {
+      mock: 'Runs today as plain arithmetic over the demonstration route.',
+      real: 'Computed by the scientific engine from the A* route; the walking speed is an illustrative assumption.',
+    },
   },
   {
     title: 'Daylight',
     kind: 'derived',
-    body: `Planned: local true solar time, sunrise and sunset from the NASA GISS Mars24 equations, validated against the published worked examples. One sol is ${SOL_SECONDS.toLocaleString('en-US')} Earth seconds, and Mars clock hours are converted to Earth seconds before any sum with walking time.`,
-    now: 'Not implemented. Fixed demonstration sunrise and sunset times are used. The sol-length conversion is real.',
+    body: `Local true solar time, sunrise and sunset from the NASA GISS Mars24 equations at the habitat. One sol is ${SOL_SECONDS.toLocaleString('en-US')} Earth seconds, and Mars clock hours are converted to Earth seconds before any sum with walking time. A modelled sky, not a weather forecast.`,
+    now: {
+      mock: 'Not implemented. Fixed demonstration sunrise and sunset times are used. The sol-length conversion is real.',
+      real: "Mars24 in the scientific engine, checked against NASA's two worked examples: local true solar time within 0.19 s, angles within 0.00065° (gate M1).",
+    },
   },
   {
     title: 'Feasibility',
     kind: 'simulated',
-    body: 'Return margin is the time available minus mission duration minus reserve. Feasible needs a valid round trip, a start in daylight and a margin of zero or more. A violated known constraint gives infeasible. Any missing route, terrain or daylight input gives indeterminate.',
-    now: 'Runs today over demonstration inputs, so the verdict is a demonstration.',
+    body: 'Return margin is the time left before the window closes (geometric sunset, or the EVA limit) minus remaining work minus reserve. Feasible needs a verified terrain grid, a legal round trip, a start in daylight and a margin of zero or more. A violated known constraint gives infeasible. Any missing route, terrain or daylight input gives indeterminate.',
+    now: {
+      mock: 'Runs today over demonstration inputs, so the verdict is a demonstration.',
+      real: 'Computed by the scientific engine on its own route and daylight results (gates M2, M3 passed). Constraints are illustrative.',
+    },
   },
 ]
 
-const UNCERTAINTY = [
-  'Terrain cells are metres wide. Rocks, sand and footing hazards smaller than a cell are invisible to slope',
+const UNCERTAINTY_COMMON = [
   'Sunrise and sunset are geometric: flat horizon, no terrain shadow, no dust, no refraction',
   'A constant walking speed ignores slope, suit, fatigue and surface. Real traverse times would differ',
-  'Datasets from different missions use different grids and vertical datums and are not combined numerically',
   'No weather, radiation, communication or life-support model exists in this app',
+]
+
+const UNCERTAINTY: Record<'mock' | 'real', string[]> = {
+  mock: [
+    'Terrain cells are metres wide. Rocks, sand and footing hazards smaller than a cell are invisible to slope',
+    ...UNCERTAINTY_COMMON,
+    'Datasets from different missions use different grids and vertical datums and are not combined numerically',
+  ],
+  real: [
+    'Unresolved (check X2b failed): the HiRISE DTM and the HiRISE imagery appear offset by 2.3 to 3.2 m east. Routes and slope are aligned with the DTM; over imagery they may look shifted by up to about 3 m. No correction is applied',
+    'Cells are 2 m (1.90 m east-west on the ground) and slope uses a ~4 m baseline. Rocks, steps, sand and footing are invisible to it. HiRISE DTM artefacts may be present',
+    'Terrain covers one 2.43 km² area of the Jezero delta front. Points outside it have no elevation or slope and cannot be routed',
+    'The outer ring of cells has measured elevation but unknown slope, and is never routed through',
+    'Science targets are Perseverance rover positions, not the exact rock or sample tube. Skinner Ridge sits on a 20.8° cell, above the default 15° limit',
+    ...UNCERTAINTY_COMMON,
+    'MOLA, CTX and HiRISE layers use different resolutions; MOLA and CTX are context imagery only and are never mixed with the DTM numerically',
+  ],
+}
+
+/** Runtime network dependencies of the real build (docs/INTEGRATION_REPORT.md §9). */
+const SERVICES = [
+  {
+    name: 'Bundled Jezero terrain assets',
+    detail: 'manifest.json, terrain.bin (5.76 MB), coverage and science-target GeoJSON, served with the app. No account, key or server code',
+  },
+  {
+    name: 'NASA/JPL Mars Trek WMTS tiles',
+    detail: 'HiRISE, CTX and MOLA imagery fetched directly by the browser from trek.nasa.gov. Public, no API key, CORS open. If unreachable, the layer is marked unavailable and the DTM relief can be used instead',
+  },
+  {
+    name: 'Everything else',
+    detail: 'Routing, Mars24 and feasibility run in your browser. No backend, no analytics, no environment variables',
+  },
 ]
 
 export function SourcesView() {
@@ -73,6 +119,8 @@ export function SourcesView() {
   const [scenario, setScenario] = useState(demo?.get() ?? 'nominal')
   const init = useDataStore((s) => s.init)
   const terrainError = useDataStore((s) => s.terrainError)
+  const manifest = useDataStore((s) => s.manifest)
+  const x2b = manifest?.verification?.crossValidation?.checks.find((c) => c.status !== 'PASS')
   const setView = useUiStore((s) => s.setView)
   const [filter, setFilter] = useState<'all' | ProvenanceRecord['integration']>('all')
   const shown = records.filter((r) => filter === 'all' || r.integration === filter)
@@ -98,14 +146,24 @@ export function SourcesView() {
           </p>
         </header>
 
-        <StatusAlert
-          tone={dataMode === 'mock' ? 'info' : 'unknown'}
-          title={dataMode === 'mock' ? 'Running on demonstration data' : 'Running on real adapters that are not implemented yet'}
-        >
-          {dataMode === 'mock'
-            ? 'No NASA or USGS dataset is loaded in this build. The map shows a synthetic surface, routes are demonstration arcs and daylight times are fixed examples. Everything served this way is labelled Illustrative'
-            : 'Real adapters are extension points only. Expect unavailable states until the scientific engine is integrated'}
-        </StatusAlert>
+        {dataMode === 'mock' ? (
+          <StatusAlert tone="info" title="Running on demonstration data">
+            No NASA or USGS dataset is loaded in this build. The map shows a synthetic surface, routes are demonstration arcs and
+            daylight times are fixed examples. Everything served this way is labelled Illustrative
+          </StatusAlert>
+        ) : terrainError ? (
+          <StatusAlert tone="bad" title="Real terrain could not be loaded">
+            {terrainError.detail}. Nothing is estimated in its place, so placement, routing and feasibility are unavailable
+          </StatusAlert>
+        ) : (
+          <StatusAlert tone="info" title="Running on real NASA and USGS data with the Ausnox scientific engine">
+            Terrain: USGS HiRISE DTM of Jezero crater (MRO), verified at load
+            {manifest?.verification?.checksum === 'verified' ? ' by SHA-256' : ''}. Imagery: NASA Mars Trek (MRO HiRISE and CTX,
+            MGS MOLA). Science targets: Perseverance (Mars 2020) rover positions. Routes, daylight and feasibility come from the
+            scientific engine. Mission constraints are illustrative.
+            {x2b ? ` Open finding: ${x2b.id} ${x2b.status}, overlay registration ±3 m.` : ''}
+          </StatusAlert>
+        )}
 
         <Block title="Reading the labels" intro="Every layer, figure and assumption carries one of these labels. Select a label anywhere in the app to see its source">
           <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -203,7 +261,7 @@ export function SourcesView() {
                 <p className="mt-2 text-[13px] text-fg-2">{m.body}</p>
                 <p className="mt-3 border-t border-line pt-3 text-[13px]">
                   <span className="text-fg-3">In this build: </span>
-                  {m.now}
+                  {m.now[dataMode]}
                 </p>
               </li>
             ))}
@@ -212,7 +270,7 @@ export function SourcesView() {
 
         <Block title="Scientific uncertainty">
           <ul className="max-w-[78ch] space-y-2 text-[13px] text-fg-2">
-            {UNCERTAINTY.map((u) => (
+            {UNCERTAINTY[dataMode].map((u) => (
               <li key={u} className="border-l border-line-strong pl-3">
                 {u}
               </li>
@@ -229,10 +287,23 @@ export function SourcesView() {
           </div>
         </Block>
 
-        <Block title="3D terrain view" intro="Planned as an enhancement once the 2D workflow runs on validated data">
+        {dataMode === 'real' && (
+          <Block title="Network services and access" intro="What this build contacts at runtime. None of it needs an account, key or backend">
+            <ul className="grid gap-4 md:grid-cols-3">
+              {SERVICES.map((s) => (
+                <li key={s.name} className="rounded-panel border border-line bg-surface p-5">
+                  <h3 className="text-sm font-medium">{s.name}</h3>
+                  <p className="mt-2 text-[13px] text-fg-2">{s.detail}</p>
+                </li>
+              ))}
+            </ul>
+          </Block>
+        )}
+
+        <Block title="3D terrain view" intro="Planned as an enhancement; not part of this release">
           <p className="max-w-[78ch] text-[13px] text-fg-2">
             Not available in this build. A 3D view will only draw the validated elevation model, with any vertical exaggeration
-            labelled. Until then the map stays 2D and nothing depends on 3D
+            labelled. The map stays 2D and nothing depends on 3D
           </p>
         </Block>
 

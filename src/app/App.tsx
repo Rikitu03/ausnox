@@ -8,6 +8,7 @@ import { SourcesView } from '@/features/data-sources/SourcesView'
 import { Workspace } from '@/features/mission-control/Workspace'
 import { SummaryView } from '@/features/mission-summary/SummaryView'
 import { useSimulationClock } from '@/hooks/useSimulation'
+import { MISSION_DISCLAIMER } from '@ausnox/scientific-engine'
 import { dataMode } from '@/services'
 import { useDataStore } from '@/stores/dataStore'
 import { useMissionStore } from '@/stores/missionStore'
@@ -17,10 +18,14 @@ import { useUiStore, VIEWS, type View } from '@/stores/uiStore'
 async function bootstrap() {
   await useDataStore.getState().init()
   const { layers, manifest } = useDataStore.getState()
+  const basemaps = layers.filter((l) => l.role === 'basemap' && l.availability === 'available')
+  const basemap = basemaps.find((l) => l.defaultVisible) ?? basemaps[0]
   useUiStore.setState({
     overlays: Object.fromEntries(layers.filter((l) => l.role === 'overlay').map((l) => [l.id, l.defaultVisible])),
+    ...(basemap ? { basemapId: basemap.id } : {}),
   })
-  if (manifest && useMissionStore.getState().status === 'idle') useMissionStore.getState().loadDemo()
+  const mission = useMissionStore.getState()
+  if (manifest && mission.status === 'idle' && !mission.config.habitat) useUiStore.getState().loadSample()
 }
 
 function BootScreen() {
@@ -73,9 +78,9 @@ export function App() {
         </main>
         <footer className="flex min-h-7 shrink-0 items-center justify-center border-t border-line px-3 py-1 text-center text-xs text-fg-3">
           <p>
-            Educational Marswalk planning simulation.{' '}
-            {dataMode === 'mock' ? 'Terrain shown is illustrative demo data, not NASA or USGS data. ' : ''}Mission constraints are
-            illustrative. Not for operational navigation
+            {dataMode === 'mock'
+              ? 'Educational Marswalk planning simulation. Terrain shown is illustrative demo data, not NASA or USGS data. Mission constraints are illustrative. Not for operational navigation'
+              : MISSION_DISCLAIMER}
           </p>
         </footer>
         <ProvenanceDrawer />

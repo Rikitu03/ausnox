@@ -93,8 +93,10 @@ describe('mission store', () => {
     services.demo!.set('terrain-missing')
     await useDataStore.getState().init()
     expect(useDataStore.getState().terrainError).toMatchObject({ code: 'DATA_UNAVAILABLE' })
-    useMissionStore.getState().loadDemo()
-    await vi.waitFor(() => expect(useMissionStore.getState().issues.length).toBeGreaterThan(0))
+    // The sample's destination cannot be checked without terrain, so it is not placed at all.
+    expect(useMissionStore.getState().loadDemo()).toMatchObject({ status: 'needs-destination', check: { ok: false, problem: 'unavailable' } })
+    expect(useMissionStore.getState().config.destination).toBeNull()
+    await useMissionStore.getState().calculate()
     expect(useMissionStore.getState().issues[0]!.message).toMatch(/terrain data is not loaded/i)
     expect(useMissionStore.getState().routes).toEqual({})
   })
@@ -124,6 +126,61 @@ describe('placement', () => {
     useUiStore.getState().attemptPlace('destination', { x: -3000, y: -3000 })
     expect(useUiStore.getState().placementIssue).toMatchObject({ validity: 'outside-coverage', snap: null })
     expect(useMissionStore.getState().config.destination).toBeNull()
+  })
+
+  /** The steepest valid cell of the loaded terrain, and its slope. */
+  const steepest = () => {
+    const r = useDataStore.getState().raster!
+    let best = -1
+    for (let i = 0; i < r.validity.length; i++) if (r.validity[i] === 1 && (best < 0 || r.slopeDeg[i]! > r.slopeDeg[best]!)) best = i
+    const cell = useDataStore.getState().manifest!.grid.cellSizeM
+    const point = { x: ((best % r.widthCells) + 0.5) * cell, y: (Math.floor(best / r.widthCells) + 0.5) * cell }
+    return { point, slope: r.slopeDeg[best]! }
+  }
+
+  it('refuses a waypoint steeper than the slope limit and keeps its identity through the confirmed snap', () => {
+    const { point, slope } = steepest()
+    const limit = Math.max(2, Math.floor(slope) - 2)
+    useMissionStore.getState().setAssumption('maxSlopeDeg', limit)
+    const meta = { label: 'Steep target', waypointId: 'wp-steep', durationMin: 25 }
+    expect(useUiStore.getState().attemptPlace('destination', point, meta)).toBe(false)
+    const issue = useUiStore.getState().placementIssue!
+    expect(issue).toMatchObject({ validity: 'too-steep', maxSlopeDeg: limit, meta })
+    expect(issue.slopeDeg!).toBeGreaterThan(limit)
+    expect(issue.snap).not.toBeNull()
+    expect(issue.snapSlopeDeg!).toBeLessThanOrEqual(limit)
+    expect(issue.snapDistanceM!).toBeGreaterThan(0)
+    // nothing moved yet
+    expect(useMissionStore.getState().config.destination).toBeNull()
+    useUiStore.getState().confirmSnap()
+    expect(useMissionStore.getState().config.destination).toMatchObject({
+      position: issue.snap,
+      label: 'Steep target (nearest usable cell)',
+      waypointId: 'wp-steep',
+      durationMin: 25,
+    })
+  })
+
+  it('loads a sample whose destination fails the placement check only after the user confirms the suggested cell', async () => {
+    const sample = services.sampleMission()!
+    const spy = vi.spyOn(services, 'sampleMission').mockReturnValue({
+      ...sample,
+      // a no-data cell of the demo surface (see "rejects an unsupported location")
+      destination: { ...sample.destination, label: 'Unusable sample target', position: { x: 1500, y: 2080 } },
+    })
+    try {
+      useUiStore.getState().loadSample()
+      expect(useMissionStore.getState()).toMatchObject({ sampleDestinationPending: true, status: 'idle' })
+      expect(useMissionStore.getState().config.destination).toBeNull()
+      expect(useUiStore.getState().placementIssue).toMatchObject({ target: 'destination', validity: 'nodata' })
+      useUiStore.getState().confirmSnap()
+      expect(useMissionStore.getState().config.destination?.label).toBe('Unusable sample target (nearest usable cell)')
+      await settle()
+      expect(useMissionStore.getState()).toMatchObject({ isDemo: true, sampleDestinationPending: false })
+      expect(useMissionStore.getState().routes.shortest?.status).toBe('ok')
+    } finally {
+      spy.mockRestore()
+    }
   })
 })
 

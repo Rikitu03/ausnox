@@ -8,9 +8,12 @@ import {
   type RouteMode,
   type RouteResult,
   type ScienceStop,
+  type SampleMission,
+  type ServiceError,
   type SolarResult,
 } from '@/services'
-import { validateMission, type ValidationIssue } from '@/utils/validation'
+import { checkPlacement, validateMission, type PlacementCheck, type ValidationIssue } from '@/utils/validation'
+import { useDataStore } from './dataStore'
 
 /** Illustrative defaults from docs/SCIENTIFIC_MODELS.md §5. Not NASA operational values. */
 export const DEFAULT_ASSUMPTIONS: MissionAssumptions = {
@@ -34,22 +37,14 @@ const emptyMission = (): MissionConfig => ({
   assumptions: { ...DEFAULT_ASSUMPTIONS, solarScenarioId: services.solar.listScenarios()[0]?.id ?? '' },
 })
 
-/** First-run sample. Both points sit on valid cells of the illustrative demo terrain. */
-const demoMission = (): MissionConfig => ({
-  ...emptyMission(),
-  id: 'demo-marswalk-01',
-  name: 'Demo Marswalk 01',
-  habitat: { id: 'habitat', label: 'Habitat', position: { x: 700, y: 1500 } },
-  destination: {
-    id: 'destination',
-    label: 'Sampling stop A',
-    position: { x: 3290, y: 1930 },
-    durationMin: 30,
-    waypointId: 'wp-a',
-  },
-})
-
 export type CalcStatus = 'idle' | 'calculating' | 'done'
+
+/** Outcome of loading the sample mission. */
+export type SampleOutcome =
+  | { status: 'unavailable' }
+  | { status: 'ready' }
+  /** The requested destination failed the placement check; the caller must ask the user (confirm-to-snap). */
+  | { status: 'needs-destination'; destination: SampleMission['destination']; check: Extract<PlacementCheck, { ok: false }> }
 
 interface MissionState {
   config: MissionConfig
@@ -63,6 +58,8 @@ interface MissionState {
   solar: SolarResult | null
   /** Shown after a calculation was refused. Cleared on the next edit. */
   issues: ValidationIssue[]
+  /** The sample is loaded except for its destination, which waits for the user's confirmation. */
+  sampleDestinationPending: boolean
 
   setName(name: string): void
   setHabitat(position: GridCoord): void
@@ -73,7 +70,8 @@ interface MissionState {
   setRouteMode(mode: RouteMode): void
   setAssumption<K extends keyof MissionAssumptions>(key: K, value: MissionAssumptions[K]): void
   restoreDefaultAssumptions(): void
-  loadDemo(): void
+  /** Loads the data mode's sample mission. Never moves its destination: see SampleOutcome. */
+  loadDemo(): SampleOutcome
   reset(): void
   calculate(): Promise<void>
 }
@@ -96,6 +94,7 @@ export const useMissionStore = create<MissionState>((set, get) => {
       isDemo: false,
       stale: hadResults,
       issues: [],
+      sampleDestinationPending: false,
       status: s.status === 'calculating' ? 'done' : s.status,
       requestId: null,
     }))
@@ -113,6 +112,7 @@ export const useMissionStore = create<MissionState>((set, get) => {
     assessments: {},
     solar: null,
     issues: [],
+    sampleDestinationPending: false,
 
     setName: (name) => set((s) => ({ config: { ...s.config, name } })),
     setHabitat: (position) => edit((c) => ({ ...c, habitat: { id: 'habitat', label: 'Habitat', position } })),
@@ -152,15 +152,57 @@ export const useMissionStore = create<MissionState>((set, get) => {
       edit((c) => ({ ...c, assumptions: { ...DEFAULT_ASSUMPTIONS, solarScenarioId: c.assumptions.solarScenarioId } })),
 
     loadDemo() {
+      const sample = services.sampleMission()
+      if (!sample) return { status: 'unavailable' }
       controller?.abort()
       clearTimeout(autoTimer)
-      set({ config: demoMission(), isDemo: true, status: 'idle', stale: false, routes: {}, assessments: {}, solar: null, issues: [] })
+      const base = emptyMission()
+      const assumptions: MissionAssumptions = {
+        ...base.assumptions,
+        ...(sample.solarScenarioId ? { solarScenarioId: sample.solarScenarioId } : {}),
+        ...(sample.startLtstHours !== undefined ? { startLtstHours: sample.startLtstHours } : {}),
+      }
+      const check = checkPlacement(services.terrain, sample.destination.position, assumptions.maxSlopeDeg)
+      const config: MissionConfig = {
+        ...base,
+        id: sample.id,
+        name: sample.name,
+        assumptions,
+        habitat: { id: 'habitat', label: 'Habitat', position: sample.habitat },
+        stops: sample.stops.map((st) => ({ ...st, id: `stop-${++stopCounter}` })),
+        destination: check.ok ? { ...sample.destination, id: 'destination' } : null,
+      }
+      set({
+        config,
+        isDemo: true,
+        status: 'idle',
+        stale: false,
+        routes: {},
+        assessments: {},
+        solar: null,
+        issues: [],
+        requestId: null,
+        sampleDestinationPending: !check.ok,
+      })
+      if (!check.ok) return { status: 'needs-destination', destination: sample.destination, check }
       void get().calculate()
+      return { status: 'ready' }
     },
     reset() {
       controller?.abort()
       clearTimeout(autoTimer)
-      set({ config: emptyMission(), isDemo: false, status: 'idle', stale: false, routes: {}, assessments: {}, solar: null, issues: [], requestId: null })
+      set({
+        config: emptyMission(),
+        isDemo: false,
+        status: 'idle',
+        stale: false,
+        routes: {},
+        assessments: {},
+        solar: null,
+        issues: [],
+        requestId: null,
+        sampleDestinationPending: false,
+      })
     },
 
     async calculate() {
@@ -182,9 +224,14 @@ export const useMissionStore = create<MissionState>((set, get) => {
         services.routing.computeRoundTrip(
           {
             requestId,
-            datasetId: 'active-terrain',
+            datasetId: useDataStore.getState().manifest?.datasetId ?? 'no-terrain',
             habitat: config.habitat!.position,
-            waypoints: [...config.stops, config.destination!].map((s) => ({ label: s.label, position: s.position })),
+            waypoints: [...config.stops, config.destination!].map((s) => ({
+              id: s.id,
+              label: s.label,
+              position: s.position,
+              durationMin: s.durationMin,
+            })),
             mode,
             maxSlopeDeg: config.assumptions.maxSlopeDeg,
           },
@@ -211,7 +258,25 @@ export const useMissionStore = create<MissionState>((set, get) => {
         })
       } catch (error) {
         if (error instanceof DOMException && error.name === 'AbortError') return
-        throw error
+        if (get().requestId !== requestId) return
+        // Fail closed: an unexpected failure becomes an error result, never an endless loading state.
+        const failure: ServiceError = {
+          status: 'error',
+          code: 'MODEL_UNAVAILABLE',
+          detail: `The calculation failed unexpectedly: ${error instanceof Error ? error.message : String(error)}`,
+          source: { kind: services.mode === 'mock' ? 'mock' : 'engine', adapter: 'mission-store', version: '-', note: 'Unexpected failure' },
+        }
+        console.error('[ausnox] mission calculation failed', error)
+        set({
+          status: 'done',
+          stale: false,
+          solar: failure,
+          routes: { shortest: failure, 'lower-slope': failure },
+          assessments: {
+            shortest: services.mission.assess({ config, route: failure, solar: failure }),
+            'lower-slope': services.mission.assess({ config, route: failure, solar: failure }),
+          },
+        })
       }
     },
   }

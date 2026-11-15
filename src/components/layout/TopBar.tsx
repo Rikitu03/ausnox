@@ -96,6 +96,17 @@ export function HelpDialog() {
             fixed examples. Real NASA and USGS data arrives with the scientific engine
           </p>
         )}
+        {dataMode === 'real' && (
+          <div className="rounded-card border border-line bg-raised p-3">
+            <h3 className="mb-1 font-medium text-fg">Data and credits</h3>
+            <p>
+              Terrain: USGS HiRISE DTM mosaic for Mars 2020 TRN (Fergason et al. 2020, doi:10.5066/P9REJ9JN), NASA/JPL-Caltech/University
+              of Arizona. Imagery: NASA/JPL Mars Trek (MRO HiRISE and CTX, MGS MOLA). Science targets: NASA/JPL-Caltech Perseverance
+              rover localizations (MMGIS). Daylight: NASA GISS Mars24 algorithm. Overlay registration against imagery is uncertain by
+              about 3 m (unresolved check X2b)
+            </p>
+          </div>
+        )}
         <div>
           <h3 className="mb-2 font-medium text-fg">Planning a mission</h3>
           <ol className="list-decimal space-y-1.5 pl-5">

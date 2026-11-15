@@ -1,70 +1,77 @@
 /**
- * Real adapters: extension points for the scientific-engine phase.
+ * Real adapters: the frontend contracts implemented on @ausnox/scientific-engine and the bundled,
+ * validated Jezero assets (docs/INTEGRATION_REPORT.md).
  *
- * Nothing here is implemented. Every call answers NOT_IMPLEMENTED so the UI
- * shows explicit "unavailable" states and never a favourable guess. Replace
- * each factory with a working implementation of the same contract; no UI
- * component needs to change. See docs/FRONTEND_HANDOFF.md.
+ *   terrain   public/data/jezero/manifest.json + terrain.bin, verified by the engine loader
+ *   mapData   NASA Mars Trek WMTS (HiRISE, CTX, MOLA), DTM-derived layers, cited science targets
+ *   routing   engine A* (shortest / lower-slope, independent return) in a Web Worker
+ *   solar     engine Mars24 daylight window for documented scenarios
+ *   mission   engine feasibility rules on the engine's own route and daylight objects
  *
- *   terrain   preprocessed Jezero DEM assets (public/data/jezero/manifest.json + grid)
- *   mapData   NASA Mars Trek WMTS layers, DEM footprint, cited science targets
- *   routing   A* on the validated terrain grid, ideally in a Web Worker
- *   solar     Mars24-derived local solar time and daylight window
- *   mission   feasibility rules from docs/SCIENTIFIC_MODELS.md §7
+ * Nothing here falls back to mock or synthetic values: a missing input produces an error or an
+ * indeterminate assessment.
  */
-import type {
-  AusnoxServices,
-  MapDataService,
-  MissionService,
-  ResultSource,
-  RoutingService,
-  ServiceError,
-  SolarService,
-  TerrainService,
-} from '@/services/contracts'
+import type { AusnoxServices, SampleMission } from '@/services/contracts'
+import { SAMPLE_MISSION } from './config'
+import { createContext, type RealAdapterOptions, type RealContext } from './context'
+import { engineCellCenterToGrid, geoToGrid } from './coords'
+import { createRealMapData } from './mapData'
+import { createRealMission } from './mission'
+import { createMainThreadExecutor, createWorkerExecutor, type RouteExecutor } from './routeExecutor'
+import { createRealRouting } from './routing'
+import { createRealSolar } from './solar'
+import { createRealTerrain } from './terrain'
 
-const source: ResultSource = {
-  kind: 'engine',
-  adapter: 'real-unimplemented',
-  version: '0.0.0',
-  note: 'Real adapter extension point without an implementation',
+export type { RealAdapterOptions } from './context'
+
+function createExecutor(ctx: RealContext): RouteExecutor {
+  if (!ctx.options.useWorker || typeof Worker === 'undefined') return createMainThreadExecutor()
+  return createWorkerExecutor(
+    () => (ctx.dataset && ctx.buffer ? { manifest: ctx.dataset.manifest, buffer: ctx.buffer } : null),
+    () => new Worker(new URL('../../../workers/route.worker.ts', import.meta.url), { type: 'module', name: 'ausnox-route' }),
+  )
 }
 
-const notImplemented = (what: string): ServiceError => ({
-  status: 'error',
-  code: 'NOT_IMPLEMENTED',
-  detail: `${what} is not implemented yet. Run with VITE_DATA_MODE=mock to use demonstration data`,
-  source,
-})
-
-const terrain: TerrainService = {
-  load: async () => notImplemented('The Jezero terrain adapter'),
-  sample: (point) => ({ grid: point, geo: null, cell: null, validity: 'unavailable', elevationM: null, slopeDeg: null }),
-  nearestValid: () => null,
-  toGeo: () => null,
-  fromGeo: () => null,
+function sampleMission(ctx: RealContext): SampleMission | null {
+  const d = ctx.dataset
+  const targets = ctx.targets
+  if (!d || !targets) return null
+  const stop = targets.find((t) => t.id === SAMPLE_MISSION.stopTargetId)
+  const dest = targets.find((t) => t.id === SAMPLE_MISSION.destinationTargetId)
+  if (!stop || !dest) return null
+  return {
+    id: SAMPLE_MISSION.id,
+    name: SAMPLE_MISSION.name,
+    description: SAMPLE_MISSION.description,
+    habitat: engineCellCenterToGrid(d, SAMPLE_MISSION.habitatEngineCell),
+    stops: [{ label: stop.title, position: geoToGrid(d, stop.coordinate), durationMin: SAMPLE_MISSION.stopDurationMin, waypointId: stop.id }],
+    // The published rover position. If it is too steep for the slope limit, the planner shows the nearest
+    // traversable cell and waits for the user to confirm it; it is never moved silently.
+    destination: { label: dest.title, position: geoToGrid(d, dest.coordinate), durationMin: SAMPLE_MISSION.destinationDurationMin, waypointId: dest.id },
+    solarScenarioId: SAMPLE_MISSION.solarScenarioId,
+    startLtstHours: SAMPLE_MISSION.startLtstHours,
+  }
 }
 
-const mapData: MapDataService = {
-  listLayers: async () => notImplemented('The NASA/USGS map layer adapter'),
-  getLayerImagery: async () => notImplemented('The NASA/USGS imagery adapter'),
-  listWaypoints: async () => notImplemented('The science waypoint adapter'),
-  listProvenance: () => [],
+export interface RealServices extends AusnoxServices {
+  /** Shared adapter state, exposed for integration tests and diagnostics. */
+  readonly context: RealContext
+  readonly routeExecutor: RouteExecutor['kind']
+  readonly mission: ReturnType<typeof createRealMission>
 }
 
-const routing: RoutingService = {
-  computeRoundTrip: async () => notImplemented('The A* routing engine'),
-}
-
-const solar: SolarService = {
-  listScenarios: () => [],
-  getSolarDay: async () => notImplemented('The Mars24 solar model'),
-}
-
-const mission: MissionService = {
-  assess: () => notImplemented('The mission feasibility engine'),
-}
-
-export function createRealServices(): AusnoxServices {
-  return { mode: 'real', terrain, mapData, routing, solar, mission }
+export function createRealServices(options: RealAdapterOptions = {}): RealServices {
+  const ctx = createContext(options)
+  const executor = createExecutor(ctx)
+  return {
+    mode: 'real',
+    context: ctx,
+    routeExecutor: executor.kind,
+    terrain: createRealTerrain(ctx),
+    mapData: createRealMapData(ctx),
+    routing: createRealRouting(ctx, executor),
+    solar: createRealSolar(ctx),
+    mission: createRealMission(ctx),
+    sampleMission: () => sampleMission(ctx),
+  }
 }
