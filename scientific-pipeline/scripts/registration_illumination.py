@@ -92,15 +92,19 @@ def fetch_files(cfg: dict, raw: Path) -> None:
     for im in cfg["images"]:
         for f in im["files"]:
             dest = raw / f["name"]
-            expect = f["kbytes"] * 1024
+            expect = f["kbytes"] * 1000  # PDS ODE "KBytes" are decimal kilobytes (rounded)
             if dest.exists() and abs(dest.stat().st_size - expect) <= 2048:
                 continue
             part = dest.with_suffix(dest.suffix + ".part")
+            if part.exists() and abs(part.stat().st_size - expect) <= 2048:
+                part.replace(dest)  # completed earlier, only the size check failed
+                print(f"kept {f['name']} ({dest.stat().st_size / 1e6:.1f} MB)")
+                continue
             req = urllib.request.Request(f["url"], headers={"User-Agent": "ausnox-pipeline/1.0 (validation)"})
             with urllib.request.urlopen(req, timeout=600, context=ctx) as r, open(part, "wb") as out:
                 while chunk := r.read(1 << 20):
                     out.write(chunk)
-            if abs(part.stat().st_size - expect) > 2048:
+            if abs(part.stat().st_size - expect) > 2048:  # tolerance covers the catalog's rounding to 1 kB
                 raise RuntimeError(f"{f['name']}: {part.stat().st_size} bytes, catalog says ~{expect}")
             part.replace(dest)
             print(f"fetched {f['name']} ({dest.stat().st_size / 1e6:.1f} MB)")
@@ -118,21 +122,58 @@ def label_values(lbl: Path) -> dict:
     return out
 
 
-def image_on_grid(jp2: Path, manifest: dict) -> tuple[np.ndarray, dict]:
+def label_number(lbl: dict, key: str) -> float:
+    return float(lbl[key].split("<")[0].strip())
+
+
+def label_crs(lbl: dict) -> rasterio.crs.CRS:
+    """CRS from the PDS label, the authoritative map-projection record of a HiRISE RDR.
+
+    HiRISE equirectangular RDRs are true to scale at CENTER_LATITUDE on a sphere of the local radius
+    (A_AXIS_RADIUS). Some older RDRs carry a GeoJP2 header with latitude of true scale and latitude of
+    origin swapped, which misplaces the image east-west by a factor cos(CENTER_LATITUDE).
+    """
+    if lbl.get("MAP_PROJECTION_TYPE") != "EQUIRECTANGULAR":
+        raise RuntimeError(f"unsupported projection {lbl.get('MAP_PROJECTION_TYPE')}")
+    r_m = label_number(lbl, "A_AXIS_RADIUS") * 1000.0
+    return rasterio.crs.CRS.from_proj4(
+        f"+proj=eqc +lat_ts={label_number(lbl, 'CENTER_LATITUDE')} +lat_0=0 +lon_0={label_number(lbl, 'CENTER_LONGITUDE')} "
+        f"+x_0=0 +y_0=0 +R={r_m} +units=m +no_defs")
+
+
+def image_on_grid(jp2: Path, lbl: dict, manifest: dict) -> tuple[np.ndarray, dict]:
     g = manifest["grid"]
     dst_crs = rasterio.crs.CRS.from_wkt(manifest["crs"]["source_wkt"])
     transform = Affine(g["cell_size_x_m"], 0.0, g["origin_x_m"], 0.0, -g["cell_size_y_m"], g["origin_y_m"])
+    src_crs = label_crs(lbl)
     with rasterio.open(jp2) as src:
-        if src.crs is None:
-            raise RuntimeError(f"{jp2.name} has no embedded georeference")
-        meta = {"src_crs": src.crs.to_wkt(), "src_res_m": [abs(src.transform.a), abs(src.transform.e)], "src_size": [src.width, src.height],
-                "src_dtype": src.dtypes[0]}
-        with WarpedVRT(src, crs=dst_crs, transform=transform, width=g["width"], height=g["height"],
+        scale = label_number(lbl, "MAP_SCALE")
+        # The geotransform must agree with the label offsets to within one pixel (1-based PDS convention).
+        dx = abs(src.transform.c - (-label_number(lbl, "SAMPLE_PROJECTION_OFFSET") * scale))
+        dy = abs(src.transform.f - (label_number(lbl, "LINE_PROJECTION_OFFSET") * scale))
+        if abs(src.transform.a - scale) > 1e-9 or dx > scale or dy > scale:
+            raise RuntimeError(f"{jp2.name}: geotransform disagrees with the PDS label (dx {dx:.3f} m, dy {dy:.3f} m)")
+        embedded = src.crs.to_proj4() if src.crs else None
+        meta = {"src_crs_used": src_crs.to_proj4(), "src_crs_embedded": embedded,
+                "embedded_crs_agrees_with_label": bool(src.crs) and src.crs.equals(src_crs) if src.crs else False,
+                "src_res_m": [abs(src.transform.a), abs(src.transform.e)], "src_size": [src.width, src.height], "src_dtype": src.dtypes[0]}
+        with WarpedVRT(src, src_crs=src_crs, crs=dst_crs, transform=transform, width=g["width"], height=g["height"],
                        resampling=Resampling.average, src_nodata=0, nodata=0) as vrt:
             a = vrt.read(1).astype(np.float64)
     a[a == 0] = np.nan
     meta["valid_fraction"] = round(float(np.isfinite(a).mean()), 4)
     return a, meta
+
+
+def finite_or_none(obj):
+    """Strict JSON: NaN and infinities become null."""
+    if isinstance(obj, float):
+        return obj if math.isfinite(obj) else None
+    if isinstance(obj, dict):
+        return {k: finite_or_none(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [finite_or_none(v) for v in obj]
+    return obj
 
 
 def fit_sun_azimuth(img: np.ndarray, gx: np.ndarray, gy: np.ndarray) -> tuple[float, float, float]:
@@ -199,8 +240,9 @@ def main(argv: list[str] | None = None) -> int:
     for im in cfg["images"]:
         jp2 = raw / next(f["name"] for f in im["files"] if f["name"].endswith(".JP2"))
         lbl = raw / next(f["name"] for f in im["files"] if f["name"].endswith(".LBL"))
-        img, meta = image_on_grid(jp2, manifest)
-        meta["label"] = label_values(lbl)
+        lbl_values = label_values(lbl)
+        img, meta = image_on_grid(jp2, lbl_values, manifest)
+        meta["label"] = lbl_values
         dr0, dc0, peak0 = phase_correlation_shift(ortho, img, CRITERIA["coarse_prealignment_max_shift_cells"])
         img = shift_image(img, dr0, dc0)  # common to p_k and c_k: cancels in d_k
         fit_az, fit_el, fit_c = fit_sun_azimuth(img, gx, gy)
@@ -265,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
         outcome = "INCONCLUSIVE"
     print(f"pair {A} vs {B}: {len(keys)} windows; predicted artifact change {dpred[0]:+.2f} m E {dpred[1]:+.2f} m S; "
           f"s = {s_hat:.2f} [{s_lo:.2f}, {s_hi:.2f}] -> {outcome}")
-    write_json(EVIDENCE_DIR / "registration_illumination.json", {
+    write_json(EVIDENCE_DIR / "registration_illumination.json", finite_or_none({
         "generated_utc": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "terrain_sha256": manifest["binary"]["sha256"],
         "question": "Does the X2b apparent DTM-to-imagery offset follow the sun azimuth (artifact) or stay fixed (real displacement)?",
@@ -277,7 +319,7 @@ def main(argv: list[str] | None = None) -> int:
         "outcome": outcome,
         "images": per_image,
         "x2b_status_changed": False,
-    })
+    }))
     return 0
 
 
