@@ -1,7 +1,7 @@
 import {
-  AmbientLight, BoxGeometry, BufferGeometry, Color, ConeGeometry, DirectionalLight, Group,
+  AmbientLight, BoxGeometry, BufferGeometry, Color, ConeGeometry, DirectionalLight, ExtrudeGeometry, Group,
   Line, LineBasicMaterial, LineDashedMaterial, Mesh, MeshBasicMaterial, PerspectiveCamera,
-  Plane, Raycaster, Scene, SphereGeometry, Vector2, Vector3, WebGLRenderer,
+  Plane, Raycaster, Scene, Shape, SphereGeometry, Vector2, Vector3, WebGLRenderer,
 } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js'
@@ -13,11 +13,15 @@ import { useSimStore } from '@/stores/simStore'
 import { useUiStore, type PlacementMeta } from '@/stores/uiStore'
 import { snapshotAt } from '@/utils/simulation'
 import { createTerrainFrame, focusBounds, surfacePath, type WorldPoint } from './TerrainCoordinates'
-import { createTerrainMaterial, type SurfaceStyle } from './TerrainMaterial'
+import { createTerrainMaterial } from './TerrainMaterial'
 import { buildTerrainGeometry } from './TerrainMesh'
+import { activeSurface } from './surface'
+
+export { activeSurface } from './surface'
 
 const vector = (p: WorldPoint) => new Vector3(p.x, p.y, p.z)
-export const activeSurface = (overlays: Record<string, boolean>): SurfaceStyle => overlays.slope ? 'slope' : overlays.elevation ? 'elevation' : 'relief'
+/** Counts scene builds, so tests can tell a kept scene from a rebuilt one. */
+let scenesBuilt = 0
 
 function disposeObjects(group: Group) {
   group.traverse((o) => {
@@ -35,7 +39,7 @@ function disposeObjects(group: Group) {
 export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElement, manifest: TerrainManifest, raster: TerrainRaster,
   onFatal: (message: string) => void, onOverlayError: (message: string) => void) {
   const started = performance.now()
-  let frame = createTerrainFrame(manifest, services.terrain)
+  let frame = createTerrainFrame(manifest, services.terrain, useUiStore.getState().verticalScale)
   let renderer: WebGLRenderer | undefined
   const cleanup: (() => void)[] = []
   try {
@@ -48,7 +52,7 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
     canvas.setAttribute('aria-label', '3D Jezero terrain. Drag to orbit, right drag to pan, scroll to zoom. Arrow keys pan; plus and minus zoom; R fits terrain.')
     canvas.setAttribute('aria-describedby', 'three-instructions')
     canvas.tabIndex = 0
-    canvas.className = 'h-full w-full touch-none rounded-panel outline-none focus-visible:ring-2 focus-visible:ring-accent'
+    canvas.className = 'block h-full w-full touch-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent'
     host.appendChild(canvas)
     cleanup.push(() => canvas.remove())
     const labels = new CSS2DRenderer()
@@ -86,11 +90,21 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
     const routes = new Group(), markers = new Group(), guides = new Group()
     scene.add(routes, markers, guides)
     cleanup.push(() => { disposeObjects(routes); disposeObjects(markers); disposeObjects(guides) })
-    const walker = new Mesh(new SphereGeometry(7, 12, 8), new MeshBasicMaterial({ color: '#ffffff', depthTest: false }))
-    walker.renderOrder = 6
+    // Simulated astronaut: a blue navigation arrow with a white rim, lying on the surface and
+    // pointing along the direction of travel.
+    const walker = new Group()
+    const arrow = (scale: number, color: string, order: number) => {
+      const shape = new Shape().moveTo(0, 16 * scale).lineTo(12 * scale, -12 * scale).lineTo(0, -5 * scale).lineTo(-12 * scale, -12 * scale).closePath()
+      const geometry = new ExtrudeGeometry(shape, { depth: 4, bevelEnabled: false }).rotateX(-Math.PI / 2)
+      const m = new Mesh(geometry, new MeshBasicMaterial({ color, depthTest: false }))
+      m.renderOrder = order
+      return m
+    }
+    walker.add(arrow(1.3, '#ffffff', 6), arrow(1, '#2f7cf6', 7))
     walker.visible = false
     scene.add(walker)
-    cleanup.push(() => { walker.geometry.dispose(); walker.material.dispose() })
+    cleanup.push(() => disposeObjects(walker))
+    let lastHeading = 0
 
     let raf = 0, disposed = false, failed = false
     let frames = 0, renderTotal = 0
@@ -103,8 +117,15 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
     const draw = () => {
       raf = 0
       if (disposed || failed) return
+      // Hidden while the 2D map is shown: keep the scene, skip the GPU work. A resize on return redraws.
+      if (!host.clientWidth || !host.clientHeight) return
       try {
         const changed = controls.update()
+        if (walker.visible) {
+          // Keep the arrow about 34 px long on screen at any zoom, never smaller than its ground size.
+          const metresPerPx = 2 * camera.position.distanceTo(walker.position) * Math.tan(camera.fov * Math.PI / 360) / host.clientHeight
+          walker.scale.setScalar(Math.max(1, 34 * metresPerPx / 36))
+        }
         const before = performance.now()
         gpu.render(scene, camera)
         labels.render(scene, camera)
@@ -211,10 +232,20 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
         const mission = useMissionStore.getState(), sim = useSimStore.getState()
         const r = mission.routes[mission.config.routeMode], a = mission.assessments[mission.config.routeMode]
         const current = !mission.stale && mission.status === 'done'
-        const snap = snapshotAt(current && a?.status === 'ok' ? a.assessment : null, current && r?.status === 'ok' ? r.route : null, sim.simS, mission.config.assumptions.startLtstHours)
+        const assessment = current && a?.status === 'ok' ? a.assessment : null, route = current && r?.status === 'ok' ? r.route : null
+        const start = mission.config.assumptions.startLtstHours
+        const snap = snapshotAt(assessment, route, sim.simS, start)
         walker.visible = current && snap.position !== null
         if (walker.visible && snap.position) {
-          walker.position.copy(vector(frame.surface(snap.position, 12)))
+          const here = frame.surface(snap.position, 12)
+          walker.position.copy(vector(here))
+          // Heading from where the plan puts the walker a moment later; kept while standing still.
+          const ahead = snapshotAt(assessment, route, sim.simS + 10, start).position
+          if (ahead) {
+            const next = frame.surface(ahead, 12), dx = next.x - here.x, dz = next.z - here.z
+            if (Math.hypot(dx, dz) > 0.01) lastHeading = Math.atan2(-dx, -dz)
+          }
+          walker.rotation.y = lastHeading
           canvas.dataset.walkerGrid = JSON.stringify(snap.position)
         } else delete canvas.dataset.walkerGrid
         invalidate()
@@ -269,6 +300,14 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
       } catch { /* Unsupported guide segments are omitted; routes and markers report errors above. */ }
     }
     const update = () => { updateMission(); updateGuides() }
+    /** Rebuilds only the terrain geometry for a new exaggeration; camera, materials and markers stay. */
+    function setScale(scale: number) {
+      frame = createTerrainFrame(manifest, services.terrain, scale)
+      const next = buildTerrainGeometry(manifest, raster, frame)
+      terrain.geometry.dispose(); terrain.geometry = next.geometry
+      canvas.dataset.verticalScale = String(scale)
+      update(); invalidate()
+    }
     cleanup.push(useMissionStore.subscribe((s, previous) => {
       if (s.config !== previous.config || s.routes !== previous.routes || s.status !== previous.status || s.stale !== previous.stale) update()
     }))
@@ -277,6 +316,7 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
     cleanup.push(useUiStore.subscribe((s, previous) => {
       try {
         if (s.focus !== previous.focus) { if (s.focus.point) focusPoint(s.focus.point); else fitTerrain() }
+        if (s.verticalScale !== previous.verticalScale) setScale(s.verticalScale)
         if (s.overlays !== previous.overlays) {
           const next = createTerrainMaterial(manifest, raster, activeSurface(s.overlays))
           surface.dispose(); surface = next; terrain.material = surface.material; invalidate()
@@ -325,7 +365,7 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
       canvas.removeEventListener('pointerup', pointerUp); canvas.removeEventListener('pointerleave', leave)
       canvas.removeEventListener('pointercancel', pointerCancel)
       canvas.removeEventListener('webglcontextlost', lost)
-      useMapStore.setState({ threeControls: null, hover: null, metresPerPx: null })
+      useMapStore.setState({ threeControls: null, hover: null })
     })
     const resize = () => {
       const { width, height } = host.getBoundingClientRect()
@@ -341,21 +381,19 @@ export function createTerrainScene(host: HTMLDivElement, compass: HTMLSpanElemen
     observer.observe(host)
     cleanup.push(() => observer.disconnect())
     resize(); fitTerrain(); update()
-    useMapStore.setState({ threeControls: { zoom }, metresPerPx: null })
+    const focusRoute = () => {
+      const mission = useMissionStore.getState(), result = mission.routes[mission.config.routeMode]
+      if (result?.status === 'ok') fit([...result.route.outbound.path, ...result.route.inbound.path].map((p) => frame.surface(p)))
+    }
+    useMapStore.setState({ threeControls: { zoom, fitTerrain, focusPoint, focusRoute, rotate } })
     canvas.dataset.buildMs = (performance.now() - started).toFixed(2)
+    canvas.dataset.sceneId = String(++scenesBuilt)
+    canvas.dataset.verticalScale = String(frame.verticalScale)
     return {
       fitTerrain, zoom, rotate,
       focusPoint,
-      focusRoute: () => {
-        const mission = useMissionStore.getState(), result = mission.routes[mission.config.routeMode]
-        if (result?.status === 'ok') fit([...result.route.outbound.path, ...result.route.inbound.path].map((p) => frame.surface(p)))
-      },
-      setScale: (scale: number) => {
-        frame = createTerrainFrame(manifest, services.terrain, scale)
-        const next = buildTerrainGeometry(manifest, raster, frame)
-        terrain.geometry.dispose(); terrain.geometry = next.geometry
-        update(); invalidate()
-      },
+      focusRoute,
+      setScale,
       dispose: () => { for (const f of cleanup.reverse()) f(); gpu.dispose(); gpu.forceContextLoss() },
     }
   } catch (e) {

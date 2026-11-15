@@ -1,4 +1,4 @@
-import { Route } from 'lucide-react'
+import { FlaskConical, Footprints, Route, ShieldAlert, Sun, Timer, type LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { ElevationProfile } from '@/components/charts/Charts'
 import { EmptyState, Stat, StatusAlert } from '@/components/layout/primitives'
@@ -32,6 +32,20 @@ function Card({ title, aside, children, className }: { title: string; aside?: Re
       </div>
       {children}
     </section>
+  )
+}
+
+function ModelNote({ icon: Icon, title, tone, children }: { icon: LucideIcon; title: string; tone?: 'warn'; children: ReactNode }) {
+  return (
+    <li className="flex gap-3 rounded-card border border-line p-4">
+      <span className={cn('grid size-8 shrink-0 place-items-center rounded-[8px] bg-raised', tone === 'warn' ? 'text-warn' : 'text-fg-2')} aria-hidden>
+        <Icon className="size-4" />
+      </span>
+      <div className="min-w-0">
+        <p className="font-medium text-fg">{title}</p>
+        <div className="mt-1 text-fg-2">{children}</div>
+      </div>
+    </li>
   )
 }
 
@@ -225,62 +239,91 @@ export function SummaryView() {
               </div>
             )}
 
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Card title="Daylight and timing" aside={<SourceBadge id="mars24-solar" />}>
-                <DaylightTimeline />
-                <div className="mt-3">
-                  <TimelineKey />
-                </div>
-                {okAssessment && (
-                  <ol className="mt-4 divide-y divide-line border-t border-line text-[13px]">
-                    {okAssessment.events.map((e, i) => (
-                      <li key={i} className="flex items-baseline justify-between gap-3 py-1.5">
-                        <span>{e.label}</span>
-                        <span className="num shrink-0 text-xs text-fg-2">
-                          {formatLtst(a.startLtstHours + e.atS / MARS_HOUR_SECONDS)} · T+{formatDuration(e.atS)}
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                )}
-                {solar?.status === 'error' && (
-                  <StatusAlert tone="unknown" title="Daylight window unknown" className="mt-4">
-                    {solar.detail}
-                  </StatusAlert>
-                )}
-              </Card>
-              <div className="space-y-4">
-                {okAssessment && okAssessment.returnMarginS !== null && (
-                  <Card title="How the margin is calculated" aside={<SourceBadge id="eva-assumptions" />}>
-                    <MarginBreakdown assessment={okAssessment} />
-                  </Card>
-                )}
-                <Card title="Route comparison">
-                  <RouteComparison />
-                </Card>
+            <Card title="Daylight and timing" aside={<SourceBadge id="mars24-solar" />}>
+              <DaylightTimeline />
+              <div className="mt-3">
+                <TimelineKey />
               </div>
+              {okAssessment && (
+                <ol
+                  className="mt-5 grid border-t border-line text-[13px] lg:grid-flow-col lg:grid-cols-2 lg:gap-x-10"
+                  style={{ gridTemplateRows: `repeat(${Math.ceil(okAssessment.events.length / 2)}, auto)` }}
+                >
+                  {okAssessment.events.map((e, i) => (
+                    <li key={i} className="flex items-baseline justify-between gap-4 border-b border-line py-2.5">
+                      <span>{e.label}</span>
+                      <span className="num shrink-0 text-xs text-fg-2">
+                        {formatLtst(a.startLtstHours + e.atS / MARS_HOUR_SECONDS)} · T+{formatDuration(e.atS)}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+              {solar?.status === 'error' && (
+                <StatusAlert tone="unknown" title="Daylight window unknown" className="mt-4">
+                  {solar.detail}
+                </StatusAlert>
+              )}
+            </Card>
+
+            <div className="grid items-start gap-4 lg:grid-cols-2">
+              {okAssessment && okAssessment.returnMarginS !== null && (
+                <Card title="How the margin is calculated" aside={<SourceBadge id="eva-assumptions" />}>
+                  <MarginBreakdown assessment={okAssessment} />
+                </Card>
+              )}
+              <Card title="Route comparison">
+                <RouteComparison />
+              </Card>
             </div>
 
             <Card title="Model assumptions used" aside={<SourceBadge id="eva-assumptions" />}>
-              <dl className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
-                <Stat label="Walking speed" value={`${a.walkingSpeedMps} m/s`} sub="constant" />
-                <Stat label="Slope limit" value={`${a.maxSlopeDeg}°`} />
-                <Stat label="Reserve" value={`${a.reserveMin} min`} />
-                <Stat label="Mission start" value={formatLtst(a.startLtstHours)} sub="local solar time" />
-                <Stat label="EVA limit" value={a.maxEvaEnabled ? `${a.maxEvaHours} h` : 'Off'} />
-                <Stat label="Daylight" value={day ? `${formatLtst(day.sunriseLtstHours)}–${formatLtst(day.sunsetLtstHours)}` : '—'} sub={scenario?.title} />
+              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                {(
+                  [
+                    ['Walking speed', `${a.walkingSpeedMps} m/s`, 'constant'],
+                    ['Slope limit', `${a.maxSlopeDeg}°`, 'steeper cells blocked'],
+                    ['Reserve', `${a.reserveMin} min`, 'held back'],
+                    ['Mission start', formatLtst(a.startLtstHours), 'local solar time'],
+                    ['EVA limit', a.maxEvaEnabled ? `${a.maxEvaHours} h` : 'Off', a.maxEvaEnabled ? 'Earth hours' : 'sunset sets the window'],
+                    ['Daylight', day ? `${formatLtst(day.sunriseLtstHours)}–${formatLtst(day.sunsetLtstHours)}` : '—', scenario?.title],
+                  ] as const
+                ).map(([label, value, sub]) => (
+                  <div key={label} className="rounded-card border border-line bg-raised p-3">
+                    <Stat label={label} value={value} sub={sub} />
+                  </div>
+                ))}
               </dl>
-              <ul className="mt-5 space-y-1.5 border-t border-line pt-4 text-[13px] text-fg-2">
-                <li>These are illustrative planning values chosen in this app. They are not NASA operational limits</li>
-                <li>
-                  {okRoute?.outbound.surfaceDistanceM !== undefined
-                    ? 'Walking time is the 3-D surface length of the route divided by a constant speed. Slope does not slow the walker in this model'
-                    : 'Walking time is distance divided by a constant speed. Slope does not slow the walker in this model'}
-                </li>
-                <li>The reserve is kept apart from the mission duration and subtracted from the time available</li>
-                {okRoute && <li>Route: {okRoute.method}</li>}
-                {day?.approximations.map((x) => <li key={x}>Daylight: {x}</li>)}
-                <li>Feasible means the plan fits these assumptions. It is never a statement that the walk is safe</li>
+
+              <h3 className="mt-6 mb-3 text-[13px] font-medium text-fg-2">How to read these results</h3>
+              <ul className="grid gap-3 text-[13px] sm:grid-cols-2 lg:grid-cols-3">
+                <ModelNote icon={FlaskConical} title="Illustrative limits">
+                  Planning values chosen in this app, not NASA operational limits
+                </ModelNote>
+                <ModelNote icon={Footprints} title="Walking time">
+                  {okRoute?.outbound.surfaceDistanceM !== undefined ? '3-D surface length' : 'Distance'} ÷ a constant speed. Slope does not slow the
+                  walker in this model
+                </ModelNote>
+                <ModelNote icon={Timer} title="Reserve">
+                  Kept apart from the mission duration and subtracted from the time available
+                </ModelNote>
+                {okRoute && (
+                  <ModelNote icon={Route} title="Route">
+                    {okRoute.method}
+                  </ModelNote>
+                )}
+                {day && day.approximations.length > 0 && (
+                  <ModelNote icon={Sun} title="Daylight">
+                    <ul className="space-y-1">
+                      {day.approximations.map((x) => (
+                        <li key={x}>{x}</li>
+                      ))}
+                    </ul>
+                  </ModelNote>
+                )}
+                <ModelNote icon={ShieldAlert} title="Feasible ≠ safe" tone="warn">
+                  Feasible means the plan fits these assumptions. It never says the walk is safe
+                </ModelNote>
               </ul>
             </Card>
           </>

@@ -69,7 +69,7 @@ The supplied 2026 form requires visible SI watermarks for generated images/video
 
 ## G. Human involvement
 
-The owner supplied the brief, named the AI tools, authorized MIT for original project code during this audit and confirmed the short film is not uploaded. Frontend records describe a user-supplied Figma reference; production records describe team direction. These facts do not establish human review of every generated line, dataset, frame or narration cue. Historical automated/browser checks are evidence of executed checks, not proof of independent scientific peer review. Rights-holder assent, final listening/viewing, term acceptance and submission remain human actions.
+The owner supplied the brief, named the AI tools, authorized MIT for original project code during this audit and later submitted the 25-second short film as the project demonstration. Frontend records describe a user-supplied Figma reference; production records describe team direction. These facts do not establish human review of every generated line, dataset, frame or narration cue. Historical automated/browser checks are evidence of executed checks, not proof of independent scientific peer review. Rights-holder assent, final listening/viewing, term acceptance and submission remain human actions.
 
 ## H. Limitations
 

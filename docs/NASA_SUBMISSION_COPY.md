@@ -60,13 +60,13 @@ The scientific, integration and release reports retain executed tests, reference
 
 Observed-source data, derived results and simulated assumptions are distinct. The shipped grid and slopes are derivatives of authentic observations; A* routes and daylight are calculated. The habitat, walking/EVA settings and timeline are hypothetical. **X2b imagery-to-DTM registration remains FAIL and unresolved, with approximately 3 m potential discrepancy.** The 2 m grid does not resolve all footing hazards. Daylight is geometric and omits terrain shadows/weather; no radiation, life-support or communications model exists. Full screen-reader, contrast and physical-touch audits are not established by the release evidence. Ausnox is educational, not flight-qualified navigation or astronaut safety guidance, and is not endorsed by NASA.
 
-OpenAI GPT models, OpenAI Codex and Anthropic Claude Code assisted planning, code, UI/design implementation, integration, tests, automation and documentation, with exact attribution limits documented publicly. AI-assisted implementation did not replace NASA/USGS observations with generated terrain. The separate short-film candidate uses real app captures, SI-assisted programmed motion graphics/score and ElevenLabs synthetic narration; its visible SI watermark, captions, metadata and rights checks are documented separately. A final uploaded demonstration link remains pending. Full disclosure: https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/AI_USAGE.md .
+OpenAI GPT models, OpenAI Codex and Anthropic Claude Code assisted planning, code, UI/design implementation, integration, tests, automation and documentation, with exact attribution limits documented publicly. AI-assisted implementation did not replace NASA/USGS observations with generated terrain. The separate short-film candidate uses real app captures, SI-assisted programmed motion graphics/score and ElevenLabs synthetic narration; its visible SI watermark, captions, metadata and rights checks are documented separately. A final uploaded demonstration link remains pending. Full disclosure: https://github.com/Rikitu03/ausnox/blob/main/docs/AI_USAGE.md .
 
 Live application: https://ausnox.vercel.app/
 
 Source repository: https://github.com/Rikitu03/ausnox
 
-Resource/license register: https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/THIRD_PARTY_NOTICES.md . Original project code is MIT by owner authorization; external components and assets retain their own terms. Media permissions, external design rights and restricted dependency compatibility still require review.
+Resource/license register: https://github.com/Rikitu03/ausnox/blob/main/docs/THIRD_PARTY_NOTICES.md . Original project code is MIT by owner authorization; external components and assets retain their own terms. Media permissions, external design rights and restricted dependency compatibility still require review.
 
 ## Field 6 — Use of Super Intelligence (SI)
 
@@ -160,8 +160,8 @@ These fields can also carry tool/source credits, per the owner's form instructio
 | OpenAI Codex — development/documentation assistance | https://openai.com/codex/ |
 | Anthropic Claude Code — development assistance | https://code.claude.com/docs/en/overview |
 | ElevenLabs — candidate narration/transcription; rights check pending | https://elevenlabs.io/ |
-| Candidate film — production/disclosure and programmed score method | https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/film/production-disclosure.md |
-| Complete dependency versions, transitive credits and rights register | https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/THIRD_PARTY_NOTICES.md |
+| Candidate film — production/disclosure and programmed score method | https://github.com/Rikitu03/ausnox/blob/main/film/production-disclosure.md |
+| Complete dependency versions, transitive credits and rights register | https://github.com/Rikitu03/ausnox/blob/main/docs/THIRD_PARTY_NOTICES.md |
 
 Do not cite THEMIS/MEDA/CRISM/RAD as integrated data. Validation-only CTX DTM/orthomosaic/RDRs are recorded in the pipeline report rather than presented as additional deployed datasets. If the form limits link rows, retain direct scientific references and use the complete register link for the detailed tool inventory; this is a recommendation, not a verified form limit.
 

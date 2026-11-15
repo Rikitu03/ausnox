@@ -1,7 +1,6 @@
 SUGGESTED UPLOAD TITLE (retain provider title credit for the recorded free-plan narration):
 Ausnox — Navigating the Red Planet from Dawn to Dusk | AI voice: elevenlabs.io
 
-UPLOAD STATUS: PENDING. This is prepared copy, not an uploaded video or verified public URL. Resolve the generation-time ElevenLabs account/voice permissions, competition reuse terms and external design/logo rights before publishing. Confirm the text matches the final export.
 
 Ausnox is an educational Marswalk planning prototype for NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map. Explore real Jezero terrain in 2D and 3D, compare terrain-aware A* outbound and return routes, and examine how science time, illustrative EVA settings and geometric daylight affect a simulated mission.
 
@@ -15,8 +14,8 @@ This video combines real application recordings with SI-assisted programmed moti
 Voiceover generated using ElevenLabs AI. The narration is synthetic. The producer records ElevenLabs text-to-speech and Scribe transcript comparison. The score and sound effects use programmed synthesis with AI-assisted code; no stock music, external samples or generative music service is recorded. Preserve SI acknowledgment in the uploaded media metadata and use the hosting platform's synthetic-content disclosure where offered.
 
 OpenAI GPT models, OpenAI Codex and Anthropic Claude Code assisted Ausnox software planning, programming, interface refinement, documentation, integration and testing. AI-assisted code did not replace authentic NASA/USGS terrain observations with generated terrain. Detailed disclosures:
-https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/AI_USAGE.md
-https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/SI_DISCLOSURE.json
+https://github.com/Rikitu03/ausnox/blob/main/docs/AI_USAGE.md
+https://github.com/Rikitu03/ausnox/blob/main/docs/SI_DISCLOSURE.json
 
 SCIENTIFIC SOURCES
 Elevation source: Fergason, R. L., Galuszka, D. M., Hare, T. M., Mayer, D. P., Redding, B. L., Smith, E. D. (2020). High-Resolution Imaging Science Experiment Digital Terrain Model Mosaic for Mars 2020 Terrain Relative Navigation. U.S. Geological Survey. https://doi.org/10.5066/P9REJ9JN
@@ -30,7 +29,7 @@ Martian time and geometric daylight: NASA GISS Mars24; Allison & McEwen (2000).
 https://www.giss.nasa.gov/tools/mars24/help/algorithm.html
 Fonts: Instrument Sans (Instrument Sans Project Authors) and IBM Plex Mono (IBM), SIL Open Font License 1.1.
 Software/source credits and rights register:
-https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/THIRD_PARTY_NOTICES.md
+https://github.com/Rikitu03/ausnox/blob/main/docs/THIRD_PARTY_NOTICES.md
 
 ENGLISH SUBTITLES
 The inspected local candidate includes burned-in English captions. Upload the matching original production captions.srt as an English caption track too, then verify timing and spoken wording after platform processing. This preparation file does not certify an uploaded track.

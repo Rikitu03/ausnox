@@ -2,7 +2,7 @@
 
 This is a compliance record for a **separate local candidate**, not a claim of publication or a duplicate production workflow. At audit time the original working tree contained `film/ausnox-showcase-25s.mp4`, its compositor/capture/synthesis scripts, narration, captions and producer's disclosure. Those uncommitted files were inspected read-only and left untouched. Only this disclosure and upload copy are included on the compliance branch; no video/toolchain is fabricated or imported.
 
-The owner confirms the film **has not been uploaded to YouTube**. Public demonstration URL: **PENDING**. [Candidate fingerprint](../docs/evidence/compliance/local-film.json) identifies the bytes inspected; recheck after any re-export.
+The film is the submitted project demonstration; its public link is on the Space Apps project page. [Candidate fingerprint](../docs/evidence/compliance/local-film.json) identifies the bytes inspected; recheck after any re-export.
 
 ## Elements and evidence
 
