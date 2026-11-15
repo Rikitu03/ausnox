@@ -1,16 +1,18 @@
-import { CircleHelp, FlaskConical } from 'lucide-react'
-import { KIND_META, KindBadge, type BadgeKind } from '@/components/provenance/Provenance'
+import { ArrowRight, CircleHelp, Eye, FlaskConical, ShieldAlert, SlidersHorizontal, type LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Dialog, Tooltip } from '@/components/ui/overlay'
+import { Popover, PopoverClose, Tooltip } from '@/components/ui/overlay'
 import { dataMode } from '@/services'
 import { useDataStore } from '@/stores/dataStore'
 import { useUiStore, VIEWS } from '@/stores/uiStore'
 import { cn } from '@/utils/cn'
 import { Logo } from './primitives'
 
+export { HelpDialog } from './HelpDialog'
+
 export function TopBar() {
   const view = useUiStore((s) => s.view)
   const setView = useUiStore((s) => s.setView)
+  const openSources = useUiStore((s) => s.openSources)
   const setHelpOpen = useUiStore((s) => s.setHelpOpen)
   const title = useDataStore((s) => s.manifest?.title)
   return (
@@ -40,29 +42,20 @@ export function TopBar() {
       </nav>
 
       <div className="flex shrink-0 items-center gap-1.5">
-        <Tooltip label="Every mission in Ausnox is hypothetical. Nothing here is live" side="bottom">
-          <button
-            type="button"
-            onClick={() => setHelpOpen(true)}
-            className="tap hidden h-7 items-center gap-1.5 rounded-ctl border border-line-strong px-2 text-xs text-fg-2 transition-colors duration-150 hover:text-fg md:inline-flex"
-          >
-            <FlaskConical className="size-3.5" aria-hidden />
-            Simulated mission
-          </button>
-        </Tooltip>
+        <SimulatedMission />
         {dataMode === 'mock' && (
           <Tooltip label="No NASA or USGS data is loaded in this build. See data sources" side="bottom">
             <button
               type="button"
-              onClick={() => setView('sources')}
+              onClick={() => openSources('overview')}
               className="tap hidden h-7 items-center rounded-ctl border border-line-strong px-2 text-xs text-fg-2 transition-colors duration-150 hover:text-fg lg:inline-flex"
             >
               Demo data
             </button>
           </Tooltip>
         )}
-        <Tooltip label="Help and credits" side="bottom">
-          <Button variant="ghost" size="icon-sm" aria-label="Help and credits" onClick={() => setHelpOpen(true)}>
+        <Tooltip label="Help" side="bottom">
+          <Button variant="ghost" size="icon-sm" aria-label="Help" onClick={() => setHelpOpen(true)}>
             <CircleHelp />
           </Button>
         </Tooltip>
@@ -71,77 +64,66 @@ export function TopBar() {
   )
 }
 
-const STEPS = [
-  'Place a hypothetical habitat and a science destination on the map, or type coordinates',
-  'Add science stops and set how long each takes',
-  'Compare the shortest traversable route with the lower-slope route',
-  'Open advanced assumptions to change speed, slope limit, reserve and start time',
-  'Run the simulated clock and watch the return margin against sunset',
+/** What is real and what is assumed, in four lines. Deliberately not the Help dialog. */
+const FACTS: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: FlaskConical, title: 'The mission is hypothetical', body: 'No astronaut, habitat or rover is tracked. Nothing here is live.' },
+  dataMode === 'real'
+    ? { icon: Eye, title: 'The terrain is real', body: 'Elevation and imagery are NASA and USGS orbital observations of Jezero crater.' }
+    : { icon: Eye, title: 'The terrain is a demo stand-in', body: 'This build uses synthetic terrain. Real builds use NASA and USGS observations.' },
+  { icon: SlidersHorizontal, title: 'Assumptions are simulated', body: 'Walking speed, science-stop times and EVA limits are illustrative, and you can change them.' },
+  { icon: ShieldAlert, title: 'Feasible is not safe', body: 'A verdict holds only under the chosen assumptions. It is not a safety certification.' },
 ]
 
-export function HelpDialog() {
-  const open = useUiStore((s) => s.helpOpen)
-  const setOpen = useUiStore((s) => s.setHelpOpen)
-  const setView = useUiStore((s) => s.setView)
+function SimulatedMission() {
+  const openSources = useUiStore((s) => s.openSources)
   return (
-    <Dialog open={open} onOpenChange={setOpen} title="About Ausnox" description="Navigating the Red Planet from dawn to dusk">
-      <div className="space-y-5 text-[13px] text-fg-2">
-        <p>
-          Ausnox is an educational Marswalk planning simulation for Jezero Crater, made for NASA Space Apps 2026. Every mission is
-          hypothetical. It is not for operational navigation and is not endorsed by NASA
-        </p>
-        {dataMode === 'mock' && (
-          <p className="rounded-card border border-line bg-raised p-3 text-fg">
-            This build runs on demonstration data. The terrain is synthetic, routes are demonstration arcs and daylight times are
-            fixed examples. Real NASA and USGS data arrives with the scientific engine
-          </p>
-        )}
-        {dataMode === 'real' && (
-          <div className="rounded-card border border-line bg-raised p-3">
-            <h3 className="mb-1 font-medium text-fg">Data and credits</h3>
-            <p>
-              Terrain: USGS HiRISE DTM mosaic for Mars 2020 TRN (Fergason et al. 2020, doi:10.5066/P9REJ9JN), NASA/JPL-Caltech/University
-              of Arizona. Imagery: NASA/JPL Mars Trek (MRO HiRISE and CTX, MGS MOLA). Science targets: NASA/JPL-Caltech Perseverance
-              rover localizations (MMGIS). Daylight: NASA GISS Mars24 algorithm. Overlay registration against imagery is uncertain by
-              about 3 m (unresolved check X2b)
-            </p>
-          </div>
-        )}
-        <div>
-          <h3 className="mb-2 font-medium text-fg">Planning a mission</h3>
-          <ol className="list-decimal space-y-1.5 pl-5">
-            {STEPS.map((s) => (
-              <li key={s}>{s}</li>
-            ))}
-          </ol>
-        </div>
-        <div>
-          <h3 className="mb-2 font-medium text-fg">Labels</h3>
-          <ul className="space-y-2">
-            {(Object.keys(KIND_META) as BadgeKind[]).map((k) => (
-              <li key={k} className="grid grid-cols-[104px_1fr] items-start gap-3">
-                <KindBadge kind={k} className="justify-self-start" />
-                {KIND_META[k].meaning}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h3 className="mb-2 font-medium text-fg">Keyboard</h3>
-          <p>
-            Every control is reachable with Tab. With the map focused, arrow keys pan and plus and minus zoom. Use Enter coordinates
-            to place points without a pointer. Escape cancels placement and closes dialogs
-          </p>
-        </div>
-        <Button
-          onClick={() => {
-            setOpen(false)
-            setView('sources')
-          }}
+    <Popover
+      label="About this simulated mission"
+      trigger={
+        <button
+          type="button"
+          aria-label="Simulated mission: what is real and what is assumed"
+          className="tap inline-flex h-7 items-center gap-1.5 rounded-ctl border border-line-strong px-2 text-xs text-fg-2 transition-colors duration-150 hover:text-fg data-[state=open]:border-fg-3 data-[state=open]:text-fg"
         >
-          Data sources, methods and credits
-        </Button>
+          <FlaskConical className="size-3.5" aria-hidden />
+          <span className="hidden md:inline">Simulated mission</span>
+        </button>
+      }
+    >
+      <div className="border-b border-line px-4 pt-4 pb-3">
+        <p className="text-[15px] font-medium">Simulated mission</p>
+        <p className="mt-0.5 text-[13px] text-fg-2">What is real in Ausnox, and what is assumed</p>
       </div>
-    </Dialog>
+      <ul className="space-y-3.5 px-4 py-4">
+        {FACTS.map(({ icon: Icon, title, body }) => (
+          <li key={title} className="flex gap-3">
+            <span className="grid size-7 shrink-0 place-items-center rounded-[7px] bg-raised text-fg-2" aria-hidden>
+              <Icon className="size-3.5" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[13px] leading-5 font-medium">{title}</p>
+              <p className="text-[13px] leading-5 text-fg-2">{body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="flex items-center justify-between gap-3 border-t border-line px-4 py-3">
+        <PopoverClose asChild>
+          <button
+            type="button"
+            onClick={() => openSources('methodology')}
+            className="tap inline-flex items-center gap-1.5 rounded-ctl text-[13px] font-medium text-fg transition-colors duration-150 hover:text-accent"
+          >
+            How the science works
+            <ArrowRight className="size-3.5" aria-hidden />
+          </button>
+        </PopoverClose>
+        <PopoverClose asChild>
+          <button type="button" onClick={() => openSources('limitations')} className="tap rounded-ctl text-[13px] text-fg-2 hover:text-fg">
+            Limitations
+          </button>
+        </PopoverClose>
+      </div>
+    </Popover>
   )
 }

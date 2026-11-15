@@ -76,13 +76,13 @@ export function SpeedControl({ className }: { className?: string }) {
 }
 
 /** Slim transport strip under the map: clock, play, the sol timeline. */
-export function SimDock({ className }: { className?: string }) {
+export function SimDock({ className, minimal }: { className?: string; minimal?: boolean }) {
   const snapshot = useSimulationSnapshot()
   const endS = useSimStore((s) => s.endS)
   const setView = useUiStore((s) => s.setView)
   const view = useUiStore((s) => s.view)
   return (
-    <section aria-label="Simulated mission clock" className={cn('sim-dock flex flex-wrap items-center gap-3 rounded-panel border border-line-strong bg-surface px-4 py-3', className)}>
+    <section aria-label="Simulated mission clock" className={cn('flex items-center gap-4 rounded-panel border border-line-strong bg-surface px-4 py-3', className)}>
       <PlayButton />
       <div className="shrink-0">
         <div className="flex items-center gap-2">
@@ -95,8 +95,8 @@ export function SimDock({ className }: { className?: string }) {
           {endS <= 0 ? 'Local solar time · no plan' : `Local solar time · T+${formatDuration(snapshot.simS)}`}
         </p>
       </div>
-      <DaylightTimeline compact className="min-w-24 flex-1 max-sm:basis-full" />
-      {view !== 'simulation' && (
+      <DaylightTimeline compact className="flex-1" />
+      {view !== 'simulation' && !minimal && (
         <Button size="sm" variant="ghost" className="hidden shrink-0 sm:inline-flex" onClick={() => setView('simulation')}>
           Open simulation
         </Button>

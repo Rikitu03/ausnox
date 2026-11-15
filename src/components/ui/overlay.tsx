@@ -1,5 +1,5 @@
 import { X } from 'lucide-react'
-import { Dialog as RadixDialog, Tooltip as RadixTooltip } from 'radix-ui'
+import { Dialog as RadixDialog, Popover as RadixPopover, Tooltip as RadixTooltip } from 'radix-ui'
 import { useState, type ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 import { Button } from './button'
@@ -18,7 +18,7 @@ const scrim = 'fixed inset-0 z-[1100] bg-black/55 anim-fade'
 
 /** Controlled overlays have external openers rather than Radix Trigger elements. */
 function useFocusReturn(open: boolean, fallbackFocus?: () => HTMLElement | null) {
-  const activeElement = () => document.activeElement instanceof HTMLElement ? document.activeElement : null
+  const activeElement = () => (document.activeElement instanceof HTMLElement ? document.activeElement : null)
   // Capture before the open render commits: React autoFocus may run before Radix's focus event.
   const [focus, setFocus] = useState(() => ({ open, opener: open ? activeElement() : null }))
   if (focus.open !== open) setFocus({ open, opener: open ? activeElement() : focus.opener })
@@ -28,7 +28,7 @@ function useFocusReturn(open: boolean, fallbackFocus?: () => HTMLElement | null)
       const target = focus.opener
       const dialogs = Array.from(document.querySelectorAll('[role="dialog"][data-state="open"]'))
       // Restore inside a remaining parent sheet, but do not take focus from a newly opened modal.
-      if (dialogs.length && !dialogs.some(dialog => target && dialog.contains(target))) return
+      if (dialogs.length && !dialogs.some((dialog) => target && dialog.contains(target))) return
       if (target?.isConnected && target !== document.body) target.focus()
       else fallbackFocus?.()?.focus()
     },
@@ -55,8 +55,12 @@ function Header({ title, description }: { title: string; description?: string })
   )
 }
 
-/** Centred modal. Escape closes it and focus returns to the trigger. */
-export function Dialog({ open, onOpenChange, title, description, children, className, fallbackFocus }: OverlayProps) {
+/**
+ * Centred modal. Escape closes it and focus returns to the trigger. Only the body scrolls, so the
+ * title and close button stay in view. `bare` hands the whole body to the caller (for tabbed layouts
+ * that manage their own scrolling regions).
+ */
+export function Dialog({ open, onOpenChange, title, description, children, className, bare, fallbackFocus }: OverlayProps & { bare?: boolean }) {
   const focusReturn = useFocusReturn(open, fallbackFocus)
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
@@ -70,12 +74,52 @@ export function Dialog({ open, onOpenChange, title, description, children, class
           )}
         >
           <Header title={title} description={description} />
-          <div className="min-h-0 overflow-y-auto px-5 py-4">{children}</div>
+          {bare ? <div className="flex min-h-0 flex-1 flex-col">{children}</div> : <div className="min-h-0 overflow-y-auto px-5 py-4">{children}</div>}
         </RadixDialog.Content>
       </RadixDialog.Portal>
     </RadixDialog.Root>
   )
 }
+
+/**
+ * Small non-modal panel anchored to its trigger. Escape or an outside click closes it and focus
+ * returns to the trigger. Used for short explanations that do not deserve a full dialog.
+ */
+export function Popover({
+  trigger,
+  children,
+  label,
+  align = 'end',
+  className,
+}: {
+  trigger: ReactNode
+  children: ReactNode
+  label: string
+  align?: 'start' | 'center' | 'end'
+  className?: string
+}) {
+  return (
+    <RadixPopover.Root>
+      <RadixPopover.Trigger asChild>{trigger}</RadixPopover.Trigger>
+      <RadixPopover.Portal>
+        <RadixPopover.Content
+          align={align}
+          sideOffset={8}
+          collisionPadding={12}
+          aria-label={label}
+          className={cn(
+            'anim-rise z-[1150] w-[min(360px,calc(100vw-24px))] rounded-panel border border-line-strong bg-surface shadow-[0_16px_48px_rgb(0_0_0/0.45)] outline-none',
+            className,
+          )}
+        >
+          {children}
+        </RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
+  )
+}
+
+export const PopoverClose = RadixPopover.Close
 
 /** Side sheet. Used for provenance and for the side panels on narrow screens. */
 export function Sheet({ side = 'right', bare, ...props }: OverlayProps & { side?: 'left' | 'right'; bare?: boolean }) {

@@ -434,7 +434,7 @@ describe('map data (real)', () => {
     expect(real.terrain.sample(W('three-forks-depot-area').position).validity).toBe('valid')
     // provenance does not claim Mars Trek layers that did not load
     const rec = real.mapData.listProvenance().find((r) => r.id === 'hirise-ortho')!
-    expect(rec.integration).toBe('planned')
+    expect(rec.integration).toBe('unavailable')
     // without a canvas (Node), DTM overlays report an error instead of an empty or invented image
     expect(await real.mapData.getLayerImagery('slope')).toMatchObject({ status: 'error', code: 'DATA_UNAVAILABLE' })
   })
