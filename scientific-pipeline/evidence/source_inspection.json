@@ -1,0 +1,175 @@
+{
+  "generated_utc": "2026-11-15T04:46:56Z",
+  "product": {
+    "key": "hirise_dtm",
+    "filename": "JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40.tif",
+    "bytes": 1839545409,
+    "sha256": "44c3819caa33922b06f7a8228534d1e32ab4087aca85144136d825c371c747d8",
+    "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/mars2020_trn/HiRISE/JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40.tif",
+    "doi": "10.5066/P9REJ9JN"
+  },
+  "header": {
+    "driver": "GTiff",
+    "width": 21400,
+    "height": 21488,
+    "count": 1,
+    "dtype": "float32",
+    "nodata": -3.4028226550889045e+38,
+    "transform": [
+      1.0,
+      0.0,
+      4577366.0,
+      0.0,
+      -1.0,
+      1106618.0
+    ],
+    "bounds_projected_m": [
+      4577366.0,
+      1085130.0,
+      4598766.0,
+      1106618.0
+    ],
+    "block_shape": [
+      1,
+      21400
+    ],
+    "tiled": false,
+    "compression": null,
+    "units": [
+      null
+    ],
+    "crs_wkt": "PROJCS[\"Equirectangular Mars 2000 Sphere IAU\",GEOGCS[\"D_Mars_2000_Sphere\",DATUM[\"Mars_2000_(Sphere)\",SPHEROID[\"Mars_2000_Sphere_IAU\",3396190,0],AUTHORITY[\"ESRI\",\"106971\"]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "gdal": "3.12.2",
+    "rasterio": "1.5.2"
+  },
+  "crs": {
+    "body": "Mars",
+    "kind": "mars-equirectangular-sphere",
+    "projection": "Equirectangular (Equidistant Cylindrical, spherical)",
+    "datum": "Mars 2000 (IAU 2000 sphere)",
+    "sphere_radius_m": 3396190.0,
+    "latitude_of_true_scale_deg": 0.0,
+    "central_meridian_deg": 0.0,
+    "false_easting_m": 0.0,
+    "false_northing_m": 0.0,
+    "latitude_type": "planetocentric",
+    "longitude_direction": "east-positive",
+    "longitude_domain": "-180..180",
+    "axis_order_geographic": "longitude,latitude",
+    "source_wkt": "PROJCRS[\"Equirectangular Mars 2000 Sphere IAU\",BASEGEOGCRS[\"D_Mars_2000_Sphere\",DATUM[\"Mars_2000_(Sphere)\",ELLIPSOID[\"Mars_2000_Sphere_IAU\",3396190,0,LENGTHUNIT[\"metre\",1]],ID[\"ESRI\",106971]],PRIMEM[\"Reference_Meridian\",0,ANGLEUNIT[\"degree\",0.0174532925199433,ID[\"EPSG\",9122]]]],CONVERSION[\"unnamed\",METHOD[\"Equidistant Cylindrical (Spherical)\",ID[\"EPSG\",1029]],PARAMETER[\"Latitude of 1st standard parallel\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8823]],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"easting\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"northing\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+    "proj4": "+proj=eqc +lat_ts=0 +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +R=3396190 +units=m +no_defs +type=crs"
+  },
+  "geographic_bounds_deg": {
+    "west": 77.2229330769714,
+    "east": 77.58396402093513,
+    "south": 18.30679944968657,
+    "north": 18.669315006877746
+  },
+  "pds3_label": {
+    "PDS_VERSION_ID": "PDS3",
+    "DD_VERSION_ID": "PDSCAT1R100",
+    "LABEL_REVISION_NOTE": "2017-05-01, David P. Mayer (USGS), initial PDS3 label pointing to GeoTIFF;",
+    "RECORD_TYPE": "FIXED_LENGTH",
+    "RECORD_BYTES": "85600",
+    "TARGET_NAME": "MARS",
+    "OBJECT": "IMAGE",
+    "LINES": "21488",
+    "LINE_SAMPLES": "21400",
+    "SAMPLE_BITS": "32",
+    "SAMPLE_TYPE": "IEEE_REAL",
+    "BANDS": "1",
+    "BAND_STORAGE_TYPE": "BAND_SEQUENTIAL",
+    "SCALING_FACTOR": "1.0",
+    "OFFSET": "0.0",
+    "END_OBJECT": "IMAGE",
+    "MAP_PROJECTION_TYPE": "EQUIRECTANGULAR",
+    "A_AXIS_RADIUS": "3396.19 <KILOMETERS>",
+    "B_AXIS_RADIUS": "3396.19 <KILOMETERS>",
+    "C_AXIS_RADIUS": "3396.19 <KILOMETERS>",
+    "FIRST_STANDARD_PARALLEL": "N/A",
+    "SECOND_STANDARD_PARALLEL": "N/A",
+    "POSITIVE_LONGITUDE_DIRECTION": "EAST",
+    "CENTER_LATITUDE": "0.0 <DEGREES>",
+    "CENTER_LONGITUDE": "0.0 <DEGREES>",
+    "REFERENCE_LATITUDE": "N/A",
+    "REFERENCE_LONGITUDE": "N/A",
+    "LINE_FIRST_PIXEL": "1",
+    "LINE_LAST_PIXEL": "21488",
+    "SAMPLE_FIRST_PIXEL": "1",
+    "SAMPLE_LAST_PIXEL": "21400",
+    "MAP_PROJECTION_ROTATION": "0.0",
+    "MAP_RESOLUTION": "59274.69752330622 <PIXELS/DEGREE>",
+    "MAP_SCALE": "1.0 <METERS/PIXEL>",
+    "MAXIMUM_LATITUDE": "18.669315006877746 <DEGREES>",
+    "MINIMUM_LATITUDE": "18.306799449686565 <DEGREES>",
+    "EASTERNMOST_LONGITUDE": "77.58396402093508 <DEGREES>",
+    "WESTERNMOST_LONGITUDE": "77.22293307697142 <DEGREES>",
+    "LINE_PROJECTION_OFFSET": "1106617.5 <PIXELS>",
+    "SAMPLE_PROJECTION_OFFSET": "-4577366.5 <PIXELS>",
+    "COORDINATE_SYSTEM_TYPE": "BODY-FIXED ROTATING",
+    "COORDINATE_SYSTEM_NAME": "PLANETOCENTRIC",
+    "PROJECTION_LATITUDE_TYPE": "PLANETOCENTRIC"
+  },
+  "fgdc": {
+    "horizontal_accuracy_value_m": "1.1",
+    "horizontal_accuracy_explanation": "All pairwise combinations of HiRISE orthoimages derived from the nadir-most members of each stereopair are registered to better than 3 meters at the 99th percentile, with most overlapping images registered to better than 1.1 meters at the 99th percentile. The HiRISE orthomosaic was also compared to the CTX orthomosaic (i.e., Lander Vision System (LVS) map) and we believe the result that 94.1% of matched features have displacements less than 6 meters is conservative.",
+    "vertical_accuracy_value_m": "0.4",
+    "vertical_accuracy_explanation": "The HiRISE DTM mosaic has a median vertical offset from the CTX DTM mosaic (i.e., LVS elevation map) of ~0.4 meters, with the CTX DTM mosaic floating above the HiRISE mosaic.",
+    "horizontal_datum": "D_Mars_2000_Sphere",
+    "ellipsoid": "Mars_2000_Sphere_IAU",
+    "semi_axis_m": "3396190.0",
+    "projection": "Equirectangular",
+    "standard_parallel": "0.0",
+    "central_meridian": "0.0",
+    "attribute_min_m": "-2659.776611328125",
+    "attribute_max_m": "-1942.1046142578125",
+    "access_constraints": "None",
+    "use_constraints": "None",
+    "publication_date": "20200724",
+    "doi_link": "https://doi.org/10.5066/P9REJ9JN"
+  },
+  "full_raster_statistics": {
+    "valid_posts": 303990958,
+    "total_posts": 459843200,
+    "valid_fraction": 0.6610752491283985,
+    "min_m": -2665.37109375,
+    "max_m": -1639.885498046875,
+    "mean_m": -2419.9421734070843
+  },
+  "checks": [
+    {
+      "id": "L1-dimensions",
+      "status": "PASS",
+      "detail": "PDS3 LINES x LINE_SAMPLES 21488 x 21400 vs raster 21488 x 21400"
+    },
+    {
+      "id": "L2-pixel-scale",
+      "status": "PASS",
+      "detail": "PDS3 MAP_SCALE 1.0 <METERS/PIXEL> vs geotransform (1.0, 1.0)"
+    },
+    {
+      "id": "L3-body-radius",
+      "status": "PASS",
+      "detail": "PDS3 A/C_AXIS_RADIUS 3396.19 <KILOMETERS>/3396.19 <KILOMETERS> vs CRS sphere 3396190.0 m"
+    },
+    {
+      "id": "L4-conventions",
+      "status": "PASS",
+      "detail": "PDS3: equirectangular, center lat/lon 0, planetocentric latitude, east-positive longitude"
+    },
+    {
+      "id": "L5-geographic-bounds",
+      "status": "PASS",
+      "detail": "PDS3 W/E/S/N 77.22293307697142 <DEGREES>/77.58396402093508 <DEGREES>/18.306799449686565 <DEGREES>/18.669315006877746 <DEGREES> vs bounds from geotransform 77.222933077/77.583964021/18.306799450/18.669315007"
+    },
+    {
+      "id": "F1-fgdc-geodetic",
+      "status": "PASS",
+      "detail": "FGDC datum D_Mars_2000_Sphere, semi-axis 3396190.0 m, Equirectangular std parallel 0.0"
+    }
+  ],
+  "notes": [
+    "FGDC attribute range -2659.776611328125..-1942.1046142578125 m does not contain the observed raster range -2665.371..-1639.885 m; the published metadata range appears to describe a different version or subset. The Ausnox AOI values lie inside both ranges."
+  ],
+  "overall": "PASS"
+}

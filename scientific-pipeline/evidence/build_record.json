@@ -1,0 +1,68 @@
+{
+  "aoi_id": "jezero-delta-front-p0",
+  "terrain_bin_sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+  "terrain_bin_bytes": 5760000,
+  "grid": [
+    800,
+    800
+  ],
+  "missing_source_posts": 0,
+  "statistics": {
+    "cell_count": 640000,
+    "elevation_valid_count": 640000,
+    "slope_valid_count": 636804,
+    "elevation_missing_count": 0,
+    "slope_unknown_count": 3196
+  },
+  "elevation": {
+    "min": -2559.2695,
+    "max": -2443.7686,
+    "mean": -2511.9462
+  },
+  "slope": {
+    "min": 0.0068,
+    "max": 67.482,
+    "mean": 6.4348,
+    "p50": 4.4125,
+    "p90": 14.6197,
+    "p99": 29.128
+  },
+  "science_targets": [
+    {
+      "id": "three-forks-depot-area",
+      "lon_east": 77.40844668,
+      "lat_north": 18.45337179,
+      "grid_cell": {
+        "row": 477,
+        "col": 458
+      },
+      "elevation_dtm_m": -2545.158,
+      "rover_reported_elev_geoid_m": -2545.203,
+      "slope_dtm_deg": 1.398
+    },
+    {
+      "id": "skinner-ridge-sampling-site",
+      "lon_east": 77.40616768,
+      "lat_north": 18.45889532,
+      "grid_cell": {
+        "row": 314,
+        "col": 390
+      },
+      "elevation_dtm_m": -2521.016,
+      "rover_reported_elev_geoid_m": -2520.852539,
+      "slope_dtm_deg": 20.755
+    }
+  ],
+  "processing": {
+    "pipeline_version": "1.0.0",
+    "build_command": "python scripts/build_terrain.py ",
+    "config": "config/jezero_p0.json",
+    "created_utc": "2026-11-15T04:47:24Z",
+    "python": "3.12.10",
+    "numpy": "2.5.4",
+    "rasterio": "1.5.2",
+    "gdal": "3.12.2",
+    "pyproj": "3.8.0",
+    "proj": "9.8.1"
+  }
+}

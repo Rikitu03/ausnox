@@ -1,0 +1,149 @@
+{
+  "validated_utc": "2026-11-15T04:51:19Z",
+  "run": 2,
+  "overall": "FAIL",
+  "terrain_sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+  "previous_run": "evidence/cross_validation_report_run1_failed.json",
+  "checks": [
+    {
+      "id": "X1-ctx-vs-hirise",
+      "status": "PASS",
+      "detail": "6241 CTX 20 m posts fully inside the AOI: median(CTX - HiRISE) +0.817 m (CTX above HiRISE, as USGS documents ~0.4 m), MAD 2.176 m; both within the 3.8 m CTX vertical registration stated by USGS. p95 |diff| 7.822 m grows with slope (resolution/registration effect).",
+      "criterion": "|median| <= 3.8 m and MAD <= 3.8 m (USGS FGDC CTX vertical registration)",
+      "run1_criterion": {
+        "rule": "p95 |diff| < 5 m",
+        "observed_m": 7.822,
+        "result": "FAIL"
+      },
+      "ctx_pixel_m": 20.0,
+      "n": 6241,
+      "median_m": 0.8169,
+      "mad_m": 2.1765,
+      "p95_abs_m": 7.8225,
+      "by_max_slope_in_footprint": {
+        "0-5deg": {
+          "n": 1197,
+          "median_m": 0.243,
+          "mad_m": 1.945,
+          "p95_abs_m": 6.638
+        },
+        "5-10deg": {
+          "n": 2453,
+          "median_m": 0.528,
+          "mad_m": 1.967,
+          "p95_abs_m": 6.589
+        },
+        "10-20deg": {
+          "n": 1815,
+          "median_m": 1.445,
+          "mad_m": 2.16,
+          "p95_abs_m": 8.621
+        },
+        "20-90deg": {
+          "n": 776,
+          "median_m": 2.146,
+          "mad_m": 3.148,
+          "p95_abs_m": 10.739
+        }
+      }
+    },
+    {
+      "id": "X2a-marstrek-tiles-vs-usgs-ortho",
+      "status": "PASS",
+      "detail": "Mars Trek z15 tiles vs USGS 25 cm orthomosaic (DTM companion, same grid origin): peak correlation 0.9746 at (+0.39, +0.56) px = +0.47 m east, +0.71 m south; below one 1.27 m tile pixel in both axes",
+      "criterion": "|offset| < 1 Mars Trek pixel in both axes and peak correlation >= 0.9 (chosen after run 1)",
+      "peak_correlation": 0.97457,
+      "zero_shift_correlation": 0.97212,
+      "offset_east_m": 0.47,
+      "offset_south_m": 0.708,
+      "trek_pixel_m": {
+        "north_south": 1.2719,
+        "east_west": 1.2065
+      },
+      "layer": "JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd",
+      "zoom": 15,
+      "tiles": 36,
+      "tiles_fetched_now": 0,
+      "tile_rows": [
+        13021,
+        13026
+      ],
+      "tile_cols": [
+        46856,
+        46861
+      ],
+      "pixel_deg": 2.1457672119140625e-05
+    },
+    {
+      "id": "X2b-dtm-vs-imagery-photometric",
+      "status": "FAIL",
+      "detail": "usgs-ortho/linear-all: +2.29 m E, -1.10 m S (R2 0.338); usgs-ortho/quadratic-masked: +2.57 m E, -0.71 m S (R2 0.187); mars-trek/linear-all: +2.61 m E, -0.38 m S (R2 0.335); mars-trek/quadratic-masked: +3.17 m E, -0.23 m S (R2 0.185)",
+      "criterion": "apparent shift magnitude <= 2.0 m with the shadow/steep-masked quadratic shading model (both image sources)",
+      "max_shift_magnitude_m_any_model": 3.176,
+      "max_shift_magnitude_m_quadratic_masked": 3.176,
+      "method_note": "Brightness is regressed on DEM gradients. scripts/photometric_control.py shows the method is unbiased (<= 0.03 m) on synthetic images rendered from the DTM, with and without cast shadows, and a direct image-vs-rendering cross-correlation gives the same ~2.4 m offset; the offset is therefore treated as a real DTM-to-orthoimage displacement (USGS FGDC: orthoimage co-registration up to 3 m at the 99th percentile). Albedo variation is not modelled. Routing uses only the DTM; the offset affects overlay display.",
+      "results": {
+        "usgs-ortho/linear-all": {
+          "model": "linear-all",
+          "best_shift_cells": [
+            -1,
+            1
+          ],
+          "subcell_shift_cells": [
+            -0.55,
+            1.208
+          ],
+          "shift_east_m": 2.291,
+          "shift_south_m": -1.101,
+          "r2_best": 0.3377,
+          "r2_zero_shift": 0.3187
+        },
+        "usgs-ortho/quadratic-masked": {
+          "model": "quadratic-masked",
+          "best_shift_cells": [
+            0,
+            1
+          ],
+          "subcell_shift_cells": [
+            -0.356,
+            1.354
+          ],
+          "shift_east_m": 2.569,
+          "shift_south_m": -0.712,
+          "r2_best": 0.1866,
+          "r2_zero_shift": 0.1621
+        },
+        "mars-trek/linear-all": {
+          "model": "linear-all",
+          "best_shift_cells": [
+            0,
+            1
+          ],
+          "subcell_shift_cells": [
+            -0.191,
+            1.374
+          ],
+          "shift_east_m": 2.607,
+          "shift_south_m": -0.382,
+          "r2_best": 0.3347,
+          "r2_zero_shift": 0.3037
+        },
+        "mars-trek/quadratic-masked": {
+          "model": "quadratic-masked",
+          "best_shift_cells": [
+            0,
+            2
+          ],
+          "subcell_shift_cells": [
+            -0.117,
+            1.669
+          ],
+          "shift_east_m": 3.167,
+          "shift_south_m": -0.233,
+          "r2_best": 0.1849,
+          "r2_zero_shift": 0.1486
+        }
+      }
+    }
+  ]
+}

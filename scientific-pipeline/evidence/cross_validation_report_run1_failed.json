@@ -1,0 +1,46 @@
+{
+  "validated_utc": "2026-11-14T15:56:47Z",
+  "overall": "FAIL",
+  "terrain_sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+  "checks": [
+    {
+      "id": "X1-ctx-vs-hirise",
+      "status": "FAIL",
+      "detail": "6241 CTX 20 m posts fully inside the AOI: median(CTX - HiRISE asset) +0.817 m, MAD 2.176 m, p95 |diff| 7.822 m (USGS FGDC reports a ~0.4 m median offset, CTX above HiRISE)",
+      "ctx_pixel_m": 20.0,
+      "n": 6241,
+      "median_m": 0.8169,
+      "p95_abs_m": 7.8225
+    },
+    {
+      "id": "X2-marstrek-imagery-registration",
+      "status": "FAIL",
+      "detail": "36 Mars Trek z15 tiles (77.25 mas/px, ~1.27 m/px N-S); best fit at shift (+0,+1) cells, sub-cell (-0.19,+1.37) = +2.61 m east, -0.38 m south; R^2 at zero shift 0.304 vs 0.231 median at >=4-cell shifts",
+      "layer": "JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd",
+      "zoom": 15,
+      "tiles": 36,
+      "tiles_fetched_now": 36,
+      "tile_rows": [
+        13021,
+        13026
+      ],
+      "tile_cols": [
+        46856,
+        46861
+      ],
+      "best_shift_cells": [
+        0,
+        1
+      ],
+      "subcell_shift_cells": [
+        -0.191,
+        1.374
+      ],
+      "shift_east_m": 2.607,
+      "shift_south_m": -0.382,
+      "r2_zero_shift": 0.3037,
+      "r2_far_median": 0.2315,
+      "tolerance_m": 2.0
+    }
+  ]
+}

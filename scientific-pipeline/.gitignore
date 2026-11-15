@@ -1,0 +1,9 @@
+# Local Python environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Original source rasters and tile caches are never committed (re-download with scripts/fetch_sources.py)
+data/raw/
+data/cache/
