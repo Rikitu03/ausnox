@@ -74,6 +74,13 @@ function Controller({ padding }: { padding: MapPadding }) {
   const manifest = useDataStore((s) => s.manifest)
   const focus = useUiStore((s) => s.focus)
   const placement = useUiStore((s) => s.placement)
+  const mapMode = useUiStore((s) => s.mapMode)
+
+  useEffect(() => {
+    if (mapMode !== '2d') return
+    map.invalidateSize()
+    measureScale(map)
+  }, [map, mapMode])
 
   useEffect(() => {
     useMapStore.setState({ map })

@@ -41,6 +41,7 @@ export interface PlacementIssue {
 
 interface UiState {
   view: View
+  mapMode: '2d' | '3d'
   placement: PlacementTarget | null
   placementIssue: PlacementIssue | null
   coordinateEntry: PlacementTarget | null
@@ -58,6 +59,7 @@ interface UiState {
   focus: { seq: number; point: GridCoord | null }
 
   setView(view: View): void
+  setMapMode(mode: UiState['mapMode']): void
   startPlacement(target: PlacementTarget): void
   cancelPlacement(): void
   /** Tries to place the active target. Returns true when the point was accepted. */
@@ -96,6 +98,7 @@ const viewFromHash = (): View => {
 
 export const useUiStore = create<UiState>((set, get) => ({
   view: viewFromHash(),
+  mapMode: '2d',
   placement: null,
   placementIssue: null,
   coordinateEntry: null,
@@ -113,6 +116,7 @@ export const useUiStore = create<UiState>((set, get) => ({
     if (window.location.hash !== `#/${view}`) window.history.replaceState(null, '', `#/${view}`)
     set({ view, sheet: null, placement: null, placementIssue: null })
   },
+  setMapMode: (mapMode) => set({ mapMode }),
   startPlacement: (target) => set({ placement: target, placementIssue: null, sheet: null }),
   cancelPlacement: () => set({ placement: null, placementIssue: null }),
 

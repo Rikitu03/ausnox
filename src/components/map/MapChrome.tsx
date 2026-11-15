@@ -6,7 +6,7 @@ import { KindBadge, SourceBadge } from '@/components/provenance/Provenance'
 import { Button } from '@/components/ui/button'
 import { Segmented } from '@/components/ui/controls'
 import { Dialog, Tooltip } from '@/components/ui/overlay'
-import { dataMode, services, type GridCoord } from '@/services'
+import { services, type GridCoord } from '@/services'
 import { useDataStore } from '@/stores/dataStore'
 import { useMapStore } from '@/stores/mapStore'
 import { useUiStore, type PlacementTarget } from '@/stores/uiStore'
@@ -23,28 +23,36 @@ const TARGET_LABEL: Record<PlacementTarget, string> = {
 
 const float = 'rounded-card border border-line-strong bg-surface'
 
-function ToolButton({ label, onClick, children }: { label: string; onClick?: () => void; children: React.ReactNode }) {
+function ToolButton({ label, onClick, pressed, children }: { label: string; onClick?: () => void; pressed?: boolean; children: React.ReactNode }) {
   return (
     <Tooltip label={label} side="right">
-      <Button variant="ghost" size="icon" aria-label={label} onClick={onClick} className="text-fg">
+      <Button
+        variant="ghost"
+        size="icon"
+        aria-label={label}
+        aria-pressed={pressed}
+        onClick={onClick}
+        className={cn(pressed ? 'bg-accent text-accent-ink hover:bg-accent/90 hover:text-accent-ink' : 'text-fg')}
+      >
         {children}
       </Button>
     </Tooltip>
   )
 }
 
-/** Zoom, fit, layers, coordinate entry and the 3D notice. */
+/** Shared zoom, fit and layer controls for both renderers. */
 export function MapTools({ className, showLayers }: { className?: string; showLayers: boolean }) {
   const map = useMapStore((s) => s.map)
+  const three = useMapStore((s) => s.threeControls)
+  const mode = useUiStore((s) => s.mapMode)
   const focusMap = useUiStore((s) => s.focusMap)
-  const [threeD, setThreeD] = useState(false)
   return (
     <div className={cn('flex flex-col gap-2', className)} role="toolbar" aria-label="Map tools" aria-orientation="vertical">
       <div className={cn(float, 'flex flex-col p-1')}>
-        <ToolButton label="Zoom in" onClick={() => map?.zoomIn()}>
+        <ToolButton label="Zoom in" onClick={() => mode === '3d' ? three?.zoom(0.8) : map?.zoomIn()}>
           <Plus />
         </ToolButton>
-        <ToolButton label="Zoom out" onClick={() => map?.zoomOut()}>
+        <ToolButton label="Zoom out" onClick={() => mode === '3d' ? three?.zoom(1.25) : map?.zoomOut()}>
           <Minus />
         </ToolButton>
         <ToolButton label="Fit terrain coverage" onClick={() => focusMap()}>
@@ -74,23 +82,10 @@ export function MapTools({ className, showLayers }: { className?: string; showLa
             </Popover.Portal>
           </Popover.Root>
         )}
-        <ToolButton label="3D terrain view" onClick={() => setThreeD(true)}>
-          <Box />
+        <ToolButton label="3D terrain view" pressed={mode === '3d'} onClick={() => useUiStore.getState().setMapMode(mode === '3d' ? '2d' : '3d')}>
+          <Box aria-hidden />
         </ToolButton>
       </div>
-      <Dialog open={threeD} onOpenChange={setThreeD} title="3D terrain view is not available" description="The 2D map has everything needed to plan and review a mission">
-        <div className="space-y-3 text-[13px] text-fg-2">
-          <p>
-            {dataMode === 'mock'
-              ? 'A 3D view needs a validated elevation model with a checked height datum. Until that exists, Ausnox will not draw a 3D surface, because a made-up mesh could be mistaken for real Martian relief.'
-              : 'The 3D explorer is not built in this release. Elevation, slope and the route profile from the validated HiRISE DTM are shown in 2D: the elevation and slope overlays, the shaded relief basemap and the elevation profile in the summary.'}
-          </p>
-          <p>Your mission, map position and layers stay exactly as they are.</p>
-          <Button variant="primary" onClick={() => setThreeD(false)}>
-            Back to the 2D map
-          </Button>
-        </div>
-      </Dialog>
     </div>
   )
 }
