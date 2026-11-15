@@ -1,0 +1,84 @@
+{
+  "type": "FeatureCollection",
+  "name": "jezero-delta-front-p0-coverage",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "aoi-boundary",
+        "role": "routing-grid-extent",
+        "aoi_id": "jezero-delta-front-p0",
+        "source_product": "JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40.tif",
+        "coordinate_order": "longitude-east, latitude-north (planetocentric, Mars 2000 sphere)",
+        "precision_note": "Exact grid edge; the projection is linear in longitude/latitude."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.392988774,
+              18.442506595
+            ],
+            [
+              77.419981742,
+              18.442506595
+            ],
+            [
+              77.419981742,
+              18.469499563
+            ],
+            [
+              77.392988774,
+              18.469499563
+            ],
+            [
+              77.392988774,
+              18.442506595
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "elevation-coverage",
+        "role": "cells-with-measured-elevation",
+        "aoi_id": "jezero-delta-front-p0",
+        "source_product": "JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40.tif",
+        "valid_cell_count": 640000,
+        "precision_note": "Cell-edge outline of cells whose 2x2 source posts all carry elevation."
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                77.392988774,
+                18.469499563
+              ],
+              [
+                77.392988774,
+                18.442506595
+              ],
+              [
+                77.419981742,
+                18.442506595
+              ],
+              [
+                77.419981742,
+                18.469499563
+              ],
+              [
+                77.392988774,
+                18.469499563
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

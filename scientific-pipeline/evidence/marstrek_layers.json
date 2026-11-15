@@ -1,0 +1,54 @@
+{
+  "purpose": "Verified NASA/JPL Mars Trek WMTS layer metadata for frontend map integration (observed, not assumed)",
+  "retrieved_utc": "2026-11-14T14:07:47Z",
+  "endpoint_pattern": "https://trek.nasa.gov/tiles/Mars/EQ/{layer}/1.0.0/{Style}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.{ext}",
+  "tile_matrix_set": {
+    "identifier": "default028mm",
+    "supported_crs": "urn:ogc:def:crs:EPSG::104905 (Mars 2000 geographic, degrees)",
+    "top_left_corner_lon_lat": [-180.0, 90.0],
+    "tile_size_px": 256,
+    "matrix_at_level_z": "2^(z+1) columns x 2^z rows; each tile spans 180 / 2^z degrees",
+    "pixel_size_deg_at_level_z": "180 / 2^z / 256",
+    "scale_denominator_note": "Published ScaleDenominators assume 0.28 mm pixels and ~111 km per degree (Earth); derive Mars ground size from degrees with R = 3 396 190 m instead.",
+    "row_and_column": "TileRow counts down from 90 N, TileCol counts east from 180 W (same as Leaflet {y}/{x} with an equirectangular CRS of 2x1 tiles at zoom 0)"
+  },
+  "layers": [
+    {
+      "identifier": "JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd",
+      "title": "MRO HiRISE, Jezero Mosaic, Controlled",
+      "mission_instrument": "MRO / HiRISE",
+      "format": "image/png (2 bands: grey + alpha; alpha 0 = no data)",
+      "levels": "0..17",
+      "wgs84_bbox_lon_lat": [77.2229331, 18.3067994, 77.583964, 18.669315],
+      "capabilities_url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/WMTSCapabilities.xml",
+      "tile_tested": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd/1.0.0/default/default028mm/15/13024/46859.png",
+      "tile_response": {"http": 200, "content_type": "image/png", "access_control_allow_origin": "*", "tested_utc": "2026-11-14T14:40:25Z", "request_origin_header": "http://localhost:5173"},
+      "covers_ausnox_aoi": true,
+      "registration_vs_usgs_orthomosaic_m": {"east": 0.47, "south": 0.71, "check": "X2a PASS"}
+    },
+    {
+      "identifier": "JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0",
+      "title": "MRO CTX Jezero mosaic",
+      "mission_instrument": "MRO / CTX",
+      "format": "image/png",
+      "levels": "0..13",
+      "wgs84_bbox_lon_lat": [77.1604655, 18.2110274, 77.6991776, 18.7211945],
+      "capabilities_url": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/WMTSCapabilities.xml",
+      "covers_ausnox_aoi": true,
+      "tiles_tested": false
+    },
+    {
+      "identifier": "Mars_MGS_MOLA_ClrShade_merge_global_463m",
+      "title": "MGS MOLA color hillshade (global, 463 m)",
+      "mission_instrument": "MGS / MOLA",
+      "format": "image/jpeg",
+      "levels": "0..7",
+      "wgs84_bbox_lon_lat": [-180.0, -89.9991635, 179.9983271, 90.0],
+      "capabilities_url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/WMTSCapabilities.xml",
+      "covers_ausnox_aoi": true,
+      "tiles_tested": false,
+      "note": "Regional context only: 463 m pixels cannot show the metre-scale hazards used for routing."
+    }
+  ],
+  "capabilities_quirk": "The ResourceURL templates contain a double slash ('1.0.0//{Style}'); requests with a single slash were served normally (HTTP 200)."
+}

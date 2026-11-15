@@ -1,0 +1,8 @@
+# Ausnox scientific preprocessing pipeline (Python 3.11+).
+# Versions pinned to the environment the committed assets were built and validated with.
+# rasterio wheels bundle GDAL 3.12.2 and PROJ; no separate GDAL install is needed.
+numpy==2.5.4
+rasterio==1.5.2
+pyproj==3.8.0
+certifi==2026.10.23
+pytest==9.2.0

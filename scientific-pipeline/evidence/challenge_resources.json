@@ -1,0 +1,37 @@
+{
+  "purpose": "Gate S5: at least one NASA resource used by Ausnox appears on the official challenge Resources tab",
+  "page": "https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/?tab=resources",
+  "retrieved_utc": "2026-11-14T13:59:55Z",
+  "html_bytes": 77102,
+  "html_sha256": "f6a057bcfa2826963d8fc42465a0c8d188b394cb6c4eb715a985f34c85b2be49",
+  "page_metadata": {
+    "title": "Interplanetary Survival Guide: Martian Map",
+    "first_published_at": "2026-09-17T14:21:03.079000Z",
+    "last_published_at": "2026-11-13T03:46:20.420900Z",
+    "source": "Next.js page data embedded in the HTML (resourcesTabContent)"
+  },
+  "resources_listed_under_nasa_data_and_resources": [
+    {"label": "Jet Propulsion Laboratory's (JPL) Mars Trek", "url": "https://trek.nasa.gov/mars/"},
+    {"label": "USGS-NASA Planetary Geologic Mapping Program", "url": "https://astrogeology-usgs.hub.arcgis.com/pages/interactive-maps-mars"},
+    {"label": "Example of a route map visual for the Curiosity example", "url": "https://science.nasa.gov/resource/curiositys-proposed-path-up-mount-sharp/"},
+    {"label": "NASA Worldview", "url": "https://worldview.earthdata.nasa.gov/"},
+    {"label": "Mars Perseverance Raw Images Gallery", "url": "https://mars.nasa.gov/mars2020/multimedia/raw-images/"}
+  ],
+  "ausnox_use_of_listed_resources": [
+    {
+      "resource": "Jet Propulsion Laboratory's (JPL) Mars Trek",
+      "use": [
+        "WMTS layer JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd (MRO HiRISE Jezero controlled mosaic): GetCapabilities parsed, 36 zoom-15 tiles fetched and registered against the USGS orthomosaic and the DTM (scientific-pipeline/evidence/cross_validation_report.json, checks X2a/X2b).",
+        "The terrain source product is catalogued in Mars Trek as 'MRO HiRISE, Jezero DEM, Controlled' (item_UUID c3935915-9abe-4d8c-a87c-b96d195a8cfd, productLabel JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40). Ausnox downloaded the USGS-distributed GeoTIFF of that product; the Mars Trek catalog lists 1,839,718,122 bytes versus 1,839,545,409 bytes for the USGS file, so the two files are not byte-identical packages of the product."
+      ]
+    },
+    {
+      "resource": "Mars Perseverance Raw Images Gallery",
+      "use": [
+        "Raw-image metadata for sols 490 and 690 (site/drive 26/1004 and 32/1184) links the cited science targets to rover positions (scientific-pipeline/config/jezero_p0.json) and provides the rover-clock cross-check of the Mars24 implementation (packages/scientific-engine/tests/solar.test.ts)."
+      ]
+    }
+  ],
+  "tls_note": "The site served an incomplete certificate chain (leaf CN=www.space.apps.nasa.gov, issuer 'SSL.com TLS Issuing RSA CA R1', intermediate not sent). The intermediate was fetched from the leaf's AIA URL http://cert.ssl.com/SSL.com-TLS-I-RSA-R1.cer, verified with `openssl verify` against the certifi Mozilla root store (chains to 'SSL.com TLS RSA Root CA 2022'), and the page was then fetched with full verification (curl --cacert bundle, 'Verify return code: 0 (ok)'). Verification was never disabled.",
+  "status": "PASS"
+}

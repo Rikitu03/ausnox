@@ -1,0 +1,153 @@
+{
+  "validated_utc": "2026-11-15T04:47:37Z",
+  "overall": "PASS",
+  "checks": [
+    {
+      "id": "V1-structure-checksum",
+      "status": "PASS",
+      "detail": "manifest schema 1.0.0, terrain.bin 5760000 bytes, SHA-256 matches",
+      "sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49"
+    },
+    {
+      "id": "V2-no-placeholders",
+      "status": "PASS",
+      "detail": "no SET_* placeholders, required keys present"
+    },
+    {
+      "id": "V3-dimensions-flags",
+      "status": "PASS",
+      "detail": "shape (800, 800); NaN elevation <=> !ELEVATION_VALID; NaN slope <=> !SLOPE_VALID; slope never valid without elevation; unknown flag bits 0"
+    },
+    {
+      "id": "V4-edge-slope-unknown",
+      "status": "PASS",
+      "detail": "every grid-edge cell has unknown slope (no one-sided differences)"
+    },
+    {
+      "id": "V5-value-ranges",
+      "status": "PASS",
+      "detail": "elevation -2559.270..-2443.769 m within Mars range; slope 0.0068..67.4820 deg in [0,90); manifest counts match"
+    },
+    {
+      "id": "V6-crs-vs-proj",
+      "status": "PASS",
+      "detail": "closed-form equirectangular vs PROJ max |error| 2.84e-09 m; bounds consistent with origin/cell size",
+      "max_error_m": 2.8421709430404007e-09
+    },
+    {
+      "id": "V7-source-elevation-preserved",
+      "status": "PASS",
+      "detail": "2004 cells re-read from the source with independent 2x2 windows: elevation equals the float32 block mean exactly (nodata rule respected)",
+      "cells_checked": 2004
+    },
+    {
+      "id": "V8-slope-independent-recompute",
+      "status": "PASS",
+      "detail": "2000 interior cells: scalar Horn from fresh source reads vs shipped slope, max |diff| 1.64e-06 deg",
+      "max_abs_diff_deg": 1.6394277864151263e-06
+    },
+    {
+      "id": "V9-known-points",
+      "status": "PASS",
+      "detail": "5 known points: asset 2 m cell vs direct 1 m source bilinear within 0.5 m (max 0.107 m); finite, no flattening",
+      "points": [
+        {
+          "id": "three-forks-depot-area",
+          "lon_east": 77.40844668,
+          "lat_north": 18.45337179,
+          "asset_cell": [
+            477,
+            458
+          ],
+          "asset_elevation_m": -2545.1582,
+          "source_bilinear_1m_m": -2545.1975,
+          "abs_diff_m": 0.0393,
+          "asset_slope_deg": 1.398
+        },
+        {
+          "id": "skinner-ridge-sampling-site",
+          "lon_east": 77.40616768,
+          "lat_north": 18.45889532,
+          "asset_cell": [
+            314,
+            390
+          ],
+          "asset_elevation_m": -2521.0161,
+          "source_bilinear_1m_m": -2520.9089,
+          "abs_diff_m": 0.1072,
+          "asset_slope_deg": 20.755
+        },
+        {
+          "id": "cell-100-100",
+          "lon_east": 77.39637976551774,
+          "lat_north": 18.466108571361747,
+          "asset_cell": [
+            100,
+            100
+          ],
+          "asset_elevation_m": -2469.3071,
+          "source_bilinear_1m_m": -2469.307,
+          "abs_diff_m": 0.0001,
+          "asset_slope_deg": 5.236
+        },
+        {
+          "id": "cell-400-400",
+          "lon_east": 77.40650212843258,
+          "lat_north": 18.45598620844688,
+          "asset_cell": [
+            400,
+            400
+          ],
+          "asset_elevation_m": -2541.4653,
+          "source_bilinear_1m_m": -2541.4655,
+          "abs_diff_m": 0.0001,
+          "asset_slope_deg": 2.09
+        },
+        {
+          "id": "cell-700-650",
+          "lon_east": 77.41493743086164,
+          "lat_north": 18.44586384553201,
+          "asset_cell": [
+            700,
+            650
+          ],
+          "asset_elevation_m": -2549.8413,
+          "source_bilinear_1m_m": -2549.8412,
+          "abs_diff_m": 0.0001,
+          "asset_slope_deg": 4.927
+        }
+      ],
+      "tolerance_m": 0.5
+    },
+    {
+      "id": "V10-rover-waypoints",
+      "status": "PASS",
+      "detail": "132 NASA MMGIS waypoints in AOI: median(elev_geoid - asset) +0.001 m, p95 |diff| 0.076 m; median |diff| at zero shift 0.019 m is lower than any +/-1..3 cell shift (best shifted 0.064 m)",
+      "n": 132,
+      "median_m": 0.0013,
+      "p95_abs_m": 0.0756,
+      "median_abs_by_shift_cells": {
+        "dx-3": 0.1622,
+        "dy-3": 0.3509,
+        "dx-2": 0.1159,
+        "dy-2": 0.2127,
+        "dx-1": 0.0644,
+        "dy-1": 0.1127,
+        "dx+1": 0.0721,
+        "dy+1": 0.1007,
+        "dx+2": 0.1383,
+        "dy+2": 0.1982,
+        "dx+3": 0.1634,
+        "dy+3": 0.2889
+      },
+      "median_abs_zero_shift_m": 0.0187
+    },
+    {
+      "id": "V11-grid-geo-roundtrip",
+      "status": "PASS",
+      "detail": "2000 cell centres -> lon/lat (PROJ) -> cell: max error 4.66e-10 cells",
+      "max_error_cells": 4.656612873077393e-10
+    }
+  ],
+  "terrain_sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49"
+}

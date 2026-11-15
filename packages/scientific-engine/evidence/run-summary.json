@@ -1,0 +1,38 @@
+{
+  "generated_utc": "2026-11-15T05:16:29.133Z",
+  "package": "@ausnox/scientific-engine@0.1.0",
+  "node": "v24.13.0",
+  "platform": "win32 x64",
+  "typescript": "6.0.3",
+  "vitest": "5.1.0",
+  "steps": [
+    {
+      "name": "typecheck",
+      "command": "npx tsc -p tsconfig.json --noEmit",
+      "exit_code": 0,
+      "duration_ms": 6403
+    },
+    {
+      "name": "build",
+      "command": "npx tsc -p tsconfig.build.json",
+      "exit_code": 0,
+      "duration_ms": 5152
+    },
+    {
+      "name": "test",
+      "command": "npx vitest run --reporter=default --reporter=json --outputFile.json=evidence/vitest-results.json",
+      "exit_code": 0,
+      "duration_ms": 5636
+    }
+  ],
+  "tests": {
+    "files": 6,
+    "suites": 22,
+    "total": 88,
+    "passed": 88,
+    "failed": 0,
+    "pending": 0,
+    "success": true
+  },
+  "overall": "PASS"
+}
