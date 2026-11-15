@@ -1,0 +1,66 @@
+{
+  "aoi_id": "jezero-delta-front-p0",
+  "title": "Jezero crater delta front: Three Forks depot area and Skinner Ridge",
+  "source_product": "hirise_dtm",
+  "source_window": {
+    "col_off": 10080,
+    "row_off": 11844,
+    "width": 1600,
+    "height": 1600,
+    "note": "Source pixel window of the 1 m HiRISE DTM mosaic, aligned to even offsets so 2x2 blocks never straddle the window edge."
+  },
+  "aggregation_factor": 2,
+  "selection_rationale": [
+    "Entirely inside valid HiRISE DTM coverage (checked: no nodata posts inside the window).",
+    "Contains flat crater floor (hypothetical habitat placement) and the steep delta-front scarp, so shortest and lower-slope routing modes can differ.",
+    "Contains two NASA-documented Perseverance science locations with rover-localized coordinates (Three Forks depot area, Skinner Ridge).",
+    "Inside the footprint of the Mars Trek layer JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd (same USGS soc_006 delivery as the DTM).",
+    "About 1.52 km (E-W) by 1.60 km (N-S): 800 x 800 cells at 2 m keeps the browser payload near 6 MB and A* fast."
+  ],
+  "science_targets": [
+    {
+      "id": "three-forks-depot-area",
+      "title": "Three Forks sample depot area",
+      "rmc": "32_1184",
+      "expected_waypoint": {"sol": 686, "lon": 77.40844668, "lat": 18.45337179, "elev_geoid": -2545.203},
+      "observation_sol": 690,
+      "observation_utc": "2023-01-28",
+      "label_quality": "cited-approximate",
+      "suggested_activity_min": 20,
+      "description": "NASA reports that Perseverance built the Three Forks sample depot on flat ground near the base of the Jezero delta, placing 10 sample tubes between sol 653 (2022-12-21) and sol 690 (2023-01-28), spaced roughly 5 to 15 m apart. This point is the rover's localized position (site 32, drive 1184) during the final tube drop on sol 690. Individual tube positions are not represented.",
+      "basis": "Rover localized position from the NASA/JPL MMGIS waypoint layer; sol-to-position link from Perseverance raw-image metadata (sol 690 images report site 32, drive 1184).",
+      "sources": [
+        {"label": "NASA Photojournal: Perseverance's Three Forks Sample Depot Map", "url": "https://science.nasa.gov/photojournal/perseverances-three-forks-sample-depot-map"},
+        {"label": "NASA: Perseverance Rover Completes Mars Sample Depot", "url": "https://www.nasa.gov/missions/mars-2020-perseverance/perseverance-rover/nasas-perseverance-rover-completes-mars-sample-depot/"},
+        {"label": "NASA/JPL MMGIS M20_waypoints.json (RMC 32_1184)", "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json"},
+        {"label": "Perseverance raw images, sol 690 (site 32, drive 1184)", "url": "https://mars.nasa.gov/mars2020/multimedia/raw-images/"}
+      ],
+      "caveats": [
+        "Rover position, not a sample-tube position.",
+        "No mineral or hazard claim is made for this point."
+      ]
+    },
+    {
+      "id": "skinner-ridge-sampling-site",
+      "title": "Skinner Ridge sampling site",
+      "rmc": "26_1004",
+      "expected_waypoint": {"sol": 477, "lon": 77.40616768, "lat": 18.45889532, "elev_geoid": -2520.852539},
+      "observation_sol": 490,
+      "observation_utc": "2022-07-07",
+      "label_quality": "cited-approximate",
+      "suggested_activity_min": 30,
+      "description": "Perseverance abraded and cored the rock 'Skinner Ridge' on the delta front. NASA describes the resulting cores, 'Swift Run' and 'Skyland', as the first rock samples the rover collected from the ancient river delta; NASA's sample feature notes that 'Skyland' was later left at the Three Forks depot. This point is the rover's localized position (site 26, drive 1004) while working on the rock; the rock lies within robotic-arm reach of this point.",
+      "basis": "Rover localized position from the NASA/JPL MMGIS waypoint layer; sol-to-position link from Perseverance raw-image metadata (sol 490 images report site 26, drive 1004) and NASA's sol 490 Skinner Ridge borehole image.",
+      "sources": [
+        {"label": "NASA Science blog: Perseverance Takes First Core From the Delta (2022-07-11)", "url": "https://science.nasa.gov/blog/perseverance-takes-first-core-from-the-delta"},
+        {"label": "NASA: Meet the Mars Samples: Swift Run and Skyland", "url": "https://science.nasa.gov/resource/meet-the-mars-samples-swift-run-and-skyland-samples-10-and-11/"},
+        {"label": "NASA/JPL MMGIS M20_waypoints.json (RMC 26_1004)", "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json"},
+        {"label": "Perseverance raw images, sol 490 (site 26, drive 1004)", "url": "https://mars.nasa.gov/mars2020/multimedia/raw-images/"}
+      ],
+      "caveats": [
+        "Rover position, not the exact rock or borehole position.",
+        "Composition statements are NASA's; Ausnox does not derive mineralogy."
+      ]
+    }
+  ]
+}

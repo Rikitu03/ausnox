@@ -1,0 +1,5 @@
+# Shipped terrain assets are compared byte for byte (SHA-256 and reproducibility tests):
+# never convert line endings or treat the grid as text.
+*.bin binary
+*.json text eol=lf
+*.geojson text eol=lf

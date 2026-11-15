@@ -1,0 +1,541 @@
+{
+  "generated_utc": "2026-11-15T05:16:27.889Z",
+  "generated_by": "tests (mars24_benchmark.json)",
+  "reference": "https://www.giss.nasa.gov/tools/mars24/help/algorithm.html (section II, worked examples)",
+  "strict_tolerance": 0.00001,
+  "note": "Rows marked published_value_inconsistent cannot be reproduced from the published inputs of the same step with the published formula; the engine matches the formula value to 1e-5 and the published value to the gate tolerance.",
+  "examples": [
+    {
+      "example": "Near coincident Earth and Mars times (2000-01-06 00:00:00 UTC, 0 W 0 N)",
+      "input": {
+        "utc_ms": 947116800000,
+        "utc": "2000-01-06T00:00:00.000Z",
+        "lon_west_deg": 0,
+        "lat_planetographic_deg": 0
+      },
+      "rows": [
+        {
+          "step": "A-2",
+          "parameter": "JD UT",
+          "expected_published": 2451549.5,
+          "computed": 2451549.5,
+          "diff": 0,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0006944444444444445,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "A-4",
+          "parameter": "TT - UTC (s)",
+          "expected_published": 64.184,
+          "computed": 64.184,
+          "diff": 0,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "A-5",
+          "parameter": "JD TT",
+          "expected_published": 2451549.50074,
+          "computed": 2451549.5007428704,
+          "diff": 0.0000028703361749649048,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0006944444444444445,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "A-6",
+          "parameter": "dt J2000 (days)",
+          "expected_published": 4.50074,
+          "computed": 4.500742870382965,
+          "diff": 0.0000028703829642040546,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0006944444444444445,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-1",
+          "parameter": "M (deg)",
+          "expected_published": 21.74558,
+          "computed": 21.745582564480376,
+          "diff": 0.000002564480375610856,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-2",
+          "parameter": "alpha FMS (deg)",
+          "expected_published": 272.74566,
+          "computed": 272.7456625246782,
+          "diff": 0.0000025246782229260134,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-3",
+          "parameter": "PBS (deg)",
+          "expected_published": 0.00142,
+          "computed": 0.0014183213411180938,
+          "diff": -0.000001678658881906249,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-4",
+          "parameter": "nu - M (deg)",
+          "expected_published": 4.44193,
+          "computed": 4.441926912553552,
+          "diff": -0.000003087446447835873,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-5",
+          "parameter": "Ls (deg)",
+          "expected_published": 277.18758,
+          "computed": 277.18758943723174,
+          "diff": 0.000009437231710762717,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-1",
+          "parameter": "EOT (deg)",
+          "expected_published": -5.18774,
+          "computed": -5.1877459261847525,
+          "diff": -0.000005926184752702568,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-1",
+          "parameter": "EOT (h)",
+          "expected_published": -0.34585,
+          "computed": -0.3458497284123168,
+          "diff": 2.715876831760333e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-2",
+          "parameter": "MST (h)",
+          "expected_published": 23.99425,
+          "computed": 23.994249464711174,
+          "diff": -5.352888265974798e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-3",
+          "parameter": "LMST (h)",
+          "expected_published": 23.99425,
+          "computed": 23.994249464711174,
+          "diff": -5.352888265974798e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-4",
+          "parameter": "LTST (h)",
+          "expected_published": 23.6484,
+          "computed": 23.648399736298856,
+          "diff": -2.637011426998015e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-5",
+          "parameter": "subsolar longitude (deg W)",
+          "expected_published": 174.726,
+          "computed": 174.72599604448283,
+          "diff": -0.0000039555171724714455,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-1",
+          "parameter": "solar declination (deg)",
+          "expected_published": -25.22825,
+          "computed": -25.22824362027205,
+          "diff": 0.000006379727949479275,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-2",
+          "parameter": "heliocentric distance (AU)",
+          "expected_published": 1.39358,
+          "computed": 1.3935835556663976,
+          "diff": 0.000003555666397536683,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0001,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-3",
+          "parameter": "heliocentric longitude (deg)",
+          "expected_published": 2.26352,
+          "computed": 2.2635158437747123,
+          "diff": -0.000004156225287932358,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-4",
+          "parameter": "heliocentric latitude (deg)",
+          "expected_published": -1.35957,
+          "computed": -1.3595691737926334,
+          "diff": 8.262073665221692e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-5",
+          "parameter": "solar zenith Z (deg)",
+          "expected_published": 154.26182,
+          "computed": 154.26175676358153,
+          "diff": -0.00006323641846961436,
+          "strict_tolerance": 0.00001,
+          "strict_status": "FAIL",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS",
+          "published_value_inconsistent": {
+            "formula_value_from_published_inputs": 154.26175128580104,
+            "published_minus_formula": 0.00006871419896015141,
+            "engine_minus_formula": 0.000005477780490537043,
+            "inputs": "published delta_s -25.22825, phi 0, H = 0 - 174.72600"
+          }
+        },
+        {
+          "step": "D-6",
+          "parameter": "solar azimuth A (deg)",
+          "expected_published": 191.03905,
+          "computed": 191.0390507268543,
+          "diff": 7.268542958627222e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        }
+      ],
+      "rows_within_strict_tolerance": 20,
+      "rows_total": 21,
+      "ltst_abs_diff_earth_s": 0.0009754222218744217,
+      "max_solar_angle_abs_diff_deg": 0.00006323641846961436,
+      "gate_tolerances": {
+        "ltst_s": 60,
+        "solar_angle_deg": 0.1
+      },
+      "gate_status": "PASS"
+    },
+    {
+      "example": "MER-A Spirit landing (2004-01-03 13:46:31 UTC, 184.702 W -14.640 N)",
+      "input": {
+        "utc_ms": 1073137591000,
+        "utc": "2004-01-03T13:46:31.000Z",
+        "lon_west_deg": 184.702,
+        "lat_planetographic_deg": -14.64
+      },
+      "rows": [
+        {
+          "step": "A-2",
+          "parameter": "JD UT",
+          "expected_published": 2453008.07397,
+          "computed": 2453008.0739699076,
+          "diff": -9.220093488693237e-8,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0006944444444444445,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "A-4",
+          "parameter": "TT - UTC (s)",
+          "expected_published": 64.184,
+          "computed": 64.184,
+          "diff": 0,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "A-5",
+          "parameter": "JD TT",
+          "expected_published": 2453008.07471,
+          "computed": 2453008.074712778,
+          "diff": 0.0000027781352400779724,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0006944444444444445,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "A-6",
+          "parameter": "dt J2000 (days)",
+          "expected_published": 1463.07471,
+          "computed": 1463.074712777976,
+          "diff": 0.0000027779758511314867,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0006944444444444445,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-1",
+          "parameter": "M (deg, reduced from 786.06858)",
+          "expected_published": 66.06858,
+          "computed": 66.06857903445541,
+          "diff": -9.655445865064394e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-2",
+          "parameter": "alpha FMS (deg, reduced from 1037.09457)",
+          "expected_published": 317.09457,
+          "computed": 317.0945720198024,
+          "diff": 0.0000020198024230921874,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-3",
+          "parameter": "PBS (deg)",
+          "expected_published": 0.01614,
+          "computed": 0.016140404907272032,
+          "diff": 4.049072720307967e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-4",
+          "parameter": "nu - M (deg)",
+          "expected_published": 10.22959,
+          "computed": 10.229589855457746,
+          "diff": -1.4454225372162455e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "B-5",
+          "parameter": "Ls (deg, reduced from 1047.32416)",
+          "expected_published": 327.32416,
+          "computed": 327.3241618752602,
+          "diff": 0.0000018752601818050607,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-1",
+          "parameter": "EOT (deg)",
+          "expected_published": -12.77553,
+          "computed": -12.775531006545508,
+          "diff": -0.0000010065455082752806,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-1",
+          "parameter": "EOT (h)",
+          "expected_published": -0.8517,
+          "computed": -0.8517020671030339,
+          "diff": -0.000002067103033853712,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-2",
+          "parameter": "MST (h)",
+          "expected_published": 13.16537,
+          "computed": 13.165368794929236,
+          "diff": -0.0000012050707631772184,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-3",
+          "parameter": "LMST (h)",
+          "expected_published": 0.8519,
+          "computed": 0.8519021282625694,
+          "diff": 0.000002128262569400796,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "C-4",
+          "parameter": "LTST (h)",
+          "expected_published": 0.00025,
+          "computed": 0.00020006115953552506,
+          "diff": -0.00004993884046447495,
+          "strict_tolerance": 0.00001,
+          "strict_status": "FAIL",
+          "gate_tolerance": 0.016220738268176407,
+          "gate_status": "PASS",
+          "published_value_inconsistent": {
+            "formula_value_from_published_inputs": 0.00019800000000003148,
+            "published_minus_formula": 0.00005199999999996852,
+            "engine_minus_formula": 0.000002061159535493573,
+            "inputs": "published LMST 0.85190 h + EOT -12.77553 deg / 15"
+          }
+        },
+        {
+          "step": "C-5",
+          "parameter": "subsolar longitude (deg W)",
+          "expected_published": 4.705,
+          "computed": 4.705000917393022,
+          "diff": 9.173930219930071e-7,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-1",
+          "parameter": "solar declination (deg)",
+          "expected_published": -13.42065,
+          "computed": -13.42039937072411,
+          "diff": 0.00025062927588948014,
+          "strict_tolerance": 0.00001,
+          "strict_status": "FAIL",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS",
+          "published_value_inconsistent": {
+            "formula_value_from_published_inputs": -13.42040006796673,
+            "published_minus_formula": -0.0002499320332702837,
+            "engine_minus_formula": 6.972426191964587e-7,
+            "inputs": "published Ls 327.32416"
+          }
+        },
+        {
+          "step": "D-2",
+          "parameter": "heliocentric distance (AU)",
+          "expected_published": 1.47767,
+          "computed": 1.477672196623362,
+          "diff": 0.0000021966233618719855,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.0001,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-3",
+          "parameter": "heliocentric longitude (deg)",
+          "expected_published": 52.37564,
+          "computed": 52.37563863061615,
+          "diff": -0.0000013693838454287288,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-4",
+          "parameter": "heliocentric latitude (deg)",
+          "expected_published": 0.08965,
+          "computed": 0.0896480663799022,
+          "diff": -0.0000019336200977881912,
+          "strict_tolerance": 0.00001,
+          "strict_status": "PASS",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS"
+        },
+        {
+          "step": "D-5",
+          "parameter": "solar zenith Z (deg)",
+          "expected_published": 151.93895,
+          "computed": 151.9396004720486,
+          "diff": 0.0006504720485907001,
+          "strict_tolerance": 0.00001,
+          "strict_status": "FAIL",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS",
+          "published_value_inconsistent": {
+            "formula_value_from_published_inputs": 151.9395997749021,
+            "published_minus_formula": -0.0006497749020866195,
+            "engine_minus_formula": 6.971465040805924e-7,
+            "inputs": "delta_s from D-1 of published Ls, phi -14.640, H = 184.702 - 4.70500"
+          }
+        },
+        {
+          "step": "D-6",
+          "parameter": "solar azimuth A (deg)",
+          "expected_published": 179.99383,
+          "computed": 179.9937947292468,
+          "diff": -0.00003527075321585471,
+          "strict_tolerance": 0.00001,
+          "strict_status": "FAIL",
+          "gate_tolerance": 0.1,
+          "gate_status": "PASS",
+          "published_value_inconsistent": {
+            "formula_value_from_published_inputs": 179.99379662638364,
+            "published_minus_formula": 0.00003337361636113201,
+            "engine_minus_formula": -0.000001897136854722703,
+            "inputs": "delta_s from D-1 of published Ls, phi -14.640, H = 184.702 - 4.70500"
+          }
+        }
+      ],
+      "rows_within_strict_tolerance": 17,
+      "rows_total": 21,
+      "ltst_abs_diff_earth_s": 0.18472219811024393,
+      "max_solar_angle_abs_diff_deg": 0.0006504720485907001,
+      "gate_tolerances": {
+        "ltst_s": 60,
+        "solar_angle_deg": 0.1
+      },
+      "gate_status": "PASS"
+    }
+  ]
+}

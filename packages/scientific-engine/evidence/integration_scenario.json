@@ -1,0 +1,250 @@
+{
+  "generated_utc": "2026-11-15T05:16:29.014Z",
+  "generated_by": "tests (integration_scenario.json)",
+  "dataset": {
+    "id": "jezero-delta-front-p0",
+    "sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+    "verification": {
+      "pipelineValidation": "passed",
+      "checksum": "verified",
+      "verifiedForFeasibility": true,
+      "crossValidation": {
+        "overall": "FAIL",
+        "report": "scientific-pipeline/evidence/cross_validation_report.json",
+        "checks": [
+          {
+            "id": "X1-ctx-vs-hirise",
+            "status": "PASS",
+            "summary": "CTX 20 m DTM minus HiRISE asset: median +0.82 m, MAD 2.18 m (USGS CTX vertical registration 3.8 m)"
+          },
+          {
+            "id": "X2a-marstrek-tiles-vs-usgs-ortho",
+            "status": "PASS",
+            "summary": "Mars Trek z15 tiles vs USGS 25 cm orthomosaic: +0.47 m east, +0.71 m south (correlation 0.975)"
+          },
+          {
+            "id": "X2b-dtm-vs-imagery-photometric",
+            "status": "FAIL",
+            "summary": "Apparent DTM-to-imagery offset +2.3 to +3.2 m east (tolerance 2 m, max magnitude 3.2 m with the masked model over 2 images): route and slope overlays may appear shifted by up to ~3 m against imagery"
+          }
+        ]
+      },
+      "notes": [
+        "Cross-check X2b-dtm-vs-imagery-photometric FAIL: Apparent DTM-to-imagery offset +2.3 to +3.2 m east (tolerance 2 m, max magnitude 3.2 m with the masked model over 2 images): route and slope overlays may appear shifted by up to ~3 m against imagery"
+      ]
+    }
+  },
+  "locations": {
+    "habitat": {
+      "lonEast": 77.41655700892801,
+      "latNorth": 18.45018272037569,
+      "cell": {
+        "row": 572,
+        "col": 698
+      },
+      "label": "Hypothetical habitat (illustrative)"
+    },
+    "three_forks": {
+      "lonEast": 77.40844668,
+      "latNorth": 18.45337179,
+      "cell": {
+        "row": 477,
+        "col": 458
+      }
+    },
+    "skinner_ridge": {
+      "lonEast": 77.40616768,
+      "latNorth": 18.45889532,
+      "cell": {
+        "row": 314,
+        "col": 390
+      }
+    }
+  },
+  "snap": {
+    "from": {
+      "row": 314,
+      "col": 390
+    },
+    "to": {
+      "row": 316,
+      "col": 390
+    },
+    "distance_m": 4,
+    "reason": "target cell slope above the 15 deg limit; snap confirmed by the planner"
+  },
+  "routes": {
+    "shortest": {
+      "outbound": {
+        "planimetric_m": 928.58,
+        "surface_m": 930.55,
+        "ascent_m": 35.82,
+        "descent_m": 5.11,
+        "max_slope_deg": 14.46,
+        "mean_slope_deg": 3.26,
+        "cells": 402
+      },
+      "return": {
+        "planimetric_m": 864.71,
+        "surface_m": 866.42,
+        "ascent_m": 3.01,
+        "descent_m": 33.72,
+        "max_slope_deg": 14.99,
+        "mean_slope_deg": 5.25,
+        "cells": 346
+      },
+      "totals": {
+        "planimetricDistanceM": 1793.2967990009802,
+        "surfaceDistanceM": 1796.9708773676248,
+        "ascentM": 38.827880859375,
+        "descentM": 38.827880859375,
+        "maxSlopeDeg": 14.988150596618652,
+        "totalCost": 1793.2967990009802
+      },
+      "nodes_expanded": [
+        14015,
+        9555,
+        24305
+      ],
+      "compute_ms": 57.8
+    },
+    "lower-slope": {
+      "outbound": {
+        "planimetric_m": 931.61,
+        "surface_m": 933.18,
+        "ascent_m": 32.62,
+        "descent_m": 1.91,
+        "max_slope_deg": 14.32,
+        "mean_slope_deg": 2.32,
+        "cells": 402
+      },
+      "return": {
+        "planimetric_m": 881.82,
+        "surface_m": 883.44,
+        "ascent_m": 1.77,
+        "descent_m": 32.48,
+        "max_slope_deg": 14.32,
+        "mean_slope_deg": 2.48,
+        "cells": 361
+      },
+      "totals": {
+        "planimetricDistanceM": 1813.438492875303,
+        "surfaceDistanceM": 1816.6250318364923,
+        "ascentM": 34.38232421875,
+        "descentM": 34.38232421875,
+        "maxSlopeDeg": 14.319680213928223,
+        "totalCost": 2221.641746357292
+      },
+      "nodes_expanded": [
+        16766,
+        31475,
+        29444
+      ],
+      "compute_ms": 75.6
+    }
+  },
+  "direction_sensitive": {
+    "uphill_cost": 1158.430913371492,
+    "downhill_cost": 571.2668809966248,
+    "ascent_out_m": 22.853515625,
+    "ascent_back_m": 0.217529296875
+  },
+  "daylight": {
+    "mission_start_utc": "2023-01-28T13:25:55.787Z",
+    "mission_start_ltst": 9,
+    "sol_mars2020": 690,
+    "ls_deg": 16.198,
+    "sunrise_utc": "2023-01-28T10:11:29.747Z",
+    "sunset_utc": "2023-01-28T22:50:18.892Z",
+    "sunrise_ltst_h": 5.8453,
+    "sunset_ltst_h": 18.157,
+    "daylight_earth_h": 12.647,
+    "noon_elevation_deg": 78.23
+  },
+  "plan": {
+    "compute_ms_both_modes": 96.6,
+    "assumptions": {
+      "walkingSpeedMps": 0.6,
+      "maxSlopeDeg": 15,
+      "reserveS": 1800,
+      "maxEvaDurationS": null,
+      "daylightPolicy": "daylight-only",
+      "turnaroundWarningS": 900
+    },
+    "shortest": {
+      "feasibility": "feasible",
+      "return_margin_min": 434.47,
+      "total_work_min": 99.92,
+      "binding": "daylight-margin"
+    },
+    "lower_slope": {
+      "feasibility": "feasible",
+      "return_margin_min": 433.92,
+      "total_work_min": 100.46,
+      "binding": "daylight-margin"
+    },
+    "comparison": {
+      "identicalRoutes": false,
+      "extraDistanceM": 20.141693874322755,
+      "maxSlopeReductionDeg": 0.6684703826904297,
+      "ascentDifferenceM": -4.445556640625,
+      "marginDifferenceS": -32.756924114779395
+    },
+    "variants": {
+      "science_plus_60_min": {
+        "feasibility": "feasible",
+        "return_margin_min": 374.47,
+        "total_work_min": 159.92,
+        "binding": "daylight-margin"
+      },
+      "walking_speed_0_3": {
+        "feasibility": "feasible",
+        "return_margin_min": 384.55,
+        "total_work_min": 149.83,
+        "binding": "daylight-margin"
+      },
+      "start_16_30_ltst": {
+        "feasibility": "infeasible",
+        "return_margin_min": -27.79,
+        "total_work_min": 99.92,
+        "binding": "daylight-margin"
+      },
+      "start_23_30_ltst": {
+        "feasibility": "infeasible",
+        "return_margin_min": -459.22,
+        "total_work_min": 99.92,
+        "binding": "starts-in-daylight"
+      },
+      "max_slope_3_deg": {
+        "feasibility": "infeasible",
+        "return_margin_min": null,
+        "total_work_min": null,
+        "binding": "route"
+      },
+      "no_solar_model": {
+        "feasibility": "indeterminate",
+        "return_margin_min": null,
+        "total_work_min": 99.92,
+        "binding": "solar-model"
+      },
+      "unverified_terrain": {
+        "feasibility": "indeterminate",
+        "return_margin_min": 434.47,
+        "total_work_min": 99.92,
+        "binding": "terrain-verification"
+      },
+      "habitat_outside_coverage": {
+        "feasibility": "indeterminate",
+        "return_margin_min": null,
+        "total_work_min": null,
+        "binding": "route"
+      }
+    },
+    "mid_mission": {
+      "after_30_min_on_plan_margin_min": 434.47,
+      "after_20_min_hold_margin_min": 414.47,
+      "remaining_work_after_slowdown_min": 87.41
+    },
+    "mars_hour_seconds": 3698.9685061200003
+  }
+}

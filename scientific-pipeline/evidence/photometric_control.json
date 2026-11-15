@@ -1,0 +1,111 @@
+{
+  "generated_utc": "2026-11-14T23:44:25Z",
+  "terrain_sha256": "fcb96e32bc854fff23d56ee4301bea7a77a38e892afc24ada6d0ce5aea1b7f49",
+  "sun_fit": {
+    "azimuth_deg": 269.0,
+    "elevation_deg": 15.0,
+    "correlation": 0.5595
+  },
+  "cast_shadow_fraction": 0.04397,
+  "control_shifts_on_perfectly_registered_synthetic_images": {
+    "synthetic-lambert/linear-all": {
+      "model": "linear-all",
+      "best_shift_cells": [
+        0,
+        0
+      ],
+      "subcell_shift_cells": [
+        -0.012,
+        -0.006
+      ],
+      "shift_east_m": -0.012,
+      "shift_south_m": -0.023,
+      "r2_best": 0.9608,
+      "r2_zero_shift": 0.9608
+    },
+    "synthetic-lambert/quadratic-masked": {
+      "model": "quadratic-masked",
+      "best_shift_cells": [
+        0,
+        0
+      ],
+      "subcell_shift_cells": [
+        -0.001,
+        0.012
+      ],
+      "shift_east_m": 0.023,
+      "shift_south_m": -0.002,
+      "r2_best": 1.0,
+      "r2_zero_shift": 1.0
+    },
+    "synthetic-lambert-castshadow/linear-all": {
+      "model": "linear-all",
+      "best_shift_cells": [
+        0,
+        0
+      ],
+      "subcell_shift_cells": [
+        -0.009,
+        -0.017
+      ],
+      "shift_east_m": -0.032,
+      "shift_south_m": -0.017,
+      "r2_best": 0.9218,
+      "r2_zero_shift": 0.9218
+    },
+    "synthetic-lambert-castshadow/quadratic-masked": {
+      "model": "quadratic-masked",
+      "best_shift_cells": [
+        0,
+        0
+      ],
+      "subcell_shift_cells": [
+        -0.001,
+        0.011
+      ],
+      "shift_east_m": 0.021,
+      "shift_south_m": -0.002,
+      "r2_best": 1.0,
+      "r2_zero_shift": 1.0
+    }
+  },
+  "real_image_shifts": {
+    "usgs-ortho/linear-all": {
+      "model": "linear-all",
+      "best_shift_cells": [
+        -1,
+        1
+      ],
+      "subcell_shift_cells": [
+        -0.55,
+        1.208
+      ],
+      "shift_east_m": 2.291,
+      "shift_south_m": -1.101,
+      "r2_best": 0.3377,
+      "r2_zero_shift": 0.3187
+    },
+    "usgs-ortho/quadratic-masked": {
+      "model": "quadratic-masked",
+      "best_shift_cells": [
+        0,
+        1
+      ],
+      "subcell_shift_cells": [
+        -0.356,
+        1.354
+      ],
+      "shift_east_m": 2.569,
+      "shift_south_m": -0.712,
+      "r2_best": 0.1866,
+      "r2_zero_shift": 0.1621
+    }
+  },
+  "max_control_bias_m": 0.036,
+  "direct_xcorr_vs_shadowed_rendering": {
+    "peak_correlation": 0.5732,
+    "zero_shift_correlation": 0.5541,
+    "offset_east_m": 2.28,
+    "offset_south_m": -0.809
+  }
+}
