@@ -8,7 +8,9 @@ from ausnox_pipeline.registration import (
     Window,
     anti_sun_unit,
     bootstrap_median,
+    phase_correlation_shift,
     photometric_window_shift,
+    shift_image,
     spearman_permutation,
     window_grid,
     xcorr_window_shift,
@@ -78,6 +80,16 @@ def test_peak_on_search_boundary_is_flagged():
     ref = smooth_field(140, 140, seed=3)
     est = xcorr_window_shift(ref, shifted(ref, 0, 6), Window(30, 30, 80), m=4)
     assert est.on_boundary
+
+
+def test_phase_correlation_finds_large_offsets_and_shift_image_undoes_them():
+    ref = smooth_field(200, 200, seed=4, passes=3)
+    moved = shifted(ref, 23, -31)  # content displaced 23 cells south, 31 cells west
+    dr, dc, _ = phase_correlation_shift(ref, moved, max_shift=60)
+    assert (dr, dc) == (23, -31)
+    back = shift_image(moved, dr, dc)
+    ok = np.isfinite(back)
+    assert np.allclose(back[ok], ref[ok])
 
 
 def test_bootstrap_median_and_ci():

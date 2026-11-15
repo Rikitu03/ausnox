@@ -1,0 +1,50 @@
+{
+  "purpose": "Test 1 for X2b: HiRISE RDR images of the AOI under different sun azimuths (scripts/registration_illumination.py)",
+  "selection": "PDS ODE query 2026-11-15 (MRO HiRISE RDRV11 intersecting 77.393-77.420 E, 18.4425-18.4695 N): 29 products, 8 RED products contain the whole AOI. Chosen: the two extreme sun azimuths with usable emission, plus one image near the orthomosaic's illumination as a consistency check.",
+  "sun_geometry_source": "Mars24 (packages/scientific-engine calculateMarsSolarTime) at the AOI centre 77.40648 E, 18.45600 N for UTC_start_time; cross-checked against the catalog incidence angle (elevation = 90 - incidence) to 0.1 deg.",
+  "raw_dir": "data/raw/hirise",
+  "images": [
+    {
+      "id": "ESP_084883_1985",
+      "role": "extreme-A",
+      "utc_start": "2024-09-04T10:30:48.222Z",
+      "sun_azimuth_deg": 226.0,
+      "sun_elevation_deg": 43.6,
+      "catalog_incidence_deg": 46.3,
+      "catalog_emission_deg": 19.0,
+      "map_scale_m": 0.25,
+      "files": [
+        {"name": "ESP_084883_1985_RED.JP2", "url": "https://hirise.lpl.arizona.edu/PDS/RDR/ESP/ORB_084800_084899/ESP_084883_1985/ESP_084883_1985_RED.JP2", "kbytes": 389885},
+        {"name": "ESP_084883_1985_RED.LBL", "url": "https://hirise.lpl.arizona.edu/PDS/RDR/ESP/ORB_084800_084899/ESP_084883_1985/ESP_084883_1985_RED.LBL", "kbytes": 9}
+      ]
+    },
+    {
+      "id": "ESP_088351_1985",
+      "role": "extreme-B",
+      "utc_start": "2025-06-01T16:05:21.639Z",
+      "sun_azimuth_deg": 287.7,
+      "sun_elevation_deg": 43.6,
+      "catalog_incidence_deg": 46.5,
+      "catalog_emission_deg": 6.0,
+      "map_scale_m": 0.5,
+      "files": [
+        {"name": "ESP_088351_1985_RED.JP2", "url": "https://hirise.lpl.arizona.edu/PDS/RDR/ESP/ORB_088300_088399/ESP_088351_1985/ESP_088351_1985_RED.JP2", "kbytes": 183829},
+        {"name": "ESP_088351_1985_RED.LBL", "url": "https://hirise.lpl.arizona.edu/PDS/RDR/ESP/ORB_088300_088399/ESP_088351_1985/ESP_088351_1985_RED.LBL", "kbytes": 9}
+      ]
+    },
+    {
+      "id": "ESP_037396_1985",
+      "role": "middle",
+      "utc_start": "2014-07-19T10:41:26.706Z",
+      "sun_azimuth_deg": 265.4,
+      "sun_elevation_deg": 34.7,
+      "catalog_incidence_deg": 55.3,
+      "catalog_emission_deg": 8.8,
+      "map_scale_m": 0.25,
+      "files": [
+        {"name": "ESP_037396_1985_RED.JP2", "url": "https://hirise.lpl.arizona.edu/PDS/RDR/ESP/ORB_037300_037399/ESP_037396_1985/ESP_037396_1985_RED.JP2", "kbytes": 774123},
+        {"name": "ESP_037396_1985_RED.LBL", "url": "https://hirise.lpl.arizona.edu/PDS/RDR/ESP/ORB_037300_037399/ESP_037396_1985/ESP_037396_1985_RED.LBL", "kbytes": 9}
+      ]
+    }
+  ]
+}

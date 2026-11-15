@@ -131,6 +131,37 @@ def xcorr_window_shift(reference: np.ndarray, moving: np.ndarray, win: Window, m
     return _peak(scores, m, n_at)
 
 
+def phase_correlation_shift(reference: np.ndarray, moving: np.ndarray, max_shift: int) -> tuple[int, int, float]:
+    """Integer (rows, cols) displacement of `moving` content relative to `reference` by FFT phase correlation.
+
+    Used only for a coarse pre-alignment of whole images (individual HiRISE RDRs can be misplaced by tens of
+    metres); NaNs are replaced by the image mean. Returns (dr, dc, peak) with |dr|, |dc| <= max_shift.
+    """
+    a = np.where(np.isfinite(reference), reference, np.nanmean(reference))
+    b = np.where(np.isfinite(moving), moving, np.nanmean(moving))
+    a = (a - a.mean()) * np.outer(np.hanning(a.shape[0]), np.hanning(a.shape[1]))
+    b = (b - b.mean()) * np.outer(np.hanning(b.shape[0]), np.hanning(b.shape[1]))
+    F = np.fft.fft2(b) * np.conj(np.fft.fft2(a))
+    r = np.real(np.fft.ifft2(F / np.maximum(np.abs(F), 1e-12)))
+    h, w = r.shape
+    best = (0, 0, -np.inf)
+    for dr in range(-max_shift, max_shift + 1):
+        for dc in range(-max_shift, max_shift + 1):
+            v = r[dr % h, dc % w]
+            if v > best[2]:
+                best = (dr, dc, float(v))
+    return best
+
+
+def shift_image(img: np.ndarray, dr: int, dc: int) -> np.ndarray:
+    """Move image content by (-dr, -dc) so that content found at (r + dr, c + dc) lands on (r, c); NaN fill."""
+    out = np.full_like(img, np.nan, dtype=np.float64)
+    h, w = img.shape
+    src = img[max(dr, 0):h + min(dr, 0), max(dc, 0):w + min(dc, 0)]
+    out[max(-dr, 0):h + min(-dr, 0), max(-dc, 0):w + min(-dc, 0)] = src
+    return out
+
+
 def bootstrap_median(values: np.ndarray, n: int = 2000, seed: int = 20261115) -> tuple[float, float, float]:
     """Median and percentile 95% CI of the median (fixed seed: reproducible)."""
     v = np.asarray(values, dtype=np.float64)
