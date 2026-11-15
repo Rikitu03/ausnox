@@ -3,6 +3,8 @@ Version: 1.0 | 2026-11-14 | Branch `feat/frontend-fable`
 
 This document describes what the frontend phase built, what it deliberately did not build, and how the scientific-engine phase plugs in. Statuses use **PASS / FAIL / BLOCKED / NOT RUN** as required by AGENT_GUIDELINES.md.
 
+> **Integration update (2026-11-15).** On `integration/ausnox-mvp` the real adapters are implemented on `@ausnox/scientific-engine` and real mode is the default; the mock adapters described here remain available with `VITE_DATA_MODE=mock` (`npm run dev:mock`) and back the unit/UI tests. Contracts were extended (slope-unknown validity, ground distance, slope-limited snap, verification info, tile bounds, layer caveats, sample missions) and the map now uses a Mars equirectangular CRS. This document is kept as the record of the frontend phase; current status is in `docs/INTEGRATION_REPORT.md`.
+
 **Read this first:** the app runs on **mock adapters**. No NASA or USGS dataset is downloaded, validated or displayed. The terrain is a synthetic analytic surface, routes are demonstration arcs and daylight times are fixed examples. Every such value is labelled *Illustrative* in the UI. The scientific gates in TESTING_AND_VALIDATION.md (S1–S5, R1–R4, M1–M3, D1, D2) remain **NOT RUN**. P0 of the product is therefore **not complete**; the P0 *frontend* is.
 
 ## 1. Architecture and directory structure

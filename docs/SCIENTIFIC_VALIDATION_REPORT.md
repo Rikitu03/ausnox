@@ -27,6 +27,8 @@ Every result below was produced by a command that was actually run. Evidence fil
 | D2 Attribution | **NOT RUN** (UI) | engine supplies provenance records for every layer and model |
 | V1 3D | **NOT RUN** | out of scope |
 
+> **Integration addendum (2026-11-15, `integration/ausnox-mvp`).** The gate matrix above records the scientific-engine branch and is unchanged. Gates that depend on the frontend were run on the integration branch (`docs/INTEGRATION_REPORT.md` §10–12): **S4 PASS** (MRO HiRISE DTM and imagery, MRO CTX, MGS MOLA and Mars 2020 rover positions are loaded and visible); **U1 PASS** (browser walkthrough of all five views on the production build); **U3 PASS** (terrain, imagery and solar failures show unavailable or indeterminate states; tested automatically and, for imagery, in the browser); **D2 PASS** (credits in the legend, help and data-sources views); **U2 NOT RUN**; **D1 NOT RUN** (not deployed). Engine tests (88, including the Mars24 benchmark) were re-run in the merged tree with the same results. The pipeline suite gave 39 passed and 5 skipped in the merged tree (the 1.8 GB source DTM is not in that worktree) and 44 passed in the scientific-engine worktree, whose pipeline code and assets are byte-identical. **X2b remains FAIL**; no tolerance was changed and no overlay shift was applied.
+
 ## 1. Verified datasets
 
 | Product | Use | Status |

@@ -2,7 +2,7 @@
 
 **Navigating the Red Planet from Dawn to Dusk.**
 
-**Status (2026-11-14): frontend implemented on demonstration data; scientific engine not started.** The React app in this repository runs every P0 screen and interaction against clearly labelled mock adapters. No NASA/USGS dataset has been ingested, no ingest pipeline is verified, A* routing and the Mars24 solar model are not implemented, and nothing is deployed. Do not represent specifications or demonstration output as completed scientific work. See [docs/FRONTEND_HANDOFF.md](docs/FRONTEND_HANDOFF.md).
+**Status (2026-11-15, branch `integration/ausnox-mvp`): integrated application running on real data; not deployed.** The React app now runs on `@ausnox/scientific-engine` and the validated Jezero terrain asset: USGS HiRISE DTM (MRO) for elevation, slope and A* routing; NASA Mars Trek imagery (MRO HiRISE and CTX, MGS MOLA); cited Perseverance (Mars 2020) rover positions as science targets; Mars24 daylight; engine feasibility rules. All gates that can run locally pass (engine 88 tests, frontend 86 tests incl. 22 on the real assets, pipeline 44 tests, clean-clone build, browser walkthrough). Open items: the DTM-to-imagery registration check **X2b failed and is unresolved** (overlays may look shifted by up to ~3 m against imagery; shown in the UI), no accessibility audit, not deployed. See [docs/INTEGRATION_REPORT.md](docs/INTEGRATION_REPORT.md).
 
 Ausnox is a proposed, science-grounded Marswalk mission-planning prototype for **NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map**. Its primary persona is a hypothetical mission-control planner. The app will combine real NASA/USGS Martian imagery and elevation with transparent, simulated EVA assumptions to compare round-trip science routes and daylight/mission time margins. **This is an educational research prototype, not flight-qualified navigation or astronaut safety guidance.**
 
@@ -36,34 +36,45 @@ All specifications live in [`docs/`](docs/), which is the authoritative specific
 | [docs/TESTING_AND_VALIDATION.md](docs/TESTING_AND_VALIDATION.md) | Scientific correctness, unit, integration and release gates |
 | [docs/AGENT_GUIDELINES.md](docs/AGENT_GUIDELINES.md) | Non-negotiable rules for AI coding agents |
 | [docs/FRONTEND_HANDOFF.md](docs/FRONTEND_HANDOFF.md) | What the frontend phase built, mock adapters, integration entry points, test evidence |
+| [docs/SCIENTIFIC_ENGINE_HANDOFF.md](docs/SCIENTIFIC_ENGINE_HANDOFF.md) | Engine API, units, conventions and error contracts |
+| [docs/DATA_PIPELINE.md](docs/DATA_PIPELINE.md) | How the Jezero terrain asset was produced from the USGS DTM |
+| [docs/SCIENTIFIC_VALIDATION_REPORT.md](docs/SCIENTIFIC_VALIDATION_REPORT.md) | Scientific gates, evidence and the unresolved X2b finding |
+| [docs/INTEGRATION_REPORT.md](docs/INTEGRATION_REPORT.md) | How frontend and engine were integrated, mappings, tests, verification |
+| [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Install, build, static hosting and production checks |
 
-## Quick start (frontend, demonstration data)
+## Quick start
 
-Requires Node 20.19+ (verified on Node 24.13.0, npm 11.6.2, Windows 11).
+Requires Node 20.19+ (verified on Node 24.13.0, npm 11.6.2, Windows 11). No API key, account or environment variable is needed.
 
 ~~~bash
-npm install
-npm run dev         # Vite dev server
+npm ci              # also builds packages/scientific-engine (postinstall)
+npm run dev         # real NASA/USGS data and the scientific engine
+npm run dev:mock    # deterministic demonstration adapters (synthetic, labelled Illustrative)
 npm run typecheck   # tsc -b --noEmit
-npm run lint        # eslint
-npm run test -- --run
-npm run build       # static output in dist/
+npm run lint        # eslint (app and engine sources)
+npx vitest run      # 86 tests, 22 of them on the real Jezero assets
+npm run test:engine # engine package suite, 88 tests
+npm run build       # static output in dist/ (real mode)
 ~~~
 
-These commands were executed on 2026-11-14: typecheck, lint, 62 tests and the production build all passed. Results and what was not run are recorded in docs/FRONTEND_HANDOFF.md §14.
+The install, check, test and build commands were run on 2026-11-15 and passed, and both dev servers were started and checked in Chrome; see docs/INTEGRATION_REPORT.md §10–12. Deployment steps: docs/DEPLOYMENT_GUIDE.md.
 
-The app defaults to `VITE_DATA_MODE=mock`: a synthetic terrain surface, demonstration route arcs and fixed example daylight times, all labelled *Illustrative* in the interface. `VITE_DATA_MODE=real` selects the real-adapter extension points in `src/services/adapters/real/`, which are not implemented and answer "unavailable". Stack: React + TypeScript + Vite + Leaflet + Tailwind + Radix/shadcn-style components + Zustand + Recharts. The Python + Rasterio/NumPy preprocessing described in docs/ARCHITECTURE.md does not exist yet. Not deployed.
+Repository layout: `src/` React app (services/contracts, real and mock adapters, stores, UI); `packages/scientific-engine/` TypeScript engine (coordinates, terrain, A*, Mars24, feasibility, simulation); `scientific-pipeline/` Python preprocessing and evidence; `public/data/jezero/` the shipped terrain asset. Stack: React + TypeScript + Vite + Leaflet + Tailwind + Radix + Zustand + Recharts; the route search runs in a Web Worker.
 
-![Mission control view on demonstration data](docs/screenshots/mission-control.jpg)
+`VITE_DATA_MODE` selects the adapters: real (default, including production builds) or mock (only when set explicitly). The production bundle contains no mock code.
+
+![Mission control on real data: HiRISE imagery from NASA Mars Trek, DTM slope overlay, A* outbound and independent return route, feasibility from the scientific engine](docs/screenshots/mission-control-real.jpg)
+
+The older screenshots in `docs/screenshots/` (`mission-control.jpg`, `terrain.jpg`, `summary.jpg`) show the frontend phase on synthetic demonstration data.
 
 ## Primary development order
 
 1. Read docs/AGENT_GUIDELINES.md, this README and all nine specification files in `docs/`.
 2. Inspect the linked Figma draft if access allows; Fable may redesign while retaining task flows.
 3. Confirm at least one NASA data source explicitly listed in the challenge's **Resources** tab; document evidence and credits.
-4. **P0 data gate**: acquire a real Jezero DEM; validate CRS, geographic extent, nodata, units, slopes and overlap with imagery. No fake DEM substitution.
-5. Build functioning georeferenced 2D map, real-data routing, Mars-time and mission feasibility.
-6. Execute the full testing/release checklist, deploy and record the live demo.
+4. **P0 data gate**: acquire a real Jezero DEM; validate CRS, geographic extent, nodata, units, slopes and overlap with imagery. No fake DEM substitution. *(Done: gates S1–S3, S5 pass; X2b fails, see the validation report.)*
+5. Build functioning georeferenced 2D map, real-data routing, Mars-time and mission feasibility. *(Done on `integration/ausnox-mvp`.)*
+6. Execute the full testing/release checklist, deploy and record the live demo. *(Tests done; accessibility audit and deployment open.)*
 7. Only then attempt optional 3D or environmental layers.
 
 ## Important limits
@@ -82,4 +93,6 @@ The initial habitat is fictional; no live astronauts or shelters are tracked. Wa
 
 Before final submission, verify that **at least one NASA resource used by Ausnox is listed in the challenge's own Resources tab**, and cite **every** scientific dataset, image, dependency, third-party asset and AI tool in the project submission. Record versions, licenses and retrieval dates in docs/DATA_SOURCES.md. The Figma file could not be inspected at documentation time. During the frontend phase it was viewed read-only in a browser and used as a reference for a redesign; there is no design-to-code parity and none is claimed (docs/FRONTEND_HANDOFF.md §13).
 
-Documentation drafted on 2026-11-14 from the project brief and user-approved decisions; implementation statuses must be updated with evidence, not assumptions.
+Data credits: USGS HiRISE DTM mosaic for Mars 2020 TRN (Fergason et al. 2020, doi:10.5066/P9REJ9JN; NASA/JPL-Caltech/University of Arizona); NASA/JPL Mars Trek WMTS (MRO HiRISE and CTX mosaics, MGS MOLA colour hillshade); NASA/JPL-Caltech Perseverance rover localizations (MMGIS) and raw-image metadata; NASA GISS Mars24 algorithm (Allison & McEwen 2000). Mars Trek and the Perseverance raw-image gallery, both used here, are listed on the challenge Resources tab (gate S5, `scientific-pipeline/evidence/challenge_resources.json`).
+
+Documentation drafted on 2026-11-14 from the project brief and user-approved decisions; statuses updated on 2026-11-15 from recorded evidence.

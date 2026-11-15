@@ -175,7 +175,9 @@ Round-trip errors also carry `failedLeg` (`outbound-1`, …, `return`).
 
 ## 12. Frontend adapter behaviour
 
-Fable's contracts were read **read-only** from the local working tree of `feat/frontend-fable` on 2026-11-15 (`src/services/contracts/*.ts`, `docs/FRONTEND_HANDOFF.md`). They were uncommitted and the branch was not on `origin`, so re-check this mapping against the pushed version. Neither contract was changed to force compatibility; the adapter in `src/services/adapters/real/` has to perform these transformations.
+Fable's contracts were read **read-only** (`src/services/contracts/*.ts`, `src/services/adapters/real/index.ts`, `docs/FRONTEND_HANDOFF.md`). The mapping was checked against `origin/feat/frontend-fable` at `c26464a`: the contract files have no changes after Fable's contract commit `0d9c112`, and the conventions used below (south-west grid origin, row 0 = south, `TIMEOUT` code, no `CANCELLED` code, NO_ROUTE and UNSUPPORTED_SLOPE as known violations) are present there. Neither contract was changed to force compatibility; the adapter in `src/services/adapters/real/` has to perform these transformations.
+
+> **Integration update (2026-11-15, `integration/ausnox-mvp`).** This mapping is now implemented in `src/services/adapters/real/`. Open contract decisions were settled as follows: the frontend `CellValidity` gained `'slope-unknown'` (raster validity 3); the south-up raster orientation was kept (one copy at load); `GridSpec` keeps projected metres and adds `groundCellSizeM`/`groundExtentM`; `TerrainService` gained `groundDistanceM` and a slope-limited `nearestValid`; provenance IDs are aliased to the frontend names. Details and test evidence: `docs/INTEGRATION_REPORT.md`.
 
 | Fable contract | Engine | Required transformation |
 | --- | --- | --- |
@@ -214,6 +216,8 @@ Fable's contracts were read **read-only** from the local working tree of `feat/f
 - Payload 5.76 MB uncompressed.
 
 ## 14. Remaining integration work
+
+> **Status 2026-11-15:** items 1–5 are done on `integration/ausnox-mvp` (`docs/INTEGRATION_REPORT.md`). Item 6: frontend gates S4, U1, U3 and D2 pass locally and the end-to-end browser test passed; U2 (accessibility) and D1 (deployment) are still NOT RUN. The list below is kept as written.
 
 1. Agree the contract decisions marked above (slope-unknown validity, row orientation, projected vs ground metres in `GridSpec`).
 2. Implement `src/services/adapters/real/` on top of this package (terrain, routing in a worker, solar, mission, map data).

@@ -15,11 +15,11 @@ Before planning a route, independently demonstrate that one chosen high-resoluti
 
 | Source / mission | What it can provide | Ausnox role | Status / caution |
 | --- | --- | --- | --- |
-| [NASA Mars Trek WMTS](https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=mars) (NASA/JPL) | Georeferenced MRO HiRISE/CTX, MOLA, THEMIS and other tiled raster layers | P0 visual imagery + scientific layers | **Catalog confirmed; exact WMTS URL/CRS/CORS not runtime-tested** |
-| [USGS Mars Sample Return HiRISE mosaics](https://www.usgs.gov/data/mars-sample-return-hirise-mosaics-terrain-relative-navigation) | Jezero-region HiRISE stereo-derived digital terrain models, orthoimages and confidence products (2025) | P0 candidate numeric terrain raster | **Product selection/download/coverage not tested**; USGS release marked CC0 1.0 |
+| [NASA Mars Trek WMTS](https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=mars) (NASA/JPL) | Georeferenced MRO HiRISE/CTX, MOLA, THEMIS and other tiled raster layers | P0 visual imagery + scientific layers | **Integrated (2026-11-15)**: HiRISE, CTX and MOLA basemaps; tile matrix verified (X2a PASS), CORS `*`, no key. See §9 |
+| [USGS Mars Sample Return HiRISE mosaics](https://www.usgs.gov/data/mars-sample-return-hirise-mosaics-terrain-relative-navigation) | Jezero-region HiRISE stereo-derived digital terrain models, orthoimages and confidence products (2025) | P0 candidate numeric terrain raster | Not used. The shipped terrain comes from the 2020 Mars 2020 TRN HiRISE DTM mosaic (DOI 10.5066/P9REJ9JN), see §9 |
 | [USGS Astrogeology product page](https://astrogeology.usgs.gov/search/map/mars-sample-return-terrain-relative-navigation-hirise-dtm-mosaic) | Download links, provenance, orthophoto, DTM/confidence mosaic | Alternative entry to above release | Verify exact asset and usable raster size |
-| [NASA PDS MOLA MEGDR](https://pds-geosciences.wustl.edu/missions/mgs/megdr.html) — Mars Global Surveyor | Global elevation/topography | Broader context, separate mission and optional cross-check | **Too coarse alone for small obstacle/footstep safety** |
-| [NASA Mars24](https://www.giss.nasa.gov/tools/mars24/help/algorithm.html) | Timekeeping/season/solar-position reference equations and worked examples | P0 solar model source | Equations to implement and validate; not a ready-made forecast API |
+| [NASA PDS MOLA MEGDR](https://pds-geosciences.wustl.edu/missions/mgs/megdr.html) — Mars Global Surveyor | Global elevation/topography | Broader context, separate mission and optional cross-check | **Too coarse alone for small obstacle/footstep safety**. MOLA is shown as the Mars Trek colour hillshade (context only, never mixed with the DTM) |
+| [NASA Mars24](https://www.giss.nasa.gov/tools/mars24/help/algorithm.html) | Timekeeping/season/solar-position reference equations and worked examples | P0 solar model source | **Implemented and validated** in the engine (gate M1 PASS); used for the daylight window |
 | [ASU Mars Odyssey THEMIS](https://mars.asu.edu/data/) | Historic thermal-infrared day/night mosaics | P1 context layer; optionally P0 if integrated correctly | Infrared values are not current atmospheric temperature; verify product meaning |
 | [NASA PDS Perseverance MEDA archive](https://pdsatmospheres.nmsu.edu/data_and_services/atmospheres_data/PERSEVERANCE/meda.html) | Historic localized rover pressure, temperature, wind, irradiance observations | P1 historic location/time panel | **Not** a Jezero-wide real-time forecast; not a particle-radiation dosimeter |
 | [NASA PDS CRISM / MRO](https://pds-imaging.jpl.nasa.gov/) | Spectral/mapped hydrated-mineral context where verified | P1 candidate science layer | Coverage/interpretation/product access must be confirmed |
@@ -42,7 +42,7 @@ Published NASA catalog: https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=mar
 
 ## 4. Exact first-hour verification procedure
 
-1. Go to the official challenge **Resources** tab: https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/?tab=resources . Record which actual NASA resource from this project matches the listing; include the link/screenshot in submission notes. **Status currently UNVERIFIED**.
+1. Go to the official challenge **Resources** tab: https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/?tab=resources . Record which actual NASA resource from this project matches the listing; include the link/screenshot in submission notes. **Status: PASS (2026-11-14)**: JPL Mars Trek and the Perseverance Raw Images Gallery are listed and used (`scientific-pipeline/evidence/challenge_resources.json`).
 2. Open USGS source release; identify a manageable Jezero DTM file and associated orthoimage/confidence product. Log original file name, DOI **10.5066/P13CPYYU** for the cited 2025 release, file size, checksum and terms.
 3. Run gdalinfo -json on the real file. Record CRS WKT, pixel dimensions, meters-per-pixel, corner coordinates, nodata value, planetary datum and uncertainty.
 4. Inspect HiRISE Jezero and CTX WMTS metadata (GetCapabilities), confirm layers, tile matrix, image format, browser CORS, attribution and coordinate conventions (longitude east/west and 0–360 vs -180–180).
@@ -97,3 +97,22 @@ These are optional tools. Microsoft Planetary Computer and Meteomatics focus mai
 ## 8. Attribution checklist
 
 For every dataset used: original scientific team and mission; instrument; USGS transformation credits if applicable; exact image/product, URL and DOI; rights/attribution requirements; retrieved date; processed derivatives and algorithm attribution. For submission also credit map library, icons/fonts, Figma reference assets if actually reused, hosting, coding/AI tools, third-party media and audio. No NASA endorsement is implied.
+
+## 9. Integration status (2026-11-15, `integration/ausnox-mvp`)
+
+Statuses below are backed by recorded evidence (`docs/SCIENTIFIC_VALIDATION_REPORT.md`, `docs/INTEGRATION_REPORT.md`). §2–§6 above are kept as the original candidate analysis.
+
+| Product | Mission / instrument | Used for in the app | Status | Evidence |
+| --- | --- | --- | --- | --- |
+| USGS HiRISE DTM mosaic for Mars 2020 TRN, `JEZ_hirise_soc_006_DTM_MOLAtopography_DeltaGeoid_1m_Eqc_latTs0_lon0_blend40.tif`, DOI 10.5066/P9REJ9JN | MRO / HiRISE | Elevation, slope, A* routing, profiles, DTM relief, overlays (2 m grid of one 2.43 km² AOI) | **Integrated** | S1–S3 PASS; SHA-256 checked at every load |
+| Mars Trek `JEZ_hirise_soc_006_orthoMosaic_25cm_Eqc_latTs0_lon0_first_dd` | MRO / HiRISE | Default basemap | **Integrated** | X2a PASS; live tiles 200, CORS `*` |
+| Mars Trek `JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0` | MRO / CTX | Context basemap | **Integrated** | live tiles 200, CORS `*`; registration against the DTM not measured |
+| Mars Trek `Mars_MGS_MOLA_ClrShade_merge_global_463m` | MGS / MOLA | Regional context basemap | **Integrated** | live tiles 200, CORS `*` |
+| NASA/JPL MMGIS `M20_waypoints.json` (RMC 32_1184, 26_1004) | Mars 2020 / Perseverance | Two cited science targets (rover positions) | **Integrated** | engine target validation; V10 |
+| Perseverance raw-image metadata (sols 490, 690) | Mars 2020 | Links targets to sols; rover-clock check of Mars24 | **Used in validation** | `tests/solar.test.ts` |
+| USGS CTX DTM mosaic `JEZ_ctx_B_soc_008_DTM_…_20m` | MRO / CTX | Vertical cross-check X1 only | **Validation only**, not shipped | X1 PASS |
+| THEMIS, MEDA, CRISM, RAD | — | — | **Planned**, not ingested | — |
+
+Unresolved: check X2b (DTM vs imagery registration) **FAIL**, apparent offset 2.3–3.2 m east. Shown in the UI as "overlay registration ±3 m"; no correction applied.
+
+Runtime access: Mars Trek tiles are fetched directly by the browser (public, no key, CORS open); all other data ship with the app. No account, API key, trial credit or backend is needed.
