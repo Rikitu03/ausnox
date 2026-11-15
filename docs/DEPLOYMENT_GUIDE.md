@@ -96,3 +96,23 @@ If Mars Trek is unreachable, the app marks its layers unavailable and offers the
 - No 3D view in this release.
 
 See `docs/INTEGRATION_REPORT.md` for the full verification record.
+
+## 9. Lockfile compatibility (2026-11-15)
+
+The first application deployment of `main` at `f5e2749` failed during `npm ci`,
+before compilation: the lockfile omitted `@emnapi/core@2.0.0-beta.2` and
+`@emnapi/runtime@2.0.0-beta.2`, required by Rolldown's optional WASM binding.
+Local npm 11 accepted the incomplete lockfile; Vercel's newer npm rejected it.
+The repair adds npm-generated dependency entries without changing existing
+package versions or replacing `npm ci` with a non-frozen install.
+
+Validation of the repair: **PASS** for npm 12.2.2 clean-install dry run,
+**PASS** for an actual clean `npm ci` including the engine postinstall build,
+and **PASS** for `npm run build` in the isolated clean checkout. The npm 12
+metadata operation used `--allow-remote=all` to resolve registry tarball URLs;
+this flag is not added to the deployment's install command. The local npm 12
+check warned that Node 24.13.0 was below its supported version; the Vercel
+project uses Node 26, so the remote production build remains the final check.
+
+If this recurs, repair the lockfile with the deployment's npm version in a
+clean checkout, review its diff, and verify `npm ci`; do not bypass the check.
