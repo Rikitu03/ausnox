@@ -1,0 +1,11 @@
+{
+  "generated_utc": "2026-11-15T05:16:28.118Z",
+  "generated_by": "tests (terrain_crosscheck.json)",
+  "check": "TypeScript Horn slope from shipped float32 elevation vs shipped slope (Python, float64 block means)",
+  "cells": 640000,
+  "unknown_pattern_mismatches": 0,
+  "max_abs_diff_deg": 0.0039310455322265625,
+  "tolerance_deg": 0.01,
+  "python_samples_matched_exactly": 25,
+  "status": "PASS"
+}
