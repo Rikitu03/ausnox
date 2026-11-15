@@ -145,6 +145,8 @@ describe('loading the real Jezero asset', () => {
 })
 
 describe('fail-closed loading (manifest and binary corruption)', () => {
+  // Deliberately untyped: these tests corrupt arbitrary nested manifest fields.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const manifest = () => structuredClone(readManifest()) as Record<string, any>
 
   it('detects a corrupted terrain.bin by checksum', async () => {

@@ -5,7 +5,9 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules'] },
+  // Build output and the Python pipeline are never linted. The engine package's
+  // TypeScript sources and tests are linted with the same rules as the app.
+  { ignores: ['dist', 'node_modules', 'packages/*/dist', 'packages/*/node_modules', 'scientific-pipeline'] },
   {
     files: ['**/*.{ts,tsx}'],
     extends: [js.configs.recommended, ...tseslint.configs.recommended],

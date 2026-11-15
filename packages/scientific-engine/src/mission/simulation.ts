@@ -98,7 +98,6 @@ export function stepSimulation(s: SimulationState, dtS: number): SimulationState
     }
     prog += ph.kind === 'science' ? t : t * speed
     elapsed += t
-    t = 0
     break
   }
   const done = idx >= phases.length
