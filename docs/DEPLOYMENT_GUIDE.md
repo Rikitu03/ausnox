@@ -4,6 +4,8 @@ Version 1.0 | 2026-11-15 | Branch `integration/ausnox-mvp`
 
 Ausnox is a static single-page app. Everything scientific runs in the browser; the server only serves files. No backend, database, account, API key or paid service is needed.
 
+The public application is [ausnox.vercel.app](https://ausnox.vercel.app). Current deployment and browser evidence is in [RELEASE_REPORT.md](RELEASE_REPORT.md); the older test counts below describe the original integration build.
+
 ## 1. Requirements
 
 - Node 20.19 or newer (verified with Node 24.13.0, npm 11.6.2).
@@ -93,7 +95,7 @@ If Mars Trek is unreachable, the app marks its layers unavailable and offers the
 - Overlay registration against imagery is uncertain by about 3 m (check X2b failed, unresolved); routes are aligned with the DTM.
 - Routing covers one 2.43 km² area of the Jezero delta front.
 - Daylight is geometric (Mars24); constraints are illustrative and not NASA operational values.
-- No 3D view in this release.
+- Optional 3D terrain view uses the verified DEM, with a 2D fallback; imagery draping and terrain shadows are not implemented.
 
 See `docs/INTEGRATION_REPORT.md` for the full verification record.
 

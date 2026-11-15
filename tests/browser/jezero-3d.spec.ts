@@ -128,6 +128,7 @@ test('production DEM, both routes, camera, simulation, styles and shared mission
   await expect(dialog.getByText('That location cannot be used')).toBeVisible()
   await dialog.getByRole('button', { name: 'Cancel', exact: true }).click()
   await expect(canvas).toHaveAttribute('data-route-vertices', /^[1-9]\d*$/)
+  await page.getByText('Compare route options', { exact: true }).click()
   await page.getByRole('switch', { name: 'Show the other mode on the map' }).click()
   await expect(canvas).toHaveAttribute('data-route-vertices', /^[1-9]\d*$/)
   await page.getByRole('button', { name: 'Reset', exact: true }).click()

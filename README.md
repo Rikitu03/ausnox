@@ -2,9 +2,9 @@
 
 **Navigating the Red Planet from Dawn to Dusk.**
 
-**Status (2026-11-15, branch `integration/ausnox-mvp`): integrated application running on real data; not deployed.** The React app now runs on `@ausnox/scientific-engine` and the validated Jezero terrain asset: USGS HiRISE DTM (MRO) for elevation, slope and A* routing; NASA Mars Trek imagery (MRO HiRISE and CTX, MGS MOLA); cited Perseverance (Mars 2020) rover positions as science targets; Mars24 daylight; engine feasibility rules. All gates that can run locally pass (engine 88 tests, frontend 86 tests incl. 22 on the real assets, pipeline 44 tests, clean-clone build, browser walkthrough). Open items: the DTM-to-imagery registration check **X2b failed and is unresolved** (overlays may look shifted by up to ~3 m against imagery; shown in the UI), no accessibility audit, not deployed. See [docs/INTEGRATION_REPORT.md](docs/INTEGRATION_REPORT.md).
+**Live application: [ausnox.vercel.app](https://ausnox.vercel.app).** Ausnox runs on `@ausnox/scientific-engine` and the validated Jezero terrain asset: USGS HiRISE DTM (MRO) for elevation, slope and A* routing; NASA Mars Trek imagery (MRO HiRISE and CTX, MGS MOLA); cited Perseverance (Mars 2020) rover positions as science targets; Mars24 daylight; engine feasibility rules. The optional 3D viewer uses the same measured terrain. Current release checks, keyboard verification, deployment evidence and the demonstration are recorded in [docs/RELEASE_REPORT.md](docs/RELEASE_REPORT.md).
 
-Ausnox is a proposed, science-grounded Marswalk mission-planning prototype for **NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map**. Its primary persona is a hypothetical mission-control planner. The app will combine real NASA/USGS Martian imagery and elevation with transparent, simulated EVA assumptions to compare round-trip science routes and daylight/mission time margins. **This is an educational research prototype, not flight-qualified navigation or astronaut safety guidance.**
+Ausnox is a science-grounded Marswalk mission-planning prototype for **NASA Space Apps Challenge 2026 — Interplanetary Survival Guide: Martian Map**. Its primary persona is a hypothetical mission-control planner. The app combines real NASA/USGS Martian imagery and elevation with transparent, simulated EVA assumptions to compare round-trip science routes and daylight/mission time margins. **This is an educational research prototype, not flight-qualified navigation or astronaut safety guidance.** X2b remains failed and unresolved; imagery overlays may appear shifted by about 3 m. Formal screen-reader and full contrast audits remain separate from the recorded keyboard and tablet checks.
 
 Official challenge: https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/
 
@@ -89,7 +89,7 @@ The server listens on `http://localhost:4747` (by default it rejects non-local r
 3. Confirm at least one NASA data source explicitly listed in the challenge's **Resources** tab; document evidence and credits.
 4. **P0 data gate**: acquire a real Jezero DEM; validate CRS, geographic extent, nodata, units, slopes and overlap with imagery. No fake DEM substitution. *(Done: gates S1–S3, S5 pass; X2b fails, see the validation report.)*
 5. Build functioning georeferenced 2D map, real-data routing, Mars-time and mission feasibility. *(Done on `integration/ausnox-mvp`.)*
-6. Execute the full testing/release checklist, deploy and record the live demo. *(Tests done; accessibility audit and deployment open.)*
+6. Execute the full testing/release checklist, deploy and record the live demo. *(Public deployment verified; current checks and recording: docs/RELEASE_REPORT.md.)*
 7. Only then attempt optional 3D or environmental layers.
 
 ## Important limits

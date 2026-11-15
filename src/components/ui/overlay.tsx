@@ -1,6 +1,6 @@
 import { X } from 'lucide-react'
 import { Dialog as RadixDialog, Tooltip as RadixTooltip } from 'radix-ui'
-import { useRef, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 import { Button } from './button'
 
@@ -17,17 +17,18 @@ interface OverlayProps {
 const scrim = 'fixed inset-0 z-[1100] bg-black/55 anim-fade'
 
 /** Controlled overlays have external openers rather than Radix Trigger elements. */
-function useFocusReturn(fallbackFocus?: () => HTMLElement | null) {
-  const opener = useRef<HTMLElement | null>(null)
+function useFocusReturn(open: boolean, fallbackFocus?: () => HTMLElement | null) {
+  const activeElement = () => document.activeElement instanceof HTMLElement ? document.activeElement : null
+  // Capture before the open render commits: React autoFocus may run before Radix's focus event.
+  const [focus, setFocus] = useState(() => ({ open, opener: open ? activeElement() : null }))
+  if (focus.open !== open) setFocus({ open, opener: open ? activeElement() : focus.opener })
   return {
-    onOpenAutoFocus() {
-      opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
-    },
     onCloseAutoFocus(event: Event) {
       event.preventDefault()
-      // A sheet can close while opening coordinate entry. Keep the new modal's focus.
-      if (document.querySelector('[role="dialog"][data-state="open"]')) return
-      const target = opener.current
+      const target = focus.opener
+      const dialogs = Array.from(document.querySelectorAll('[role="dialog"][data-state="open"]'))
+      // Restore inside a remaining parent sheet, but do not take focus from a newly opened modal.
+      if (dialogs.length && !dialogs.some(dialog => target && dialog.contains(target))) return
       if (target?.isConnected && target !== document.body) target.focus()
       else fallbackFocus?.()?.focus()
     },
@@ -56,7 +57,7 @@ function Header({ title, description }: { title: string; description?: string })
 
 /** Centred modal. Escape closes it and focus returns to the trigger. */
 export function Dialog({ open, onOpenChange, title, description, children, className, fallbackFocus }: OverlayProps) {
-  const focusReturn = useFocusReturn(fallbackFocus)
+  const focusReturn = useFocusReturn(open, fallbackFocus)
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <RadixDialog.Portal>
@@ -78,7 +79,7 @@ export function Dialog({ open, onOpenChange, title, description, children, class
 
 /** Side sheet. Used for provenance and for the side panels on narrow screens. */
 export function Sheet({ side = 'right', bare, ...props }: OverlayProps & { side?: 'left' | 'right'; bare?: boolean }) {
-  const focusReturn = useFocusReturn(props.fallbackFocus)
+  const focusReturn = useFocusReturn(props.open, props.fallbackFocus)
   return (
     <RadixDialog.Root open={props.open} onOpenChange={props.onOpenChange}>
       <RadixDialog.Portal>

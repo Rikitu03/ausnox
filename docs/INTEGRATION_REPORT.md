@@ -1,5 +1,7 @@
 # AUSNOX — INTEGRATION REPORT
 
+> Historical integration evidence. For the deployed release, current keyboard checks, review fixes and demonstration, see [RELEASE_REPORT.md](RELEASE_REPORT.md). Statements below such as "not deployed" describe the original integration run.
+
 Version 1.0 | 2026-11-15 | Branch `integration/ausnox-mvp` | Statuses: **PASS / FAIL / BLOCKED / NOT RUN**
 
 This report records how the frontend (`feat/frontend-fable`) and the scientific engine (`feat/scientific-engine`) were made into one application, and what was verified. Every result below comes from a command or browser session that was actually run on 2026-11-15 (Windows 11, Node 24.13.0, npm 11.6.2, Python 3.12.10). Historical evidence in `docs/SCIENTIFIC_VALIDATION_REPORT.md`, `scientific-pipeline/evidence/` and `packages/scientific-engine/evidence/` is unchanged.

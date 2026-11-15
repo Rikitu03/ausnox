@@ -140,8 +140,10 @@ try {
     await page.screenshot({ path: `${out}/terrain-checksum.png` })
     await activate(page, page.getByRole('navigation', { name: 'Views' }).getByRole('button', { name: 'Data sources', exact: true }))
     await expect(page.getByText(/Running on real NASA and USGS data/)).toBeVisible()
+    await expect(page.getByText('An optional view of the same verified elevation model', { exact: true })).toBeVisible()
+    await expect(page.getByText(/including OpenAI Codex/)).toBeVisible()
     assert.equal(signals.terrainRequests, 1, 'Terrain is fetched once across views')
-    return { sha256, terrainBytes: bytes.length, tileResponses: signals.tileResponses, bothRouteLegs: summary.includes('Outbound route') && summary.includes('Return route'), invalidCoordinatesRejected: true, routePreferenceKeyboard: true, scienceTimeChangesVerdict: true, checksumUi: 'Verified at load', x2b: 'FAIL remains disclosed' }
+    return { sha256, terrainBytes: bytes.length, terrainContentEncoding: asset.headers()['content-encoding'] ?? 'none', tileResponses: signals.tileResponses, bothRouteLegs: summary.includes('Outbound route') && summary.includes('Return route'), invalidCoordinatesRejected: true, routePreferenceKeyboard: true, scienceTimeChangesVerdict: true, checksumUi: 'Verified at load', creditsAnd3dStatus: true, x2b: 'FAIL remains disclosed' }
   })
 
   await scenario('tablet-768', { viewport: { width: 768, height: 1024 } }, async page => {
