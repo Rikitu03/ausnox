@@ -67,6 +67,20 @@ Repository layout: `src/` React app (services/contracts, real and mock adapters,
 
 The older screenshots in `docs/screenshots/` (`mission-control.jpg`, `terrain.jpg`, `summary.jpg`) show the frontend phase on synthetic demonstration data.
 
+## Development tooling: Agentation
+
+[Agentation](https://www.agentation.com/) is a dev-only visual-feedback toolbar. You click a UI element, add a note, and the annotation (element name, selector, source file and line, bounding box, styles) is passed to Claude Code. It is not a product feature: `src/app/DevAgentation.tsx` renders it only when `import.meta.env.DEV` is true, via a dynamic import, so `npm run build` ships none of it. It needs no external service, account or API key.
+
+1. `npm run dev`, open the app, and click the Agentation icon at the bottom right. Click an element, type a note and press Add. Click the X to close the toolbar.
+2. Register the local MCP server with Claude Code once per machine, then restart Claude Code (or reload its MCP servers):
+   ~~~bash
+   claude mcp add agentation -- npx -y agentation-mcp server
+   npx agentation-mcp doctor   # "Server not reachable" is normal until Claude Code has started the server
+   ~~~
+3. Check sync: add a note, then ask Claude Code to list pending Agentation annotations (`agentation_get_all_pending`). The same note and page should come back. Without the server the toolbar still works and keeps notes in the browser only.
+
+The server listens on `http://localhost:4747` (by default it rejects non-local requests; the toolbar's `endpoint` in `DevAgentation.tsx` must match). Do not expose that port or set `AGENTATION_CORS_ORIGINS=*`.
+
 ## Primary development order
 
 1. Read docs/AGENT_GUIDELINES.md, this README and all nine specification files in `docs/`.
