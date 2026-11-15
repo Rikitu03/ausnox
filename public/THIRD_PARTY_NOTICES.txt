@@ -1,6 +1,6 @@
 AUSNOX THIRD-PARTY SOFTWARE AND FONT NOTICES
 Original Ausnox code: MIT (see repository LICENSE). These third-party texts retain their own terms.
-Resource and rights register: https://github.com/Rikitu03/ausnox/blob/chore/nasa-space-apps-compliance/docs/THIRD_PARTY_NOTICES.md
+Resource and rights register: https://github.com/Rikitu03/ausnox/blob/main/docs/THIRD_PARTY_NOTICES.md
 AI-assisted development: OpenAI GPT models, OpenAI Codex, Anthropic Claude Code. Authentic NASA/USGS observations are distinct from AI-assisted code.
 Scientific credits: USGS Fergason et al. (2020), DOI 10.5066/P9REJ9JN; NASA/JPL-Caltech/University of Arizona/USGS HiRISE; NASA/JPL-Caltech/MSSS/USGS CTX; NASA/GSFC/MOLA Science Team/USGS MOLA; NASA/JPL-Caltech Perseverance MMGIS; NASA GISS Mars24, Allison & McEwen (2000). X2b unresolved, approximately 3 m potential discrepancy. No NASA endorsement.
 
